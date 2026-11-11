@@ -38,7 +38,13 @@ export async function createApp(config: AppConfig, db: Db = createDb(config.data
   if (config.migrateOnBoot) await runMigrations(db);
 
   const app = await NestFactory.create<NestExpressApplication>(AppModule.forRoot(config, db), {
-    logger: config.env === 'test' ? false : ['log', 'warn', 'error'],
+    // Production logs only problems, not the route map printed on every cold start.
+    logger:
+      config.env === 'test'
+        ? false
+        : config.env === 'production'
+          ? ['warn', 'error']
+          : ['log', 'warn', 'error'],
   });
 
   app.set('trust proxy', config.trustProxy);
