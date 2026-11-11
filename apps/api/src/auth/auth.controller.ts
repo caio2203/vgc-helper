@@ -11,7 +11,6 @@ import {
   UnauthorizedException,
   UseGuards,
 } from '@nestjs/common';
-import { Throttle } from '@nestjs/throttler';
 import {
   type AuthMethods,
   type LocalLoginRequest,
@@ -23,12 +22,14 @@ import type { Response } from 'express';
 import type { AppConfig } from '../config/env.js';
 import { APP_CONFIG } from '../core/core.module.js';
 import { ZodPipe } from '../core/zod.pipe.js';
+import { RateLimit } from '../security/rate-limit.js';
 import { type AuthedRequest, CurrentSession, Public } from './access.js';
 import { AuthService } from './auth.service.js';
 import { GithubAuthGuard, type GithubIdentity } from './github.strategy.js';
 import { type SessionContext, SessionService } from './session.service.js';
 
-const LOGIN_LIMIT = { default: { limit: 10, ttl: 60_000 } };
+const GITHUB_LOGIN_LIMIT = { limit: 10, windowMs: 60_000 };
+const PASSWORD_LOGIN_LIMIT = { limit: 5, windowMs: 60_000 };
 
 @Controller('auth')
 export class AuthController {
@@ -51,7 +52,7 @@ export class AuthController {
   }
 
   @Public()
-  @Throttle(LOGIN_LIMIT)
+  @RateLimit(GITHUB_LOGIN_LIMIT)
   @UseGuards(GithubAuthGuard)
   @Get('github')
   githubStart(): void {
@@ -59,7 +60,7 @@ export class AuthController {
   }
 
   @Public()
-  @Throttle(LOGIN_LIMIT)
+  @RateLimit(GITHUB_LOGIN_LIMIT)
   @UseGuards(GithubAuthGuard)
   @Get('github/callback')
   async githubCallback(@Req() req: AuthedRequest, @Res() res: Response): Promise<void> {
@@ -74,7 +75,7 @@ export class AuthController {
   }
 
   @Public()
-  @Throttle({ default: { limit: 5, ttl: 60_000 } })
+  @RateLimit(PASSWORD_LOGIN_LIMIT)
   @Post('login')
   @HttpCode(204)
   async login(
