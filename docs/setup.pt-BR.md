@@ -45,7 +45,22 @@ Mantenha `AUTH_MODE=local-password` e suba:
 pnpm dev
 ```
 
-Abra http://localhost:5173. Os dados ficam em `apps/api/local.db`.
+Abra http://localhost:5173. Os dados ficam em `apps/api/local.db`. Deve aparecer a tela de
+login; depois de entrar, a página lista o snapshot de dados e os regulamentos:
+
+<p>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="images/login-desktop-dark-pt-BR.png">
+    <img alt="Tela de login com o campo de senha" src="images/login-desktop-light-pt-BR.png" width="420">
+  </picture>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="images/home-desktop-dark-pt-BR.png">
+    <img alt="Página de quem está logado, com a versão do snapshot de dados e o Regulamento M-C" src="images/home-desktop-light-pt-BR.png" width="420">
+  </picture>
+</p>
+
+Na sua instância online, o botão do GitHub aparece no lugar do campo de senha, e a Vercel pede
+login antes desta tela.
 
 ## 2. A sua instância online (Vercel + Turso)
 

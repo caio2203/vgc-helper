@@ -1,6 +1,6 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, type Page, test } from '@playwright/test';
-import { E2E_PASSWORD } from '../playwright.config';
+import { E2E_PASSWORD } from './instance';
 
 async function expectNoA11yViolations(page: Page) {
   const results = await new AxeBuilder({ page })

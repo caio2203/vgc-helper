@@ -45,7 +45,22 @@ Keep `AUTH_MODE=local-password` and start:
 pnpm dev
 ```
 
-Open http://localhost:5173. The data lives in `apps/api/local.db`.
+Open http://localhost:5173. The data lives in `apps/api/local.db`. You should see the sign-in
+screen; after signing in, the page lists the data snapshot and its regulations:
+
+<p>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="images/login-desktop-dark.png">
+    <img alt="Sign-in screen with the password field" src="images/login-desktop-light.png" width="420">
+  </picture>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="images/home-desktop-dark.png">
+    <img alt="Signed-in page with the data snapshot version and Regulation Set M-C" src="images/home-desktop-light.png" width="420">
+  </picture>
+</p>
+
+On your online instance the GitHub button replaces the password field, and Vercel asks you to
+log in before this screen appears.
 
 ## 2. Your own online instance (Vercel + Turso)
 

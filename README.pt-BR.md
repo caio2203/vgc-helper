@@ -11,7 +11,27 @@ faltando e o que o meta atual está usando. VGC (Doubles) primeiro, Singles depo
 
 > **Status: início do desenvolvimento.** A base está pronta (login, pipeline de dados e dados do
 > Regulamento M-C do Pokémon Champions). O montador de times e a análise vêm a seguir — veja o
-> [roadmap](#roadmap). Os screenshots entram quando houver o que mostrar.
+> [roadmap](#roadmap).
+
+## Screenshots
+
+O que existe hoje: a tela de login e a página de quem está logado, que confirma o snapshot de
+dados que o montador vai usar. O design visual chega na Fase 2; os screenshots do montador e um
+GIF curto (adicionar um Pokémon → ver o alerta → aceitar uma sugestão) chegam na Fase 3.
+
+<p>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/images/home-desktop-dark-pt-BR.png">
+    <img alt="Página de quem está logado, no navegador do computador, mostrando a versão do snapshot de dados e as datas do Regulamento M-C com a fonte" src="docs/images/home-desktop-light-pt-BR.png" width="600">
+  </picture>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/images/login-mobile-dark-pt-BR.png">
+    <img alt="Tela de login no celular" src="docs/images/login-mobile-light-pt-BR.png" width="200">
+  </picture>
+</p>
+
+As imagens são geradas a partir de uma instância local descartável com
+`pnpm --filter @vgc-helper/web screenshots`.
 
 ## Por que eu fiz isso
 

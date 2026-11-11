@@ -11,7 +11,27 @@ missing and what the current meta is running. VGC (Doubles) first, Singles next.
 
 > **Status: early development.** The foundation is in place (sign-in, data pipeline, Pokémon
 > Champions Reg M-C data). The team builder and the analysis come next — see the
-> [roadmap](#roadmap). Screenshots will be added when there is something to show.
+> [roadmap](#roadmap).
+
+## Screenshots
+
+What exists today: the sign-in screen and the signed-in page, which confirms the data snapshot
+the builder will use. The visual design arrives in Phase 2; the team builder screenshots and a
+short GIF (add a Pokémon → see the alert → accept a suggestion) arrive in Phase 3.
+
+<p>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/images/home-desktop-dark.png">
+    <img alt="Signed-in page on a desktop browser, showing the data snapshot version and the dates of Regulation Set M-C with their source" src="docs/images/home-desktop-light.png" width="600">
+  </picture>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/images/login-mobile-dark.png">
+    <img alt="Sign-in screen on a phone" src="docs/images/login-mobile-light.png" width="200">
+  </picture>
+</p>
+
+The images are generated from a throwaway local instance with
+`pnpm --filter @vgc-helper/web screenshots`.
 
 ## Why I built this
 
