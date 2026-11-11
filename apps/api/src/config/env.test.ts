@@ -43,6 +43,12 @@ describe('loadConfig fails closed', () => {
     ).toThrow(/ADMIN_PASSWORD_HASH/);
   });
 
+  it('treats empty values from .env files as unset', () => {
+    expect(() => loadConfig({ ...base(), GITHUB_CLIENT_ID: '', TRUST_PROXY: '' })).toThrow(
+      /GITHUB_CLIENT_ID is required/,
+    );
+  });
+
   it('refuses a local database file on Vercel', () => {
     expect(() => loadConfig({ ...base(), VERCEL: '1' })).toThrow(/TURSO_DATABASE_URL/);
   });

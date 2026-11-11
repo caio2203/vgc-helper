@@ -1,0 +1,39 @@
+name: Bug report
+description: Something does not work as expected.
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What did you see, and what did you expect instead?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open the team builder
+        2. Paste this team: …
+        3. …
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version or commit
+      description: Shown on the About screen, or the commit you are running.
+  - type: dropdown
+    id: where
+    attributes:
+      label: Where are you running it
+      options:
+        - On my PC (local)
+        - My own Vercel + Turso deployment
+        - Other
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs or screenshots
+      description: Remove passwords, tokens and your instance URL before posting.

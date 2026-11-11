@@ -1,0 +1,30 @@
+name: New regulation
+description: A new regulation set was announced or has started.
+labels: [data, regulation]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Regulation
+      placeholder: "Regulation Set M-D"
+    validations:
+      required: true
+  - type: input
+    id: dates
+    attributes:
+      label: Start and end (with time zone)
+      placeholder: "2026-12-02 02:00 UTC to …"
+    validations:
+      required: true
+  - type: textarea
+    id: changes
+    attributes:
+      label: What changes
+      description: New Pokémon, Megas, items, bans, rule or timer changes.
+  - type: textarea
+    id: sources
+    attributes:
+      label: Official sources
+      description: Links to the announcement (pokemon.com, championships.pokemon.com, press release).
+    validations:
+      required: true

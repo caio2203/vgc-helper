@@ -61,8 +61,13 @@ export class ConfigError extends Error {
 
 const MIN_SECRET_LENGTH = 32;
 
+/** `KEY=` lines in .env files arrive as empty strings; treat them as unset. */
+function withoutEmpty(env: NodeJS.ProcessEnv): NodeJS.ProcessEnv {
+  return Object.fromEntries(Object.entries(env).filter(([, value]) => value !== ''));
+}
+
 export function loadDatabaseConfig(env: NodeJS.ProcessEnv = process.env): DatabaseConfig {
-  const e = envSchema.parse(env);
+  const e = envSchema.parse(withoutEmpty(env));
   if (e.TURSO_DATABASE_URL) {
     return {
       url: e.TURSO_DATABASE_URL,
@@ -77,7 +82,7 @@ export function loadDatabaseConfig(env: NodeJS.ProcessEnv = process.env): Databa
  * the API refuses to start instead of starting unprotected.
  */
 export function loadConfig(env: NodeJS.ProcessEnv = process.env): AppConfig {
-  const parsed = envSchema.safeParse(env);
+  const parsed = envSchema.safeParse(withoutEmpty(env));
   if (!parsed.success) {
     const details = parsed.error.issues.map((i) => `${i.path.join('.')}: ${i.message}`).join('; ');
     throw new ConfigError(`Invalid environment: ${details}`);
@@ -130,7 +135,7 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env): AppConfig {
   }
 
   const database = loadDatabaseConfig(env);
-  if (onVercel && database.url.startsWith('file:')) {
+  if (onVercel && !/^(libsql|https|wss?):\/\//.test(database.url)) {
     problems.push('The Vercel disk is temporary. Set TURSO_DATABASE_URL and TURSO_AUTH_TOKEN');
   }
 

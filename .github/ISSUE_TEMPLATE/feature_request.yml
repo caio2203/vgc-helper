@@ -1,0 +1,26 @@
+name: Suggestion
+description: An idea to make the app more useful.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What are you trying to do
+      description: Describe the situation, for example while building a team or preparing for a tournament.
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: What would help
+    validations:
+      required: true
+  - type: dropdown
+    id: format
+    attributes:
+      label: Format
+      options:
+        - VGC (Doubles)
+        - Singles
+        - Both
+        - Not format-specific

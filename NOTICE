@@ -1,0 +1,45 @@
+VGC Helper — originally created by caio2203 (https://github.com/caio2203/vgc-helper)
+Copyright 2026 caio2203
+
+Licensed under the Apache License, Version 2.0 (see LICENSE).
+
+If you distribute this project or a modified version of it, keep this NOTICE file
+with it (section 4(d) of the license) and keep the "Created by caio2203" credit
+shown in the app's footer and About screen.
+
+Pokémon and all related names are trademarks of Nintendo, Game Freak, Creatures
+and The Pokémon Company. This project is not affiliated with, endorsed by or
+sponsored by any of them.
+
+-------------------------------------------------------------------------------
+Data sources
+-------------------------------------------------------------------------------
+
+Pokémon Showdown (https://github.com/smogon/pokemon-showdown)
+  Game data for Pokémon Champions: species, moves, items, abilities, learnsets
+  and battle rules from its "champions" mods.
+  MIT License. Copyright (c) 2011-2026 Guangcong Luo and other contributors.
+
+@pkmn/dex, @pkmn/data and @pkmn/mods (https://github.com/pkmn/ps)
+  The Pokémon Showdown data above, packaged for JavaScript.
+  MIT License. Copyright (c) 2020-2026 pkmn contributors.
+
+Smogon University usage statistics (https://www.smogon.com/stats/)
+  Monthly usage, sets, spreads and teammates for the Pokémon Champions formats.
+
+Rule dates and announcements are credited where they are used, in
+packages/data/manual/*.json, with the link and the date they were checked.
+
+-------------------------------------------------------------------------------
+Software
+-------------------------------------------------------------------------------
+
+This project uses, among others, the following open source packages:
+
+  NestJS, Express, cookie-parser, Passport, passport-github2 ........ MIT
+  React, TanStack Router, TanStack Query, i18next, react-i18next ...... MIT
+  zod, @libsql/client ................................................ MIT
+  Drizzle ORM, RxJS, reflect-metadata ......................... Apache-2.0
+
+The full list, with versions, is in pnpm-lock.yaml. Each package's license is
+in its folder under node_modules after installation.

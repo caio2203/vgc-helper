@@ -1,0 +1,36 @@
+name: Wrong meta or game data
+description: A usage number, a set, a legality rule, a move or a stat looks wrong.
+labels: [data]
+body:
+  - type: input
+    id: what
+    attributes:
+      label: What is wrong
+      placeholder: "Incineroar still shows Knock Off in Reg M-C"
+    validations:
+      required: true
+  - type: input
+    id: regulation
+    attributes:
+      label: Format and regulation
+      placeholder: "VGC, Reg M-C"
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What it should be
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Source
+      description: A link that shows the correct value (patch notes, Showdown, Smogon stats, a tournament team sheet).
+    validations:
+      required: true
+  - type: input
+    id: snapshot
+    attributes:
+      label: Data snapshot version
+      description: Shown in the app next to the data.
