@@ -1,0 +1,61 @@
+name: Update data
+
+# Rebuilds the competitive data snapshot from its public sources and opens a pull request
+# when something changed. Nothing is merged automatically: the owner reviews every change.
+# Phase 4 adds the readable diff report and the sanity checks against the previous snapshot.
+
+on:
+  schedule:
+    - cron: "23 7 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: update-data
+  cancel-in-progress: false
+
+jobs:
+  update:
+    # Skipped until the GitHub App is set up (docs/setup.md), so forks do not fail every day.
+    if: vars.BOT_APP_ID != ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      # PRs opened with the default GITHUB_TOKEN do not trigger other workflows,
+      # so a GitHub App token is used to make CI run on the data PR.
+      - id: app-token
+        uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3.3.0
+        with:
+          app-id: ${{ vars.BOT_APP_ID }}
+          private-key: ${{ secrets.BOT_APP_PRIVATE_KEY }}
+
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: pnpm/action-setup@73e46992e05b19abd31f2f3c20e0e7370d762115 # v6.1.1
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .node-version
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm turbo run build --filter=@vgc-helper/scripts...
+      - run: pnpm snapshot:build
+
+      - uses: peter-evans/create-pull-request@3ffccacd46053766916f087ce41d627c0b8cf2d1 # v8.1.3
+        with:
+          token: ${{ steps.app-token.outputs.token }}
+          branch: data/update
+          delete-branch: true
+          commit-message: "chore(data): update competitive data snapshot"
+          title: "chore(data): update competitive data snapshot"
+          body: |
+            Automatic update from the data pipeline (`pnpm snapshot:build`).
+
+            Review the changed files in `packages/data/snapshots` before merging.
+          labels: data
+          add-paths: packages/data/snapshots
