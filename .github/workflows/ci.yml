@@ -41,6 +41,12 @@ jobs:
 
       - run: pnpm lint
       - run: pnpm build
+
+      # Vercel's function runtime cannot require() ES modules. A CommonJS dependency that
+      # requires an ESM-only package crashes the API there, so load it the same way here.
+      - name: API loads without require(esm), as on Vercel
+        run: node --no-experimental-require-module --input-type=module -e "await import('./apps/api/dist/vercel.js')"
+
       - run: pnpm typecheck
       - run: pnpm test
 
