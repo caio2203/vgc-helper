@@ -1,0 +1,39 @@
+{
+  "name": "vgc-helper",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Open-source team builder for competitive Pokémon, VGC first, with a rule-based analysis engine.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "packageManager": "pnpm@12.18.0",
+  "engines": {
+    "node": "24.x"
+  },
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "start": "pnpm --filter @vgc-helper/api start",
+    "lint": "biome check .",
+    "format": "biome check --write .",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "db:generate": "pnpm --filter @vgc-helper/api db:generate",
+    "db:migrate": "pnpm --filter @vgc-helper/api db:migrate",
+    "snapshot:build": "pnpm --filter @vgc-helper/scripts snapshot:build",
+    "hash-password": "pnpm --filter @vgc-helper/scripts hash-password",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*": "biome check --write --no-errors-on-unmatched --files-ignore-unknown=true"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.6.6",
+    "@commitlint/cli": "^21.2.4",
+    "@commitlint/config-conventional": "^21.2.4",
+    "@types/node": "^24.0.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.6.0",
+    "turbo": "^2.11.11",
+    "typescript": "^7.0.2"
+  }
+}

@@ -1,0 +1,29 @@
+node_modules/
+dist/
+coverage/
+.turbo/
+.vercel/
+*.tsbuildinfo
+
+# Environment and local data
+.env
+.env.*
+!.env.example
+*.db
+*.db-journal
+*.db-shm
+*.db-wal
+
+# Test output
+playwright-report/
+test-results/
+
+# Editor and OS
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Local assistant settings
+.claude/settings.local.json
