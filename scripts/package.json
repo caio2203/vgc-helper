@@ -1,0 +1,25 @@
+{
+  "name": "@vgc-helper/scripts",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Data pipeline: builds the competitive data snapshots from public sources.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "scripts": {
+    "snapshot:build": "tsx src/snapshot/build.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run --passWithNoTests"
+  },
+  "dependencies": {
+    "@pkmn/data": "^0.11.0",
+    "@pkmn/dex": "^0.11.0",
+    "@pkmn/mods": "^0.11.0",
+    "@vgc-helper/data": "workspace:*",
+    "@vgc-helper/engine": "workspace:*",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "tsx": "^4.23.15",
+    "vitest": "^5.1.0"
+  }
+}
