@@ -7,7 +7,8 @@ export const experienceLevelSchema = z.enum(['beginner', 'intermediate', 'advanc
 export type ExperienceLevel = z.infer<typeof experienceLevelSchema>;
 
 export const settingsSchema = z.object({
-  locale: localeSchema,
+  /** `null` until the user picks one: the app follows the browser language. */
+  locale: localeSchema.nullable(),
   experienceLevel: experienceLevelSchema,
   defaultFormatId: z.string().min(1).nullable(),
   /** Minimum usage share (0–1) for a suggestion. `null` uses the format default from the snapshot. */
@@ -22,7 +23,7 @@ export const settingsPatchSchema = settingsSchema.partial();
 export type SettingsPatch = z.infer<typeof settingsPatchSchema>;
 
 export const DEFAULT_SETTINGS: Settings = {
-  locale: 'en',
+  locale: null,
   experienceLevel: 'intermediate',
   defaultFormatId: null,
   viabilityCutoff: null,
