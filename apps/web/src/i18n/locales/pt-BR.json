@@ -1,0 +1,43 @@
+{
+  "app": {
+    "name": "VGC Helper"
+  },
+  "common": {
+    "loading": "Carregando…",
+    "retry": "Tentar de novo",
+    "error": "Algo deu errado. Confira sua conexão e tente de novo."
+  },
+  "login": {
+    "title": "Entrar",
+    "intro": "Esta instância é privada. Só o dono pode entrar.",
+    "github": "Entrar com GitHub",
+    "password": "Senha",
+    "submit": "Entrar",
+    "submitting": "Entrando…",
+    "errors": {
+      "access_denied": "Esta conta do GitHub não tem acesso a esta instância.",
+      "invalid_credentials": "Senha errada. Tente de novo.",
+      "oauth_failed": "O login pelo GitHub não terminou. Tente de novo.",
+      "rate_limited": "Muitas tentativas. Espere um minuto e tente de novo.",
+      "unknown": "Não deu para entrar. Confira sua conexão e tente de novo."
+    }
+  },
+  "home": {
+    "title": "VGC Helper",
+    "signedInAs": "Conectado como {{login}}",
+    "signOut": "Sair",
+    "placeholder": "O montador de times chega na próxima fase. Esta página confirma os dados que ele vai usar.",
+    "snapshot": "Snapshot de dados {{version}}",
+    "regulations": "Regulamentos neste snapshot",
+    "regulationDates": "De {{start}} a {{end}}",
+    "regulationOpenEnded": "A partir de {{start}}",
+    "source": "Fonte: {{name}}, conferida em {{date}}"
+  },
+  "settings": {
+    "language": "Idioma"
+  },
+  "footer": {
+    "createdBy": "Criado por",
+    "notAffiliated": "Não é afiliado à Nintendo, Game Freak, Creatures ou The Pokémon Company."
+  }
+}

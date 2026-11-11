@@ -1,0 +1,43 @@
+{
+  "app": {
+    "name": "VGC Helper"
+  },
+  "common": {
+    "loading": "Loading…",
+    "retry": "Try again",
+    "error": "Something went wrong. Check your connection and try again."
+  },
+  "login": {
+    "title": "Sign in",
+    "intro": "This instance is private. Only its owner can sign in.",
+    "github": "Sign in with GitHub",
+    "password": "Password",
+    "submit": "Sign in",
+    "submitting": "Signing in…",
+    "errors": {
+      "access_denied": "This GitHub account is not allowed on this instance.",
+      "invalid_credentials": "Wrong password. Try again.",
+      "oauth_failed": "GitHub sign-in did not finish. Try again.",
+      "rate_limited": "Too many attempts. Wait a minute and try again.",
+      "unknown": "Could not sign in. Check your connection and try again."
+    }
+  },
+  "home": {
+    "title": "VGC Helper",
+    "signedInAs": "Signed in as {{login}}",
+    "signOut": "Sign out",
+    "placeholder": "The team builder arrives in the next phase. This page confirms the data it will use.",
+    "snapshot": "Data snapshot {{version}}",
+    "regulations": "Regulations in this snapshot",
+    "regulationDates": "{{start}} to {{end}}",
+    "regulationOpenEnded": "From {{start}}",
+    "source": "Source: {{name}}, checked on {{date}}"
+  },
+  "settings": {
+    "language": "Language"
+  },
+  "footer": {
+    "createdBy": "Created by",
+    "notAffiliated": "Not affiliated with Nintendo, Game Freak, Creatures or The Pokémon Company."
+  }
+}
