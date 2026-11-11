@@ -1,0 +1,167 @@
+{
+  "games": [
+    {
+      "id": "champions",
+      "name": "Pokémon Champions",
+      "mechanicsProfileId": "champions-2026"
+    }
+  ],
+  "mechanicsProfiles": [
+    {
+      "id": "champions-2026",
+      "name": "Pokémon Champions (2026)",
+      "statSystem": { "kind": "statPoints", "total": 66, "maxPerStat": 32, "fixedIv": 31 },
+      "nature": { "plusPercent": 110, "minusPercent": 90 },
+      "gimmick": { "kind": "mega", "perBattle": 1 },
+      "pp": { "maxBasePp": 20, "formula": "champions" },
+      "statusRules": {
+        "paralysisFullParaChance": 0.125,
+        "sleepTurns": { "min": 2, "max": 3 },
+        "freezeMaxTurns": 3,
+        "freezeThawChance": 0.25
+      },
+      "moveRestrictions": [
+        {
+          "move": "fakeout",
+          "restriction": "firstActionOnly",
+          "note": "Fake Out can only be selected on the Pokémon's first action after it enters the field."
+        }
+      ],
+      "sources": [
+        {
+          "name": "Pokémon Showdown: data/mods/champions/scripts.ts (stat formula, PP formula and cap)",
+          "url": "https://github.com/smogon/pokemon-showdown/blob/master/data/mods/champions/scripts.ts",
+          "retrievedAt": "2026-11-11T20:00:00.000Z"
+        },
+        {
+          "name": "Pokémon Showdown: data/mods/champions/conditions.ts (paralysis, sleep, freeze)",
+          "url": "https://github.com/smogon/pokemon-showdown/blob/master/data/mods/champions/conditions.ts",
+          "retrievedAt": "2026-11-11T20:00:00.000Z"
+        },
+        {
+          "name": "Pokémon Showdown: data/mods/champions/moves.ts (Fake Out, Protect PP)",
+          "url": "https://github.com/smogon/pokemon-showdown/blob/master/data/mods/champions/moves.ts",
+          "retrievedAt": "2026-11-11T20:00:00.000Z"
+        },
+        {
+          "name": "Pokémon Showdown: sim/team-validator.ts (32 Stat Points per stat, IVs fixed at 31)",
+          "url": "https://github.com/smogon/pokemon-showdown/blob/master/sim/team-validator.ts",
+          "retrievedAt": "2026-11-11T20:00:00.000Z"
+        },
+        {
+          "name": "Pokémon Showdown client: battle-team-editor.tsx (66 Stat Points in total)",
+          "url": "https://github.com/smogon/pokemon-showdown-client/blob/master/play.pokemonshowdown.com/src/battle-team-editor.tsx",
+          "retrievedAt": "2026-11-11T20:00:00.000Z"
+        },
+        {
+          "name": "The Pokémon Company: Regulation Set M-C announcement (one Mega Evolution per battle)",
+          "url": "https://asia-press.portal-pokemon.com/press-release/pokemon-champions_20260830/",
+          "retrievedAt": "2026-11-11T20:00:00.000Z"
+        }
+      ]
+    }
+  ],
+  "formats": [
+    {
+      "id": "champions-vgc",
+      "gameId": "champions",
+      "name": "VGC Doubles",
+      "gameType": "doubles",
+      "teamSize": { "min": 4, "max": 6 },
+      "pickCount": 4,
+      "level": 50,
+      "analysisProfile": "doubles",
+      "viability": {
+        "defaultCutoff": 0.04,
+        "minBattles": 10000,
+        "ratingCutoff": 1630,
+        "note": "Set in Phase 0 from the October 2026 Reg M-C ladder at 1630+: 44 species reach 4% usage and cover about 85% of team slots."
+      },
+      "sources": [
+        {
+          "name": "Serebii: Regulation M-C (team size, level, timer)",
+          "url": "https://serebii.net/pokemonchampions/rankedbattle/regulationm-c.shtml",
+          "retrievedAt": "2026-11-11T20:00:00.000Z"
+        },
+        {
+          "name": "Smogon usage stats, 2026-10, gen9championsvgc2026regmc-1630",
+          "url": "https://www.smogon.com/stats/2026-10/chaos/gen9championsvgc2026regmc-1630.json",
+          "retrievedAt": "2026-11-11T20:00:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "champions-singles",
+      "gameId": "champions",
+      "name": "Ranked Singles",
+      "gameType": "singles",
+      "teamSize": { "min": 3, "max": 6 },
+      "pickCount": 3,
+      "level": 50,
+      "analysisProfile": "singles",
+      "viability": {
+        "defaultCutoff": 0.04,
+        "minBattles": 10000,
+        "ratingCutoff": 1630,
+        "note": "Same cutoff as Doubles for now. To be calibrated in Phase 7 (Singles)."
+      },
+      "sources": [
+        {
+          "name": "Serebii: Regulation M-C (team size, level, timer)",
+          "url": "https://serebii.net/pokemonchampions/rankedbattle/regulationm-c.shtml",
+          "retrievedAt": "2026-11-11T20:00:00.000Z"
+        }
+      ]
+    }
+  ],
+  "regulations": [
+    {
+      "id": "M-C",
+      "gameId": "champions",
+      "name": "Regulation Set M-C",
+      "startsAt": "2026-09-09T02:00:00.000Z",
+      "endsAt": "2026-12-02T01:59:00.000Z",
+      "dexMod": "champions",
+      "formats": [
+        {
+          "formatId": "champions-vgc",
+          "showdownFormatId": "gen9championsvgc2026regmc",
+          "smogonStatsId": "gen9championsvgc2026regmc",
+          "timer": { "playerSeconds": 420, "turnSeconds": 45, "previewSeconds": 90 }
+        },
+        {
+          "formatId": "champions-singles",
+          "showdownFormatId": "gen9championsbssregmc",
+          "smogonStatsId": "gen9championsbssregmc",
+          "timer": { "playerSeconds": 420, "turnSeconds": 45, "previewSeconds": 90 }
+        }
+      ],
+      "clauses": ["species", "item", "nickname"],
+      "bannedTags": ["Mythical", "Restricted Legendary"],
+      "bannedSpecies": [],
+      "bannedItems": [],
+      "bannedMoves": [],
+      "bannedAbilities": [],
+      "restrictedLimit": null,
+      "sources": [
+        {
+          "name": "The Pokémon Company: Regulation Set M-C announcement (dates, added Pokémon and Megas)",
+          "url": "https://asia-press.portal-pokemon.com/press-release/pokemon-champions_20260830/",
+          "retrievedAt": "2026-11-11T20:00:00.000Z"
+        },
+        {
+          "name": "Pokémon Showdown: config/formats.ts (Flat Rules: Species Clause, Item Clause, no Mythical or Restricted Legendary)",
+          "url": "https://github.com/smogon/pokemon-showdown/blob/master/config/formats.ts",
+          "retrievedAt": "2026-11-11T20:00:00.000Z"
+        },
+        {
+          "name": "Serebii: Regulation M-C (timer)",
+          "url": "https://serebii.net/pokemonchampions/rankedbattle/regulationm-c.shtml",
+          "retrievedAt": "2026-11-11T20:00:00.000Z",
+          "note": "An older Serebii season page lists a 10 minute / 60 second timer for Singles. The M-C page lists 7 minutes / 45 seconds."
+        }
+      ],
+      "verifiedAt": "2026-11-11T20:00:00.000Z"
+    }
+  ]
+}
