@@ -203,7 +203,7 @@ O arquivo [NOTICE](NOTICE) lista os créditos que precisam acompanhar qualquer c
 ## Roadmap
 
 - [x] **Fase 0** — pesquisa: regras, fontes de dados, limites da hospedagem
-- [ ] **Fase 1** — base: monorepo, CI, login, banco, i18n, primeiro snapshot de dados, primeiro deploy
+- [x] **Fase 1** — base: monorepo, CI, login, banco, i18n, primeiro snapshot de dados, primeiro deploy
 - [ ] **Fase 2** — design system, montador de times, legalidade, import/export de paste, busca, atalhos
 - [ ] **Fase 3** — motor de análise, sugestões, níveis de experiência, feedback, calculadora de dano
 - [ ] **Fase 4** — pipeline de dados com diff legível, página "Novidades", revalidação de times

@@ -203,7 +203,7 @@ The [NOTICE](NOTICE) file lists the credits that must travel with every copy.
 ## Roadmap
 
 - [x] **Phase 0** — research: rules, data sources, hosting limits
-- [ ] **Phase 1** — foundation: monorepo, CI, sign-in, database, i18n, first data snapshot, first deploy
+- [x] **Phase 1** — foundation: monorepo, CI, sign-in, database, i18n, first data snapshot, first deploy
 - [ ] **Phase 2** — design system, team builder, legality, paste import/export, search, shortcuts
 - [ ] **Phase 3** — analysis engine, suggestions, experience levels, feedback, damage calculator
 - [ ] **Phase 4** — data pipeline with readable diffs, "What's new" page, team revalidation
