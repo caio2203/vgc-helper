@@ -12,3 +12,4 @@ minimumReleaseAgeExclude:
   - turbo@2.11.11
 allowBuilds:
   esbuild: true
+  "@swc/core": true

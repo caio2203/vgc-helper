@@ -1,0 +1,33 @@
+import { type DynamicModule, Module } from '@nestjs/common';
+import { APP_GUARD } from '@nestjs/core';
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
+import { AuthModule } from './auth/auth.module.js';
+import { SessionGuard } from './auth/session.guard.js';
+import type { AppConfig } from './config/env.js';
+import { CoreModule } from './core/core.module.js';
+import type { Db } from './db/client.js';
+import { HealthController } from './health/health.controller.js';
+import { SettingsController } from './settings/settings.controller.js';
+import { SnapshotsController } from './snapshots/snapshots.controller.js';
+import { SnapshotsService } from './snapshots/snapshots.service.js';
+
+@Module({})
+export class AppModule {
+  static forRoot(config: AppConfig, db: Db): DynamicModule {
+    return {
+      module: AppModule,
+      imports: [
+        CoreModule.forRoot(config, db),
+        ThrottlerModule.forRoot([{ ttl: 60_000, limit: 120 }]),
+        AuthModule.forRoot(config),
+      ],
+      controllers: [HealthController, SettingsController, SnapshotsController],
+      providers: [
+        SnapshotsService,
+        // Order matters: rate limit first, then the deny-by-default session check.
+        { provide: APP_GUARD, useClass: ThrottlerGuard },
+        { provide: APP_GUARD, useClass: SessionGuard },
+      ],
+    };
+  }
+}
