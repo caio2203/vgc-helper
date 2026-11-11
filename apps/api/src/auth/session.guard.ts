@@ -65,7 +65,7 @@ export class SessionGuard implements CanActivate {
   /** Browsers always send Origin on writes. Without a session, it is required. */
   private assertSameOrigin(req: AuthedRequest, requireOrigin: boolean): void {
     const origin = req.header('origin');
-    if (origin === undefined ? requireOrigin : origin !== this.config.appOrigin) {
+    if (origin === undefined ? requireOrigin : !this.config.allowedOrigins.has(origin)) {
       throw new ForbiddenException('Cross-origin request blocked');
     }
     const site = req.header('sec-fetch-site');

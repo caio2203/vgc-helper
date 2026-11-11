@@ -45,7 +45,7 @@ export async function createApp(config: AppConfig, db: Db = createDb(config.data
   app.disable('x-powered-by');
   app.use('/api', setHeaders({ ...API_HEADERS, 'Cache-Control': 'no-store' }));
   app.use(cookieParser());
-  app.enableCors({ origin: config.appOrigin, credentials: true });
+  app.enableCors({ origin: [...config.allowedOrigins], credentials: true });
   app.setGlobalPrefix('api');
   if (config.serveWebDir) mountWeb(app, config.serveWebDir);
 

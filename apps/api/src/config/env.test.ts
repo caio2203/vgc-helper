@@ -71,6 +71,39 @@ describe('loadConfig with a valid environment', () => {
     expect(config.migrateOnBoot).toBe(false);
   });
 
+  it("takes the origins from Vercel's own variables when APP_ORIGIN is not set", () => {
+    const { APP_ORIGIN: _, ...env } = base();
+    const vercel = { VERCEL: '1', TURSO_DATABASE_URL: 'libsql://db.turso.io' };
+
+    const preview = loadConfig({
+      ...env,
+      ...vercel,
+      VERCEL_ENV: 'preview',
+      VERCEL_URL: 'vgc-helper-abc123.vercel.app',
+      VERCEL_BRANCH_URL: 'vgc-helper-git-feature.vercel.app',
+      VERCEL_PROJECT_PRODUCTION_URL: 'vgc-helper.vercel.app',
+    });
+    expect(preview.appOrigin).toBe('https://vgc-helper-git-feature.vercel.app');
+    expect([...preview.allowedOrigins].sort()).toEqual([
+      'https://vgc-helper-abc123.vercel.app',
+      'https://vgc-helper-git-feature.vercel.app',
+      'https://vgc-helper.vercel.app',
+    ]);
+
+    const production = loadConfig({
+      ...env,
+      ...vercel,
+      VERCEL_ENV: 'production',
+      VERCEL_PROJECT_PRODUCTION_URL: 'vgc-helper.vercel.app',
+    });
+    expect(production.appOrigin).toBe('https://vgc-helper.vercel.app');
+  });
+
+  it('allows only APP_ORIGIN outside Vercel', () => {
+    const config = loadConfig({ ...base(), VERCEL_URL: 'ignored.vercel.app' });
+    expect([...config.allowedOrigins]).toEqual(['https://helper.example']);
+  });
+
   it('accepts local-password mode with a valid hash', () => {
     const config = loadConfig({
       ...base(),

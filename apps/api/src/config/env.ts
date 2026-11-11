@@ -7,6 +7,10 @@ const envSchema = z.object({
   NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
   VERCEL: z.string().optional(),
   VERCEL_ENV: z.enum(['production', 'preview', 'development']).optional(),
+  // Hostnames Vercel injects at runtime (no protocol).
+  VERCEL_URL: z.string().optional(),
+  VERCEL_BRANCH_URL: z.string().optional(),
+  VERCEL_PROJECT_PRODUCTION_URL: z.string().optional(),
   PORT: z.coerce.number().int().positive().default(3000),
   APP_ORIGIN: z.url().optional(),
   AUTH_MODE: z.enum(['github', 'local-password']).optional(),
@@ -44,7 +48,10 @@ export interface DatabaseConfig {
 export interface AppConfig {
   env: 'development' | 'production' | 'test';
   port: number;
+  /** Canonical origin: OAuth callback and redirects after login. */
   appOrigin: string;
+  /** Origins allowed to send writes: the app origin plus this deployment's own Vercel URLs. */
+  allowedOrigins: ReadonlySet<string>;
   secureCookies: boolean;
   session: { secret: string; ttlMs: number; cookieName: string };
   auth: AuthConfig;
@@ -91,8 +98,24 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env): AppConfig {
   const onVercel = e.VERCEL === '1';
   const problems: string[] = [];
 
-  const appOrigin = e.APP_ORIGIN ? new URL(e.APP_ORIGIN).origin : null;
+  // On Vercel each preview has its own URL, so the origin can come from Vercel's own variables.
+  const https = (host: string | undefined) => (host ? `https://${host}` : null);
+  const vercelOrigin = onVercel
+    ? e.VERCEL_ENV === 'production'
+      ? https(e.VERCEL_PROJECT_PRODUCTION_URL)
+      : (https(e.VERCEL_BRANCH_URL) ?? https(e.VERCEL_URL))
+    : null;
+  const appOrigin = e.APP_ORIGIN ? new URL(e.APP_ORIGIN).origin : vercelOrigin;
   if (!appOrigin) problems.push('APP_ORIGIN is required (for example http://localhost:5173)');
+
+  const allowedOrigins = new Set(
+    [
+      appOrigin,
+      ...(onVercel
+        ? [https(e.VERCEL_URL), https(e.VERCEL_BRANCH_URL), https(e.VERCEL_PROJECT_PRODUCTION_URL)]
+        : []),
+    ].filter((origin): origin is string => origin !== null),
+  );
 
   const secret = e.SESSION_SECRET ?? '';
   if (secret.length < MIN_SECRET_LENGTH) {
@@ -148,6 +171,7 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env): AppConfig {
     env: e.NODE_ENV,
     port: e.PORT,
     appOrigin,
+    allowedOrigins,
     secureCookies,
     session: {
       secret,
