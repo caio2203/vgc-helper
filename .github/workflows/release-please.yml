@@ -9,15 +9,13 @@ permissions:
 
 jobs:
   release:
+    # Release PRs are opened with the GitHub App token (docs/setup.md, step 3), so CI runs on
+    # them and the default token never needs permission to create pull requests.
+    # Skipped until the app is set up.
+    if: vars.BOT_APP_ID != ''
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pull-requests: write
     steps:
-      # A GitHub App token makes the release PR trigger CI. Without the app (for example in a
-      # fork), the default token still works, but CI will not run on the release PR.
       - id: app-token
-        if: vars.BOT_APP_ID != ''
         uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3.3.0
         with:
           app-id: ${{ vars.BOT_APP_ID }}
@@ -25,6 +23,6 @@ jobs:
 
       - uses: googleapis/release-please-action@45996ed1f6d02564a971a2fa1b5860e934307cf7 # v5.0.0
         with:
-          token: ${{ steps.app-token.outputs.token || github.token }}
+          token: ${{ steps.app-token.outputs.token }}
           config-file: release-please-config.json
           manifest-file: .release-please-manifest.json

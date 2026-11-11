@@ -178,7 +178,7 @@ gh secret set BOT_APP_PRIVATE_KEY < path/to/the-downloaded-key.pem
 6. Delete the `.pem` file from your computer. Run the workflow once from the **Actions** tab
    (**Update data → Run workflow**) to check it.
 
-The same app token lets release-please open release pull requests that run CI.
+Release pull requests (release-please) use the same app, so CI runs on them too. Until the app is set up, the `Release Please` workflow is skipped.
 
 ## 4. Repository settings for maintainers
 
