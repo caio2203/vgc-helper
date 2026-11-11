@@ -3,6 +3,7 @@ dist/
 coverage/
 .turbo/
 .vercel/
+.cache/
 *.tsbuildinfo
 
 # Environment and local data
