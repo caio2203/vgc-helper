@@ -1,0 +1,29 @@
+{
+  "name": "@vgc-helper/engine",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Pure, deterministic team analysis engine. No I/O: it runs in the browser and in the API.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "dev": "tsc -p tsconfig.build.json --watch --preserveWatchOutput",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@vgc-helper/data": "workspace:*"
+  },
+  "devDependencies": {
+    "vitest": "^5.1.0"
+  }
+}
