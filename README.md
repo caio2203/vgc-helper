@@ -9,13 +9,13 @@ missing and what the current meta is running. VGC (Doubles) first, Singles next.
 [![License: Apache 2.0](https://img.shields.io/github/license/caio2203/vgc-helper)](LICENSE)
 [![Release](https://img.shields.io/github/v/release/caio2203/vgc-helper?include_prereleases)](https://github.com/caio2203/vgc-helper/releases)
 
-> **Status: early development.** Phases 2 to 7 are done: the team builder checks legality as
+> **Status: early development.** Phases 2 to 8 are done: the team builder checks legality as
 > you edit, the analysis column shows the type matrix, stacked weaknesses, the role checklist,
 > speed tiers and meta threats from damage calcs, with suggestions that explain their score,
 > every data update comes with a readable diff, a What's new page and a check of your saved
 > teams, the team preview says who to bring and lead against an open team list, and an optional
 > Explain button and chat use Gemini on the analysis; Ranked Singles has its own analysis profile.
-> Next: Scarlet/Violet and Smogon formats — see the [roadmap](#roadmap).
+> Scarlet/Violet VGC and Smogon OU are in too. See the [roadmap](#roadmap).
 
 ## Screenshots
 
@@ -70,6 +70,9 @@ Available now:
 - Pokémon Champions data for Regulation Set M-C: legal species, Megas, moves, items, abilities
   and learnsets, monthly usage stats for VGC and Singles, and the top cut of recent online VGC
   tournaments. Every dataset carries its source and date.
+- Pokémon Scarlet & Violet: VGC Regulation Set G (one Restricted Legendary, no Mythicals,
+  level 50) and Smogon OU (6 against 6, level 100, the Showdown banlist), with EVs and IVs,
+  Tera Types and Showdown usage stats. Pick the format in the builder; the game follows it.
 - Team builder with live legality checks against the regulation: species and forms, abilities,
   learnsets, Stat Points, Item and Species Clause, Mega Stones and one Mega per battle. Every
   error names the slot and the rule's source.
@@ -128,9 +131,7 @@ Available now:
   legality from the data snapshot. Answers are cached; without a key the buttons are hidden and
   nothing else changes.
 
-Planned (see the roadmap):
-
-- Scarlet/Violet and Smogon formats.
+Planned: more Smogon tiers and regulations as they get usage data.
 
 ## Keyboard shortcuts
 
@@ -289,7 +290,8 @@ screen: if authentication is not configured, the API refuses to start.
 ## Data sources and credits
 
 - [Pokémon Showdown](https://github.com/smogon/pokemon-showdown) (MIT) — game data for the
-  Pokémon Champions mods, packaged by [pkmn](https://github.com/pkmn/ps) (MIT).
+  Pokémon Champions mods and Scarlet/Violet, packaged by [pkmn](https://github.com/pkmn/ps)
+  (MIT), and the rules of the Showdown formats (Reg G, OU).
 - [Smogon University usage statistics](https://www.smogon.com/stats/) — monthly usage, sets,
   spreads and teammates.
 - [Limitless](https://play.limitlesstcg.com) — standings of recent online VGC tournaments
@@ -313,7 +315,7 @@ The [NOTICE](NOTICE) file lists the credits that must travel with every copy.
 - [x] **Phase 5** — team preview: which 4 to bring against an open team list
 - [x] **Phase 6** — on-demand AI explanations and chat (Gemini)
 - [x] **Phase 7** — Singles analysis profile
-- [ ] **Phase 8** — Scarlet/Violet and Smogon formats
+- [x] **Phase 8** — Scarlet/Violet and Smogon formats
 
 ## Contributing
 

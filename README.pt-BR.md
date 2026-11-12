@@ -9,14 +9,14 @@ faltando e o que o meta atual está usando. VGC (Doubles) primeiro, Singles depo
 [![Licença: Apache 2.0](https://img.shields.io/github/license/caio2203/vgc-helper)](LICENSE)
 [![Versão](https://img.shields.io/github/v/release/caio2203/vgc-helper?include_prereleases)](https://github.com/caio2203/vgc-helper/releases)
 
-> **Status: início do desenvolvimento.** As Fases 2 a 7 estão prontas: o montador checa a
+> **Status: início do desenvolvimento.** As Fases 2 a 8 estão prontas: o montador checa a
 > legalidade enquanto você edita, a coluna de análise mostra a matriz de tipos, as fraquezas
 > acumuladas, o checklist de papéis, os speed tiers e as ameaças do meta com cálculo de dano,
 > com sugestões que explicam a pontuação, cada atualização dos dados vem com um diff legível,
 > uma página de Novidades e uma checagem dos times salvos, e o team preview diz quem levar e
 > quem começar contra uma Open Team List, e um botão Explicar e um chat opcionais usam o Gemini
-> sobre a análise; o Singles ranqueado tem perfil de análise próprio. Próximo passo: Scarlet/Violet
-> e formatos do Smogon — veja o [roadmap](#roadmap).
+> sobre a análise; o Singles ranqueado tem perfil de análise próprio, e o VGC de Scarlet/Violet e o
+> Smogon OU também entraram. Veja o [roadmap](#roadmap).
 
 ## Screenshots
 
@@ -71,6 +71,9 @@ Já disponível:
 - Dados do Pokémon Champions no Regulamento M-C: espécies, Megas, golpes, itens, habilidades e
   learnsets legais, estatísticas mensais de uso do VGC e do Singles e o top cut de torneios
   online recentes de VGC. Cada conjunto de dados traz a fonte e a data.
+- Pokémon Scarlet & Violet: VGC Regulamento G (um Lendário Restrito, sem Míticos, nível 50) e
+  Smogon OU (6 contra 6, nível 100, banlist do Showdown), com EVs e IVs, Tipos Tera e
+  estatísticas de uso do Showdown. Escolha o formato no montador; o jogo acompanha.
 - Montador de times com checagem de legalidade ao vivo contra o regulamento: espécies e formas,
   habilidades, learnsets, Stat Points, Item e Species Clause, Mega Stones e uma Mega por batalha.
   Cada erro diz o slot e a fonte da regra.
@@ -131,9 +134,7 @@ Já disponível:
   a análise feita pelo motor, mais ferramentas que leem uso, sets comuns e legalidade do snapshot
   de dados. As respostas ficam guardadas; sem chave os botões ficam ocultos e nada mais muda.
 
-Planejado (veja o roadmap):
-
-- Scarlet/Violet e formatos do Smogon.
+Planejado: mais tiers do Smogon e regulamentos conforme tiverem dados de uso.
 
 ## Atalhos de teclado
 
@@ -292,7 +293,8 @@ se a autenticação não estiver configurada, a API se recusa a subir.
 ## Fontes de dados e créditos
 
 - [Pokémon Showdown](https://github.com/smogon/pokemon-showdown) (MIT) — dados de jogo dos mods
-  do Pokémon Champions, empacotados pelo [pkmn](https://github.com/pkmn/ps) (MIT).
+  do Pokémon Champions e de Scarlet/Violet, empacotados pelo [pkmn](https://github.com/pkmn/ps)
+  (MIT), e as regras dos formatos do Showdown (Reg G, OU).
 - [Estatísticas de uso do Smogon](https://www.smogon.com/stats/) — uso mensal, sets, spreads e
   companheiros de time.
 - [Limitless](https://play.limitlesstcg.com) — classificação de torneios online recentes de VGC
@@ -316,7 +318,7 @@ O arquivo [NOTICE](NOTICE) lista os créditos que precisam acompanhar qualquer c
 - [x] **Fase 5** — team preview: quais 4 levar contra uma Open Team List
 - [x] **Fase 6** — explicações e chat com IA sob demanda (Gemini)
 - [x] **Fase 7** — perfil de análise de Singles
-- [ ] **Fase 8** — Scarlet/Violet e formatos do Smogon
+- [x] **Fase 8** — Scarlet/Violet e formatos do Smogon
 
 ## Como contribuir
 

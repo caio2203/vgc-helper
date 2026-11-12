@@ -117,4 +117,11 @@ pnpm hash-password     # ADMIN_PASSWORD_HASH for AUTH_MODE=local-password
   `baseStat` kind (any listed sum of base stats reaches `min`); archetypes have `profiles`
   (Tailwind and Trick Room are Doubles only). The Singles usage cutoff is 3% (note in
   `manual/champions.json`).
-- Next: Phase 8 — Scarlet/Violet and Smogon formats.
+- Phase 8 is done: game `sv` in `manual/sv.json` (profile `sv`: EVs/IVs, Tera with
+  `gimmick.teraTypes`, standard PP) with VGC Reg G (`gen9vgc2024regg`, one Restricted Legendary
+  via `restrictedTags`) and Smogon OU (`gen9ou`, `bannedTiers` Uber/AG plus the Showdown
+  banlist). `dexMod: "gen9"` loads the base Showdown data; its learnsets keep moves with a gen 9
+  source from the species and earlier stages. `regulationInForce` takes the format, because a
+  game can run formats on different regulations. Reg G's official period ended; with no newer
+  SV VGC regulation it stays the one teams are checked against.
+- Next: the owner reviews and approves Phases 4–8 for push.
