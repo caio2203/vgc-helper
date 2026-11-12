@@ -1,5 +1,7 @@
 import type { AnalysisProfile, AnalysisRules, MetaSnapshot, Species } from '@vgc-helper/data';
+import type { TeamSlot } from '@vgc-helper/shared';
 import type { DexIndex, RulesContext } from '../context.js';
+import { emptySlot } from '../paste.js';
 import { commonSet, type MetaSet, usageByBase } from './meta.js';
 import type { ResolvedSlot } from './resolve.js';
 import { findRoles } from './roles.js';
@@ -21,6 +23,8 @@ export interface Suggestion {
   /** Usage of the species with its Megas summed. */
   usage: number;
   offMeta: boolean;
+  /** The common set as a team slot, ready to add. */
+  slot: TeamSlot;
   score: number;
   parts: ScorePart[];
 }
@@ -119,10 +123,27 @@ export function suggest(
         types: added,
       });
 
+    const mega = set.species.id !== species.id;
+    // A Mega set lists the Mega's ability; the slot keeps one the base species can have.
+    const baseAbility =
+      group.entries
+        .find((e) => e.species === species.id)
+        ?.abilities.find((a) => species.abilities.includes(a.id))?.id ??
+      species.abilities[0] ??
+      null;
     out.push({
       species,
+      slot: {
+        ...emptySlot(species.id),
+        item: set.item,
+        ability: mega ? baseAbility : set.ability,
+        moves: set.moves.map((m) => m.id),
+        nature: set.nature,
+        spread: set.spread,
+        mega,
+      },
       set,
-      mega: set.species.id !== species.id,
+      mega,
       usage: group.usage,
       offMeta,
       score: round(parts.reduce((a, p) => a + p.points, 0)),

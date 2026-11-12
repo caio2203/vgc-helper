@@ -204,3 +204,14 @@ describe('weather from abilities', () => {
     expect(sunny.description).toContain('Sun');
   });
 });
+
+describe('suggested slots', () => {
+  it('are legal to add, Mega sets included', async () => {
+    const { checkLegality } = await import('../legality.js');
+    const a = analyze([incineroar, kingambit, archaludon]);
+    for (const s of a.suggestions) {
+      const errors = checkLegality([s.slot], ctx, index).filter((i) => i.severity === 'error');
+      expect(errors, s.species.id).toEqual([]);
+    }
+  });
+});
