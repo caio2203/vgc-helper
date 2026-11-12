@@ -341,7 +341,7 @@ export function BuilderPage({ teamId }: { teamId?: string }) {
       {/* Phone: Team / Analysis tabs at the bottom (DESIGN.md §7). */}
       <nav
         aria-label={t('builder.views')}
-        className="fixed inset-x-0 bottom-0 z-10 grid h-14 grid-cols-2 border-t border-line bg-surface md:hidden"
+        className="fixed inset-x-0 bottom-0 z-30 grid h-14 grid-cols-2 border-t border-line bg-surface md:hidden"
       >
         {(['team', 'analysis'] as const).map((v) => {
           const errors = issues.filter((i) => i.severity === 'error').length;

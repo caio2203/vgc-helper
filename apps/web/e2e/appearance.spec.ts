@@ -6,6 +6,8 @@ test.describe('dark theme', () => {
   test.use({ locale: 'en-US', colorScheme: 'dark', storageState: AUTH_STATE });
 
   test('every screen passes axe in dark mode', async ({ page }, info) => {
+    // Four axe scans, one of them over the whole analysis column.
+    test.setTimeout(60_000);
     await page.goto('/');
     await expect(page.locator('#team-heading')).toContainText('0 / 6');
     await pasteOnPage(page, TEAM_WITH_ERROR);
@@ -57,3 +59,20 @@ test('the app ships a manifest and a service worker that never caches the API', 
   );
   await expect(page.locator('link[rel="icon"]')).toHaveAttribute('href', '/favicon.svg');
 });
+
+for (const locale of ['en-US', 'pt-BR']) {
+  test.describe(`layout in ${locale}`, () => {
+    test.use({ locale, storageState: AUTH_STATE });
+
+    test('no screen scrolls sideways', async ({ page }) => {
+      for (const path of ['/', '/teams', '/calc', '/settings', '/about']) {
+        await page.goto(path);
+        await page.locator('main').waitFor();
+        const overflow = await page.evaluate(
+          () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
+        );
+        expect(overflow, path).toBeLessThanOrEqual(0);
+      }
+    });
+  });
+}

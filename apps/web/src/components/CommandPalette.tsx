@@ -149,10 +149,10 @@ export function CommandPalette() {
   return (
     <Radix.Root open={paletteOpen} onOpenChange={(open) => (open ? setPalette(true) : close())}>
       <Radix.Portal>
-        <Radix.Overlay className="fixed inset-0 bg-[color-mix(in_srgb,var(--ink)_35%,transparent)]" />
+        <Radix.Overlay className="fixed inset-0 z-40 bg-[color-mix(in_srgb,var(--ink)_35%,transparent)]" />
         <Radix.Content
           aria-describedby={undefined}
-          className="fixed top-[12vh] left-1/2 w-[calc(100vw-32px)] max-w-xl -translate-x-1/2 rounded-md border border-line-strong bg-surface text-ink"
+          className="fixed top-[12vh] left-1/2 z-40 w-[calc(100vw-32px)] max-w-xl -translate-x-1/2 rounded-md border border-line-strong bg-surface text-ink"
         >
           <Radix.Title className="sr-only">{t('palette.title')}</Radix.Title>
           <div className="flex items-center gap-2 border-b border-line px-3">
