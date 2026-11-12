@@ -86,6 +86,12 @@ export function CommandPalette() {
       run: () => void navigate({ to: '/settings' }),
     },
     {
+      id: 'admin',
+      label: t('palette.admin'),
+      hint: t('palette.page'),
+      run: () => void navigate({ to: '/admin' }),
+    },
+    {
       id: 'shortcuts',
       label: t('palette.shortcuts'),
       hint: t('palette.action'),

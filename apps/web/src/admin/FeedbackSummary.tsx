@@ -15,14 +15,14 @@ export function FeedbackSummary({ nameOf }: { nameOf: (id: string) => string }) 
   });
   const data = summary.data;
   return (
-    <Panel title={t('settings.feedback.title')} labelledBy="settings-feedback">
+    <Panel title={t('admin.feedback.title')} labelledBy="admin-feedback">
       <div className="flex flex-col gap-2 p-4">
         {!data && <p className="m-0 text-muted">{t('common.loading')}</p>}
-        {data && data.total === 0 && <p className="m-0">{t('settings.feedback.empty')}</p>}
+        {data && data.total === 0 && <p className="m-0">{t('admin.feedback.empty')}</p>}
         {data && data.total > 0 && (
           <>
             <p className="m-0">
-              {t('settings.feedback.total', {
+              {t('admin.feedback.total', {
                 total: f.number(data.total),
                 helpful: f.number(data.helpful),
               })}
@@ -31,13 +31,13 @@ export function FeedbackSummary({ nameOf }: { nameOf: (id: string) => string }) 
               <thead>
                 <tr className="border-b border-line-strong text-left">
                   <th scope="col" className="py-1 font-semibold">
-                    {t('settings.feedback.pokemon')}
+                    {t('admin.feedback.pokemon')}
                   </th>
                   <th scope="col" className="py-1 text-right font-semibold">
-                    {t('settings.feedback.helpful')}
+                    {t('admin.feedback.helpful')}
                   </th>
                   <th scope="col" className="py-1 text-right font-semibold">
-                    {t('settings.feedback.notHelpful')}
+                    {t('admin.feedback.notHelpful')}
                   </th>
                 </tr>
               </thead>

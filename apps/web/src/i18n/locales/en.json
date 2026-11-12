@@ -367,6 +367,7 @@
     "save": "Save team",
     "teams": "My teams",
     "settings": "Settings",
+    "admin": "Admin: data and feedback",
     "shortcuts": "Keyboard shortcuts",
     "kind": {
       "species": "Pokémon",
@@ -423,6 +424,34 @@
     "offMeta": "Off-meta mode: also suggest Pokémon below the cutoff",
     "saved": "Settings saved.",
     "saveError": "The setting was not saved. Check your connection and try again.",
+    "adminHint": "Data status, pipeline warnings and suggestion feedback are on the page"
+  },
+  "admin": {
+    "title": "Admin",
+    "intro": "The data this instance uses, what the last data build flagged, and how the suggestions were rated.",
+    "snapshot": "Data snapshot",
+    "version": "Version",
+    "built": "Built",
+    "dex": "Game data",
+    "dexValue": "{{name}}, retrieved {{date}}",
+    "overrides": "Manual corrections",
+    "overridesNone": "None applied",
+    "warnings": "Pipeline warnings",
+    "warningsNone": "The last build flagged nothing.",
+    "warningsNote": "Warnings come from the build that made this snapshot (pnpm snapshot:build or the Update data workflow).",
+    "dates": "Dates",
+    "datesValue": "{{start}} to {{end}}",
+    "datesOpen": "From {{start}}, no end date yet",
+    "daysLeft_one": "{{count}} day left",
+    "daysLeft_other": "{{count}} days left",
+    "verified": "Rules checked",
+    "usage": "Usage, {{format}}",
+    "usageValue": "{{period}}, {{battles}} battles at rating {{rating}}+, retrieved {{date}}.",
+    "smallSample": "Small sample: under {{min}} battles.",
+    "topCut": "Top cut, {{format}}",
+    "topCutValue": "{{events}} tournaments with {{players}}+ players, {{teams}} teams in the top {{top}}, {{from}} to {{to}}, retrieved {{date}}.",
+    "topCutMissing": "No tournament data in this snapshot. See the pipeline warnings.",
+    "topCutNone": "No tournament source for this format.",
     "feedback": {
       "title": "Suggestion feedback",
       "empty": "No suggestion rated yet. Use Useful or Not useful in the analysis.",
@@ -447,6 +476,7 @@
   "footer": {
     "createdBy": "Created by",
     "about": "About",
+    "admin": "Admin",
     "notAffiliated": "Not affiliated with Nintendo, Game Freak, Creatures or The Pokémon Company."
   },
   "calc": {

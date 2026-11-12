@@ -6,7 +6,7 @@ test.describe('dark theme', () => {
   test.use({ locale: 'en-US', colorScheme: 'dark', storageState: AUTH_STATE });
 
   test('every screen passes axe in dark mode', async ({ page }, info) => {
-    // Four axe scans, one of them over the whole analysis column.
+    // Five axe scans, one of them over the whole analysis column.
     test.setTimeout(60_000);
     await page.goto('/');
     await expect(page.locator('#team-heading')).toContainText('0 / 6');
@@ -25,6 +25,10 @@ test.describe('dark theme', () => {
 
     await page.goto('/settings');
     await page.getByRole('heading', { level: 1 }).waitFor();
+    await expectNoA11yViolations(page);
+
+    await page.goto('/admin');
+    await expect(page.getByText(/tournaments with/).first()).toBeVisible();
     await expectNoA11yViolations(page);
   });
 });
@@ -65,7 +69,7 @@ for (const locale of ['en-US', 'pt-BR']) {
     test.use({ locale, storageState: AUTH_STATE });
 
     test('no screen scrolls sideways', async ({ page }) => {
-      for (const path of ['/', '/teams', '/calc', '/settings', '/about']) {
+      for (const path of ['/', '/teams', '/calc', '/settings', '/admin', '/about']) {
         await page.goto(path);
         await page.locator('main').waitFor();
         const overflow = await page.evaluate(

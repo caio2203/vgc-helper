@@ -78,6 +78,8 @@ Já disponível:
 - Meus times: salvar, abrir, duplicar e excluir times.
 - Configurações: idioma, nível de experiência, densidade (confortável ou compacta), tema,
   formato padrão.
+- Admin: versão do snapshot, cada fonte com o tamanho da amostra e a data, o fim do
+  regulamento, os avisos do último build de dados e as avaliações das sugestões.
 - App instalável (PWA). Só a estrutura do app fica em cache; seus dados nunca ficam offline.
 - Interface em inglês e português do Brasil, temas claro e escuro.
 - Análise ao vivo, sem IA, refeita a cada mudança:
@@ -94,8 +96,8 @@ Já disponível:
 - Sugestões a partir dos dados de uso: Pokémon legais acima de um corte de uso configurável (ou
   abaixo dele no modo off-meta), ordenados por uma pontuação explicada — fraquezas acumuladas
   que resistem, papéis que faltam e que preenchem, uso, presença no top cut de torneios
-  recentes, companheiros de time comuns — com o set mais comum, adicionados com um clique. Cada uma pode ser marcada como útil ou não; as
-  Configurações mostram o total.
+  recentes, companheiros de time comuns — com o set mais comum, adicionados com um clique. Cada
+  uma pode ser marcada como útil ou não; a página Admin mostra o total.
 - Os níveis de experiência mudam quanto se explica e quantos números aparecem: o iniciante ganha
   um glossário em cada papel, o avançado ganha rolagens de dano e os pontos da pontuação.
 - Calculadora de dano com a mecânica do Champions (Stat Points, nível 50), usando o mesmo

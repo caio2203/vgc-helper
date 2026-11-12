@@ -17,9 +17,14 @@ export function Footer({ showAbout = true }: { showAbout?: boolean }) {
           </a>
         </span>
         {showAbout && (
-          <Link to="/about" className="text-ink underline underline-offset-2">
-            {t('footer.about')}
-          </Link>
+          <>
+            <Link to="/about" className="text-ink underline underline-offset-2">
+              {t('footer.about')}
+            </Link>
+            <Link to="/admin" className="text-ink underline underline-offset-2">
+              {t('footer.admin')}
+            </Link>
+          </>
         )}
         <span>{t('footer.notAffiliated')}</span>
       </div>

@@ -9,6 +9,7 @@ import {
 import { loginErrorSchema } from '@vgc-helper/shared';
 import { z } from 'zod';
 import { AboutPage } from './about/AboutPage';
+import { AdminPage } from './admin/AdminPage';
 import { sessionQuery } from './api/queries';
 import { BuilderPage } from './builder/BuilderPage';
 import { CalcPage } from './calc/CalcPage';
@@ -92,6 +93,12 @@ const settingsRoute = createRoute({
   component: SettingsPage,
 });
 
+const adminRoute = createRoute({
+  getParentRoute: () => authedRoute,
+  path: '/admin',
+  component: AdminPage,
+});
+
 const aboutRoute = createRoute({
   getParentRoute: () => authedRoute,
   path: '/about',
@@ -106,6 +113,7 @@ const routeTree = rootRoute.addChildren([
     teamRoute,
     calcRoute,
     settingsRoute,
+    adminRoute,
     aboutRoute,
   ]),
 ]);

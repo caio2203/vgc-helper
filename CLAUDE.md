@@ -80,6 +80,8 @@ pnpm hash-password     # ADMIN_PASSWORD_HASH for AUTH_MODE=local-password
   (`pnpm --filter @vgc-helper/web screenshots`, after `pnpm build`).
 - Phase 3 is done: analysis column (type matrix, stacked weaknesses, roles, archetypes, speed
   tiers, meta threats), suggestions with an explained score, experience levels, useful/not
-  useful feedback (`/api/feedback`, summary in Settings), damage calculator (`/calc`) and the
-  README GIF (`screenshots/demo.spec.ts`).
+  useful feedback (`/api/feedback`), damage calculator (`/calc`), the README GIFs in English and
+  Portuguese (`screenshots/demo.spec.ts`), top-cut data from the Limitless API as a score bonus
+  (`scripts/src/snapshot/limitless.ts`, config per regulation format in `manual/champions.json`)
+  and the Admin page (`/admin`: data status, pipeline warnings saved in the manifest, feedback).
 - Next: Phase 4 — data pipeline with readable diffs, "What's new" page, team revalidation.

@@ -367,6 +367,7 @@
     "save": "Salvar time",
     "teams": "Meus times",
     "settings": "Configurações",
+    "admin": "Admin: dados e avaliações",
     "shortcuts": "Atalhos de teclado",
     "kind": {
       "species": "Pokémon",
@@ -423,6 +424,34 @@
     "offMeta": "Modo off-meta: sugerir também Pokémon abaixo do corte",
     "saved": "Configurações salvas.",
     "saveError": "A configuração não foi salva. Confira sua conexão e tente de novo.",
+    "adminHint": "Status dos dados, avisos do pipeline e avaliações das sugestões ficam na página"
+  },
+  "admin": {
+    "title": "Admin",
+    "intro": "Os dados que esta instância usa, o que o último build de dados apontou e como as sugestões foram avaliadas.",
+    "snapshot": "Snapshot de dados",
+    "version": "Versão",
+    "built": "Gerado em",
+    "dex": "Dados do jogo",
+    "dexValue": "{{name}}, coletado em {{date}}",
+    "overrides": "Correções manuais",
+    "overridesNone": "Nenhuma aplicada",
+    "warnings": "Avisos do pipeline",
+    "warningsNone": "O último build não apontou nada.",
+    "warningsNote": "Os avisos vêm do build que gerou este snapshot (pnpm snapshot:build ou o workflow Update data).",
+    "dates": "Datas",
+    "datesValue": "{{start}} a {{end}}",
+    "datesOpen": "A partir de {{start}}, ainda sem data de fim",
+    "daysLeft_one": "Falta {{count}} dia",
+    "daysLeft_other": "Faltam {{count}} dias",
+    "verified": "Regras conferidas em",
+    "usage": "Uso, {{format}}",
+    "usageValue": "{{period}}, {{battles}} batalhas com rating {{rating}}+, coletado em {{date}}.",
+    "smallSample": "Amostra pequena: menos de {{min}} batalhas.",
+    "topCut": "Top cut, {{format}}",
+    "topCutValue": "{{events}} torneios com {{players}}+ jogadores, {{teams}} times no top {{top}}, {{from}} a {{to}}, coletado em {{date}}.",
+    "topCutMissing": "Sem dados de torneio neste snapshot. Veja os avisos do pipeline.",
+    "topCutNone": "Sem fonte de torneios para este formato.",
     "feedback": {
       "title": "Avaliação das sugestões",
       "empty": "Nenhuma sugestão avaliada ainda. Use Útil ou Não útil na análise.",
@@ -447,6 +476,7 @@
   "footer": {
     "createdBy": "Criado por",
     "about": "Sobre",
+    "admin": "Admin",
     "notAffiliated": "Não é afiliado à Nintendo, Game Freak, Creatures ou The Pokémon Company."
   },
   "calc": {

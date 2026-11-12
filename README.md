@@ -75,6 +75,8 @@ Available now:
 - Keyboard shortcuts, undo and redo, and saved versions of each team.
 - My teams: save, open, duplicate and delete teams.
 - Settings: language, experience level, density (comfortable or compact), theme, default format.
+- Admin: snapshot version, every source with its sample size and date, the end date of the
+  regulation, the warnings of the last data build and the suggestion feedback.
 - Installable app (PWA). Only the app shell is cached; your data is never stored offline.
 - Interface in English and Brazilian Portuguese, light and dark themes.
 - Live analysis without AI, recomputed on every change:
@@ -91,7 +93,7 @@ Available now:
   in off-meta mode), ranked by an explained score — stacked weaknesses they resist, missing
   roles they fill, usage, top-cut presence in recent tournaments, common teammates — with their
   most common set, added in one click.
-  Each one can be rated useful or not; Settings shows the totals.
+  Each one can be rated useful or not; the Admin page shows the totals.
 - Experience levels change how much is explained and how many numbers are shown: beginners get
   a glossary on every role, advanced players get damage rolls and score points.
 - Damage calculator with Champions mechanics (Stat Points, level 50), using the same calc and
