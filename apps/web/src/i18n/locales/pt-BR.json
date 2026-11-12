@@ -1,5 +1,7 @@
 {
-  "app": { "name": "VGC Helper" },
+  "app": {
+    "name": "VGC Helper"
+  },
   "common": {
     "loading": "Carregando…",
     "retry": "Tentar de novo",
@@ -7,7 +9,12 @@
     "close": "Fechar",
     "cancel": "Cancelar"
   },
-  "tone": { "error": "Erro", "warning": "Atenção", "info": "Observação", "success": "OK" },
+  "tone": {
+    "error": "Erro",
+    "warning": "Atenção",
+    "info": "Observação",
+    "success": "OK"
+  },
   "shell": {
     "skip": "Pular para o conteúdo",
     "home": "VGC Helper, montador de times",
@@ -82,7 +89,10 @@
     "teamFull": "O time já tem 6 Pokémon. Remova um antes.",
     "added": "{{name}} adicionado ao slot {{slot}}.",
     "views": "Visões do time",
-    "tab": { "team": "Time", "analysis": "Análise" },
+    "tab": {
+      "team": "Time",
+      "analysis": "Análise"
+    },
     "errorCount_one": "{{count}} erro",
     "errorCount_other": "{{count}} erros"
   },
@@ -109,7 +119,11 @@
     "over_one": "{{count}} acima do limite",
     "over_other": "{{count}} acima do limite"
   },
-  "move": { "Physical": "Físico", "Special": "Especial", "Status": "Status" },
+  "move": {
+    "Physical": "Físico",
+    "Special": "Especial",
+    "Status": "Status"
+  },
   "analysis": {
     "title": "Análise",
     "legality": "Legalidade no {{regulation}}",
@@ -117,7 +131,147 @@
     "legalDetail": "Espécies, itens, habilidades, golpes e Stat Points seguem as regras.",
     "empty": "Adicione um Pokémon para ver a análise.",
     "source": "Regras do {{name}}:",
-    "comingNext": "Matriz de tipos, ameaças do meta, speed tiers e sugestões chegam na próxima fase."
+    "sections": {
+      "alerts": "Alertas",
+      "types": "Matriz de tipos",
+      "coverage": "Cobertura ofensiva",
+      "checklist": "Papéis",
+      "archetypes": "Arquétipo",
+      "speed": "Speed tiers",
+      "threats": "Ameaças do meta",
+      "suggestions": "Sugestões"
+    },
+    "stacked": {
+      "title": "{{count}} membros fracos a {{type}}",
+      "added": "Adicionar {{name}} levou a {{count}}.",
+      "users": "Quem usa isso no meta: {{list}}.",
+      "user": "{{name}} ({{usage}}, {{move}})",
+      "recommended": "Tipos que resistem: {{list}}."
+    },
+    "archetype": {
+      "detected": "{{name}}: {{setters}} para ativar, {{abusers}} que aproveitam.",
+      "missingSetters_one": "Coloque mais {{count}} setter de {{name}}: um pode ser derrubado ou travado por Taunt.",
+      "missingSetters_other": "Coloque mais {{count}} setters de {{name}}: um pode ser derrubado ou travado por Taunt.",
+      "missingAbusers_one": "Poucos membros aproveitam {{name}}: mais {{count}} fariam o turno valer a pena.",
+      "missingAbusers_other": "Poucos membros aproveitam {{name}}: mais {{count}} fariam o turno valer a pena.",
+      "none": "Sem arquétipo claro: o time joga de balance ou goodstuffs.",
+      "names": {
+        "tailwind": "Tailwind",
+        "trickRoom": "Trick Room",
+        "sun": "Sol",
+        "rain": "Chuva",
+        "sand": "Areia",
+        "snow": "Neve",
+        "electricTerrain": "Electric Terrain",
+        "psychicTerrain": "Psychic Terrain",
+        "grassyTerrain": "Grassy Terrain"
+      }
+    },
+    "groups": {
+      "speedControl": "Controle de velocidade",
+      "fakeOut": "Fake Out",
+      "redirection": "Redirecionamento",
+      "intimidate": "Intimidate",
+      "intimidateAnswer": "Resposta a Intimidate",
+      "protect": "Protect",
+      "spread": "Golpes em área",
+      "priority": "Golpes de prioridade",
+      "pivot": "Pivot",
+      "wideGuard": "Wide Guard",
+      "hazards": "Hazards",
+      "hazardRemoval": "Remoção de hazards",
+      "weather": "Clima",
+      "terrain": "Terreno"
+    },
+    "glossary": {
+      "speedControl": "Golpes que mudam quem age primeiro: Tailwind, Trick Room ou baixar a Speed do oponente.",
+      "fakeOut": "Golpe de prioridade que faz o alvo hesitar no primeiro turno em campo, perdendo a ação.",
+      "redirection": "Follow Me ou Rage Powder: puxa para si os golpes de alvo único do oponente.",
+      "intimidate": "Habilidade que baixa um estágio do Attack dos dois oponentes quando o Pokémon entra.",
+      "intimidateAnswer": "Habilidades ou itens que ignoram ou punem o Intimidate, como Defiant ou Clear Body.",
+      "protect": "Bloqueia golpes por um turno. Quase todo Pokémon de VGC usa.",
+      "spread": "Golpes que acertam os dois oponentes, ou todos, de uma vez, com 75% do poder em cada.",
+      "priority": "Golpes de dano que agem antes dos golpes normais, seja qual for a Speed.",
+      "pivot": "Golpes que acertam ou agem e depois trocam o usuário, como U-turn ou Parting Shot.",
+      "wideGuard": "Protege os dois Pokémon do seu lado contra golpes em área por um turno.",
+      "hazards": "Golpes que causam dano quando o Pokémon entra em campo.",
+      "hazardRemoval": "Golpes que limpam os hazards do seu lado.",
+      "weather": "Ativa sol, chuva, areia ou neve.",
+      "terrain": "Ativa um terreno que fortalece ou bloqueia alguns golpes."
+    },
+    "checklist": {
+      "missing": "Falta",
+      "balance": "Golpes de dano: {{physical}} físicos, {{special}} especiais.",
+      "megasNone": "Nenhuma Mega planejada.",
+      "megas": "Mega: {{list}}."
+    },
+    "matrix": {
+      "caption": "Dano que cada membro recebe de cada tipo de ataque",
+      "type": "Tipo",
+      "weak": "Fracos",
+      "stacked": "fraqueza acumulada",
+      "byAbility": "alterado pela habilidade"
+    },
+    "coverage": {
+      "gaps": "Nenhum golpe super efetivo contra: {{list}}.",
+      "full": "Todo tipo leva dano super efetivo de pelo menos um golpe.",
+      "noAttacks": "Ainda sem golpes de dano."
+    },
+    "speed": {
+      "caption": "Speed do time e dos Pokémon mais usados",
+      "speed": "Speed",
+      "pokemon": "Pokémon",
+      "tailwind": "Tailwind",
+      "team": "seu time",
+      "usage": "{{usage}} dos times",
+      "item": "com {{item}}, {{share}} dos sets",
+      "note": "Os Pokémon do meta usam o spread e a natureza mais comuns. No Trick Room a ordem se inverte.",
+      "teamItem": "com {{item}}"
+    },
+    "threats": {
+      "loading": "Calculando dano",
+      "ohko_one": "Pode derrubar {{count}} membro com um golpe",
+      "ohko_other": "Pode derrubar {{count}} membros com um golpe",
+      "ohkoNone": "Nenhum membro cai com um golpe",
+      "answered": "Respondido por {{list}}",
+      "unanswered": "Nada no time responde",
+      "details": "Rolagens de dano",
+      "taken": "{{name}} recebe {{range}} de {{move}}",
+      "dealt": "{{name}} causa {{range}} com {{move}}",
+      "noDamage": "{{name}}: sem golpe de dano",
+      "set": "Set: {{set}}",
+      "rule": "Um membro responde quando derruba a ameaça com um golpe agindo antes, ou com dois golpes aguentando o melhor golpe dela."
+    },
+    "suggestions": {
+      "add": "Adicionar {{name}}",
+      "added": "{{name}} adicionado ao slot {{n}}.",
+      "full": "O time está completo.",
+      "none": "Nenhum Pokémon do meta se encaixa acima do corte de uso. Baixe o corte ou ligue o modo off-meta nas Configurações.",
+      "score": "Pontuação {{score}}",
+      "offMeta": "Abaixo do corte",
+      "cutoff": "Pokémon com pelo menos {{cutoff}} de uso. Mude nas Configurações.",
+      "set": "Set mais comum",
+      "useful": "Útil",
+      "notUseful": "Não útil",
+      "rated": "Avaliado",
+      "thanks": "Obrigado, salvo.",
+      "feedbackError": "Não deu para salvar a avaliação. Tente de novo.",
+      "points": "{{points}} pts",
+      "parts": {
+        "coversWeakness": "Resiste a {{list}}, uma fraqueza acumulada",
+        "fillsRole": "Preenche {{list}}",
+        "usage": "Em {{usage}} dos times",
+        "teammates": "Costuma jogar com {{list}}",
+        "addsWeakness": "Aumenta a fraqueza a {{list}}"
+      }
+    },
+    "sources": {
+      "title": "Fontes",
+      "meta": "Uso: {{name}}, {{battles}} batalhas, coletado em {{date}}.",
+      "dex": "Dados do jogo: {{name}}, coletado em {{date}}.",
+      "rules": "Papéis, limites e pesos: {{name}}, {{date}}.",
+      "calc": "Dano: @smogon/calc com os stats e golpes do snapshot, nível {{level}}."
+    }
   },
   "legality": {
     "slot": "Slot {{n}} ({{name}})",
@@ -235,16 +389,27 @@
     "interface": "Interface",
     "language": "Idioma",
     "level": "Nível de experiência",
-    "levels": { "beginner": "Iniciante", "intermediate": "Intermediário", "advanced": "Avançado" },
+    "levels": {
+      "beginner": "Iniciante",
+      "intermediate": "Intermediário",
+      "advanced": "Avançado"
+    },
     "levelHint": {
       "beginner": "Linguagem simples, glossário para cada termo, poucos números.",
       "intermediate": "Speed tiers, sets do meta e ameaças com porcentagens.",
       "advanced": "Cálculos de dano detalhados, benchmarks de Stat Points, dados brutos."
     },
     "density": "Densidade",
-    "densities": { "comfortable": "Confortável", "compact": "Compacta" },
+    "densities": {
+      "comfortable": "Confortável",
+      "compact": "Compacta"
+    },
     "theme": "Tema",
-    "themes": { "system": "Seguir o sistema", "light": "Claro", "dark": "Escuro" },
+    "themes": {
+      "system": "Seguir o sistema",
+      "light": "Claro",
+      "dark": "Escuro"
+    },
     "data": "Dados",
     "defaultFormat": "Formato padrão",
     "cutoff": "Corte de viabilidade (% de uso)",

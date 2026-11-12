@@ -1,5 +1,10 @@
 import { queryOptions } from '@tanstack/react-query';
-import { type DexSnapshot, type Manifest, manifestSchema } from '@vgc-helper/data';
+import {
+  type DexSnapshot,
+  type Manifest,
+  type MetaSnapshot,
+  manifestSchema,
+} from '@vgc-helper/data';
 import {
   authMethodsSchema,
   type SessionResponse,
@@ -53,6 +58,15 @@ export const dexQuery = (gameId: string, regulationId: string) =>
   queryOptions({
     queryKey: ['snapshots', gameId, regulationId, 'dex'],
     queryFn: (): Promise<DexSnapshot> => api(`/snapshots/${gameId}/${regulationId}/dex`),
+    staleTime: Number.POSITIVE_INFINITY,
+  });
+
+/** Usage data for one format, also validated by the API and large: not re-parsed here. */
+export const metaQuery = (gameId: string, regulationId: string, formatId: string) =>
+  queryOptions({
+    queryKey: ['snapshots', gameId, regulationId, 'meta', formatId],
+    queryFn: (): Promise<MetaSnapshot> =>
+      api(`/snapshots/${gameId}/${regulationId}/meta/${formatId}`),
     staleTime: Number.POSITIVE_INFINITY,
   });
 

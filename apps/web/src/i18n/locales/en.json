@@ -1,5 +1,7 @@
 {
-  "app": { "name": "VGC Helper" },
+  "app": {
+    "name": "VGC Helper"
+  },
   "common": {
     "loading": "Loading…",
     "retry": "Try again",
@@ -7,7 +9,12 @@
     "close": "Close",
     "cancel": "Cancel"
   },
-  "tone": { "error": "Error", "warning": "Warning", "info": "Note", "success": "OK" },
+  "tone": {
+    "error": "Error",
+    "warning": "Warning",
+    "info": "Note",
+    "success": "OK"
+  },
   "shell": {
     "skip": "Skip to content",
     "home": "VGC Helper, team builder",
@@ -82,7 +89,10 @@
     "teamFull": "The team already has 6 Pokémon. Remove one first.",
     "added": "Added {{name}} to slot {{slot}}.",
     "views": "Team views",
-    "tab": { "team": "Team", "analysis": "Analysis" },
+    "tab": {
+      "team": "Team",
+      "analysis": "Analysis"
+    },
     "errorCount_one": "{{count}} error",
     "errorCount_other": "{{count}} errors"
   },
@@ -109,7 +119,11 @@
     "over_one": "{{count}} over the limit",
     "over_other": "{{count}} over the limit"
   },
-  "move": { "Physical": "Physical", "Special": "Special", "Status": "Status" },
+  "move": {
+    "Physical": "Physical",
+    "Special": "Special",
+    "Status": "Status"
+  },
   "analysis": {
     "title": "Analysis",
     "legality": "Legality in {{regulation}}",
@@ -117,7 +131,147 @@
     "legalDetail": "Species, items, abilities, moves and Stat Points follow the rules.",
     "empty": "Add a Pokémon to see the analysis.",
     "source": "Rules for {{name}}:",
-    "comingNext": "Type matrix, meta threats, speed tiers and suggestions arrive in the next phase."
+    "sections": {
+      "alerts": "Alerts",
+      "types": "Type matrix",
+      "coverage": "Offensive coverage",
+      "checklist": "Roles",
+      "archetypes": "Archetype",
+      "speed": "Speed tiers",
+      "threats": "Meta threats",
+      "suggestions": "Suggestions"
+    },
+    "stacked": {
+      "title": "{{count}} members weak to {{type}}",
+      "added": "Adding {{name}} made it {{count}}.",
+      "users": "Used against it in the meta: {{list}}.",
+      "user": "{{name}} ({{usage}}, {{move}})",
+      "recommended": "Types that resist it: {{list}}."
+    },
+    "archetype": {
+      "detected": "{{name}}: {{setters}} setting it up, {{abusers}} that benefit.",
+      "missingSetters_one": "Add {{count}} more {{name}} setter: one can be knocked out or stopped by Taunt.",
+      "missingSetters_other": "Add {{count}} more {{name}} setters: one can be knocked out or stopped by Taunt.",
+      "missingAbusers_one": "Few members benefit from {{name}}: {{count}} more would make it worth the turn.",
+      "missingAbusers_other": "Few members benefit from {{name}}: {{count}} more would make it worth the turn.",
+      "none": "No clear archetype: the team plays balance or goodstuffs.",
+      "names": {
+        "tailwind": "Tailwind",
+        "trickRoom": "Trick Room",
+        "sun": "Sun",
+        "rain": "Rain",
+        "sand": "Sand",
+        "snow": "Snow",
+        "electricTerrain": "Electric Terrain",
+        "psychicTerrain": "Psychic Terrain",
+        "grassyTerrain": "Grassy Terrain"
+      }
+    },
+    "groups": {
+      "speedControl": "Speed control",
+      "fakeOut": "Fake Out",
+      "redirection": "Redirection",
+      "intimidate": "Intimidate",
+      "intimidateAnswer": "Answer to Intimidate",
+      "protect": "Protect",
+      "spread": "Spread moves",
+      "priority": "Priority moves",
+      "pivot": "Pivot",
+      "wideGuard": "Wide Guard",
+      "hazards": "Entry hazards",
+      "hazardRemoval": "Hazard removal",
+      "weather": "Weather",
+      "terrain": "Terrain"
+    },
+    "glossary": {
+      "speedControl": "Moves that change who moves first: Tailwind, Trick Room or lowering the foe’s Speed.",
+      "fakeOut": "A priority move that makes the target flinch on its first turn, so it loses that turn.",
+      "redirection": "Follow Me or Rage Powder: draws the foe’s single-target moves away from the partner.",
+      "intimidate": "An ability that lowers both foes’ Attack by one stage when the Pokémon comes in.",
+      "intimidateAnswer": "Abilities or items that ignore or punish Intimidate, such as Defiant or Clear Body.",
+      "protect": "Blocks moves for one turn. Most VGC Pokémon carry it.",
+      "spread": "Moves that hit both foes, or everyone, at once, at 75% power each.",
+      "priority": "Damaging moves that act before normal moves, whatever the Speed.",
+      "pivot": "Moves that hit or act and then switch the user out, such as U-turn or Parting Shot.",
+      "wideGuard": "Protects both Pokémon on your side from spread moves for one turn.",
+      "hazards": "Moves that damage Pokémon as they switch in.",
+      "hazardRemoval": "Moves that clear entry hazards from your side.",
+      "weather": "Sets sun, rain, sand or snow.",
+      "terrain": "Sets a terrain that powers up or blocks some moves."
+    },
+    "checklist": {
+      "missing": "Missing",
+      "balance": "Damaging moves: {{physical}} physical, {{special}} special.",
+      "megasNone": "No Mega planned.",
+      "megas": "Mega: {{list}}."
+    },
+    "matrix": {
+      "caption": "Damage each member takes from each attacking type",
+      "type": "Type",
+      "weak": "Weak",
+      "stacked": "stacked weakness",
+      "byAbility": "changed by its ability"
+    },
+    "coverage": {
+      "gaps": "No super-effective move against: {{list}}.",
+      "full": "Every type is hit super-effectively by at least one move.",
+      "noAttacks": "No damaging moves yet."
+    },
+    "speed": {
+      "caption": "Speed of the team and of the most used Pokémon",
+      "speed": "Speed",
+      "pokemon": "Pokémon",
+      "tailwind": "Tailwind",
+      "team": "your team",
+      "usage": "{{usage}} of teams",
+      "item": "with {{item}}, {{share}} of its sets",
+      "note": "Meta Pokémon use their most common spread and nature. Under Trick Room the order is reversed.",
+      "teamItem": "with {{item}}"
+    },
+    "threats": {
+      "loading": "Calculating damage",
+      "ohko_one": "Can knock out {{count}} member in one hit",
+      "ohko_other": "Can knock out {{count}} members in one hit",
+      "ohkoNone": "No one-hit knockouts on the team",
+      "answered": "Answered by {{list}}",
+      "unanswered": "Nothing on the team answers it",
+      "details": "Damage rolls",
+      "taken": "{{name}} takes {{range}} from {{move}}",
+      "dealt": "{{name}} deals {{range}} with {{move}}",
+      "noDamage": "{{name}}: no damaging move",
+      "set": "Set: {{set}}",
+      "rule": "A member answers when it knocks the threat out in one hit and moves first, or in two hits and survives its best hit."
+    },
+    "suggestions": {
+      "add": "Add {{name}}",
+      "added": "{{name}} added to slot {{n}}.",
+      "full": "The team is full.",
+      "none": "No meta Pokémon fits above the usage cutoff. Lower it or turn on off-meta mode in Settings.",
+      "score": "Score {{score}}",
+      "offMeta": "Below the cutoff",
+      "cutoff": "Pokémon with at least {{cutoff}} usage. Change it in Settings.",
+      "set": "Common set",
+      "useful": "Useful",
+      "notUseful": "Not useful",
+      "rated": "Rated",
+      "thanks": "Thanks, saved.",
+      "feedbackError": "Could not save the feedback. Try again.",
+      "points": "{{points}} pts",
+      "parts": {
+        "coversWeakness": "Resists {{list}}, a stacked weakness",
+        "fillsRole": "Fills {{list}}",
+        "usage": "On {{usage}} of teams",
+        "teammates": "Often paired with {{list}}",
+        "addsWeakness": "Adds to the weakness to {{list}}"
+      }
+    },
+    "sources": {
+      "title": "Sources",
+      "meta": "Usage: {{name}}, {{battles}} battles, retrieved {{date}}.",
+      "dex": "Game data: {{name}}, retrieved {{date}}.",
+      "rules": "Roles, thresholds and weights: {{name}}, {{date}}.",
+      "calc": "Damage: @smogon/calc with the stats and moves of the snapshot, level {{level}}."
+    }
   },
   "legality": {
     "slot": "Slot {{n}} ({{name}})",
@@ -235,16 +389,27 @@
     "interface": "Interface",
     "language": "Language",
     "level": "Experience level",
-    "levels": { "beginner": "Beginner", "intermediate": "Intermediate", "advanced": "Advanced" },
+    "levels": {
+      "beginner": "Beginner",
+      "intermediate": "Intermediate",
+      "advanced": "Advanced"
+    },
     "levelHint": {
       "beginner": "Plain language, a glossary for every term, few numbers.",
       "intermediate": "Speed tiers, meta sets and threats with percentages.",
       "advanced": "Detailed damage calcs, Stat Point benchmarks, raw data."
     },
     "density": "Density",
-    "densities": { "comfortable": "Comfortable", "compact": "Compact" },
+    "densities": {
+      "comfortable": "Comfortable",
+      "compact": "Compact"
+    },
     "theme": "Theme",
-    "themes": { "system": "Follow the system", "light": "Light", "dark": "Dark" },
+    "themes": {
+      "system": "Follow the system",
+      "light": "Light",
+      "dark": "Dark"
+    },
     "data": "Data",
     "defaultFormat": "Default format",
     "cutoff": "Viability cutoff (% usage)",

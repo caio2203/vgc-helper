@@ -43,3 +43,31 @@ Jolly Nature
 - Dragon Claw
 - Rock Slide
 - Protect`;
+
+/** Three members weak to Ground (and Fighting), for the stacked-weakness alert. */
+export const TEAM_WEAK_TO_GROUND = `Incineroar @ Sitrus Berry
+Ability: Intimidate
+EVs: 32 HP / 2 Def / 32 SpD
+Careful Nature
+- Fake Out
+- Flare Blitz
+- Parting Shot
+- Protect
+
+Kingambit @ Black Glasses
+Ability: Defiant
+EVs: 32 HP / 32 Atk / 2 SpD
+Adamant Nature
+- Kowtow Cleave
+- Sucker Punch
+- Iron Head
+- Protect
+
+Archaludon @ Leftovers
+Ability: Stamina
+EVs: 32 HP / 32 SpA / 2 SpD
+Modest Nature
+- Electro Shot
+- Draco Meteor
+- Flash Cannon
+- Protect`;

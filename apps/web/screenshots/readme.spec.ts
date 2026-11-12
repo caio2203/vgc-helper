@@ -117,6 +117,18 @@ async function shoot(
   await page.evaluate(() => document.fonts.ready);
   await page.screenshot({ path: path('builder'), fullPage: device === 'desktop' });
 
+  // The whole analysis column, with the damage calcs loaded. On desktop it scrolls on its own,
+  // so its height limit is lifted for the shot; phones open the Analysis tab.
+  const panel = page.locator('section[aria-labelledby="analysis-heading"]');
+  if (device === 'mobile') await page.getByRole('button', { name: /^(Analysis|Análise)/ }).click();
+  else
+    await panel.evaluate((el) => {
+      // The CSP forbids injected style tags; the CSSOM is fine.
+      if (el.parentElement) el.parentElement.style.maxHeight = 'none';
+    });
+  await expect(panel.getByText(/Calculating damage|Calculando dano/)).toHaveCount(0);
+  await panel.screenshot({ path: path('analysis') });
+
   await page.goto('/teams');
   await expect(page.getByRole('link', { name: 'Rain', exact: true })).toBeVisible();
   await page.screenshot({ path: path('teams'), fullPage: device === 'desktop' });

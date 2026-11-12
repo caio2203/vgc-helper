@@ -328,7 +328,12 @@ export function BuilderPage({ teamId }: { teamId?: string }) {
         <div className={cx('min-w-0', tab !== 'team' && 'hidden md:block')}>
           <SlotEditor rules={rules} speciesInput={speciesInput} />
         </div>
-        <div className={cx('md:col-span-2 xl:col-span-1', tab !== 'analysis' && 'hidden md:block')}>
+        <div
+          className={cx(
+            'md:col-span-2 xl:sticky xl:top-4 xl:col-span-1 xl:max-h-[calc(100dvh-2rem)] xl:self-start xl:overflow-y-auto',
+            tab !== 'analysis' && 'hidden md:block',
+          )}
+        >
           <AnalysisPanel rules={rules} issues={issues} />
         </div>
       </div>
