@@ -21,7 +21,8 @@
     "db:migrate": "pnpm --filter @vgc-helper/api db:migrate",
     "snapshot:build": "pnpm --filter @vgc-helper/scripts snapshot:build",
     "hash-password": "pnpm --filter @vgc-helper/api build && pnpm --filter @vgc-helper/api hash-password",
-    "prepare": "husky"
+    "prepare": "husky",
+    "design:colors": "pnpm --filter @vgc-helper/scripts design:colors"
   },
   "lint-staged": {
     "*": "biome check --write --no-errors-on-unmatched --files-ignore-unknown=true"

@@ -8,7 +8,8 @@
   "scripts": {
     "snapshot:build": "tsx src/snapshot/build.ts",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "test": "vitest run --passWithNoTests"
+    "test": "vitest run --passWithNoTests",
+    "design:colors": "tsx src/design/type-colors.ts"
   },
   "dependencies": {
     "@pkmn/data": "^0.11.0",
