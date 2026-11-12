@@ -74,3 +74,26 @@ export const teamVersions = sqliteTable(
   },
   (t) => [uniqueIndex('team_versions_team_version_idx').on(t.teamId, t.version)],
 );
+
+/** "Useful / not useful" on suggestions, so the owner can see which ones work. */
+export const suggestionFeedback = sqliteTable(
+  'suggestion_feedback',
+  {
+    id: text('id').primaryKey(),
+    userId: text('user_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    subject: text('subject').notNull(),
+    helpful: integer('helpful', { mode: 'boolean' }).notNull(),
+    gameId: text('game_id').notNull(),
+    formatId: text('format_id').notNull(),
+    regulationId: text('regulation_id').notNull(),
+    snapshotVersion: text('snapshot_version').notNull(),
+    score: integer('score_x100').notNull(),
+    rank: integer('rank').notNull(),
+    experienceLevel: text('experience_level').notNull(),
+    team: text('team', { mode: 'json' }).$type<string[]>().notNull(),
+    createdAt: createdAt(),
+  },
+  (t) => [index('suggestion_feedback_user_idx').on(t.userId)],
+);

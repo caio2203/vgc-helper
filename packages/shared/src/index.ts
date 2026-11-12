@@ -1,4 +1,5 @@
 export * from './auth.js';
+export * from './feedback.js';
 export * from './settings.js';
 export * from './team.js';
 

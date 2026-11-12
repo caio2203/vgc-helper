@@ -5,6 +5,7 @@ import { SessionGuard } from './auth/session.guard.js';
 import type { AppConfig } from './config/env.js';
 import { CoreModule } from './core/core.module.js';
 import type { Db } from './db/client.js';
+import { FeedbackController } from './feedback/feedback.controller.js';
 import { HealthController } from './health/health.controller.js';
 import { RateLimitGuard } from './security/rate-limit.js';
 import { SettingsController } from './settings/settings.controller.js';
@@ -19,7 +20,13 @@ export class AppModule {
     return {
       module: AppModule,
       imports: [CoreModule.forRoot(config, db), AuthModule.forRoot(config)],
-      controllers: [HealthController, SettingsController, SnapshotsController, TeamsController],
+      controllers: [
+        FeedbackController,
+        HealthController,
+        SettingsController,
+        SnapshotsController,
+        TeamsController,
+      ],
       providers: [
         SnapshotsService,
         TeamsService,
