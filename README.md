@@ -9,12 +9,13 @@ missing and what the current meta is running. VGC (Doubles) first, Singles next.
 [![License: Apache 2.0](https://img.shields.io/github/license/caio2203/vgc-helper)](LICENSE)
 [![Release](https://img.shields.io/github/v/release/caio2203/vgc-helper?include_prereleases)](https://github.com/caio2203/vgc-helper/releases)
 
-> **Status: early development.** Phases 2 to 6 are done: the team builder checks legality as
+> **Status: early development.** Phases 2 to 7 are done: the team builder checks legality as
 > you edit, the analysis column shows the type matrix, stacked weaknesses, the role checklist,
 > speed tiers and meta threats from damage calcs, with suggestions that explain their score,
 > every data update comes with a readable diff, a What's new page and a check of your saved
 > teams, the team preview says who to bring and lead against an open team list, and an optional
-> Explain button and chat use Gemini on the analysis. Next: Singles — see the [roadmap](#roadmap).
+> Explain button and chat use Gemini on the analysis; Ranked Singles has its own analysis profile.
+> Next: Scarlet/Violet and Smogon formats — see the [roadmap](#roadmap).
 
 ## Screenshots
 
@@ -87,6 +88,10 @@ Available now:
     Pokémon that hit them, and offensive coverage gaps;
   - VGC role checklist: speed control, Fake Out, redirection, Intimidate and answers to it,
     Protect, spread and priority moves, pivots, Wide Guard, physical/special balance, Megas;
+  - Ranked Singles has its own profile: entry hazards and their removal, pivots, win conditions
+    (setup moves), wallbreakers (base Attack or Sp. Atk 120+), walls with reliable recovery and
+    priority, its own suggestion weights and usage cutoff (3%), and no Tailwind or Trick Room
+    archetypes;
   - archetypes (Tailwind, Trick Room, weather, terrains) and the piece that is missing;
   - speed tiers on a ruler next to the most used Pokémon, with Tailwind and Choice Scarf;
   - meta threats: the most used Pokémon with their most common sets, damage-calculated against
@@ -125,7 +130,7 @@ Available now:
 
 Planned (see the roadmap):
 
-- The Singles analysis profile, then Scarlet/Violet and Smogon formats.
+- Scarlet/Violet and Smogon formats.
 
 ## Keyboard shortcuts
 
@@ -307,7 +312,7 @@ The [NOTICE](NOTICE) file lists the credits that must travel with every copy.
 - [x] **Phase 4** — data pipeline with readable diffs, "What's new" page, team revalidation
 - [x] **Phase 5** — team preview: which 4 to bring against an open team list
 - [x] **Phase 6** — on-demand AI explanations and chat (Gemini)
-- [ ] **Phase 7** — Singles analysis profile
+- [x] **Phase 7** — Singles analysis profile
 - [ ] **Phase 8** — Scarlet/Violet and Smogon formats
 
 ## Contributing

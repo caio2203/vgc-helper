@@ -9,13 +9,14 @@ faltando e o que o meta atual está usando. VGC (Doubles) primeiro, Singles depo
 [![Licença: Apache 2.0](https://img.shields.io/github/license/caio2203/vgc-helper)](LICENSE)
 [![Versão](https://img.shields.io/github/v/release/caio2203/vgc-helper?include_prereleases)](https://github.com/caio2203/vgc-helper/releases)
 
-> **Status: início do desenvolvimento.** As Fases 2 a 6 estão prontas: o montador checa a
+> **Status: início do desenvolvimento.** As Fases 2 a 7 estão prontas: o montador checa a
 > legalidade enquanto você edita, a coluna de análise mostra a matriz de tipos, as fraquezas
 > acumuladas, o checklist de papéis, os speed tiers e as ameaças do meta com cálculo de dano,
 > com sugestões que explicam a pontuação, cada atualização dos dados vem com um diff legível,
 > uma página de Novidades e uma checagem dos times salvos, e o team preview diz quem levar e
 > quem começar contra uma Open Team List, e um botão Explicar e um chat opcionais usam o Gemini
-> sobre a análise. Próximo passo: Singles — veja o [roadmap](#roadmap).
+> sobre a análise; o Singles ranqueado tem perfil de análise próprio. Próximo passo: Scarlet/Violet
+> e formatos do Smogon — veja o [roadmap](#roadmap).
 
 ## Screenshots
 
@@ -91,6 +92,10 @@ Já disponível:
   - checklist de papéis do VGC: controle de velocidade, Fake Out, redirecionamento, Intimidate e
     respostas a ele, Protect, golpes em área e de prioridade, pivots, Wide Guard, equilíbrio
     físico/especial, Megas;
+  - o Singles ranqueado tem perfil próprio: entry hazards e remoção, pivots, win conditions (golpes
+    de setup), wallbreakers (Ataque ou Atq. Esp. base 120+), walls com recuperação confiável e
+    prioridade, pesos de sugestão e corte de uso próprios (3%), e sem arquétipos de Tailwind ou
+    Trick Room;
   - arquétipos (Tailwind, Trick Room, climas, terrenos) e a peça que falta;
   - speed tiers numa régua ao lado dos Pokémon mais usados, com Tailwind e Choice Scarf;
   - ameaças do meta: os Pokémon mais usados, com o set mais comum, calculados contra o time,
@@ -128,7 +133,7 @@ Já disponível:
 
 Planejado (veja o roadmap):
 
-- O perfil de análise de Singles, depois Scarlet/Violet e formatos do Smogon.
+- Scarlet/Violet e formatos do Smogon.
 
 ## Atalhos de teclado
 
@@ -310,7 +315,7 @@ O arquivo [NOTICE](NOTICE) lista os créditos que precisam acompanhar qualquer c
 - [x] **Fase 4** — pipeline de dados com diff legível, página "Novidades", revalidação de times
 - [x] **Fase 5** — team preview: quais 4 levar contra uma Open Team List
 - [x] **Fase 6** — explicações e chat com IA sob demanda (Gemini)
-- [ ] **Fase 7** — perfil de análise de Singles
+- [x] **Fase 7** — perfil de análise de Singles
 - [ ] **Fase 8** — Scarlet/Violet e formatos do Smogon
 
 ## Como contribuir

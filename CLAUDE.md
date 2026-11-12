@@ -112,4 +112,9 @@ pnpm hash-password     # ADMIN_PASSWORD_HASH for AUTH_MODE=local-password
   that is a feature switch, not an auth fallback. Tests pass a fake provider to `createApp`;
   e2e stubs `/api/ai/*` with `page.route`. Never paste or handle the key: the owner adds it with
   `vercel env add GEMINI_API_KEY` (docs/setup.md 2.8).
-- Next: Phase 7 — the Champions Singles analysis profile.
+- Phase 7 is done: the Singles profile in `manual/analysis.json` checks hazards, removal, pivots,
+  win conditions, wallbreakers, walls (reliable recovery) and priority. Role rules gained the
+  `baseStat` kind (any listed sum of base stats reaches `min`); archetypes have `profiles`
+  (Tailwind and Trick Room are Doubles only). The Singles usage cutoff is 3% (note in
+  `manual/champions.json`).
+- Next: Phase 8 — Scarlet/Violet and Smogon formats.
