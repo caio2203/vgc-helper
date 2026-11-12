@@ -205,8 +205,16 @@ async function main(): Promise<void> {
       throw new Error(`Regulation ${regulation.id}: unknown game or mechanics profile`);
 
     const dex = await buildDexSnapshot(regulation, profile, {
-      name: `Pokémon Showdown "${regulation.dexMod}" mod, via @pkmn/mods ${modsVersion}`,
-      url: `https://github.com/smogon/pokemon-showdown/tree/master/data/mods/${regulation.dexMod}`,
+      // A base generation (gen9) is Showdown's main data; anything else is one of its mods.
+      ...(/^gen\d+$/.test(regulation.dexMod)
+        ? {
+            name: `Pokémon Showdown ${regulation.dexMod} data, via @pkmn/dex ${modsVersion}`,
+            url: 'https://github.com/smogon/pokemon-showdown/tree/master/data',
+          }
+        : {
+            name: `Pokémon Showdown "${regulation.dexMod}" mod, via @pkmn/mods ${modsVersion}`,
+            url: `https://github.com/smogon/pokemon-showdown/tree/master/data/mods/${regulation.dexMod}`,
+          }),
       retrievedAt: now,
     });
     overridesApplied.push(...applyOverrides(dex, overrides));

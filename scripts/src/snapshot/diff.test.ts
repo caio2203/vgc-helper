@@ -92,6 +92,8 @@ const regulation: Regulation = {
   ],
   clauses: ['species', 'item'],
   bannedTags: [],
+  bannedTiers: [],
+  restrictedTags: [],
   bannedSpecies: [],
   bannedItems: [],
   bannedMoves: [],

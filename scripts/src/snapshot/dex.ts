@@ -26,8 +26,16 @@ async function importMod(mod: string): Promise<ModuleData> {
   return loaded.default ?? loaded;
 }
 
-/** Loads a Showdown mod, loading its parent mod first when it inherits from one. */
+/** A base generation (`gen9`) instead of a mod: the main-series games, e.g. Scarlet/Violet. */
+const baseGen = (mod: string) => /^gen(\d+)$/.exec(mod)?.[1];
+
+/**
+ * Loads a Showdown mod, loading its parent mod first when it inherits from one. `gen9` loads
+ * the base generation: the main-series data, with no mod on top.
+ */
 export async function loadModdedDex(mod: string): Promise<{ dex: ModdedDex; data: ModuleData }> {
+  const gen = baseGen(mod);
+  if (gen) return { dex: Dex.forGen(Number(gen)) as ModdedDex, data: {} as ModuleData };
   const data = await importMod(mod);
   const parent = data.Scripts?.inherit;
   if (parent && !/^gen\d+$/.test(parent)) await loadModdedDex(parent);
@@ -96,11 +104,15 @@ export async function buildDexSnapshot(
   };
 
   const bannedTags = new Set(regulation.bannedTags);
+  const bannedTiers = new Set(regulation.bannedTiers);
   const available = dex.species
     .all()
     .filter((s) => !s.isNonstandard)
     .filter(
-      (s) => !regulation.bannedSpecies.includes(s.id) && !s.tags.some((t) => bannedTags.has(t)),
+      (s) =>
+        !regulation.bannedSpecies.includes(s.id) &&
+        !s.tags.some((t) => bannedTags.has(t)) &&
+        !bannedTiers.has(s.tier),
     );
   const availableNames = new Set(available.map((s) => s.name));
 
@@ -137,7 +149,10 @@ export async function buildDexSnapshot(
     })
     .sort(byId);
 
-  const learnsets = await buildLearnsets(dex, data, species, moveIds);
+  const gen = baseGen(regulation.dexMod);
+  const learnsets = gen
+    ? await buildGenLearnsets(dex, species, moveIds, gen)
+    : await buildLearnsets(dex, data, species, moveIds);
 
   const types = [...new Set(species.flatMap((s) => s.types))].sort();
   const typeChart: DexSnapshot['typeChart'] = {};
@@ -212,6 +227,42 @@ async function buildLearnsets(
       moves = await own(toID(name));
     }
     result[s.id] = [...new Set(moves ?? [])].filter((m) => legalMoves.has(m)).sort();
+  }
+  return result;
+}
+
+/**
+ * Learnsets of a base generation: moves the species or an earlier stage learns in that
+ * generation (a source code that starts with the generation number, e.g. `9M`, `9L20`, `9E`,
+ * `9S1`). Moves only from older games are left out, like Showdown's "Min Source Gen".
+ * Formes without a learnset of their own use their base forme's.
+ */
+async function buildGenLearnsets(
+  dex: ModdedDex,
+  species: Species[],
+  legalMoves: Set<string>,
+  gen: string,
+): Promise<Record<string, string[]>> {
+  async function inGen(id: string): Promise<string[] | null> {
+    const entry = await dex.learnsets.get(id as ID);
+    if (!entry?.learnset) return null;
+    return Object.entries(entry.learnset)
+      .filter(([, sources]) => (sources as string[]).some((src) => src.startsWith(gen)))
+      .map(([move]) => move);
+  }
+
+  const result: Record<string, string[]> = {};
+  for (const s of species) {
+    const full = dex.species.get(s.id);
+    const moves = new Set<string>();
+    // The forme's own learnset, or the one it changes from.
+    const own = (await inGen(s.id)) ?? (await inGen(toID(full.changesFrom ?? full.baseSpecies)));
+    for (const move of own ?? []) moves.add(move);
+    // Earlier evolution stages.
+    for (let prevo = full.prevo; prevo; prevo = dex.species.get(prevo).prevo) {
+      for (const move of (await inGen(toID(prevo))) ?? []) moves.add(move);
+    }
+    result[s.id] = [...moves].filter((m) => legalMoves.has(m)).sort();
   }
   return result;
 }
