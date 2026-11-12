@@ -127,6 +127,11 @@ describe('local-password login, CSRF and logout', () => {
       .get('/api/snapshots/champions/NOPE/dex')
       .set('Cookie', cookie);
     expect(missing.status).toBe(404);
+
+    const changelog = await request(http).get('/api/snapshots/changelog').set('Cookie', cookie);
+    expect(changelog.status).toBe(200);
+    // The history ends with the committed snapshot the manifest names, or starts from it.
+    expect(changelog.body.entries[0].version).toBe(manifest.body.version);
   });
 
   it('sends the security headers', async () => {

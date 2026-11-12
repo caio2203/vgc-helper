@@ -1,16 +1,28 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import type { DexSnapshot, Manifest, MetaSnapshot } from '@vgc-helper/data';
-import { readDexSnapshot, readManifest, readMetaSnapshot } from '@vgc-helper/data/node';
+import type { Changelog, DexSnapshot, Manifest, MetaSnapshot } from '@vgc-helper/data';
+import {
+  readChangelog,
+  readDexSnapshot,
+  readManifest,
+  readMetaSnapshot,
+} from '@vgc-helper/data/node';
 
 /** Serves the committed snapshots. Files are read and validated once per instance. */
 @Injectable()
 export class SnapshotsService {
   private manifestPromise: Promise<Manifest> | undefined;
+  private changelogPromise: Promise<Changelog> | undefined;
   private readonly files = new Map<string, Promise<DexSnapshot | MetaSnapshot>>();
 
   manifest(): Promise<Manifest> {
     this.manifestPromise ??= readManifest();
     return this.manifestPromise;
+  }
+
+  /** What changed in each snapshot, newest first, for the What's new page and revalidation. */
+  changelog(): Promise<Changelog> {
+    this.changelogPromise ??= readChangelog();
+    return this.changelogPromise;
   }
 
   async dex(gameId: string, regulationId: string): Promise<DexSnapshot> {

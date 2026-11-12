@@ -1,5 +1,5 @@
 import { Controller, Get, Header, Param } from '@nestjs/common';
-import type { DexSnapshot, Manifest, MetaSnapshot } from '@vgc-helper/data';
+import type { Changelog, DexSnapshot, Manifest, MetaSnapshot } from '@vgc-helper/data';
 import { SnapshotsService } from './snapshots.service.js';
 
 /**
@@ -14,6 +14,12 @@ export class SnapshotsController {
   @Header('Cache-Control', 'private, no-cache')
   manifest(): Promise<Manifest> {
     return this.snapshots.manifest();
+  }
+
+  @Get('changelog')
+  @Header('Cache-Control', 'private, no-cache')
+  changelog(): Promise<Changelog> {
+    return this.snapshots.changelog();
   }
 
   @Get(':gameId/:regulationId/dex')
