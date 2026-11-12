@@ -50,3 +50,32 @@ export const teamSchema = teamInputSchema.extend({
   updatedAt: z.iso.datetime(),
 });
 export type Team = z.infer<typeof teamSchema>;
+
+/** Saving needs the version the client last saw, so two tabs cannot overwrite each other silently. */
+export const teamUpdateSchema = teamInputSchema.extend({
+  expectedVersion: z.int().min(1),
+});
+export type TeamUpdate = z.infer<typeof teamUpdateSchema>;
+
+export const teamSummarySchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  gameId: z.string(),
+  formatId: z.string(),
+  regulationId: z.string(),
+  snapshotVersion: z.string(),
+  species: z.array(z.string()),
+  version: z.int().min(1),
+  updatedAt: z.iso.datetime(),
+});
+export type TeamSummary = z.infer<typeof teamSummarySchema>;
+
+export const teamVersionSummarySchema = z.object({
+  version: z.int().min(1),
+  snapshotVersion: z.string(),
+  createdAt: z.iso.datetime(),
+});
+export type TeamVersionSummary = z.infer<typeof teamVersionSummarySchema>;
+
+export const teamVersionSchema = teamVersionSummarySchema.extend({ data: teamInputSchema });
+export type TeamVersion = z.infer<typeof teamVersionSchema>;

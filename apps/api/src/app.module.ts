@@ -10,6 +10,8 @@ import { RateLimitGuard } from './security/rate-limit.js';
 import { SettingsController } from './settings/settings.controller.js';
 import { SnapshotsController } from './snapshots/snapshots.controller.js';
 import { SnapshotsService } from './snapshots/snapshots.service.js';
+import { TeamsController } from './teams/teams.controller.js';
+import { TeamsService } from './teams/teams.service.js';
 
 @Module({})
 export class AppModule {
@@ -17,9 +19,10 @@ export class AppModule {
     return {
       module: AppModule,
       imports: [CoreModule.forRoot(config, db), AuthModule.forRoot(config)],
-      controllers: [HealthController, SettingsController, SnapshotsController],
+      controllers: [HealthController, SettingsController, SnapshotsController, TeamsController],
       providers: [
         SnapshotsService,
+        TeamsService,
         // Order matters: rate limit first, then the deny-by-default session check.
         { provide: APP_GUARD, useClass: RateLimitGuard },
         { provide: APP_GUARD, useClass: SessionGuard },
