@@ -64,8 +64,9 @@ pnpm hash-password     # ADMIN_PASSWORD_HASH for AUTH_MODE=local-password
 
 - Phase 0 (research) and Phase 1 (foundation) are done: monorepo, auth, database, i18n,
   Champions Reg M-C snapshot, CI, and the production deploy on Vercel + Turso with GitHub login.
-- Setup still open (owner, on a computer): Preview environment variables (password login and a
-  preview database), the GitHub App for data and release pull requests (`docs/setup.md`, step 3).
+- Preview deployments are set up (password login, separate preview database).
+- Setup still open (owner): the GitHub App for data and release pull requests
+  (`docs/setup.md`, step 3).
 - Vercel's function runtime cannot `require()` ES modules: never add a CommonJS dependency that
   requires an ESM-only package (Nest 12 is ESM-only). CI checks this.
 - Next: Phase 2 — `DESIGN.md` (wait for the owner's approval), team builder, legality,
