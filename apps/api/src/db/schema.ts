@@ -97,3 +97,28 @@ export const suggestionFeedback = sqliteTable(
   },
   (t) => [index('suggestion_feedback_user_idx').on(t.userId)],
 );
+
+/**
+ * AI answers, kept so the same question about the same team, data version, language and level
+ * is answered from here instead of spending the free quota again. Also counts the daily limit.
+ */
+export const aiResponses = sqliteTable(
+  'ai_responses',
+  {
+    id: text('id').primaryKey(),
+    userId: text('user_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    /** SHA-256 of the request: kind, team, snapshot version, language, level, model, messages. */
+    cacheKey: text('cache_key').notNull(),
+    kind: text('kind', { enum: ['explain', 'chat'] }).notNull(),
+    model: text('model').notNull(),
+    snapshotVersion: text('snapshot_version').notNull(),
+    text: text('text').notNull(),
+    createdAt: createdAt(),
+  },
+  (t) => [
+    index('ai_responses_user_key_idx').on(t.userId, t.cacheKey),
+    index('ai_responses_user_created_idx').on(t.userId, t.createdAt),
+  ],
+);

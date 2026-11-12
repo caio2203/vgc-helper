@@ -163,6 +163,35 @@ Automation** in the same page.
 3. Try it with another GitHub account: you get "This GitHub account is not allowed".
 4. In **Settings → Cron Jobs** you should see `/api/internal/keepalive` once a day.
 
+### 2.8 Optional: AI explanations (Gemini free tier)
+
+The Explain button and the chat in the analysis column use Google Gemini. Without a key they are
+hidden and the rest of the app works the same. Use the free tier only: do not enable billing on
+the Google Cloud project behind the key. On the free tier Google may use what is sent to improve
+its products; the API sends only the analysis of the team you ask about, never your account
+data.
+
+1. Open https://aistudio.google.com/apikey, sign in, and click **Create API key**. Pick a
+   project without billing.
+2. Copy the key. Do not paste it in chats, issues or files.
+3. In your own terminal, from the repository folder (after `vercel link`), run each command and
+   paste the key when it asks. The value is hidden and goes straight to Vercel:
+
+```bash
+vercel env add GEMINI_API_KEY production
+```
+
+```bash
+vercel env add GEMINI_API_KEY preview
+```
+
+4. Redeploy (**Deployments → … → Redeploy**). The Admin page then shows "AI explanations: On".
+
+Optional variables: `GEMINI_MODEL` (default `gemini-3.8-flash`, the newest Flash model with a
+free tier in November 2026) and `AI_DAILY_LIMIT` (answers per user per 24 hours, default 50).
+Answers are cached in the database per team, data version, language and level, so asking again
+costs nothing. For a copy on your PC, put the key in `.env` instead.
+
 ## 3. Data update pull requests (GitHub App)
 
 The `Update data` workflow rebuilds the data snapshot every day and opens a pull request when it

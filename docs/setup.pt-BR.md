@@ -163,6 +163,35 @@ Automation**, na mesma página.
 3. Teste com outra conta do GitHub: aparece "Esta conta do GitHub não tem acesso".
 4. Em **Settings → Cron Jobs** deve aparecer `/api/internal/keepalive`, uma vez por dia.
 
+### 2.8 Opcional: explicações com IA (free tier do Gemini)
+
+O botão Explicar e o chat da coluna de análise usam o Google Gemini. Sem chave eles ficam
+ocultos e o resto do app funciona igual. Use só o free tier: não ative cobrança no projeto do
+Google Cloud da chave. No free tier o Google pode usar o que é enviado para melhorar os produtos
+dele; a API envia só a análise do time sobre o qual você pergunta, nunca dados da sua conta.
+
+1. Abra https://aistudio.google.com/apikey, entre e clique em **Create API key**. Escolha um
+   projeto sem cobrança.
+2. Copie a chave. Não cole em chats, issues ou arquivos.
+3. No seu terminal, na pasta do repositório (depois do `vercel link`), rode cada comando e cole
+   a chave quando ele pedir. O valor fica oculto e vai direto para a Vercel:
+
+```bash
+vercel env add GEMINI_API_KEY production
+```
+
+```bash
+vercel env add GEMINI_API_KEY preview
+```
+
+4. Faça um redeploy (**Deployments → … → Redeploy**). A página Admin passa a mostrar
+   "Explicações com IA: Ligadas".
+
+Variáveis opcionais: `GEMINI_MODEL` (padrão `gemini-3.8-flash`, o Flash mais novo com free tier
+em novembro de 2026) e `AI_DAILY_LIMIT` (respostas por usuário a cada 24 horas, padrão 50). As
+respostas ficam guardadas no banco por time, versão dos dados, idioma e nível, então perguntar de
+novo não gasta nada. Numa cópia no seu PC, coloque a chave no `.env`.
+
 ## 3. Pull requests de atualização de dados (GitHub App)
 
 O workflow `Update data` refaz o snapshot de dados todo dia e abre um pull request quando algo

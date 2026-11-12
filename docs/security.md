@@ -34,6 +34,22 @@ allowlist in the CI test and this table.
 which Vercel Cron sends. Its daily read keeps a free Turso database from being archived after
 10 days without use.
 
+## AI (optional)
+
+`/api/ai/status`, `/api/ai/explain` and `/api/ai/chat` need a session like every other route,
+and the two POSTs need `Origin` + `x-csrf-token`. Without `GEMINI_API_KEY` they answer
+`disabled`; that only hides a feature and does not touch authentication.
+
+- The browser sends the team (slots, format, regulation) and the questions. The API runs the
+  engine itself and sends Gemini that analysis, never data the browser computed, and never
+  account or session data.
+- The key lives only in the API's environment. Error messages from the SDK are not returned to
+  the browser.
+- Abuse limits: 6 calls per minute per route and IP, `AI_DAILY_LIMIT` answers per user per 24
+  hours (cached answers are free). The tools the model can call only read the snapshot.
+- The system prompt tells the model to ignore instructions inside the questions; the answer is
+  shown as plain text (no HTML), so it cannot inject markup.
+
 ## Things to keep in mind
 
 - The in-memory rate limiter is per serverless instance. Vercel Authentication in front of the

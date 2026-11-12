@@ -1,5 +1,9 @@
 import { type DynamicModule, Module } from '@nestjs/common';
 import { APP_GUARD } from '@nestjs/core';
+import { AiController } from './ai/ai.controller.js';
+import { AiService } from './ai/ai.service.js';
+import { GeminiProvider } from './ai/gemini.provider.js';
+import { LLM_PROVIDER, type LlmProvider } from './ai/llm.js';
 import { AuthModule } from './auth/auth.module.js';
 import { SessionGuard } from './auth/session.guard.js';
 import type { AppConfig } from './config/env.js';
@@ -16,11 +20,19 @@ import { TeamsService } from './teams/teams.service.js';
 
 @Module({})
 export class AppModule {
-  static forRoot(config: AppConfig, db: Db): DynamicModule {
+  /** `llm` replaces the provider in tests; otherwise Gemini when GEMINI_API_KEY is set. */
+  static forRoot(config: AppConfig, db: Db, llm?: LlmProvider | null): DynamicModule {
+    const provider =
+      llm !== undefined
+        ? llm
+        : config.ai.apiKey
+          ? new GeminiProvider(config.ai.apiKey, config.ai.model)
+          : null;
     return {
       module: AppModule,
       imports: [CoreModule.forRoot(config, db), AuthModule.forRoot(config)],
       controllers: [
+        AiController,
         FeedbackController,
         HealthController,
         SettingsController,
@@ -28,6 +40,8 @@ export class AppModule {
         TeamsController,
       ],
       providers: [
+        { provide: LLM_PROVIDER, useValue: provider },
+        AiService,
         SnapshotsService,
         TeamsService,
         // Order matters: rate limit first, then the deny-by-default session check.

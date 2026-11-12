@@ -5,6 +5,7 @@ import { NestFactory } from '@nestjs/core';
 import type { NestExpressApplication } from '@nestjs/platform-express';
 import cookieParser from 'cookie-parser';
 import express, { type NextFunction, type Request, type Response } from 'express';
+import type { LlmProvider } from './ai/llm.js';
 import { AppModule } from './app.module.js';
 import type { AppConfig } from './config/env.js';
 import { createDb, type Db, runMigrations } from './db/client.js';
@@ -34,10 +35,14 @@ function mountWeb(app: NestExpressApplication, dir: string): void {
   });
 }
 
-export async function createApp(config: AppConfig, db: Db = createDb(config.database)) {
+export async function createApp(
+  config: AppConfig,
+  db: Db = createDb(config.database),
+  llm?: LlmProvider | null,
+) {
   if (config.migrateOnBoot) await runMigrations(db);
 
-  const app = await NestFactory.create<NestExpressApplication>(AppModule.forRoot(config, db), {
+  const app = await NestFactory.create<NestExpressApplication>(AppModule.forRoot(config, db, llm), {
     // Production logs only problems, not the route map printed on every cold start.
     logger:
       config.env === 'test'
