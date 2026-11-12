@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { analysisRulesSchema } from './analysis.js';
 import { formatSchema, gameSchema, mechanicsProfileSchema, regulationSchema } from './rules.js';
 
 const snapshotPathSchema = z
@@ -24,6 +25,8 @@ export const manifestSchema = z.object({
   mechanicsProfiles: z.array(mechanicsProfileSchema).min(1),
   formats: z.array(formatSchema).min(1),
   regulations: z.array(manifestRegulationSchema).min(1),
+  /** Rules the analysis engine reads, per game. */
+  analysisRules: z.array(analysisRulesSchema).min(1),
   overridesApplied: z.array(z.string()),
 });
 export type Manifest = z.infer<typeof manifestSchema>;

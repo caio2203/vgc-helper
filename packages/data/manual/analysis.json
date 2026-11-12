@@ -1,0 +1,456 @@
+{
+  "analysisRules": [
+    {
+      "id": "champions-analysis",
+      "gameIds": ["champions"],
+      "abilityMatchups": [
+        { "ability": "levitate", "type": "Ground", "multiplier": 0 },
+        { "ability": "eartheater", "type": "Ground", "multiplier": 0 },
+        { "ability": "flashfire", "type": "Fire", "multiplier": 0 },
+        { "ability": "wellbakedbody", "type": "Fire", "multiplier": 0 },
+        { "ability": "waterabsorb", "type": "Water", "multiplier": 0 },
+        { "ability": "stormdrain", "type": "Water", "multiplier": 0 },
+        { "ability": "dryskin", "type": "Water", "multiplier": 0 },
+        { "ability": "dryskin", "type": "Fire", "multiplier": 1.25 },
+        { "ability": "voltabsorb", "type": "Electric", "multiplier": 0 },
+        { "ability": "lightningrod", "type": "Electric", "multiplier": 0 },
+        { "ability": "motordrive", "type": "Electric", "multiplier": 0 },
+        { "ability": "sapsipper", "type": "Grass", "multiplier": 0 },
+        { "ability": "thickfat", "type": "Fire", "multiplier": 0.5 },
+        { "ability": "thickfat", "type": "Ice", "multiplier": 0.5 },
+        { "ability": "heatproof", "type": "Fire", "multiplier": 0.5 },
+        { "ability": "waterbubble", "type": "Fire", "multiplier": 0.5 },
+        { "ability": "purifyingsalt", "type": "Ghost", "multiplier": 0.5 },
+        { "ability": "fluffy", "type": "Fire", "multiplier": 2 }
+      ],
+      "roles": [
+        {
+          "id": "tailwind",
+          "group": "speedControl",
+          "rule": { "kind": "list", "moves": ["tailwind"], "abilities": [], "items": [] }
+        },
+        {
+          "id": "trickRoom",
+          "group": "speedControl",
+          "rule": { "kind": "list", "moves": ["trickroom"], "abilities": [], "items": [] }
+        },
+        {
+          "id": "speedDrop",
+          "group": "speedControl",
+          "rule": {
+            "kind": "list",
+            "moves": [
+              "icywind",
+              "electroweb",
+              "bulldoze",
+              "rocktomb",
+              "scaryface",
+              "thunderwave",
+              "nuzzle",
+              "glare"
+            ],
+            "abilities": [],
+            "items": []
+          }
+        },
+        {
+          "id": "fakeOut",
+          "group": "fakeOut",
+          "rule": { "kind": "list", "moves": ["fakeout"], "abilities": [], "items": [] }
+        },
+        {
+          "id": "redirection",
+          "group": "redirection",
+          "rule": {
+            "kind": "list",
+            "moves": ["followme", "ragepowder"],
+            "abilities": [],
+            "items": []
+          }
+        },
+        {
+          "id": "intimidate",
+          "group": "intimidate",
+          "rule": { "kind": "list", "moves": [], "abilities": ["intimidate"], "items": [] }
+        },
+        {
+          "id": "intimidateAnswer",
+          "group": "intimidateAnswer",
+          "rule": {
+            "kind": "list",
+            "moves": [],
+            "abilities": [
+              "defiant",
+              "competitive",
+              "clearbody",
+              "whitesmoke",
+              "fullmetalbody",
+              "innerfocus",
+              "owntempo",
+              "oblivious",
+              "scrappy",
+              "guarddog",
+              "hypercutter",
+              "mirrorarmor"
+            ],
+            "items": ["whiteherb"]
+          }
+        },
+        {
+          "id": "protect",
+          "group": "protect",
+          "rule": {
+            "kind": "list",
+            "moves": [
+              "protect",
+              "detect",
+              "spikyshield",
+              "kingsshield",
+              "banefulbunker",
+              "silktrap",
+              "burningbulwark",
+              "obstruct"
+            ],
+            "abilities": [],
+            "items": []
+          }
+        },
+        {
+          "id": "spread",
+          "group": "spread",
+          "rule": {
+            "kind": "moveTarget",
+            "targets": ["allAdjacentFoes", "allAdjacent"],
+            "damagingOnly": true
+          }
+        },
+        {
+          "id": "priority",
+          "group": "priority",
+          "rule": { "kind": "movePriority", "min": 1, "damagingOnly": true }
+        },
+        {
+          "id": "pivot",
+          "group": "pivot",
+          "rule": {
+            "kind": "list",
+            "moves": [
+              "uturn",
+              "voltswitch",
+              "flipturn",
+              "partingshot",
+              "teleport",
+              "chillyreception",
+              "shedtail"
+            ],
+            "abilities": [],
+            "items": []
+          }
+        },
+        {
+          "id": "wideGuard",
+          "group": "wideGuard",
+          "rule": { "kind": "list", "moves": ["wideguard"], "abilities": [], "items": [] }
+        },
+        {
+          "id": "sunSetter",
+          "group": "weather",
+          "rule": {
+            "kind": "list",
+            "moves": ["sunnyday"],
+            "abilities": ["drought", "orichalcumpulse"],
+            "items": []
+          }
+        },
+        {
+          "id": "rainSetter",
+          "group": "weather",
+          "rule": { "kind": "list", "moves": ["raindance"], "abilities": ["drizzle"], "items": [] }
+        },
+        {
+          "id": "sandSetter",
+          "group": "weather",
+          "rule": {
+            "kind": "list",
+            "moves": ["sandstorm"],
+            "abilities": ["sandstream"],
+            "items": []
+          }
+        },
+        {
+          "id": "snowSetter",
+          "group": "weather",
+          "rule": {
+            "kind": "list",
+            "moves": ["snowscape", "chillyreception"],
+            "abilities": ["snowwarning"],
+            "items": []
+          }
+        },
+        {
+          "id": "electricTerrainSetter",
+          "group": "terrain",
+          "rule": {
+            "kind": "list",
+            "moves": ["electricterrain"],
+            "abilities": ["electricsurge", "hadronengine"],
+            "items": []
+          }
+        },
+        {
+          "id": "psychicTerrainSetter",
+          "group": "terrain",
+          "rule": {
+            "kind": "list",
+            "moves": ["psychicterrain"],
+            "abilities": ["psychicsurge"],
+            "items": []
+          }
+        },
+        {
+          "id": "grassyTerrainSetter",
+          "group": "terrain",
+          "rule": {
+            "kind": "list",
+            "moves": ["grassyterrain"],
+            "abilities": ["grassysurge", "seedsower"],
+            "items": []
+          }
+        },
+        {
+          "id": "mistyTerrainSetter",
+          "group": "terrain",
+          "rule": {
+            "kind": "list",
+            "moves": ["mistyterrain"],
+            "abilities": ["mistysurge"],
+            "items": []
+          }
+        },
+        {
+          "id": "sunAbuser",
+          "group": "abuser",
+          "rule": {
+            "kind": "list",
+            "moves": ["solarbeam", "solarblade", "weatherball", "hydrosteam"],
+            "abilities": [
+              "chlorophyll",
+              "solarpower",
+              "protosynthesis",
+              "flowergift",
+              "harvest",
+              "orichalcumpulse",
+              "megasol"
+            ],
+            "items": []
+          }
+        },
+        {
+          "id": "rainAbuser",
+          "group": "abuser",
+          "rule": {
+            "kind": "list",
+            "moves": ["weatherball", "thunder", "hurricane"],
+            "abilities": ["swiftswim", "raindish", "hydration"],
+            "items": []
+          }
+        },
+        {
+          "id": "sandAbuser",
+          "group": "abuser",
+          "rule": {
+            "kind": "list",
+            "moves": [],
+            "abilities": ["sandrush", "sandforce", "sandveil"],
+            "items": []
+          }
+        },
+        {
+          "id": "snowAbuser",
+          "group": "abuser",
+          "rule": {
+            "kind": "list",
+            "moves": ["blizzard", "auroraveil"],
+            "abilities": ["slushrush", "icebody", "snowcloak"],
+            "items": []
+          }
+        },
+        {
+          "id": "electricTerrainAbuser",
+          "group": "abuser",
+          "rule": {
+            "kind": "list",
+            "moves": ["risingvoltage"],
+            "abilities": ["surgesurfer", "quarkdrive", "hadronengine"],
+            "items": []
+          }
+        },
+        {
+          "id": "psychicTerrainAbuser",
+          "group": "abuser",
+          "rule": { "kind": "list", "moves": ["expandingforce"], "abilities": [], "items": [] }
+        },
+        {
+          "id": "grassyTerrainAbuser",
+          "group": "abuser",
+          "rule": { "kind": "list", "moves": ["grassyglide"], "abilities": [], "items": [] }
+        },
+        {
+          "id": "hazards",
+          "group": "hazards",
+          "rule": {
+            "kind": "list",
+            "moves": ["stealthrock", "spikes", "toxicspikes", "stickyweb"],
+            "abilities": [],
+            "items": []
+          }
+        },
+        {
+          "id": "hazardRemoval",
+          "group": "hazardRemoval",
+          "rule": {
+            "kind": "list",
+            "moves": ["defog", "rapidspin", "courtchange", "tidyup", "mortalspin"],
+            "abilities": [],
+            "items": []
+          }
+        }
+      ],
+      "archetypes": [
+        {
+          "id": "tailwind",
+          "setterRoles": ["tailwind"],
+          "abuser": { "roles": [], "baseStat": { "stat": "spe", "min": 60, "max": 100 } },
+          "minSetters": 1,
+          "minAbusers": 2
+        },
+        {
+          "id": "trickRoom",
+          "setterRoles": ["trickRoom"],
+          "abuser": { "roles": [], "baseStat": { "stat": "spe", "min": null, "max": 50 } },
+          "minSetters": 2,
+          "minAbusers": 2
+        },
+        {
+          "id": "sun",
+          "setterRoles": ["sunSetter"],
+          "abuser": { "roles": ["sunAbuser"], "baseStat": null },
+          "minSetters": 1,
+          "minAbusers": 1
+        },
+        {
+          "id": "rain",
+          "setterRoles": ["rainSetter"],
+          "abuser": { "roles": ["rainAbuser"], "baseStat": null },
+          "minSetters": 1,
+          "minAbusers": 1
+        },
+        {
+          "id": "sand",
+          "setterRoles": ["sandSetter"],
+          "abuser": { "roles": ["sandAbuser"], "baseStat": null },
+          "minSetters": 1,
+          "minAbusers": 1
+        },
+        {
+          "id": "snow",
+          "setterRoles": ["snowSetter"],
+          "abuser": { "roles": ["snowAbuser"], "baseStat": null },
+          "minSetters": 1,
+          "minAbusers": 1
+        },
+        {
+          "id": "electricTerrain",
+          "setterRoles": ["electricTerrainSetter"],
+          "abuser": { "roles": ["electricTerrainAbuser"], "baseStat": null },
+          "minSetters": 1,
+          "minAbusers": 1
+        },
+        {
+          "id": "psychicTerrain",
+          "setterRoles": ["psychicTerrainSetter"],
+          "abuser": { "roles": ["psychicTerrainAbuser"], "baseStat": null },
+          "minSetters": 1,
+          "minAbusers": 1
+        },
+        {
+          "id": "grassyTerrain",
+          "setterRoles": ["grassyTerrainSetter"],
+          "abuser": { "roles": ["grassyTerrainAbuser"], "baseStat": null },
+          "minSetters": 1,
+          "minAbusers": 1
+        }
+      ],
+      "profiles": [
+        {
+          "id": "doubles",
+          "checklist": [
+            "speedControl",
+            "fakeOut",
+            "redirection",
+            "intimidate",
+            "intimidateAnswer",
+            "protect",
+            "spread",
+            "priority",
+            "pivot",
+            "wideGuard"
+          ],
+          "weights": {
+            "coversWeakness": 3,
+            "fillsRole": 2,
+            "usage": 3,
+            "teammates": 2,
+            "addsWeakness": 2
+          }
+        },
+        {
+          "id": "singles",
+          "checklist": ["hazards", "hazardRemoval", "pivot", "priority", "speedControl"],
+          "weights": {
+            "coversWeakness": 3,
+            "fillsRole": 2,
+            "usage": 3,
+            "teammates": 1,
+            "addsWeakness": 2
+          }
+        }
+      ],
+      "thresholds": {
+        "stackedWeakness": 3,
+        "threatCount": 12,
+        "speedTierCount": 24,
+        "speedItemShare": 0.15,
+        "suggestionCount": 6
+      },
+      "speed": {
+        "tailwindMultiplier": 2,
+        "itemMultipliers": { "choicescarf": 1.5 },
+        "minusOneMultiplier": 0.6667
+      },
+      "sources": [
+        {
+          "name": "Pokémon Showdown: data/abilities.ts (immunities and damage changes from abilities)",
+          "url": "https://github.com/smogon/pokemon-showdown/blob/master/data/abilities.ts",
+          "retrievedAt": "2026-11-12T00:00:00.000Z"
+        },
+        {
+          "name": "Pokémon Showdown: data/moves.ts (Tailwind doubles Speed, move targets and priority)",
+          "url": "https://github.com/smogon/pokemon-showdown/blob/master/data/moves.ts",
+          "retrievedAt": "2026-11-12T00:00:00.000Z"
+        },
+        {
+          "name": "Pokémon Showdown: data/items.ts (Choice Scarf raises Speed by 1.5×)",
+          "url": "https://github.com/smogon/pokemon-showdown/blob/master/data/items.ts",
+          "retrievedAt": "2026-11-12T00:00:00.000Z"
+        },
+        {
+          "name": "VGC Helper: roles, archetypes, thresholds and weights chosen for this project",
+          "url": "https://github.com/caio2203/vgc-helper/blob/main/packages/data/manual/analysis.json",
+          "retrievedAt": "2026-11-12T00:00:00.000Z",
+          "note": "Hand-curated from the move and ability effects above. Change them by pull request."
+        }
+      ]
+    }
+  ]
+}

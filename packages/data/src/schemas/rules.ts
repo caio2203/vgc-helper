@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { analysisRulesSchema } from './analysis.js';
 import { idSchema, sourceRefSchema } from './common.js';
 
 export const statSystemSchema = z.discriminatedUnion('kind', [
@@ -119,11 +120,15 @@ export const regulationSchema = z.object({
 });
 export type Regulation = z.infer<typeof regulationSchema>;
 
-/** Hand-curated input, reviewed by PR. The snapshot builder copies it into the manifest. */
+/**
+ * One hand-curated file, reviewed by PR. The snapshot builder merges every file in
+ * packages/data/manual and copies the result into the manifest, which requires each list.
+ */
 export const manualDataSchema = z.object({
-  games: z.array(gameSchema).min(1),
-  mechanicsProfiles: z.array(mechanicsProfileSchema).min(1),
-  formats: z.array(formatSchema).min(1),
-  regulations: z.array(regulationSchema).min(1),
+  games: z.array(gameSchema).default([]),
+  mechanicsProfiles: z.array(mechanicsProfileSchema).default([]),
+  formats: z.array(formatSchema).default([]),
+  regulations: z.array(regulationSchema).default([]),
+  analysisRules: z.array(analysisRulesSchema).default([]),
 });
 export type ManualData = z.infer<typeof manualDataSchema>;

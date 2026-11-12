@@ -47,6 +47,7 @@ async function loadManual(): Promise<ManualData> {
     mechanicsProfiles: parts.flatMap((p) => p.mechanicsProfiles),
     formats: parts.flatMap((p) => p.formats),
     regulations: parts.flatMap((p) => p.regulations),
+    analysisRules: parts.flatMap((p) => p.analysisRules),
   };
 }
 
@@ -171,6 +172,7 @@ async function main(): Promise<void> {
     mechanicsProfiles: manual.mechanicsProfiles,
     formats: manual.formats,
     regulations,
+    analysisRules: manual.analysisRules,
     overridesApplied: [...new Set(overridesApplied)].sort(),
   };
   const hash = contentHash(new Map([...files, ['manifest', manifestBody]]));
