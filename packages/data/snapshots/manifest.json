@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "version": "2026-11-12.fbc5b5643f",
-  "generatedAt": "2026-11-12T02:37:45.652Z",
+  "version": "2026-11-12.e5c256a6aa",
+  "generatedAt": "2026-11-12T06:09:37.269Z",
   "games": [
     { "id": "champions", "name": "Pokémon Champions", "mechanicsProfileId": "champions-2026" }
   ],
@@ -203,7 +203,8 @@
             "moves": ["tailwind"],
             "abilities": [],
             "items": []
-          }
+          },
+          "sets": null
         },
         {
           "id": "trickRoom",
@@ -213,7 +214,8 @@
             "moves": ["trickroom"],
             "abilities": [],
             "items": []
-          }
+          },
+          "sets": null
         },
         {
           "id": "speedDrop",
@@ -223,7 +225,8 @@
             "moves": ["icywind", "electroweb", "bulldoze", "rocktomb", "scaryface", "thunderwave", "nuzzle", "glare"],
             "abilities": [],
             "items": []
-          }
+          },
+          "sets": null
         },
         {
           "id": "fakeOut",
@@ -233,7 +236,8 @@
             "moves": ["fakeout"],
             "abilities": [],
             "items": []
-          }
+          },
+          "sets": null
         },
         {
           "id": "redirection",
@@ -243,7 +247,8 @@
             "moves": ["followme", "ragepowder"],
             "abilities": [],
             "items": []
-          }
+          },
+          "sets": null
         },
         {
           "id": "intimidate",
@@ -253,7 +258,8 @@
             "moves": [],
             "abilities": ["intimidate"],
             "items": []
-          }
+          },
+          "sets": null
         },
         {
           "id": "intimidateAnswer",
@@ -263,7 +269,8 @@
             "moves": [],
             "abilities": ["defiant", "competitive", "clearbody", "whitesmoke", "fullmetalbody", "innerfocus", "owntempo", "oblivious", "scrappy", "guarddog", "hypercutter", "mirrorarmor"],
             "items": ["whiteherb"]
-          }
+          },
+          "sets": null
         },
         {
           "id": "protect",
@@ -273,7 +280,8 @@
             "moves": ["protect", "detect", "spikyshield", "kingsshield", "banefulbunker", "silktrap", "burningbulwark", "obstruct"],
             "abilities": [],
             "items": []
-          }
+          },
+          "sets": null
         },
         {
           "id": "spread",
@@ -282,12 +290,14 @@
             "kind": "moveTarget",
             "targets": ["allAdjacentFoes", "allAdjacent"],
             "damagingOnly": true
-          }
+          },
+          "sets": null
         },
         {
           "id": "priority",
           "group": "priority",
-          "rule": { "kind": "movePriority", "min": 1, "damagingOnly": true }
+          "rule": { "kind": "movePriority", "min": 1, "damagingOnly": true },
+          "sets": null
         },
         {
           "id": "pivot",
@@ -297,7 +307,8 @@
             "moves": ["uturn", "voltswitch", "flipturn", "partingshot", "teleport", "chillyreception", "shedtail"],
             "abilities": [],
             "items": []
-          }
+          },
+          "sets": null
         },
         {
           "id": "wideGuard",
@@ -307,7 +318,8 @@
             "moves": ["wideguard"],
             "abilities": [],
             "items": []
-          }
+          },
+          "sets": null
         },
         {
           "id": "sunSetter",
@@ -317,7 +329,8 @@
             "moves": ["sunnyday"],
             "abilities": ["drought", "orichalcumpulse"],
             "items": []
-          }
+          },
+          "sets": { "weather": "Sun", "terrain": null }
         },
         {
           "id": "rainSetter",
@@ -327,7 +340,8 @@
             "moves": ["raindance"],
             "abilities": ["drizzle"],
             "items": []
-          }
+          },
+          "sets": { "weather": "Rain", "terrain": null }
         },
         {
           "id": "sandSetter",
@@ -337,7 +351,8 @@
             "moves": ["sandstorm"],
             "abilities": ["sandstream"],
             "items": []
-          }
+          },
+          "sets": { "weather": "Sand", "terrain": null }
         },
         {
           "id": "snowSetter",
@@ -347,7 +362,8 @@
             "moves": ["snowscape", "chillyreception"],
             "abilities": ["snowwarning"],
             "items": []
-          }
+          },
+          "sets": { "weather": "Snow", "terrain": null }
         },
         {
           "id": "electricTerrainSetter",
@@ -357,7 +373,8 @@
             "moves": ["electricterrain"],
             "abilities": ["electricsurge", "hadronengine"],
             "items": []
-          }
+          },
+          "sets": { "weather": null, "terrain": "Electric" }
         },
         {
           "id": "psychicTerrainSetter",
@@ -367,7 +384,8 @@
             "moves": ["psychicterrain"],
             "abilities": ["psychicsurge"],
             "items": []
-          }
+          },
+          "sets": { "weather": null, "terrain": "Psychic" }
         },
         {
           "id": "grassyTerrainSetter",
@@ -377,7 +395,8 @@
             "moves": ["grassyterrain"],
             "abilities": ["grassysurge", "seedsower"],
             "items": []
-          }
+          },
+          "sets": { "weather": null, "terrain": "Grassy" }
         },
         {
           "id": "mistyTerrainSetter",
@@ -387,7 +406,8 @@
             "moves": ["mistyterrain"],
             "abilities": ["mistysurge"],
             "items": []
-          }
+          },
+          "sets": { "weather": null, "terrain": "Misty" }
         },
         {
           "id": "sunAbuser",
@@ -397,7 +417,8 @@
             "moves": ["solarbeam", "solarblade", "weatherball", "hydrosteam"],
             "abilities": ["chlorophyll", "solarpower", "protosynthesis", "flowergift", "harvest", "orichalcumpulse", "megasol"],
             "items": []
-          }
+          },
+          "sets": null
         },
         {
           "id": "rainAbuser",
@@ -407,7 +428,8 @@
             "moves": ["weatherball", "thunder", "hurricane"],
             "abilities": ["swiftswim", "raindish", "hydration"],
             "items": []
-          }
+          },
+          "sets": null
         },
         {
           "id": "sandAbuser",
@@ -417,7 +439,8 @@
             "moves": [],
             "abilities": ["sandrush", "sandforce", "sandveil"],
             "items": []
-          }
+          },
+          "sets": null
         },
         {
           "id": "snowAbuser",
@@ -427,7 +450,8 @@
             "moves": ["blizzard", "auroraveil"],
             "abilities": ["slushrush", "icebody", "snowcloak"],
             "items": []
-          }
+          },
+          "sets": null
         },
         {
           "id": "electricTerrainAbuser",
@@ -437,7 +461,8 @@
             "moves": ["risingvoltage"],
             "abilities": ["surgesurfer", "quarkdrive", "hadronengine"],
             "items": []
-          }
+          },
+          "sets": null
         },
         {
           "id": "psychicTerrainAbuser",
@@ -447,7 +472,8 @@
             "moves": ["expandingforce"],
             "abilities": [],
             "items": []
-          }
+          },
+          "sets": null
         },
         {
           "id": "grassyTerrainAbuser",
@@ -457,7 +483,8 @@
             "moves": ["grassyglide"],
             "abilities": [],
             "items": []
-          }
+          },
+          "sets": null
         },
         {
           "id": "hazards",
@@ -467,7 +494,8 @@
             "moves": ["stealthrock", "spikes", "toxicspikes", "stickyweb"],
             "abilities": [],
             "items": []
-          }
+          },
+          "sets": null
         },
         {
           "id": "hazardRemoval",
@@ -477,7 +505,8 @@
             "moves": ["defog", "rapidspin", "courtchange", "tidyup", "mortalspin"],
             "abilities": [],
             "items": []
-          }
+          },
+          "sets": null
         }
       ],
       "archetypes": [
@@ -489,7 +518,8 @@
             "baseStat": { "stat": "spe", "min": 60, "max": 100 }
           },
           "minSetters": 1,
-          "minAbusers": 2
+          "minAbusers": 2,
+          "detectWithoutSetter": false
         },
         {
           "id": "trickRoom",
@@ -499,7 +529,8 @@
             "baseStat": { "stat": "spe", "min": null, "max": 50 }
           },
           "minSetters": 2,
-          "minAbusers": 2
+          "minAbusers": 2,
+          "detectWithoutSetter": true
         },
         {
           "id": "sun",
@@ -509,7 +540,8 @@
             "baseStat": null
           },
           "minSetters": 1,
-          "minAbusers": 1
+          "minAbusers": 1,
+          "detectWithoutSetter": true
         },
         {
           "id": "rain",
@@ -519,7 +551,8 @@
             "baseStat": null
           },
           "minSetters": 1,
-          "minAbusers": 1
+          "minAbusers": 1,
+          "detectWithoutSetter": true
         },
         {
           "id": "sand",
@@ -529,7 +562,8 @@
             "baseStat": null
           },
           "minSetters": 1,
-          "minAbusers": 1
+          "minAbusers": 1,
+          "detectWithoutSetter": true
         },
         {
           "id": "snow",
@@ -539,7 +573,8 @@
             "baseStat": null
           },
           "minSetters": 1,
-          "minAbusers": 1
+          "minAbusers": 1,
+          "detectWithoutSetter": true
         },
         {
           "id": "electricTerrain",
@@ -549,7 +584,8 @@
             "baseStat": null
           },
           "minSetters": 1,
-          "minAbusers": 1
+          "minAbusers": 1,
+          "detectWithoutSetter": true
         },
         {
           "id": "psychicTerrain",
@@ -559,7 +595,8 @@
             "baseStat": null
           },
           "minSetters": 1,
-          "minAbusers": 1
+          "minAbusers": 1,
+          "detectWithoutSetter": true
         },
         {
           "id": "grassyTerrain",
@@ -569,7 +606,8 @@
             "baseStat": null
           },
           "minSetters": 1,
-          "minAbusers": 1
+          "minAbusers": 1,
+          "detectWithoutSetter": true
         }
       ],
       "profiles": [

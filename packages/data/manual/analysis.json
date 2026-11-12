@@ -4,35 +4,119 @@
       "id": "champions-analysis",
       "gameIds": ["champions"],
       "abilityMatchups": [
-        { "ability": "levitate", "type": "Ground", "multiplier": 0 },
-        { "ability": "eartheater", "type": "Ground", "multiplier": 0 },
-        { "ability": "flashfire", "type": "Fire", "multiplier": 0 },
-        { "ability": "wellbakedbody", "type": "Fire", "multiplier": 0 },
-        { "ability": "waterabsorb", "type": "Water", "multiplier": 0 },
-        { "ability": "stormdrain", "type": "Water", "multiplier": 0 },
-        { "ability": "dryskin", "type": "Water", "multiplier": 0 },
-        { "ability": "dryskin", "type": "Fire", "multiplier": 1.25 },
-        { "ability": "voltabsorb", "type": "Electric", "multiplier": 0 },
-        { "ability": "lightningrod", "type": "Electric", "multiplier": 0 },
-        { "ability": "motordrive", "type": "Electric", "multiplier": 0 },
-        { "ability": "sapsipper", "type": "Grass", "multiplier": 0 },
-        { "ability": "thickfat", "type": "Fire", "multiplier": 0.5 },
-        { "ability": "thickfat", "type": "Ice", "multiplier": 0.5 },
-        { "ability": "heatproof", "type": "Fire", "multiplier": 0.5 },
-        { "ability": "waterbubble", "type": "Fire", "multiplier": 0.5 },
-        { "ability": "purifyingsalt", "type": "Ghost", "multiplier": 0.5 },
-        { "ability": "fluffy", "type": "Fire", "multiplier": 2 }
+        {
+          "ability": "levitate",
+          "type": "Ground",
+          "multiplier": 0
+        },
+        {
+          "ability": "eartheater",
+          "type": "Ground",
+          "multiplier": 0
+        },
+        {
+          "ability": "flashfire",
+          "type": "Fire",
+          "multiplier": 0
+        },
+        {
+          "ability": "wellbakedbody",
+          "type": "Fire",
+          "multiplier": 0
+        },
+        {
+          "ability": "waterabsorb",
+          "type": "Water",
+          "multiplier": 0
+        },
+        {
+          "ability": "stormdrain",
+          "type": "Water",
+          "multiplier": 0
+        },
+        {
+          "ability": "dryskin",
+          "type": "Water",
+          "multiplier": 0
+        },
+        {
+          "ability": "dryskin",
+          "type": "Fire",
+          "multiplier": 1.25
+        },
+        {
+          "ability": "voltabsorb",
+          "type": "Electric",
+          "multiplier": 0
+        },
+        {
+          "ability": "lightningrod",
+          "type": "Electric",
+          "multiplier": 0
+        },
+        {
+          "ability": "motordrive",
+          "type": "Electric",
+          "multiplier": 0
+        },
+        {
+          "ability": "sapsipper",
+          "type": "Grass",
+          "multiplier": 0
+        },
+        {
+          "ability": "thickfat",
+          "type": "Fire",
+          "multiplier": 0.5
+        },
+        {
+          "ability": "thickfat",
+          "type": "Ice",
+          "multiplier": 0.5
+        },
+        {
+          "ability": "heatproof",
+          "type": "Fire",
+          "multiplier": 0.5
+        },
+        {
+          "ability": "waterbubble",
+          "type": "Fire",
+          "multiplier": 0.5
+        },
+        {
+          "ability": "purifyingsalt",
+          "type": "Ghost",
+          "multiplier": 0.5
+        },
+        {
+          "ability": "fluffy",
+          "type": "Fire",
+          "multiplier": 2
+        }
       ],
       "roles": [
         {
           "id": "tailwind",
           "group": "speedControl",
-          "rule": { "kind": "list", "moves": ["tailwind"], "abilities": [], "items": [] }
+          "rule": {
+            "kind": "list",
+            "moves": ["tailwind"],
+            "abilities": [],
+            "items": []
+          },
+          "sets": null
         },
         {
           "id": "trickRoom",
           "group": "speedControl",
-          "rule": { "kind": "list", "moves": ["trickroom"], "abilities": [], "items": [] }
+          "rule": {
+            "kind": "list",
+            "moves": ["trickroom"],
+            "abilities": [],
+            "items": []
+          },
+          "sets": null
         },
         {
           "id": "speedDrop",
@@ -51,12 +135,19 @@
             ],
             "abilities": [],
             "items": []
-          }
+          },
+          "sets": null
         },
         {
           "id": "fakeOut",
           "group": "fakeOut",
-          "rule": { "kind": "list", "moves": ["fakeout"], "abilities": [], "items": [] }
+          "rule": {
+            "kind": "list",
+            "moves": ["fakeout"],
+            "abilities": [],
+            "items": []
+          },
+          "sets": null
         },
         {
           "id": "redirection",
@@ -66,12 +157,19 @@
             "moves": ["followme", "ragepowder"],
             "abilities": [],
             "items": []
-          }
+          },
+          "sets": null
         },
         {
           "id": "intimidate",
           "group": "intimidate",
-          "rule": { "kind": "list", "moves": [], "abilities": ["intimidate"], "items": [] }
+          "rule": {
+            "kind": "list",
+            "moves": [],
+            "abilities": ["intimidate"],
+            "items": []
+          },
+          "sets": null
         },
         {
           "id": "intimidateAnswer",
@@ -94,7 +192,8 @@
               "mirrorarmor"
             ],
             "items": ["whiteherb"]
-          }
+          },
+          "sets": null
         },
         {
           "id": "protect",
@@ -113,7 +212,8 @@
             ],
             "abilities": [],
             "items": []
-          }
+          },
+          "sets": null
         },
         {
           "id": "spread",
@@ -122,12 +222,18 @@
             "kind": "moveTarget",
             "targets": ["allAdjacentFoes", "allAdjacent"],
             "damagingOnly": true
-          }
+          },
+          "sets": null
         },
         {
           "id": "priority",
           "group": "priority",
-          "rule": { "kind": "movePriority", "min": 1, "damagingOnly": true }
+          "rule": {
+            "kind": "movePriority",
+            "min": 1,
+            "damagingOnly": true
+          },
+          "sets": null
         },
         {
           "id": "pivot",
@@ -145,12 +251,19 @@
             ],
             "abilities": [],
             "items": []
-          }
+          },
+          "sets": null
         },
         {
           "id": "wideGuard",
           "group": "wideGuard",
-          "rule": { "kind": "list", "moves": ["wideguard"], "abilities": [], "items": [] }
+          "rule": {
+            "kind": "list",
+            "moves": ["wideguard"],
+            "abilities": [],
+            "items": []
+          },
+          "sets": null
         },
         {
           "id": "sunSetter",
@@ -160,12 +273,25 @@
             "moves": ["sunnyday"],
             "abilities": ["drought", "orichalcumpulse"],
             "items": []
+          },
+          "sets": {
+            "weather": "Sun",
+            "terrain": null
           }
         },
         {
           "id": "rainSetter",
           "group": "weather",
-          "rule": { "kind": "list", "moves": ["raindance"], "abilities": ["drizzle"], "items": [] }
+          "rule": {
+            "kind": "list",
+            "moves": ["raindance"],
+            "abilities": ["drizzle"],
+            "items": []
+          },
+          "sets": {
+            "weather": "Rain",
+            "terrain": null
+          }
         },
         {
           "id": "sandSetter",
@@ -175,6 +301,10 @@
             "moves": ["sandstorm"],
             "abilities": ["sandstream"],
             "items": []
+          },
+          "sets": {
+            "weather": "Sand",
+            "terrain": null
           }
         },
         {
@@ -185,6 +315,10 @@
             "moves": ["snowscape", "chillyreception"],
             "abilities": ["snowwarning"],
             "items": []
+          },
+          "sets": {
+            "weather": "Snow",
+            "terrain": null
           }
         },
         {
@@ -195,6 +329,10 @@
             "moves": ["electricterrain"],
             "abilities": ["electricsurge", "hadronengine"],
             "items": []
+          },
+          "sets": {
+            "weather": null,
+            "terrain": "Electric"
           }
         },
         {
@@ -205,6 +343,10 @@
             "moves": ["psychicterrain"],
             "abilities": ["psychicsurge"],
             "items": []
+          },
+          "sets": {
+            "weather": null,
+            "terrain": "Psychic"
           }
         },
         {
@@ -215,6 +357,10 @@
             "moves": ["grassyterrain"],
             "abilities": ["grassysurge", "seedsower"],
             "items": []
+          },
+          "sets": {
+            "weather": null,
+            "terrain": "Grassy"
           }
         },
         {
@@ -225,6 +371,10 @@
             "moves": ["mistyterrain"],
             "abilities": ["mistysurge"],
             "items": []
+          },
+          "sets": {
+            "weather": null,
+            "terrain": "Misty"
           }
         },
         {
@@ -243,7 +393,8 @@
               "megasol"
             ],
             "items": []
-          }
+          },
+          "sets": null
         },
         {
           "id": "rainAbuser",
@@ -253,7 +404,8 @@
             "moves": ["weatherball", "thunder", "hurricane"],
             "abilities": ["swiftswim", "raindish", "hydration"],
             "items": []
-          }
+          },
+          "sets": null
         },
         {
           "id": "sandAbuser",
@@ -263,7 +415,8 @@
             "moves": [],
             "abilities": ["sandrush", "sandforce", "sandveil"],
             "items": []
-          }
+          },
+          "sets": null
         },
         {
           "id": "snowAbuser",
@@ -273,7 +426,8 @@
             "moves": ["blizzard", "auroraveil"],
             "abilities": ["slushrush", "icebody", "snowcloak"],
             "items": []
-          }
+          },
+          "sets": null
         },
         {
           "id": "electricTerrainAbuser",
@@ -283,17 +437,30 @@
             "moves": ["risingvoltage"],
             "abilities": ["surgesurfer", "quarkdrive", "hadronengine"],
             "items": []
-          }
+          },
+          "sets": null
         },
         {
           "id": "psychicTerrainAbuser",
           "group": "abuser",
-          "rule": { "kind": "list", "moves": ["expandingforce"], "abilities": [], "items": [] }
+          "rule": {
+            "kind": "list",
+            "moves": ["expandingforce"],
+            "abilities": [],
+            "items": []
+          },
+          "sets": null
         },
         {
           "id": "grassyTerrainAbuser",
           "group": "abuser",
-          "rule": { "kind": "list", "moves": ["grassyglide"], "abilities": [], "items": [] }
+          "rule": {
+            "kind": "list",
+            "moves": ["grassyglide"],
+            "abilities": [],
+            "items": []
+          },
+          "sets": null
         },
         {
           "id": "hazards",
@@ -303,7 +470,8 @@
             "moves": ["stealthrock", "spikes", "toxicspikes", "stickyweb"],
             "abilities": [],
             "items": []
-          }
+          },
+          "sets": null
         },
         {
           "id": "hazardRemoval",
@@ -313,72 +481,117 @@
             "moves": ["defog", "rapidspin", "courtchange", "tidyup", "mortalspin"],
             "abilities": [],
             "items": []
-          }
+          },
+          "sets": null
         }
       ],
       "archetypes": [
         {
           "id": "tailwind",
           "setterRoles": ["tailwind"],
-          "abuser": { "roles": [], "baseStat": { "stat": "spe", "min": 60, "max": 100 } },
+          "abuser": {
+            "roles": [],
+            "baseStat": {
+              "stat": "spe",
+              "min": 60,
+              "max": 100
+            }
+          },
           "minSetters": 1,
-          "minAbusers": 2
+          "minAbusers": 2,
+          "detectWithoutSetter": false
         },
         {
           "id": "trickRoom",
           "setterRoles": ["trickRoom"],
-          "abuser": { "roles": [], "baseStat": { "stat": "spe", "min": null, "max": 50 } },
+          "abuser": {
+            "roles": [],
+            "baseStat": {
+              "stat": "spe",
+              "min": null,
+              "max": 50
+            }
+          },
           "minSetters": 2,
-          "minAbusers": 2
+          "minAbusers": 2,
+          "detectWithoutSetter": true
         },
         {
           "id": "sun",
           "setterRoles": ["sunSetter"],
-          "abuser": { "roles": ["sunAbuser"], "baseStat": null },
+          "abuser": {
+            "roles": ["sunAbuser"],
+            "baseStat": null
+          },
           "minSetters": 1,
-          "minAbusers": 1
+          "minAbusers": 1,
+          "detectWithoutSetter": true
         },
         {
           "id": "rain",
           "setterRoles": ["rainSetter"],
-          "abuser": { "roles": ["rainAbuser"], "baseStat": null },
+          "abuser": {
+            "roles": ["rainAbuser"],
+            "baseStat": null
+          },
           "minSetters": 1,
-          "minAbusers": 1
+          "minAbusers": 1,
+          "detectWithoutSetter": true
         },
         {
           "id": "sand",
           "setterRoles": ["sandSetter"],
-          "abuser": { "roles": ["sandAbuser"], "baseStat": null },
+          "abuser": {
+            "roles": ["sandAbuser"],
+            "baseStat": null
+          },
           "minSetters": 1,
-          "minAbusers": 1
+          "minAbusers": 1,
+          "detectWithoutSetter": true
         },
         {
           "id": "snow",
           "setterRoles": ["snowSetter"],
-          "abuser": { "roles": ["snowAbuser"], "baseStat": null },
+          "abuser": {
+            "roles": ["snowAbuser"],
+            "baseStat": null
+          },
           "minSetters": 1,
-          "minAbusers": 1
+          "minAbusers": 1,
+          "detectWithoutSetter": true
         },
         {
           "id": "electricTerrain",
           "setterRoles": ["electricTerrainSetter"],
-          "abuser": { "roles": ["electricTerrainAbuser"], "baseStat": null },
+          "abuser": {
+            "roles": ["electricTerrainAbuser"],
+            "baseStat": null
+          },
           "minSetters": 1,
-          "minAbusers": 1
+          "minAbusers": 1,
+          "detectWithoutSetter": true
         },
         {
           "id": "psychicTerrain",
           "setterRoles": ["psychicTerrainSetter"],
-          "abuser": { "roles": ["psychicTerrainAbuser"], "baseStat": null },
+          "abuser": {
+            "roles": ["psychicTerrainAbuser"],
+            "baseStat": null
+          },
           "minSetters": 1,
-          "minAbusers": 1
+          "minAbusers": 1,
+          "detectWithoutSetter": true
         },
         {
           "id": "grassyTerrain",
           "setterRoles": ["grassyTerrainSetter"],
-          "abuser": { "roles": ["grassyTerrainAbuser"], "baseStat": null },
+          "abuser": {
+            "roles": ["grassyTerrainAbuser"],
+            "baseStat": null
+          },
           "minSetters": 1,
-          "minAbusers": 1
+          "minAbusers": 1,
+          "detectWithoutSetter": true
         }
       ],
       "profiles": [
@@ -425,7 +638,9 @@
       },
       "speed": {
         "tailwindMultiplier": 2,
-        "itemMultipliers": { "choicescarf": 1.5 },
+        "itemMultipliers": {
+          "choicescarf": 1.5
+        },
         "minusOneMultiplier": 0.6667
       },
       "sources": [

@@ -40,11 +40,18 @@ export const roleRuleSchema = z.discriminatedUnion('kind', [
 ]);
 export type RoleRule = z.infer<typeof roleRuleSchema>;
 
+export const weatherSchema = z.enum(['Sun', 'Rain', 'Sand', 'Snow']);
+export const terrainSchema = z.enum(['Electric', 'Grassy', 'Psychic', 'Misty']);
+
 export const roleSchema = z.object({
   id: z.string().regex(/^[a-zA-Z]+$/),
   /** Roles of one group count together in the checklist, e.g. Tailwind and Trick Room. */
   group: z.string().regex(/^[a-zA-Z]+$/),
   rule: roleRuleSchema,
+  /** Weather or terrain a matching ability sets on entry; damage calcs apply it. */
+  sets: z
+    .object({ weather: weatherSchema.nullable(), terrain: terrainSchema.nullable() })
+    .nullable(),
 });
 export type Role = z.infer<typeof roleSchema>;
 
@@ -63,6 +70,8 @@ export const archetypeSchema = z.object({
   /** Fewer setters than this, with the archetype detected, is a missing piece. */
   minSetters: z.int().min(1),
   minAbusers: z.int().min(0),
+  /** Recognise the archetype from abusers alone (3 slow attackers suggest Trick Room). */
+  detectWithoutSetter: z.boolean(),
 });
 export type Archetype = z.infer<typeof archetypeSchema>;
 
