@@ -62,13 +62,17 @@ function history(current: string): Changelog {
   };
 }
 
-/** Serves the history above instead of the committed one, which has no update yet. */
+/**
+ * Serves the history above instead of the committed one. Its newest version is unique to this
+ * test, so other tests that open What's new (and mark the real history as read) cannot clear
+ * the unread count it checks.
+ */
 async function useHistory(page: Page): Promise<string> {
-  const manifest = await (await page.request.get('/api/snapshots/manifest')).json();
+  const version = `e2e-new-${test.info().project.name}-${Date.now()}`;
   await page.route('**/api/snapshots/changelog', (route) =>
-    route.fulfill({ json: history(manifest.version) }),
+    route.fulfill({ json: history(version) }),
   );
-  return manifest.version;
+  return version;
 }
 
 test("What's new lists every change and marks it as read", async ({ page }) => {
