@@ -6,6 +6,7 @@ import { analyzeThreats, calcDamage } from '../damage/index.js';
 import { emptySlot } from '../paste.js';
 import { loadAnalysis } from '../test-support/snapshot.js';
 import { analyzeTeam } from './analyze.js';
+import { topCutByBase } from './meta.js';
 import { resolveSlots } from './resolve.js';
 
 let ctx: RulesContext;
@@ -226,5 +227,82 @@ describe('covering a stacked weakness', () => {
     expect(before.stacked.find((s) => s.type === 'Ground')?.coveredBy).toEqual([]);
     const after = analyze([incineroar, kingambit, archaludon, pick.slot]);
     expect(after.stacked.find((s) => s.type === 'Ground')?.coveredBy).toEqual([3]);
+  });
+});
+
+describe('top-cut bonus', () => {
+  const withTopCut = (pokemon: { species: string; teams: number; share: number }[]) => ({
+    ...meta,
+    tournaments: {
+      source: {
+        name: 'Limitless (test)',
+        url: 'https://play.limitlesstcg.com/tournaments/completed',
+        retrievedAt: '2026-11-09T00:00:00.000Z',
+      },
+      from: '2026-10-12',
+      to: '2026-11-09',
+      minPlayers: 32,
+      topPlacings: 8,
+      events: [{ id: 'a', name: 'Test', date: '2026-11-01T12:00:00.000Z', players: 64 }],
+      teams: 10,
+      pokemon,
+    },
+  });
+
+  it('adds points scaled by the top-cut share against the most common species', () => {
+    const plain = analyze([incineroar, kingambit, archaludon]).suggestions;
+    const [target, other] = plain;
+    if (!target || !other) throw new Error('not enough suggestions');
+    const id = target.species.id;
+    const a = analyzeTeam(
+      [incineroar, kingambit, archaludon],
+      ctx,
+      index,
+      rules,
+      withTopCut([
+        { species: id, teams: 5, share: 0.5 },
+        { species: other.species.id, teams: 10, share: 1 },
+      ]),
+      OPTIONS,
+    );
+    const s = a.suggestions.find((x) => x.species.id === id);
+    const part = s?.parts.find((p) => p.criterion === 'topCut');
+    const weight = rules.profiles.find((p) => p.id === 'doubles')?.weights.topCut ?? 0;
+    expect(part).toEqual({
+      criterion: 'topCut',
+      points: Math.round(0.5 * weight * 100) / 100,
+      share: 0.5,
+      teams: 10,
+      events: 1,
+    });
+  });
+
+  it('sums the Megas into the base species', () => {
+    const shares = topCutByBase(
+      withTopCut([
+        { species: 'charizard', teams: 2, share: 0.2 },
+        { species: 'charizardmegay', teams: 1, share: 0.1 },
+      ]),
+      index,
+    );
+    expect(shares.get('charizard')).toBeCloseTo(0.3, 5);
+    expect(shares.has('charizardmegay')).toBe(false);
+  });
+
+  it('has no top-cut part without tournament data', () => {
+    const a = analyzeTeam(
+      [incineroar, kingambit, archaludon],
+      ctx,
+      index,
+      rules,
+      {
+        ...meta,
+        tournaments: null,
+      },
+      OPTIONS,
+    );
+    for (const s of a.suggestions) {
+      expect(s.parts.some((p) => p.criterion === 'topCut')).toBe(false);
+    }
   });
 });

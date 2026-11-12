@@ -70,3 +70,14 @@ export function usageByBase(
   }
   return out;
 }
+
+/** Top-cut share per base species (Megas summed into the base), or empty without data. */
+export function topCutByBase(meta: MetaSnapshot, index: DexIndex): Map<string, number> {
+  const out = new Map<string, number>();
+  for (const entry of meta.tournaments?.pokemon ?? []) {
+    if (!index.species.has(entry.species)) continue;
+    const base = baseSpeciesId(index, entry.species);
+    out.set(base, Math.min(1, (out.get(base) ?? 0) + entry.share));
+  }
+  return out;
+}

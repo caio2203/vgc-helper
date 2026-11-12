@@ -2,7 +2,7 @@ import type { AnalysisProfile, AnalysisRules, MetaSnapshot, Species } from '@vgc
 import type { TeamSlot } from '@vgc-helper/shared';
 import type { DexIndex, RulesContext } from '../context.js';
 import { emptySlot } from '../paste.js';
-import { commonSet, type MetaSet, usageByBase } from './meta.js';
+import { commonSet, type MetaSet, topCutByBase, usageByBase } from './meta.js';
 import type { ResolvedSlot } from './resolve.js';
 import { findRoles } from './roles.js';
 import { defensiveMultiplier, type TypeAnalysis } from './types.js';
@@ -12,6 +12,8 @@ export type ScorePart =
   | { criterion: 'fillsRole'; points: number; groups: string[] }
   | { criterion: 'usage'; points: number; usage: number }
   | { criterion: 'teammates'; points: number; partners: { species: string; share: number }[] }
+  /** `share` of the `teams` top-cut teams in `events` recent tournaments. */
+  | { criterion: 'topCut'; points: number; share: number; teams: number; events: number }
   | { criterion: 'addsWeakness'; points: number; types: string[] };
 
 export interface Suggestion {
@@ -56,6 +58,8 @@ export function suggest(
   const w = profile.weights;
   const groups = usageByBase(meta, index);
   const top = Math.max(0, ...[...groups.values()].map((g) => g.usage));
+  const topCut = topCutByBase(meta, index);
+  const topCutMax = Math.max(0, ...topCut.values());
   const teamNums = new Set(team.map((s) => s.species.num));
   const teamItems = new Set(team.flatMap((s) => (s.item ? [s.item] : [])));
   const teamIds = new Set(team.flatMap((s) => [s.species.id, s.battle.id]));
@@ -115,6 +119,15 @@ export function suggest(
         criterion: 'teammates',
         points: round(partnerScale * w.teammates),
         partners: partners.map((p) => ({ species: p.id, share: p.share })),
+      });
+    const cutShare = topCut.get(baseId) ?? 0;
+    if (cutShare > 0 && topCutMax > 0 && meta.tournaments)
+      parts.push({
+        criterion: 'topCut',
+        points: round((cutShare / topCutMax) * w.topCut),
+        share: cutShare,
+        teams: meta.tournaments.teams,
+        events: meta.tournaments.events.length,
       });
     if (added.length > 0)
       parts.push({
