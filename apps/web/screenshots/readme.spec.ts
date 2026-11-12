@@ -146,6 +146,10 @@ async function shoot(
   await page.goto('/settings');
   await page.getByRole('heading', { level: 1 }).waitFor();
   await page.screenshot({ path: path('settings'), fullPage: device === 'desktop' });
+
+  await page.goto('/admin');
+  await expect(page.getByText(/tournaments with|torneios com/).first()).toBeVisible();
+  await page.screenshot({ path: path('admin'), fullPage: device === 'desktop' });
   await signedIn.close();
 }
 

@@ -45,9 +45,9 @@ The builder next to the full analysis column, and the damage calculator:
 </p>
 
 `docs/images` has every screen (builder, analysis, damage calculator, My teams, settings,
-sign-in) on desktop and phone, in light and dark, in English and Portuguese. They are generated
+Admin, sign-in) on desktop and phone, in light and dark, in English and Portuguese. They are generated
 from a throwaway local instance with demo data by `pnpm --filter @vgc-helper/web screenshots`,
-which also records the GIF; the icons and the social preview come from
+which also records the GIF in both languages; the icons and the social preview come from
 `pnpm --filter @vgc-helper/web brand`.
 
 ## Why I built this

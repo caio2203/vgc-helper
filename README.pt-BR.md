@@ -19,7 +19,7 @@ faltando e o que o meta atual está usando. VGC (Doubles) primeiro, Singles depo
 
 Adicionar um Pokémon, ver o alerta, aceitar uma sugestão (gravado com a interface em inglês):
 
-<img alt="Adicionar o Archaludon deixa três membros fracos a Ground; a análise avisa e sugere Pokémon que resistem a Ground; depois de adicionar a primeira sugestão o alerta diz que ela cobre a fraqueza" src="docs/images/demo.gif" width="720">
+<img alt="Adicionar o Archaludon deixa três membros fracos a Ground; a análise avisa e sugere Pokémon que resistem a Ground; depois de adicionar a primeira sugestão o alerta diz que ela cobre a fraqueza" src="docs/images/demo.pt-BR.gif" width="720">
 
 O montador ao lado da coluna de análise completa, e a calculadora de dano:
 
@@ -46,9 +46,9 @@ O montador ao lado da coluna de análise completa, e a calculadora de dano:
 </p>
 
 A pasta `docs/images` tem todas as telas (montador, análise, calculadora de dano, Meus times,
-configurações, login) no computador e no celular, no tema claro e no escuro, em inglês e em
+configurações, Admin, login) no computador e no celular, no tema claro e no escuro, em inglês e em
 português. Elas são geradas a partir de uma instância local descartável, com dados de
-demonstração, por `pnpm --filter @vgc-helper/web screenshots`, que também grava o GIF; os ícones
+demonstração, por `pnpm --filter @vgc-helper/web screenshots`, que também grava o GIF nas duas línguas; os ícones
 e a imagem de prévia social vêm de `pnpm --filter @vgc-helper/web brand`.
 
 ## Por que eu fiz isso
