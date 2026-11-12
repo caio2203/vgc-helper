@@ -76,4 +76,21 @@ describe('Showdown paste', () => {
       moves: ['fakeout'],
     });
   });
+
+  it('reads a team list with one Pokémon per line and no blank lines', () => {
+    const { slots, problems } = parsePaste(
+      ['Charizard @ Charizardite Y', '- Heat Wave', 'Gholdengo', 'Archaludon', 'Indeedee-F'].join(
+        '\n',
+      ),
+      index,
+    );
+    expect(slots.map((s) => s.species)).toEqual([
+      'charizard',
+      'gholdengo',
+      'archaludon',
+      'indeedeef',
+    ]);
+    expect(slots[0]).toMatchObject({ moves: ['heatwave'], mega: true });
+    expect(problems).toEqual([]);
+  });
 });

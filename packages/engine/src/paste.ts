@@ -124,7 +124,13 @@ export function parsePaste(text: string, index: DexIndex): ParsedPaste {
     ) {
       // Not part of a team in these formats.
     } else {
-      problems.push({ line: i + 1, text: raw });
+      // A known Pokémon without a blank line before it starts the next set, so a team list
+      // with one name per line reads as a team.
+      const header = parseHeader(line, index);
+      if (index.species.has(header.species)) {
+        current = { ...emptySlot(header.species), item: header.item, mega: header.mega };
+        slots.push(current);
+      } else problems.push({ line: i + 1, text: raw });
     }
   });
 

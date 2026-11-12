@@ -211,7 +211,10 @@ export interface Threat {
   answeredBy: number[];
 }
 
-function slotSet(s: ResolvedSlot, slots: { spread: StatsTable; nature: string | null }[]): CalcSet {
+export function slotSet(
+  s: ResolvedSlot,
+  slots: { spread: StatsTable; nature: string | null }[],
+): CalcSet {
   const source = slots[s.slot];
   return {
     species: s.battle,
@@ -271,7 +274,8 @@ export function analyzeThreats(
   );
 }
 
-function calcStatsFor(set: CalcSet, ctx: RulesContext, index: DexIndex): StatsTable {
+/** Battle stats of a calc set at the format level. */
+export function calcStatsFor(set: CalcSet, ctx: RulesContext, index: DexIndex): StatsTable {
   const gen = generationFor(ctx);
   return toCalcPokemon(gen, set, ctx, index, {}).stats;
 }
