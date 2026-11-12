@@ -35,6 +35,8 @@ test('a pasted team is checked against the regulation and Ctrl+Z undoes it', asy
   ).toBeVisible();
   await expectNoA11yViolations(page);
 
+  // Inside a text field Ctrl+Z undoes the typing, not the team: press it outside one.
+  await page.evaluate(() => (document.activeElement as HTMLElement | null)?.blur());
   await page.keyboard.press('Control+z');
   if (info.project.name === 'mobile') {
     await page.getByRole('button', { name: 'Team', exact: true }).click();

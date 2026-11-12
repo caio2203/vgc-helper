@@ -4,6 +4,9 @@ import { E2E_ORIGIN, testInstance } from './e2e/instance';
 export default defineConfig({
   testDir: './e2e',
   fullyParallel: false,
+  // Every test signs in as the same owner on one in-memory database, and some change account
+  // state (language, read updates): in parallel they would see each other's changes.
+  workers: 1,
   forbidOnly: Boolean(process.env.CI),
   retries: process.env.CI ? 1 : 0,
   reporter: process.env.CI ? [['github'], ['html', { open: 'never' }]] : 'list',
