@@ -21,7 +21,8 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@vgc-helper/data": "workspace:*"
+    "@vgc-helper/data": "workspace:*",
+    "@vgc-helper/shared": "workspace:*"
   },
   "devDependencies": {
     "vitest": "^5.1.0"
