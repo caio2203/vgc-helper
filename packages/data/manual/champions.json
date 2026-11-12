@@ -100,10 +100,10 @@
       "level": 50,
       "analysisProfile": "singles",
       "viability": {
-        "defaultCutoff": 0.04,
+        "defaultCutoff": 0.03,
         "minBattles": 10000,
         "ratingCutoff": 1630,
-        "note": "Same cutoff as Doubles for now. To be calibrated in Phase 7 (Singles)."
+        "note": "Calibrated in Phase 7 from the October 2026 Reg M-C Singles ladder at 1630+: usage is spread over 178 species, so 4% keeps only 38 (76% of team slots); 3% keeps 48 species and 82% of slots, a pool close to the Doubles one."
       },
       "sources": [
         {

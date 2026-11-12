@@ -483,6 +483,65 @@
             "items": []
           },
           "sets": null
+        },
+        {
+          "id": "winCondition",
+          "group": "winCondition",
+          "rule": {
+            "kind": "list",
+            "moves": [
+              "swordsdance",
+              "nastyplot",
+              "dragondance",
+              "calmmind",
+              "quiverdance",
+              "shellsmash",
+              "bulkup",
+              "coil",
+              "agility",
+              "rockpolish",
+              "tailglow",
+              "geomancy",
+              "victorydance",
+              "shiftgear",
+              "filletaway",
+              "clangoroussoul",
+              "bellydrum",
+              "tidyup"
+            ],
+            "abilities": ["speedboost", "moxie", "beastboost"],
+            "items": []
+          },
+          "sets": null
+        },
+        {
+          "id": "wallbreaker",
+          "group": "wallbreaker",
+          "rule": { "kind": "baseStat", "anyOf": [["atk"], ["spa"]], "min": 120 },
+          "sets": null
+        },
+        {
+          "id": "reliableRecovery",
+          "group": "wall",
+          "rule": {
+            "kind": "list",
+            "moves": [
+              "recover",
+              "roost",
+              "slackoff",
+              "softboiled",
+              "milkdrink",
+              "moonlight",
+              "morningsun",
+              "synthesis",
+              "shoreup",
+              "strengthsap",
+              "wish"
+            ],
+            "abilities": [],
+            "items": []
+          },
+          "sets": null
         }
       ],
       "archetypes": [
@@ -499,7 +558,8 @@
           },
           "minSetters": 1,
           "minAbusers": 2,
-          "detectWithoutSetter": false
+          "detectWithoutSetter": false,
+          "profiles": ["doubles"]
         },
         {
           "id": "trickRoom",
@@ -514,7 +574,8 @@
           },
           "minSetters": 2,
           "minAbusers": 2,
-          "detectWithoutSetter": true
+          "detectWithoutSetter": true,
+          "profiles": ["doubles"]
         },
         {
           "id": "sun",
@@ -629,7 +690,15 @@
         },
         {
           "id": "singles",
-          "checklist": ["hazards", "hazardRemoval", "pivot", "priority", "speedControl"],
+          "checklist": [
+            "hazards",
+            "hazardRemoval",
+            "pivot",
+            "winCondition",
+            "wallbreaker",
+            "wall",
+            "priority"
+          ],
           "weights": {
             "coversWeakness": 3,
             "fillsRole": 2,
