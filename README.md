@@ -9,10 +9,11 @@ missing and what the current meta is running. VGC (Doubles) first, Singles next.
 [![License: Apache 2.0](https://img.shields.io/github/license/caio2203/vgc-helper)](LICENSE)
 [![Release](https://img.shields.io/github/v/release/caio2203/vgc-helper?include_prereleases)](https://github.com/caio2203/vgc-helper/releases)
 
-> **Status: early development.** Phases 2 and 3 are done: the team builder checks legality as
-> you edit, and the analysis column shows the type matrix, stacked weaknesses, the role
-> checklist, speed tiers and meta threats from damage calcs, with suggestions that explain
-> their score. Next: data updates with readable diffs — see the [roadmap](#roadmap).
+> **Status: early development.** Phases 2 to 4 are done: the team builder checks legality as
+> you edit, the analysis column shows the type matrix, stacked weaknesses, the role checklist,
+> speed tiers and meta threats from damage calcs, with suggestions that explain their score,
+> and every data update comes with a readable diff, a What's new page and a check of your saved
+> teams. Next: team preview — see the [roadmap](#roadmap).
 
 ## Screenshots
 
@@ -99,6 +100,14 @@ Available now:
 - Damage calculator with Champions mechanics (Stat Points, level 50), using the same calc and
   data as the analysis.
 - Every number carries its source and date.
+- Data updates you can read: each snapshot lists what changed (new regulations and dates,
+  Pokémon, Megas, moves and items that became legal or not, bans, balance changes such as
+  power or PP, learnsets, usage moves with their month and sample) on a What's new page, with
+  a count in the header until you open it.
+- Saved teams are checked again when the data changes: My teams shows which teams have
+  illegal slots, a regulation that ended (and how they fare in the one in force), and the
+  changes that touch their Pokémon and moves. The builder lists the same changes when you open
+  such a team, and announces the end of the regulation 30 days ahead.
 
 Planned (see the roadmap):
 
@@ -145,10 +154,18 @@ flowchart LR
   A[Scheduled GitHub Action] --> B[pnpm snapshot:build]
   B --> C{Data changed?}
   C -- no --> D[Nothing to do]
-  C -- yes --> E[Pull request with the new snapshot]
+  C -- yes --> H{Sanity checks pass?}
+  H -- no --> I[Run fails, old snapshot kept]
+  H -- yes --> E[Pull request with the new snapshot<br/>and the change report]
   E --> F[Owner reviews and merges]
-  F --> G[Vercel deploys]
+  F --> G[Vercel deploys: What's new<br/>and team checks update]
 ```
+
+The builder compares the new snapshot with the committed one and writes the differences to
+`packages/data/snapshots/changelog.json`; the pull request body is the same report in plain
+English. If a legal Pokémon or move list changes by more than 30%, which usually means a source
+broke, nothing is written and the run fails until the owner reruns it with
+**accept large changes**.
 
 ## Stack
 
@@ -270,7 +287,7 @@ The [NOTICE](NOTICE) file lists the credits that must travel with every copy.
 - [x] **Phase 1** — foundation: monorepo, CI, sign-in, database, i18n, first data snapshot, first deploy
 - [x] **Phase 2** — design system, team builder, legality, paste import/export, search, shortcuts
 - [x] **Phase 3** — analysis engine, suggestions, experience levels, feedback, damage calculator
-- [ ] **Phase 4** — data pipeline with readable diffs, "What's new" page, team revalidation
+- [x] **Phase 4** — data pipeline with readable diffs, "What's new" page, team revalidation
 - [ ] **Phase 5** — team preview: which 4 to bring against an open team list
 - [ ] **Phase 6** — on-demand AI explanations and chat (Gemini)
 - [ ] **Phase 7** — Singles analysis profile

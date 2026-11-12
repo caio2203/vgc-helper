@@ -84,4 +84,14 @@ pnpm hash-password     # ADMIN_PASSWORD_HASH for AUTH_MODE=local-password
   Portuguese (`screenshots/demo.spec.ts`), top-cut data from the Limitless API as a score bonus
   (`scripts/src/snapshot/limitless.ts`, config per regulation format in `manual/champions.json`)
   and the Admin page (`/admin`: data status, pipeline warnings saved in the manifest, feedback).
-- Next: Phase 4 — data pipeline with readable diffs, "What's new" page, team revalidation.
+- Phase 4 is done: the builder diffs the new snapshot against the committed one
+  (`scripts/src/snapshot/diff.ts`), refuses a legal species or move list that changes by more
+  than 30% unless run with `--accept-large-changes`, and appends structured changes to
+  `snapshots/changelog.json` (schema in `src/schemas/changelog.ts`, served at
+  `/api/snapshots/changelog`). `--report <file>` writes the English Markdown report
+  (`report.ts`) that `Update data` uses as the PR body. The web renders changes from i18n
+  templates (`src/changes/describe.ts`) on `/whats-new`; the read state is the
+  `whatsNewSeenVersion` setting. `@vgc-helper/engine` `revalidateTeam` checks saved teams
+  (legality in their regulation and in the one in force, plus the history changes that touch
+  them) on My teams and in the builder. The e2e tests stub the changelog with `page.route`.
+- Next: Phase 5 — team preview: which 4 to bring and 2 to lead against an Open Team List.

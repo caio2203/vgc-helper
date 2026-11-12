@@ -9,11 +9,12 @@ faltando e o que o meta atual está usando. VGC (Doubles) primeiro, Singles depo
 [![Licença: Apache 2.0](https://img.shields.io/github/license/caio2203/vgc-helper)](LICENSE)
 [![Versão](https://img.shields.io/github/v/release/caio2203/vgc-helper?include_prereleases)](https://github.com/caio2203/vgc-helper/releases)
 
-> **Status: início do desenvolvimento.** As Fases 2 e 3 estão prontas: o montador checa a
-> legalidade enquanto você edita, e a coluna de análise mostra a matriz de tipos, as fraquezas
+> **Status: início do desenvolvimento.** As Fases 2 a 4 estão prontas: o montador checa a
+> legalidade enquanto você edita, a coluna de análise mostra a matriz de tipos, as fraquezas
 > acumuladas, o checklist de papéis, os speed tiers e as ameaças do meta com cálculo de dano,
-> com sugestões que explicam a pontuação. Próximo passo: atualização dos dados com diffs
-> legíveis — veja o [roadmap](#roadmap).
+> com sugestões que explicam a pontuação, e cada atualização dos dados vem com um diff legível,
+> uma página de Novidades e uma checagem dos times salvos. Próximo passo: team preview — veja o
+> [roadmap](#roadmap).
 
 ## Screenshots
 
@@ -103,6 +104,14 @@ Já disponível:
 - Calculadora de dano com a mecânica do Champions (Stat Points, nível 50), usando o mesmo
   cálculo e os mesmos dados da análise.
 - Todo número traz a fonte e a data.
+- Atualizações de dados que dá para ler: cada snapshot lista o que mudou (regulamentos novos e
+  datas, Pokémon, Megas, golpes e itens que passaram a ser legais ou deixaram de ser, banimentos,
+  mudanças de balanceamento como poder ou PP, learnsets, variação de uso com o mês e a amostra)
+  numa página de Novidades, com um contador no cabeçalho até você abrir.
+- Os times salvos são checados de novo quando os dados mudam: Meus times mostra quais times têm
+  slots ilegais, um regulamento que terminou (e como eles ficam no que está em vigor) e as
+  mudanças que afetam os Pokémon e golpes deles. O montador lista as mesmas mudanças quando você
+  abre um desses times e avisa do fim do regulamento com 30 dias de antecedência.
 
 Planejado (veja o roadmap):
 
@@ -149,10 +158,18 @@ flowchart LR
   A[GitHub Action agendada] --> B[pnpm snapshot:build]
   B --> C{Os dados mudaram?}
   C -- não --> D[Nada a fazer]
-  C -- sim --> E[Pull request com o snapshot novo]
+  C -- sim --> H{As checagens de sanidade passam?}
+  H -- não --> I[A execução falha e o snapshot antigo fica]
+  H -- sim --> E[Pull request com o snapshot novo<br/>e o relatório de mudanças]
   E --> F[O dono revisa e dá merge]
-  F --> G[A Vercel publica]
+  F --> G[A Vercel publica: Novidades<br/>e checagem dos times atualizam]
 ```
+
+O builder compara o snapshot novo com o que está no repositório e grava as diferenças em
+`packages/data/snapshots/changelog.json`; o corpo do pull request é o mesmo relatório, em
+inglês. Se uma lista de Pokémon ou golpes legais muda mais de 30%, o que em geral quer dizer que
+uma fonte quebrou, nada é gravado e a execução falha até o dono rodar de novo com
+**accept large changes**.
 
 ## Stack
 
@@ -274,7 +291,7 @@ O arquivo [NOTICE](NOTICE) lista os créditos que precisam acompanhar qualquer c
 - [x] **Fase 1** — base: monorepo, CI, login, banco, i18n, primeiro snapshot de dados, primeiro deploy
 - [x] **Fase 2** — design system, montador de times, legalidade, import/export de paste, busca, atalhos
 - [x] **Fase 3** — motor de análise, sugestões, níveis de experiência, feedback, calculadora de dano
-- [ ] **Fase 4** — pipeline de dados com diff legível, página "Novidades", revalidação de times
+- [x] **Fase 4** — pipeline de dados com diff legível, página "Novidades", revalidação de times
 - [ ] **Fase 5** — team preview: quais 4 levar contra uma Open Team List
 - [ ] **Fase 6** — explicações e chat com IA sob demanda (Gemini)
 - [ ] **Fase 7** — perfil de análise de Singles
