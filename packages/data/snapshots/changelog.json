@@ -2,6 +2,51 @@
   "schemaVersion": 1,
   "entries": [
     {
+      "version": "2026-11-12.9192b72ce1",
+      "previousVersion": "2026-11-12.b41ea314d2",
+      "generatedAt": "2026-11-12T22:57:52.051Z",
+      "changes": [
+        {
+          "kind": "setting",
+          "scope": "format",
+          "id": "sv-ou",
+          "path": "viability.defaultCutoff",
+          "from": 0.04,
+          "to": 0.03
+        }
+      ],
+      "warnings": ["G/sv-vgc: only 1864 battles in 2026-10"]
+    },
+    {
+      "version": "2026-11-12.b41ea314d2",
+      "previousVersion": "2026-11-12.7e323310fe",
+      "generatedAt": "2026-11-12T22:57:08.472Z",
+      "changes": [
+        {
+          "kind": "analysisRules",
+          "id": "champions-analysis",
+          "sections": ["gameIds"]
+        },
+        {
+          "kind": "regulationAdded",
+          "gameId": "sv",
+          "regulationId": "G",
+          "name": "Regulation Set G",
+          "startsAt": "2025-01-06T00:00:00.000Z",
+          "endsAt": "2025-04-30T23:59:00.000Z"
+        },
+        {
+          "kind": "regulationAdded",
+          "gameId": "sv",
+          "regulationId": "OU",
+          "name": "Smogon OU",
+          "startsAt": "2022-11-18T00:00:00.000Z",
+          "endsAt": null
+        }
+      ],
+      "warnings": ["G/sv-vgc: only 1864 battles in 2026-10"]
+    },
+    {
       "version": "2026-11-12.7e323310fe",
       "previousVersion": "2026-11-12.a2f39e0d8e",
       "generatedAt": "2026-11-12T22:47:46.579Z",

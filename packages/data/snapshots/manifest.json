@@ -1,9 +1,10 @@
 {
   "schemaVersion": 1,
-  "version": "2026-11-12.7e323310fe",
-  "generatedAt": "2026-11-12T22:47:46.579Z",
+  "version": "2026-11-12.9192b72ce1",
+  "generatedAt": "2026-11-12T22:57:52.051Z",
   "games": [
-    { "id": "champions", "name": "Pokémon Champions", "mechanicsProfileId": "champions-2026" }
+    { "id": "champions", "name": "Pokémon Champions", "mechanicsProfileId": "champions-2026" },
+    { "id": "sv", "name": "Pokémon Scarlet & Violet", "mechanicsProfileId": "sv" }
   ],
   "mechanicsProfiles": [
     {
@@ -11,7 +12,11 @@
       "name": "Pokémon Champions (2026)",
       "statSystem": { "kind": "statPoints", "total": 66, "maxPerStat": 32, "fixedIv": 31 },
       "nature": { "plusPercent": 110, "minusPercent": 90 },
-      "gimmick": { "kind": "mega", "perBattle": 1 },
+      "gimmick": {
+        "kind": "mega",
+        "perBattle": 1,
+        "teraTypes": []
+      },
       "pp": { "maxBasePp": 20, "formula": "champions" },
       "statusRules": {
         "paralysisFullParaChance": 0.125,
@@ -56,6 +61,42 @@
           "name": "The Pokémon Company: Regulation Set M-C announcement (one Mega Evolution per battle)",
           "url": "https://asia-press.portal-pokemon.com/press-release/pokemon-champions_20260830/",
           "retrievedAt": "2026-11-11T20:00:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "sv",
+      "name": "Pokémon Scarlet & Violet",
+      "statSystem": { "kind": "evIv", "evTotal": 510, "evMaxPerStat": 252, "ivMax": 31 },
+      "nature": { "plusPercent": 110, "minusPercent": 90 },
+      "gimmick": {
+        "kind": "tera",
+        "perBattle": 1,
+        "teraTypes": ["Bug", "Dark", "Dragon", "Electric", "Fairy", "Fighting", "Fire", "Flying", "Ghost", "Grass", "Ground", "Ice", "Normal", "Poison", "Psychic", "Rock", "Steel", "Water", "Stellar"]
+      },
+      "pp": { "maxBasePp": null, "formula": "standard" },
+      "statusRules": {
+        "paralysisFullParaChance": 0.25,
+        "sleepTurns": { "min": 1, "max": 3 },
+        "freezeMaxTurns": null,
+        "freezeThawChance": 0.2
+      },
+      "moveRestrictions": [],
+      "sources": [
+        {
+          "name": "Pokémon Showdown: data/conditions.ts (paralysis 1 in 4, sleep 1 to 3 turns, freeze thaws 1 in 5)",
+          "url": "https://github.com/smogon/pokemon-showdown/blob/master/data/conditions.ts",
+          "retrievedAt": "2026-11-12T12:00:00.000Z"
+        },
+        {
+          "name": "Pokémon Showdown: sim/team-validator.ts (510 EVs, 252 per stat, IVs up to 31)",
+          "url": "https://github.com/smogon/pokemon-showdown/blob/master/sim/team-validator.ts",
+          "retrievedAt": "2026-11-12T12:00:00.000Z"
+        },
+        {
+          "name": "Pokémon Showdown: data/typechart.ts (the 18 types and Stellar as Tera Types)",
+          "url": "https://github.com/smogon/pokemon-showdown/blob/master/data/typechart.ts",
+          "retrievedAt": "2026-11-12T12:00:00.000Z"
         }
       ]
     }
@@ -111,6 +152,52 @@
           "retrievedAt": "2026-11-11T20:00:00.000Z"
         }
       ]
+    },
+    {
+      "id": "sv-vgc",
+      "gameId": "sv",
+      "name": "VGC Doubles",
+      "gameType": "doubles",
+      "teamSize": { "min": 4, "max": 6 },
+      "pickCount": 4,
+      "level": 50,
+      "analysisProfile": "doubles",
+      "viability": {
+        "defaultCutoff": 0.04,
+        "minBattles": 10000,
+        "ratingCutoff": 1630,
+        "note": "Calibrated from the October 2026 Reg G ladder at 1630+: 4% keeps 32 of 120 species and 86% of team slots, like the Champions VGC pool. Only 1864 battles that month, flagged as a small sample."
+      },
+      "sources": [
+        {
+          "name": "Pokémon Showdown: config/formats.ts, [Gen 9] VGC 2024 Reg G (Flat Rules: bring 6, pick 4, level 50)",
+          "url": "https://github.com/smogon/pokemon-showdown/blob/master/config/formats.ts",
+          "retrievedAt": "2026-11-12T12:00:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "sv-ou",
+      "gameId": "sv",
+      "name": "Smogon OU",
+      "gameType": "singles",
+      "teamSize": { "min": 1, "max": 6 },
+      "pickCount": 6,
+      "level": 100,
+      "analysisProfile": "singles",
+      "viability": {
+        "defaultCutoff": 0.03,
+        "minBattles": 10000,
+        "ratingCutoff": 1695,
+        "note": "Calibrated from the October 2026 OU ladder at 1695+: 3% keeps 51 of 173 species and 84% of team slots; 4% would keep 42 and 79%."
+      },
+      "sources": [
+        {
+          "name": "Pokémon Showdown: config/formats.ts, [Gen 9] OU (6 against 6, level 100)",
+          "url": "https://github.com/smogon/pokemon-showdown/blob/master/config/formats.ts",
+          "retrievedAt": "2026-11-12T12:00:00.000Z"
+        }
+      ]
     }
   ],
   "regulations": [
@@ -152,11 +239,13 @@
       ],
       "clauses": ["species", "item", "nickname"],
       "bannedTags": ["Mythical", "Restricted Legendary"],
+      "bannedTiers": [],
       "bannedSpecies": [],
       "bannedItems": [],
       "bannedMoves": [],
       "bannedAbilities": [],
       "restrictedLimit": null,
+      "restrictedTags": [],
       "sources": [
         {
           "name": "The Pokémon Company: Regulation Set M-C announcement (dates, added Pokémon and Megas)",
@@ -183,12 +272,105 @@
           "champions-singles": "champions/M-C/meta/champions-singles.json"
         }
       }
+    },
+    {
+      "id": "G",
+      "gameId": "sv",
+      "name": "Regulation Set G",
+      "startsAt": "2025-01-06T00:00:00.000Z",
+      "endsAt": "2025-04-30T23:59:00.000Z",
+      "dexMod": "gen9",
+      "formats": [
+        {
+          "formatId": "sv-vgc",
+          "showdownFormatId": "gen9vgc2024regg",
+          "smogonStatsId": "gen9vgc2024regg",
+          "tournaments": null,
+          "timer": null
+        }
+      ],
+      "clauses": ["species", "item", "nickname"],
+      "bannedTags": ["Mythical"],
+      "bannedTiers": [],
+      "bannedSpecies": ["greninjabond"],
+      "bannedItems": [],
+      "bannedMoves": [],
+      "bannedAbilities": [],
+      "restrictedLimit": 1,
+      "restrictedTags": ["Restricted Legendary"],
+      "sources": [
+        {
+          "name": "The Pokémon Company: Regulation Set G for Ranked Battles, 6 January to 30 April 2025 (UTC)",
+          "url": "https://sv-news.pokemon.co.jp/en/page/295.html",
+          "retrievedAt": "2026-11-12T12:00:00.000Z",
+          "note": "The last official run of Regulation Set G. The Showdown ladder still uses it, and it is the only Scarlet/Violet VGC format with Smogon usage stats in October 2026."
+        },
+        {
+          "name": "Pokémon Showdown: config/formats.ts and data/rulesets.ts ([Gen 9] VGC 2024 Reg G: Flat Rules, Limit One Restricted, Min Source Gen 9)",
+          "url": "https://github.com/smogon/pokemon-showdown/blob/master/config/formats.ts",
+          "retrievedAt": "2026-11-12T12:00:00.000Z"
+        }
+      ],
+      "verifiedAt": "2026-11-12T12:00:00.000Z",
+      "files": {
+        "dex": "sv/G/dex.json",
+        "meta": { "sv-vgc": "sv/G/meta/sv-vgc.json" }
+      }
+    },
+    {
+      "id": "OU",
+      "gameId": "sv",
+      "name": "Smogon OU",
+      "startsAt": "2022-11-18T00:00:00.000Z",
+      "endsAt": null,
+      "dexMod": "gen9",
+      "formats": [
+        {
+          "formatId": "sv-ou",
+          "showdownFormatId": "gen9ou",
+          "smogonStatsId": "gen9ou",
+          "tournaments": null,
+          "timer": null
+        }
+      ],
+      "clauses": ["species", "nickname"],
+      "bannedTags": [],
+      "bannedTiers": ["Uber", "AG"],
+      "bannedSpecies": [],
+      "bannedItems": ["kingsrock", "razorfang", "brightpowder", "laxincense"],
+      "bannedMoves": ["batonpass", "lastrespects", "shedtail", "terablast", "fissure", "guillotine", "horndrill", "sheercold", "acupressure", "minimize", "doubleteam", "darkvoid", "grasswhistle", "hypnosis", "lovelykiss", "sing", "sleeppowder", "spore", "yawn"],
+      "bannedAbilities": ["arenatrap", "moody", "shadowtag", "sandveil", "snowcloak"],
+      "restrictedLimit": null,
+      "restrictedTags": [],
+      "sources": [
+        {
+          "name": "Pokémon Showdown: config/formats.ts, [Gen 9] OU banlist (Uber, AG, Arena Trap, Moody, Shadow Tag, King's Rock, Razor Fang, Baton Pass, Last Respects, Shed Tail, Tera Blast)",
+          "url": "https://github.com/smogon/pokemon-showdown/blob/master/config/formats.ts",
+          "retrievedAt": "2026-11-12T12:00:00.000Z",
+          "note": "Smogon tiers have no end date; suspect tests change them. The tiers come from the Showdown data (via @pkmn/dex, checked against Showdown master on this date)."
+        },
+        {
+          "name": "Pokémon Showdown: data/rulesets.ts (Standard: OHKO, Evasion Items and Evasion Moves Clauses; Evasion Abilities and Sleep Moves Clauses)",
+          "url": "https://github.com/smogon/pokemon-showdown/blob/master/data/rulesets.ts",
+          "retrievedAt": "2026-11-12T12:00:00.000Z"
+        },
+        {
+          "name": "Bulbapedia: Pokémon Scarlet and Violet (released 18 November 2022, when Gen 9 OU began)",
+          "url": "https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_Scarlet_and_Violet",
+          "retrievedAt": "2026-11-12T12:00:00.000Z"
+        }
+      ],
+      "verifiedAt": "2026-11-12T12:00:00.000Z",
+      "files": {
+        "dex": "sv/OU/dex.json",
+        "meta": { "sv-ou": "sv/OU/meta/sv-ou.json" }
+      }
     }
   ],
   "analysisRules": [
     {
       "id": "champions-analysis",
-      "gameIds": ["champions"],
+      "gameIds": ["champions", "sv"],
       "abilityMatchups": [
         { "ability": "levitate", "type": "Ground", "multiplier": 0 },
         { "ability": "eartheater", "type": "Ground", "multiplier": 0 },
@@ -737,5 +919,5 @@
     }
   ],
   "overridesApplied": [],
-  "warnings": []
+  "warnings": ["G/sv-vgc: only 1864 battles in 2026-10"]
 }

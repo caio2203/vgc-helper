@@ -7,7 +7,7 @@
   "source": {
     "name": "Smogon usage stats (gen9championsvgc2026regmc, 2026-10, rating 1630+)",
     "url": "https://www.smogon.com/stats/2026-10/chaos/gen9championsvgc2026regmc-1630.json",
-    "retrievedAt": "2026-11-12T22:47:46.579Z"
+    "retrievedAt": "2026-11-12T22:57:52.051Z"
   },
   "pokemon": [
     {
@@ -19401,7 +19401,7 @@
     "source": {
       "name": "Limitless (M-C, 40 tournaments with 32+ players, top 8, 2026-10-12 to 2026-11-09)",
       "url": "https://play.limitlesstcg.com/tournaments/completed?game=VGC&format=M-C",
-      "retrievedAt": "2026-11-12T22:47:46.579Z"
+      "retrievedAt": "2026-11-12T22:57:52.051Z"
     },
     "from": "2026-10-12",
     "to": "2026-11-09",
