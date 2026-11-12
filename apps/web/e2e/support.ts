@@ -1,6 +1,6 @@
 import AxeBuilder from '@axe-core/playwright';
-import { expect, type Page } from '@playwright/test';
-import { E2E_PASSWORD } from './instance';
+import { type APIRequestContext, expect, type Page } from '@playwright/test';
+import { E2E_ORIGIN, E2E_PASSWORD } from './instance';
 
 export async function expectNoA11yViolations(page: Page) {
   const results = await new AxeBuilder({ page })
@@ -77,4 +77,21 @@ export async function pickSpecies(page: Page, side: string | RegExp, query: stri
   const region = page.getByRole('region', { name: side });
   await region.getByLabel('Pokémon', { exact: true }).fill(query);
   await region.getByRole('option', { name: new RegExp(`^${name}`) }).click();
+}
+
+/** Calls the API as the signed-in user, with the Origin and CSRF headers writes need. */
+export async function api(
+  request: APIRequestContext,
+  method: 'PATCH' | 'POST',
+  path: string,
+  body: unknown,
+) {
+  const session = await (await request.get('/api/auth/session')).json();
+  const response = await request.fetch(path, {
+    method,
+    data: body,
+    headers: { Origin: E2E_ORIGIN, 'x-csrf-token': session.csrfToken },
+  });
+  expect(response.ok(), `${method} ${path}`).toBe(true);
+  return response.json();
 }

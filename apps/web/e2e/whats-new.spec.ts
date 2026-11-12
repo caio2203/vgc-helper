@@ -1,7 +1,7 @@
-import { type APIRequestContext, expect, type Page, test } from '@playwright/test';
+import { expect, type Page, test } from '@playwright/test';
 import type { Changelog } from '@vgc-helper/data';
-import { AUTH_STATE, E2E_ORIGIN } from './instance';
-import { expectNoA11yViolations } from './support';
+import { AUTH_STATE } from './instance';
+import { api, expectNoA11yViolations } from './support';
 
 test.use({ locale: 'en-US', storageState: AUTH_STATE });
 
@@ -60,22 +60,6 @@ function history(current: string): Changelog {
       },
     ],
   };
-}
-
-async function api(
-  request: APIRequestContext,
-  method: 'PATCH' | 'POST',
-  path: string,
-  body: unknown,
-) {
-  const session = await (await request.get('/api/auth/session')).json();
-  const response = await request.fetch(path, {
-    method,
-    data: body,
-    headers: { Origin: E2E_ORIGIN, 'x-csrf-token': session.csrfToken },
-  });
-  expect(response.ok(), `${method} ${path}`).toBe(true);
-  return response.json();
 }
 
 /** Serves the history above instead of the committed one, which has no update yet. */
@@ -139,7 +123,8 @@ test('saved teams are checked again when the data changes', async ({ page }) => 
 
   await page.goto('/teams');
   const row = page.getByRole('row').filter({ hasText: name }).first();
-  await expect(row).toContainText('1 problem · 2 changes since saved');
+  // The check waits for the dex of the team's regulation, which is large.
+  await expect(row).toContainText('1 problem · 2 changes since saved', { timeout: 15_000 });
   await page.getByText(`Details for ${name}`).click();
   const details = page.locator('details', { hasText: `Details for ${name}` });
   await expect(details).toContainText('Slot 1 (Incineroar): cannot learn Spore in this game.');
