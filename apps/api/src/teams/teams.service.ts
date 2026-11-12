@@ -174,7 +174,7 @@ export class TeamsService {
     const regulation = manifest.regulations.find(
       (r) => r.gameId === input.gameId && r.id === input.regulationId,
     );
-    if (!regulation || !regulation.formats.some((f) => f.formatId === input.formatId)) {
+    if (!regulation?.formats.some((f) => f.formatId === input.formatId)) {
       throw new BadRequestException('Unknown game, format or regulation');
     }
   }
