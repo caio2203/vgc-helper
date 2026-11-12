@@ -616,6 +616,15 @@
             "teammates": 2,
             "topCut": 2,
             "addsWeakness": 2
+          },
+          "preview": {
+            "offense": 1,
+            "defense": 1,
+            "speed": 0.5,
+            "bringRole": 0.25,
+            "leadRoles": ["fakeOut", "speedControl", "intimidate", "redirection"],
+            "leadRole": 0.5,
+            "alternatives": 3
           }
         },
         {
@@ -628,6 +637,15 @@
             "teammates": 1,
             "topCut": 0,
             "addsWeakness": 2
+          },
+          "preview": {
+            "offense": 1,
+            "defense": 1,
+            "speed": 0.5,
+            "bringRole": 0.25,
+            "leadRoles": ["hazards", "pivot"],
+            "leadRole": 0.5,
+            "alternatives": 3
           }
         }
       ],

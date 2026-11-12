@@ -34,6 +34,7 @@ import {
   overrideFileSchema,
 } from '@vgc-helper/data';
 import { readChangelog } from '@vgc-helper/data/node';
+import { z } from 'zod';
 import { stringify } from '../lib/json.js';
 import { buildDexSnapshot } from './dex.js';
 import { diffSnapshots, metaKey, regulationKey, type SnapshotSet, sanityProblems } from './diff.js';
@@ -133,15 +134,42 @@ async function writeChangelog(changelog: Changelog): Promise<void> {
   await writeFile(join(SNAPSHOT_DIR, 'changelog.json'), `${body}\n`);
 }
 
+/**
+ * The committed manifest. When a schema change made it invalid (a new required field), it is
+ * still used for the comparison and the history, as long as the parts the builder reads are there.
+ */
 async function previousManifest(): Promise<Manifest | null> {
+  let raw: unknown;
   try {
-    return manifestSchema.parse(
-      JSON.parse(await readFile(join(SNAPSHOT_DIR, 'manifest.json'), 'utf8')),
-    );
+    raw = JSON.parse(await readFile(join(SNAPSHOT_DIR, 'manifest.json'), 'utf8'));
   } catch {
     return null;
   }
+  const strict = manifestSchema.safeParse(raw);
+  if (strict.success) return strict.data;
+  const loose = previousManifestSchema.safeParse(raw);
+  if (!loose.success) return null;
+  console.warn('warning: the committed manifest predates the current schema; compared as-is');
+  return loose.data as unknown as Manifest;
 }
+
+/** What the builder needs from an older manifest; other fields pass through unchecked. */
+const previousManifestSchema = z.looseObject({
+  version: z.string().min(1),
+  generatedAt: z.iso.datetime(),
+  warnings: z.array(z.string()).default([]),
+  overridesApplied: z.array(z.string()).default([]),
+  mechanicsProfiles: z.array(z.looseObject({ id: z.string() })).default([]),
+  formats: z.array(z.looseObject({ id: z.string() })).default([]),
+  analysisRules: z.array(z.looseObject({ id: z.string() })).default([]),
+  regulations: z.array(
+    z.looseObject({
+      id: z.string(),
+      gameId: z.string(),
+      files: z.object({ dex: z.string(), meta: z.record(z.string(), z.string()) }),
+    }),
+  ),
+});
 
 /** Hash of the content without timestamps, so re-running with unchanged data is a no-op. */
 function contentHash(files: Map<string, unknown>): string {

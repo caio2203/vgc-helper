@@ -4,7 +4,7 @@
   "source": {
     "name": "Pokémon Showdown \"champions\" mod, via @pkmn/mods 0.11.0",
     "url": "https://github.com/smogon/pokemon-showdown/tree/master/data/mods/champions",
-    "retrievedAt": "2026-11-12T09:31:28.892Z"
+    "retrievedAt": "2026-11-12T10:19:43.750Z"
   },
   "types": ["Bug", "Dark", "Dragon", "Electric", "Fairy", "Fighting", "Fire", "Flying", "Ghost", "Grass", "Ground", "Ice", "Normal", "Poison", "Psychic", "Rock", "Steel", "Water"],
   "typeChart": {

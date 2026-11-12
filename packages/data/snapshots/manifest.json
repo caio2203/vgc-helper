@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "version": "2026-11-12.f2f9c6a828",
-  "generatedAt": "2026-11-12T09:31:28.892Z",
+  "version": "2026-11-12.a2f39e0d8e",
+  "generatedAt": "2026-11-12T10:19:43.750Z",
   "games": [
     { "id": "champions", "name": "Pokémon Champions", "mechanicsProfileId": "champions-2026" }
   ],
@@ -629,12 +629,30 @@
         {
           "id": "doubles",
           "checklist": ["speedControl", "fakeOut", "redirection", "intimidate", "intimidateAnswer", "protect", "spread", "priority", "pivot", "wideGuard"],
-          "weights": { "coversWeakness": 3, "fillsRole": 2, "usage": 3, "teammates": 2, "topCut": 2, "addsWeakness": 2 }
+          "weights": { "coversWeakness": 3, "fillsRole": 2, "usage": 3, "teammates": 2, "topCut": 2, "addsWeakness": 2 },
+          "preview": {
+            "offense": 1,
+            "defense": 1,
+            "speed": 0.5,
+            "bringRole": 0.25,
+            "leadRoles": ["fakeOut", "speedControl", "intimidate", "redirection"],
+            "leadRole": 0.5,
+            "alternatives": 3
+          }
         },
         {
           "id": "singles",
           "checklist": ["hazards", "hazardRemoval", "pivot", "priority", "speedControl"],
-          "weights": { "coversWeakness": 3, "fillsRole": 2, "usage": 3, "teammates": 1, "topCut": 0, "addsWeakness": 2 }
+          "weights": { "coversWeakness": 3, "fillsRole": 2, "usage": 3, "teammates": 1, "topCut": 0, "addsWeakness": 2 },
+          "preview": {
+            "offense": 1,
+            "defense": 1,
+            "speed": 0.5,
+            "bringRole": 0.25,
+            "leadRoles": ["hazards", "pivot"],
+            "leadRole": 0.5,
+            "alternatives": 3
+          }
         }
       ],
       "thresholds": {

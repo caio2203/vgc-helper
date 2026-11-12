@@ -91,12 +91,36 @@ export const suggestionWeightsSchema = z.object({
 });
 export type SuggestionWeights = z.infer<typeof suggestionWeightsSchema>;
 
+/**
+ * Team preview: which members to bring and lead against an opponent's team list. A matchup
+ * between one of your members and one of theirs scores offense, defense and speed; a pick scores
+ * how well it covers each opponent plus the roles it keeps.
+ */
+export const previewWeightsSchema = z.object({
+  /** Points for the share of the opponent's HP your best hit takes (capped at 100%). */
+  offense: z.number().min(0),
+  /** Points for the share of your HP left after the opponent's best hit. */
+  defense: z.number().min(0),
+  /** Points when your member moves first. */
+  speed: z.number().min(0),
+  /** Points per checklist group the brought members still fill. */
+  bringRole: z.number().min(0),
+  /** Role groups that matter on turn one, e.g. Fake Out and speed control. */
+  leadRoles: z.array(z.string().min(1)),
+  /** Points per lead role group the lead fills. */
+  leadRole: z.number().min(0),
+  /** Picks shown, the best first. */
+  alternatives: z.int().min(1),
+});
+export type PreviewWeights = z.infer<typeof previewWeightsSchema>;
+
 export const analysisProfileSchema = z.object({
   /** Matches `Format.analysisProfile`. */
   id: z.enum(['doubles', 'singles']),
   /** Role groups the checklist expects, in display order. */
   checklist: z.array(z.string().min(1)).min(1),
   weights: suggestionWeightsSchema,
+  preview: previewWeightsSchema,
 });
 export type AnalysisProfile = z.infer<typeof analysisProfileSchema>;
 
