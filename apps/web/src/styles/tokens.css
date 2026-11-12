@@ -1,0 +1,79 @@
+/* Design tokens from DESIGN.md §3–§9. Components use these, never raw values. */
+
+:root {
+  color-scheme: light;
+  --bg: #f6f5f1;
+  --surface: #ffffff;
+  --ink: #17191c;
+  --muted: #5b5f66;
+  --line: #dddad2;
+  --line-strong: #868990;
+  --danger: #b4132e;
+  --danger-bg: #fce8eb;
+  --warning: #8a5300;
+  --warning-bg: #fbf0dc;
+  --success: #1e7340;
+  --success-bg: #e5f3ea;
+  --resist: #e3eaf0;
+  --resist-2: #c9d6e2;
+
+  /* Density (DESIGN.md §6): comfortable by default. */
+  --row-h: 36px;
+  --control-h: 36px;
+  --body-size: 14px;
+  --body-line: 20px;
+  --table-wdth: 100;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #111316;
+    --surface: #191c20;
+    --ink: #eeede8;
+    --muted: #a2a6ad;
+    --line: #2c3036;
+    --line-strong: #686e77;
+    --danger: #ff8a98;
+    --danger-bg: #3a1a20;
+    --warning: #f2b856;
+    --warning-bg: #35290f;
+    --success: #7fd39a;
+    --success-bg: #15301f;
+    --resist: #1e2833;
+    --resist-2: #26384a;
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #111316;
+  --surface: #191c20;
+  --ink: #eeede8;
+  --muted: #a2a6ad;
+  --line: #2c3036;
+  --line-strong: #686e77;
+  --danger: #ff8a98;
+  --danger-bg: #3a1a20;
+  --warning: #f2b856;
+  --warning-bg: #35290f;
+  --success: #7fd39a;
+  --success-bg: #15301f;
+  --resist: #1e2833;
+  --resist-2: #26384a;
+}
+
+:root[data-density="compact"] {
+  --row-h: 28px;
+  --control-h: 28px;
+  --body-size: 13px;
+  --body-line: 18px;
+  --table-wdth: 87;
+}
+
+/* Touch screens keep 44 px targets in every density (DESIGN.md §6). */
+@media (pointer: coarse) {
+  :root {
+    --control-h: 44px;
+  }
+}

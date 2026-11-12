@@ -1,0 +1,132 @@
+@import "tailwindcss";
+@import "@fontsource-variable/archivo/wdth.css";
+@import "./tokens.css";
+@import "./type-colors.css";
+
+/* Only the DESIGN.md tokens exist: Tailwind's default colors, radii and shadows are removed. */
+@theme {
+  --color-*: initial;
+  --radius-*: initial;
+  --shadow-*: initial;
+  --font-*: initial;
+  --text-*: initial;
+
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-danger: var(--danger);
+  --color-danger-bg: var(--danger-bg);
+  --color-warning: var(--warning);
+  --color-warning-bg: var(--warning-bg);
+  --color-success: var(--success);
+  --color-success-bg: var(--success-bg);
+  --color-resist: var(--resist);
+  --color-resist-2: var(--resist-2);
+  --color-transparent: transparent;
+
+  --font-sans: "Archivo Variable", system-ui, sans-serif;
+  --font-mono: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace;
+
+  --radius-sm: 4px;
+  --radius-md: 6px;
+
+  --text-micro: 12px;
+  --text-micro--line-height: 16px;
+  --text-sm: 13px;
+  --text-sm--line-height: 18px;
+  --text-base: var(--body-size);
+  --text-base--line-height: var(--body-line);
+  --text-lead: 16px;
+  --text-lead--line-height: 24px;
+  --text-h3: 18px;
+  --text-h3--line-height: 24px;
+  --text-h2: 22px;
+  --text-h2--line-height: 28px;
+  --text-h1: 28px;
+  --text-h1--line-height: 32px;
+
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+}
+
+@layer base {
+  html {
+    background: var(--bg);
+  }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: var(--body-size);
+    line-height: var(--body-line);
+    font-variant-numeric: tabular-nums;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background: var(--ink);
+    color: var(--surface);
+  }
+
+  input,
+  select,
+  textarea,
+  button {
+    font: inherit;
+    color: inherit;
+  }
+}
+
+@layer utilities {
+  /* Section labels on the sheet (DESIGN.md §4, --text-micro). */
+  .label {
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+  }
+
+  .wdth-table {
+    font-stretch: calc(var(--table-wdth) * 1%);
+  }
+
+  .wdth-heading {
+    font-stretch: 108%;
+  }
+
+  .wdth-display {
+    font-stretch: 112%;
+  }
+
+  .hatch {
+    background-image: repeating-linear-gradient(135deg, var(--line) 0 2px, transparent 2px 6px);
+  }
+
+  .transition-state {
+    transition-duration: 120ms;
+    transition-timing-function: var(--ease-standard);
+  }
+}
+
+/* DESIGN.md §9: nothing moves when the user asks for reduced motion. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    /* biome-ignore lint/complexity/noImportantStyles: reduced motion must win over every component transition */
+    transition-duration: 0ms !important;
+    /* biome-ignore lint/complexity/noImportantStyles: same as above */
+    animation-duration: 0ms !important;
+  }
+}

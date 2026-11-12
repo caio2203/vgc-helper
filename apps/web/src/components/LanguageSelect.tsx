@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { api } from '../api/client';
 import { settingsQuery } from '../api/queries';
 import { applyLocale, LOCALES } from '../i18n';
+import { Select } from './ui/Controls';
 
 /** Changes the interface language. When signed in, the choice is saved to the account. */
 export function LanguageSelect({ signedIn }: { signedIn: boolean }) {
@@ -28,15 +29,22 @@ export function LanguageSelect({ signedIn }: { signedIn: boolean }) {
   }
 
   return (
-    <p>
-      <label htmlFor={id}>{t('settings.language')}</label>{' '}
-      <select id={id} value={i18n.language} onChange={(e) => void change(e.target.value)}>
+    <div className="flex items-center gap-2">
+      <label htmlFor={id} className="label">
+        {t('settings.language')}
+      </label>
+      <Select
+        id={id}
+        className="w-auto"
+        value={i18n.language}
+        onChange={(e) => void change(e.target.value)}
+      >
         {LOCALES.map((l) => (
           <option key={l.id} value={l.id} lang={l.id}>
             {l.label}
           </option>
         ))}
-      </select>
-    </p>
+      </Select>
+    </div>
   );
 }

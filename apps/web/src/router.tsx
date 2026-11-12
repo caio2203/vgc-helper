@@ -8,9 +8,14 @@ import {
 } from '@tanstack/react-router';
 import { loginErrorSchema } from '@vgc-helper/shared';
 import { z } from 'zod';
+import { AboutPage } from './about/AboutPage';
 import { sessionQuery } from './api/queries';
-import { HomePage } from './routes/HomePage';
+import { BuilderPage } from './builder/BuilderPage';
+import { AppShell } from './components/AppShell';
+import { useAppearance } from './lib/theme';
 import { LoginPage } from './routes/LoginPage';
+import { SettingsPage } from './settings/SettingsPage';
+import { TeamsPage } from './teams/TeamsPage';
 
 interface RouterContext {
   queryClient: QueryClient;
@@ -42,19 +47,54 @@ const authedRoute = createRoute({
     if (!session) throw redirect({ to: '/login' });
     return { session };
   },
-  component: Outlet,
-});
-
-const homeRoute = createRoute({
-  getParentRoute: () => authedRoute,
-  path: '/',
-  component: function Home() {
-    const { session } = homeRoute.useRouteContext();
-    return <HomePage session={session} />;
+  component: function Authed() {
+    const { session } = authedRoute.useRouteContext();
+    useAppearance(true);
+    return (
+      <AppShell session={session}>
+        <Outlet />
+      </AppShell>
+    );
   },
 });
 
-const routeTree = rootRoute.addChildren([loginRoute, authedRoute.addChildren([homeRoute])]);
+const builderRoute = createRoute({
+  getParentRoute: () => authedRoute,
+  path: '/',
+  component: () => <BuilderPage />,
+});
+
+const teamsRoute = createRoute({
+  getParentRoute: () => authedRoute,
+  path: '/teams',
+  component: TeamsPage,
+});
+
+const teamRoute = createRoute({
+  getParentRoute: () => authedRoute,
+  path: '/teams/$teamId',
+  component: function Team() {
+    const { teamId } = teamRoute.useParams();
+    return <BuilderPage teamId={teamId} />;
+  },
+});
+
+const settingsRoute = createRoute({
+  getParentRoute: () => authedRoute,
+  path: '/settings',
+  component: SettingsPage,
+});
+
+const aboutRoute = createRoute({
+  getParentRoute: () => authedRoute,
+  path: '/about',
+  component: AboutPage,
+});
+
+const routeTree = rootRoute.addChildren([
+  loginRoute,
+  authedRoute.addChildren([builderRoute, teamsRoute, teamRoute, settingsRoute, aboutRoute]),
+]);
 
 export function makeRouter(queryClient: QueryClient) {
   return createRouter({ routeTree, context: { queryClient }, defaultPreload: false });

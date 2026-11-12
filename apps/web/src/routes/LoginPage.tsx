@@ -7,29 +7,46 @@ import { ApiError, api } from '../api/client';
 import { authMethodsQuery, sessionQuery } from '../api/queries';
 import { Footer } from '../components/Footer';
 import { LanguageSelect } from '../components/LanguageSelect';
+import { Logo } from '../components/Logo';
+import { Alert } from '../components/ui/Alert';
+import { Button } from '../components/ui/Button';
+import { Field, TextInput } from '../components/ui/Controls';
 
+/** The only screen a signed-out visitor sees. No marketing, just the way in. */
 export function LoginPage({ error }: { error: LoginError | undefined }) {
   const { t } = useTranslation();
   const methods = useQuery(authMethodsQuery);
 
   return (
-    <>
-      <main>
-        <h1>{t('login.title')}</h1>
-        <p>{t('login.intro')}</p>
-        {error && <p role="alert">{t(`login.errors.${error}`)}</p>}
-        {methods.isPending && <p>{t('common.loading')}</p>}
-        {methods.isError && <p role="alert">{t('common.error')}</p>}
-        {methods.data?.mode === 'github' && (
-          <p>
-            <a href="/api/auth/github">{t('login.github')}</a>
-          </p>
-        )}
-        {methods.data?.mode === 'local-password' && <PasswordForm />}
+    <div className="flex min-h-dvh flex-col">
+      <main className="mx-auto flex w-full max-w-sm flex-1 flex-col justify-center gap-6 px-4 py-12">
+        <Logo />
+        <section className="flex flex-col gap-4 rounded-md border border-line bg-surface p-5">
+          <div>
+            <h1 className="wdth-heading m-0 text-h2 font-bold">{t('login.title')}</h1>
+            <p className="m-0 mt-1 text-muted">{t('login.intro')}</p>
+          </div>
+          {error && (
+            <Alert tone="error" title={t(`login.errors.${error}`)} toneLabel={t('tone.error')} />
+          )}
+          {methods.isPending && <p className="m-0 text-muted">{t('common.loading')}</p>}
+          {methods.isError && (
+            <Alert tone="error" title={t('common.error')} toneLabel={t('tone.error')} />
+          )}
+          {methods.data?.mode === 'github' && (
+            <a
+              href="/api/auth/github"
+              className="inline-flex h-[var(--control-h)] items-center justify-center rounded-sm border border-ink bg-ink px-3.5 font-semibold text-surface"
+            >
+              {t('login.github')}
+            </a>
+          )}
+          {methods.data?.mode === 'local-password' && <PasswordForm />}
+        </section>
         <LanguageSelect signedIn={false} />
       </main>
-      <Footer />
-    </>
+      <Footer showAbout={false} />
+    </div>
   );
 }
 
@@ -61,10 +78,9 @@ function PasswordForm() {
   }
 
   return (
-    <form onSubmit={(e) => void submit(e)}>
-      <p>
-        <label htmlFor={id}>{t('login.password')}</label>{' '}
-        <input
+    <form onSubmit={(e) => void submit(e)} className="flex flex-col gap-3">
+      <Field label={t('login.password')} htmlFor={id}>
+        <TextInput
           id={id}
           type="password"
           autoComplete="current-password"
@@ -73,13 +89,15 @@ function PasswordForm() {
           onChange={(e) => setPassword(e.target.value)}
           aria-invalid={failure === 'invalid_credentials'}
         />
-      </p>
-      {failure && <p role="alert">{t(`login.errors.${failure}`)}</p>}
-      <p>
-        <button type="submit" disabled={pending}>
-          {pending ? t('login.submitting') : t('login.submit')}
-        </button>
-      </p>
+      </Field>
+      {failure && (
+        <p role="alert" className="m-0 text-danger">
+          {t(`login.errors.${failure}`)}
+        </p>
+      )}
+      <Button type="submit" variant="primary" disabled={pending}>
+        {pending ? t('login.submitting') : t('login.submit')}
+      </Button>
     </form>
   );
 }
