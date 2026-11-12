@@ -1,6 +1,6 @@
 {
   "name": "vgc-helper",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": true,
   "description": "Open-source team builder for competitive Pokémon, VGC first, with a rule-based analysis engine.",
   "license": "Apache-2.0",
