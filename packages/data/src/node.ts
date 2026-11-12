@@ -2,6 +2,7 @@ import { readFile } from 'node:fs/promises';
 import { isAbsolute, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type { z } from 'zod';
+import { type Changelog, changelogSchema } from './schemas/changelog.js';
 import { type DexSnapshot, dexSnapshotSchema } from './schemas/dex.js';
 import { type Manifest, manifestSchema } from './schemas/manifest.js';
 import { type MetaSnapshot, metaSnapshotSchema } from './schemas/meta.js';
@@ -35,4 +36,15 @@ export function readDexSnapshot(relativePath: string, dir = SNAPSHOT_DIR): Promi
 
 export function readMetaSnapshot(relativePath: string, dir = SNAPSHOT_DIR): Promise<MetaSnapshot> {
   return readJson(resolveSnapshotPath(relativePath, dir), metaSnapshotSchema);
+}
+
+/** The history of snapshot changes, newest first. A missing file is an empty history. */
+export async function readChangelog(dir = SNAPSHOT_DIR): Promise<Changelog> {
+  try {
+    return await readJson(join(dir, 'changelog.json'), changelogSchema);
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code === 'ENOENT')
+      return { schemaVersion: 1, entries: [] };
+    throw error;
+  }
 }

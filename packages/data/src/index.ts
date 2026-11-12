@@ -1,4 +1,5 @@
 export * from './schemas/analysis.js';
+export * from './schemas/changelog.js';
 export * from './schemas/common.js';
 export * from './schemas/dex.js';
 export * from './schemas/manifest.js';
