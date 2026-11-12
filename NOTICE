@@ -54,3 +54,7 @@ This project uses, among others, the following open source packages:
 
 The full list, with versions, is in pnpm-lock.yaml. Each package's license is
 in its folder under node_modules after installation.
+
+@google/genai (https://github.com/googleapis/js-genai)
+  Official Google Gen AI SDK, used by the API for the optional Gemini explanations.
+  Apache License 2.0. Copyright 2025 Google LLC.

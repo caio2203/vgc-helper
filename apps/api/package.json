@@ -17,6 +17,7 @@
     "hash-password": "node dist/cli/hash-password.js"
   },
   "dependencies": {
+    "@google/genai": "2.32.0",
     "@libsql/client": "^0.18.0",
     "@nestjs/common": "^12.4.2",
     "@nestjs/core": "^12.4.2",
