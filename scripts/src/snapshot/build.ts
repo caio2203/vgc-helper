@@ -208,6 +208,7 @@ async function main(): Promise<void> {
     regulations,
     analysisRules: manual.analysisRules,
     overridesApplied: [...new Set(overridesApplied)].sort(),
+    warnings,
   };
   const hash = contentHash(new Map([...files, ['manifest', manifestBody]]));
 

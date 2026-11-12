@@ -28,5 +28,7 @@ export const manifestSchema = z.object({
   /** Rules the analysis engine reads, per game. */
   analysisRules: z.array(analysisRulesSchema).min(1),
   overridesApplied: z.array(z.string()),
+  /** What the last build flagged (small samples, unknown species, a source that failed). */
+  warnings: z.array(z.string()).default([]),
 });
 export type Manifest = z.infer<typeof manifestSchema>;
