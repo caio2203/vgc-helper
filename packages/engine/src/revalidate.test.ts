@@ -4,7 +4,13 @@ import type { TeamSlot } from '@vgc-helper/shared';
 import { beforeAll, describe, expect, it } from 'vitest';
 import { type DexIndex, indexDex, type RulesContext } from './context.js';
 import { emptySlot } from './paste.js';
-import { changesSince, needsAttention, revalidateTeam, type SavedTeam } from './revalidate.js';
+import {
+  changesSince,
+  needsAttention,
+  regulationInForce,
+  revalidateTeam,
+  type SavedTeam,
+} from './revalidate.js';
 import { loadContext } from './test-support/snapshot.js';
 
 let manifest: Manifest;
@@ -193,5 +199,14 @@ describe('changesSince', () => {
     expect(changesSince(log, '2026-10-01.old').entries).toHaveLength(1);
     expect(changesSince(log, '2026-09-30.gone')).toMatchObject({ known: false });
     expect(changesSince(log, '2026-09-30.gone').entries).toHaveLength(2);
+  });
+});
+
+describe('regulationInForce', () => {
+  it('only counts regulations that run the format', () => {
+    const now = Date.parse('2026-11-12T12:00:00Z');
+    // Smogon OU never ends, but it is not a VGC regulation: Reg G stays the one for VGC.
+    expect(regulationInForce(manifest, 'sv', now, 'sv-vgc')?.id).toBe('G');
+    expect(regulationInForce(manifest, 'sv', now, 'sv-ou')?.id).toBe('OU');
   });
 });

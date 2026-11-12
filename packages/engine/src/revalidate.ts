@@ -34,9 +34,21 @@ export interface Revalidation {
   changes: TeamChange[];
 }
 
-/** The regulation in force at `now`, or else the latest one that started, from the snapshot dates. */
-export function regulationInForce(manifest: Manifest, gameId: string, now = Date.now()) {
-  const ofGame = manifest.regulations.filter((r) => r.gameId === gameId);
+/**
+ * The regulation in force at `now`, or else the latest one that started, from the snapshot dates.
+ * With a format, only regulations that run it count (Smogon OU is not a VGC regulation).
+ */
+export function regulationInForce(
+  manifest: Manifest,
+  gameId: string,
+  now = Date.now(),
+  formatId?: string,
+) {
+  const ofGame = manifest.regulations.filter(
+    (r) =>
+      r.gameId === gameId &&
+      (formatId === undefined || r.formats.some((f) => f.formatId === formatId)),
+  );
   const active = ofGame.find(
     (r) => Date.parse(r.startsAt) <= now && (r.endsAt === null || now < Date.parse(r.endsAt)),
   );
@@ -164,7 +176,7 @@ export function revalidateTeam(team: SavedTeam, data: RevalidationData): Revalid
     : [];
 
   let inForce: Revalidation['inForce'] = null;
-  const current = regulationInForce(data.manifest, team.gameId, now);
+  const current = regulationInForce(data.manifest, team.gameId, now, team.formatId);
   if (status !== 'active' && current && current.id !== team.regulationId) {
     const rules = data.rulesFor(current.id);
     if (rules) {
@@ -204,5 +216,7 @@ export const needsAttention = (r: Revalidation) =>
   r.issues.length > 0 ||
   (r.inForce?.issues.length ?? 0) > 0 ||
   r.regulation.status === 'missing' ||
-  r.regulation.status === 'ended' ||
+  // An ended regulation matters when a newer one is in force; the last one of a game (played on
+  // Showdown after its official period) does not.
+  (r.regulation.status === 'ended' && r.inForce !== null) ||
   r.changes.some((c) => c.change.kind !== 'usage');

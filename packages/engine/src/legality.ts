@@ -19,11 +19,13 @@ export type LegalityIssue = { severity: Severity } & (
   | { code: 'spread'; slot: number; issue: SpreadIssue }
   | { code: 'ivsNotAllowed'; slot: number }
   | { code: 'teraNotAvailable'; slot: number }
+  | { code: 'unknownTeraType'; slot: number; teraType: string }
   | { code: 'megaWithoutStone'; slot: number }
   | { code: 'stoneDoesNothing'; slot: number; item: string; species: string }
   | { code: 'itemClause'; item: string; slots: number[] }
   | { code: 'speciesClause'; species: string; slots: number[] }
   | { code: 'gimmickLimit'; slots: number[]; perBattle: number }
+  | { code: 'restrictedLimit'; slots: number[]; limit: number }
   | { code: 'teamTooSmall'; count: number; min: number }
   | { code: 'teamTooLarge'; count: number; max: number }
 );
@@ -85,6 +87,8 @@ function checkSlot(slot: TeamSlot, i: number, ctx: RulesContext, index: DexIndex
   }
   if (slot.teraType && ctx.profile.gimmick.kind !== 'tera') {
     issues.push({ severity: 'error', code: 'teraNotAvailable', slot: i });
+  } else if (slot.teraType && !ctx.profile.gimmick.teraTypes.includes(slot.teraType)) {
+    issues.push({ severity: 'error', code: 'unknownTeraType', slot: i, teraType: slot.teraType });
   }
 
   const item = slot.item ? index.items.get(slot.item) : undefined;
@@ -138,6 +142,22 @@ export function checkLegality(
     for (const [num, at] of duplicates(nums)) {
       const name = index.species.get(slots[at[0] as number]?.species ?? '')?.baseSpecies ?? num;
       issues.push({ severity: 'error', code: 'speciesClause', species: name, slots: at });
+    }
+  }
+
+  const { restrictedLimit, restrictedTags } = ctx.regulation;
+  if (restrictedLimit !== null && restrictedTags.length > 0) {
+    const restricted = slots.flatMap((s, i) => {
+      const tags = index.species.get(s.species)?.tags ?? [];
+      return tags.some((t) => restrictedTags.includes(t)) ? [i] : [];
+    });
+    if (restricted.length > restrictedLimit) {
+      issues.push({
+        severity: 'error',
+        code: 'restrictedLimit',
+        slots: restricted,
+        limit: restrictedLimit,
+      });
     }
   }
 

@@ -13,7 +13,7 @@ const statPoints: MechanicsProfile = {
   name: 'Stat Points',
   statSystem: { kind: 'statPoints', total: 66, maxPerStat: 32, fixedIv: 31 },
   nature: { plusPercent: 110, minusPercent: 90 },
-  gimmick: { kind: 'mega', perBattle: 1 },
+  gimmick: { kind: 'mega', perBattle: 1, teraTypes: [] },
   pp: { maxBasePp: 20, formula: 'champions' },
   statusRules: {
     paralysisFullParaChance: 0.125,
