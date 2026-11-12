@@ -13,6 +13,7 @@ import { AdminPage } from './admin/AdminPage';
 import { sessionQuery } from './api/queries';
 import { BuilderPage } from './builder/BuilderPage';
 import { CalcPage } from './calc/CalcPage';
+import { WhatsNewPage } from './changes/WhatsNewPage';
 import { AppShell } from './components/AppShell';
 import { useAppearance } from './lib/theme';
 import { LoginPage } from './routes/LoginPage';
@@ -99,6 +100,12 @@ const adminRoute = createRoute({
   component: AdminPage,
 });
 
+const whatsNewRoute = createRoute({
+  getParentRoute: () => authedRoute,
+  path: '/whats-new',
+  component: WhatsNewPage,
+});
+
 const aboutRoute = createRoute({
   getParentRoute: () => authedRoute,
   path: '/about',
@@ -114,6 +121,7 @@ const routeTree = rootRoute.addChildren([
     calcRoute,
     settingsRoute,
     adminRoute,
+    whatsNewRoute,
     aboutRoute,
   ]),
 ]);

@@ -1,5 +1,7 @@
 import { queryOptions } from '@tanstack/react-query';
 import {
+  type Changelog,
+  changelogSchema,
   type DexSnapshot,
   type Manifest,
   type MetaSnapshot,
@@ -50,6 +52,13 @@ export const settingsQuery = queryOptions({
 export const manifestQuery = queryOptions({
   queryKey: ['snapshots', 'manifest'],
   queryFn: (): Promise<Manifest> => api('/snapshots/manifest', { schema: manifestSchema }),
+  staleTime: 10 * 60 * 1000,
+});
+
+/** Every snapshot change, newest first. Small: parsed like the manifest. */
+export const changelogQuery = queryOptions({
+  queryKey: ['snapshots', 'changelog'],
+  queryFn: (): Promise<Changelog> => api('/snapshots/changelog', { schema: changelogSchema }),
   staleTime: 10 * 60 * 1000,
 });
 

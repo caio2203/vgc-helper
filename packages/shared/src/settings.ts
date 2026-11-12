@@ -16,6 +16,8 @@ export const settingsSchema = z.object({
   offMetaMode: z.boolean(),
   density: z.enum(['compact', 'comfortable']),
   theme: z.enum(['system', 'light', 'dark']),
+  /** Newest snapshot version the user saw on the What's new page; `null` before the first visit. */
+  whatsNewSeenVersion: z.string().min(1).nullable(),
 });
 export type Settings = z.infer<typeof settingsSchema>;
 
@@ -30,4 +32,5 @@ export const DEFAULT_SETTINGS: Settings = {
   offMetaMode: false,
   density: 'comfortable',
   theme: 'system',
+  whatsNewSeenVersion: null,
 };

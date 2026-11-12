@@ -6,6 +6,7 @@ import { type ReactNode, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { api, setCsrfToken } from '../api/client';
 import { sessionQuery } from '../api/queries';
+import { useUnreadCount } from '../changes/WhatsNewPage';
 import { isMod, isTyping, modKey } from '../lib/keys';
 import { useUi } from '../state/ui';
 import { CommandPalette } from './CommandPalette';
@@ -23,6 +24,7 @@ export function AppShell({ session, children }: { session: SessionResponse; chil
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const { setPalette, setShortcuts, status } = useUi();
+  const unread = useUnreadCount();
 
   useEffect(() => {
     function onKey(event: KeyboardEvent) {
@@ -78,6 +80,15 @@ export function AppShell({ session, children }: { session: SessionResponse; chil
             </Link>
             <Link to="/calc" className={navLink} activeProps={navActive}>
               {t('shell.calc')}
+            </Link>
+            <Link to="/whats-new" className={navLink} activeProps={navActive}>
+              {t('shell.whatsNew')}
+              {unread > 0 && (
+                <span className="ml-1.5 rounded-sm border border-ink px-1 text-micro text-ink">
+                  <span aria-hidden="true">{unread}</span>
+                  <span className="sr-only">{t('shell.unread', { count: unread })}</span>
+                </span>
+              )}
             </Link>
           </nav>
           <div className="ml-auto flex shrink-0 items-center gap-1">

@@ -24,7 +24,10 @@
     "search": "Buscar",
     "settings": "Configurações",
     "signOut": "Sair ({{login}})",
-    "calc": "Calculadora"
+    "calc": "Calculadora",
+    "whatsNew": "Novidades",
+    "unread_one": "{{count}} atualização nova",
+    "unread_other": "{{count}} atualizações novas"
   },
   "login": {
     "title": "Entrar",
@@ -523,5 +526,106 @@
       "Psychic": "Psychic Terrain",
       "Misty": "Misty Terrain"
     }
+  },
+  "whatsNew": {
+    "title": "Novidades",
+    "intro": "Todas as mudanças nos dados competitivos, da mais nova para a mais antiga: regulamentos, Pokémon e golpes legais, mudanças de balanceamento e uso. Cada atualização vem do pipeline de dados e foi revisada antes de chegar ao app.",
+    "new": "Nova",
+    "baseline": "Primeiro snapshot do histórico. As mudanças aparecem a partir daqui.",
+    "noChanges": "Só as datas de coleta mudaram.",
+    "general": "Regras e configurações",
+    "empty": "Nenhuma atualização de dados registrada ainda."
+  },
+  "changes": {
+    "more_one": "{{names}} e mais {{count}}",
+    "more_other": "{{names}} e mais {{count}}",
+    "none": "nenhum",
+    "yes": "sim",
+    "no": "não",
+    "alwaysHits": "nunca erra",
+    "noEnd": "sem data de fim",
+    "regulationAdded": "Regulamento novo: {{name}}, de {{start}} a {{end}}.",
+    "regulationAddedOpen": "Regulamento novo: {{name}}, a partir de {{start}}.",
+    "regulationRemoved": "{{name}} não está mais nos dados.",
+    "dates": {
+      "startsAt": "Início do {{regulation}}: {{from}} → {{to}}.",
+      "endsAt": "Fim do {{regulation}}: {{from}} → {{to}}."
+    },
+    "legalAdded": {
+      "species": "Pokémon agora legais: {{names}}.",
+      "megas": "Megas agora permitidas: {{names}}.",
+      "moves": "Golpes agora disponíveis: {{names}}.",
+      "items": "Itens agora disponíveis: {{names}}.",
+      "abilities": "Habilidades agora disponíveis: {{names}}."
+    },
+    "legalRemoved": {
+      "species": "Pokémon que deixaram de ser legais: {{names}}.",
+      "megas": "Megas que deixaram de ser permitidas: {{names}}.",
+      "moves": "Golpes que deixaram de existir: {{names}}.",
+      "items": "Itens que deixaram de existir: {{names}}.",
+      "abilities": "Habilidades que deixaram de existir: {{names}}."
+    },
+    "banned": "Agora banidos: {{names}}.",
+    "unbanned": "Não são mais banidos: {{names}}.",
+    "field": "{{name}}: {{field}} {{from}} → {{to}}.",
+    "moveField": {
+      "type": "tipo",
+      "category": "categoria",
+      "basePower": "poder",
+      "accuracy": "precisão",
+      "maxPp": "PP",
+      "priority": "prioridade",
+      "target": "alvo"
+    },
+    "speciesField": {
+      "types": "tipos",
+      "abilities": "habilidades",
+      "hp": "HP base",
+      "atk": "Ataque base",
+      "def": "Defesa base",
+      "spa": "Atq. Esp. base",
+      "spd": "Def. Esp. base",
+      "spe": "Velocidade base"
+    },
+    "unlearned": "{{species}} não aprende mais {{moves}}.",
+    "learned": "{{species}} agora aprende {{moves}}.",
+    "usage": "Uso em {{format}}, {{period}}, {{battles}} batalhas:",
+    "usageMonths": "Uso em {{format}}, {{from}} → {{to}}, {{battles}} batalhas:",
+    "usageEntry": "{{species}}: {{from}} → {{to}}",
+    "setting": "{{scope}} {{id}}: {{path}} {{from}} → {{to}}.",
+    "scope": {
+      "mechanics": "Mecânicas do jogo",
+      "format": "Formato",
+      "regulation": "Regulamento"
+    },
+    "overridesAdded": "Correções manuais aplicadas: {{ids}}.",
+    "overridesRemoved": "Correções manuais que deixaram de valer: {{ids}}.",
+    "analysisRules": "Regras de análise atualizadas: {{sections}}.",
+    "source": "Fonte: {{name}}, coletado em {{date}}."
+  },
+  "revalidation": {
+    "column": "Checagem dos dados",
+    "upToDate": "Dados atuais",
+    "fine": "Sem problemas com os dados atuais",
+    "problems_one": "{{count}} problema",
+    "problems_other": "{{count}} problemas",
+    "changes_one": "{{count}} mudança desde que foi salvo",
+    "changes_other": "{{count}} mudanças desde que foi salvo",
+    "details": "Detalhes de {{name}}",
+    "ended": "O {{regulation}} terminou em {{date}}.",
+    "missing": "O {{regulation}} não está mais nos dados.",
+    "ownIssues": "No {{regulation}}:",
+    "inForce": "No {{regulation}}, o regulamento em vigor:",
+    "inForceLegal": "Legal no {{regulation}}, o regulamento em vigor.",
+    "historyUnknown": "Salvo com dados mais antigos que o histórico, então só a legalidade atual é checada.",
+    "changesTitle": "Mudanças que afetam este time:",
+    "bannerTitle": "Os dados mudaram desde que este time foi salvo",
+    "bannerHint": "Salvo com os dados {{saved}}; o app agora usa {{current}}. Salvar o time registra os dados atuais.",
+    "seeAll": "Ver todas as mudanças",
+    "endsTitle": "O {{regulation}} termina em {{date}}",
+    "endsHint_one": "Falta {{count}} dia. Os times salvos mantêm o regulamento; escolha o próximo no seletor quando ele estiver nos dados.",
+    "endsHint_other": "Faltam {{count}} dias. Os times salvos mantêm o regulamento; escolha o próximo no seletor quando ele estiver nos dados.",
+    "endedTitle": "O {{regulation}} terminou em {{date}}",
+    "endedHint": "Escolha o regulamento em vigor no seletor para checar o time com ele."
   }
 }
