@@ -188,7 +188,10 @@
       "hazards": "Hazards",
       "hazardRemoval": "Remoção de hazards",
       "weather": "Clima",
-      "terrain": "Terreno"
+      "terrain": "Terreno",
+      "winCondition": "Win condition",
+      "wallbreaker": "Wallbreaker",
+      "wall": "Wall"
     },
     "glossary": {
       "speedControl": "Golpes que mudam quem age primeiro: Tailwind, Trick Room ou baixar a Speed do oponente.",
@@ -204,7 +207,10 @@
       "hazards": "Golpes que causam dano quando o Pokémon entra em campo.",
       "hazardRemoval": "Golpes que limpam os hazards do seu lado.",
       "weather": "Ativa sol, chuva, areia ou neve.",
-      "terrain": "Ativa um terreno que fortalece ou bloqueia alguns golpes."
+      "terrain": "Ativa um terreno que fortalece ou bloqueia alguns golpes.",
+      "winCondition": "Um Pokémon que aumenta os próprios atributos (Swords Dance, Dragon Dance, Nasty Plot, Speed Boost) e pode varrer o time depois que as respostas a ele caem.",
+      "wallbreaker": "Um atacante forte (Ataque ou Atq. Esp. base 120 ou mais) que quebra os Pokémon defensivos.",
+      "wall": "Um Pokémon defensivo com recuperação confiável (Recover, Roost, Slack Off, Wish) que pode entrar várias vezes."
     },
     "checklist": {
       "missing": "Falta",

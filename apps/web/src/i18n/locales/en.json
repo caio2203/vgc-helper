@@ -188,7 +188,10 @@
       "hazards": "Entry hazards",
       "hazardRemoval": "Hazard removal",
       "weather": "Weather",
-      "terrain": "Terrain"
+      "terrain": "Terrain",
+      "winCondition": "Win condition",
+      "wallbreaker": "Wallbreaker",
+      "wall": "Wall"
     },
     "glossary": {
       "speedControl": "Moves that change who moves first: Tailwind, Trick Room or lowering the foe’s Speed.",
@@ -204,7 +207,10 @@
       "hazards": "Moves that damage Pokémon as they switch in.",
       "hazardRemoval": "Moves that clear entry hazards from your side.",
       "weather": "Sets sun, rain, sand or snow.",
-      "terrain": "Sets a terrain that powers up or blocks some moves."
+      "terrain": "Sets a terrain that powers up or blocks some moves.",
+      "winCondition": "A Pokémon that boosts its own stats (Swords Dance, Dragon Dance, Nasty Plot, Speed Boost) and can sweep once the checks are gone.",
+      "wallbreaker": "A strong attacker (base Attack or Sp. Atk 120 or more) that breaks through defensive Pokémon.",
+      "wall": "A defensive Pokémon with reliable recovery (Recover, Roost, Slack Off, Wish) that can come in again and again."
     },
     "checklist": {
       "missing": "Missing",
