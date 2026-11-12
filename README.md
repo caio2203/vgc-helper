@@ -9,12 +9,12 @@ missing and what the current meta is running. VGC (Doubles) first, Singles next.
 [![License: Apache 2.0](https://img.shields.io/github/license/caio2203/vgc-helper)](LICENSE)
 [![Release](https://img.shields.io/github/v/release/caio2203/vgc-helper?include_prereleases)](https://github.com/caio2203/vgc-helper/releases)
 
-> **Status: early development.** Phases 2 to 5 are done: the team builder checks legality as
+> **Status: early development.** Phases 2 to 6 are done: the team builder checks legality as
 > you edit, the analysis column shows the type matrix, stacked weaknesses, the role checklist,
 > speed tiers and meta threats from damage calcs, with suggestions that explain their score,
 > every data update comes with a readable diff, a What's new page and a check of your saved
-> teams, and the team preview says who to bring and lead against an open team list. Next:
-> on-demand AI explanations — see the [roadmap](#roadmap).
+> teams, the team preview says who to bring and lead against an open team list, and an optional
+> Explain button and chat use Gemini on the analysis. Next: Singles — see the [roadmap](#roadmap).
 
 ## Screenshots
 
@@ -117,9 +117,15 @@ Available now:
   the matchup table, who answers each of theirs and with which hit, the other picks with their
   score, and which fields of their list came from the usage data.
 
+- Optional AI, only when you ask: Explain turns the analysis into a short note in your language
+  and level, and you can ask questions about the team. It uses Google Gemini on the free tier
+  and sees only the analysis the engine made, plus tools that read usage, common sets and
+  legality from the data snapshot. Answers are cached; without a key the buttons are hidden and
+  nothing else changes.
+
 Planned (see the roadmap):
 
-- On-demand explanations and chat with Google Gemini (free tier), with a full fallback without it.
+- The Singles analysis profile, then Scarlet/Violet and Smogon formats.
 
 ## Keyboard shortcuts
 
@@ -255,22 +261,25 @@ screen: if authentication is not configured, the API refuses to start.
 
 ## Environment variables
 
-| Variable                  | Required            | Description                                                        |
-| ------------------------- | ------------------- | ------------------------------------------------------------------ |
-| `APP_ORIGIN`              | yes                 | Address you open in the browser, e.g. `https://helper.example.com` |
-| `SESSION_SECRET`          | yes                 | At least 32 random characters                                      |
-| `AUTH_MODE`               | yes                 | `github` or `local-password`                                       |
-| `GITHUB_CLIENT_ID`        | github mode         | OAuth app client id                                                |
-| `GITHUB_CLIENT_SECRET`    | github mode         | OAuth app client secret                                            |
-| `AUTH_ALLOWED_GITHUB_IDS` | github mode         | Comma-separated numeric GitHub ids                                 |
-| `ADMIN_PASSWORD_HASH`     | local-password mode | Output of `pnpm hash-password`                                     |
-| `DATABASE_URL`            | no                  | Local SQLite file, default `file:local.db`                         |
-| `TURSO_DATABASE_URL`      | on Vercel           | `libsql://…` URL of the Turso database                             |
-| `TURSO_AUTH_TOKEN`        | on Vercel           | Turso database token                                               |
-| `CRON_SECRET`             | on Vercel           | 16+ characters; lets the daily cron keep the free database active  |
-| `SESSION_TTL_DAYS`        | no                  | Session length in days, default 30                                 |
-| `SERVE_WEB_DIR`           | no                  | Serve the built web app from the API (single process)              |
-| `PORT`                    | no                  | API port for local runs, default 3000                              |
+| Variable                  | Required            | Description                                                         |
+| ------------------------- | ------------------- | ------------------------------------------------------------------- |
+| `APP_ORIGIN`              | yes                 | Address you open in the browser, e.g. `https://helper.example.com`  |
+| `SESSION_SECRET`          | yes                 | At least 32 random characters                                       |
+| `AUTH_MODE`               | yes                 | `github` or `local-password`                                        |
+| `GITHUB_CLIENT_ID`        | github mode         | OAuth app client id                                                 |
+| `GITHUB_CLIENT_SECRET`    | github mode         | OAuth app client secret                                             |
+| `AUTH_ALLOWED_GITHUB_IDS` | github mode         | Comma-separated numeric GitHub ids                                  |
+| `ADMIN_PASSWORD_HASH`     | local-password mode | Output of `pnpm hash-password`                                      |
+| `DATABASE_URL`            | no                  | Local SQLite file, default `file:local.db`                          |
+| `TURSO_DATABASE_URL`      | on Vercel           | `libsql://…` URL of the Turso database                              |
+| `TURSO_AUTH_TOKEN`        | on Vercel           | Turso database token                                                |
+| `CRON_SECRET`             | on Vercel           | 16+ characters; lets the daily cron keep the free database active   |
+| `SESSION_TTL_DAYS`        | no                  | Session length in days, default 30                                  |
+| `SERVE_WEB_DIR`           | no                  | Serve the built web app from the API (single process)               |
+| `GEMINI_API_KEY`          | no                  | Turns on Explain and the chat (Gemini free tier); hidden without it |
+| `GEMINI_MODEL`            | no                  | Gemini model id, default `gemini-3.8-flash`                         |
+| `AI_DAILY_LIMIT`          | no                  | AI answers per user per 24 hours, default 50 (cached ones are free) |
+| `PORT`                    | no                  | API port for local runs, default 3000                               |
 
 ## Data sources and credits
 
@@ -297,7 +306,7 @@ The [NOTICE](NOTICE) file lists the credits that must travel with every copy.
 - [x] **Phase 3** — analysis engine, suggestions, experience levels, feedback, damage calculator
 - [x] **Phase 4** — data pipeline with readable diffs, "What's new" page, team revalidation
 - [x] **Phase 5** — team preview: which 4 to bring against an open team list
-- [ ] **Phase 6** — on-demand AI explanations and chat (Gemini)
+- [x] **Phase 6** — on-demand AI explanations and chat (Gemini)
 - [ ] **Phase 7** — Singles analysis profile
 - [ ] **Phase 8** — Scarlet/Violet and Smogon formats
 

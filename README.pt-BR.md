@@ -9,13 +9,13 @@ faltando e o que o meta atual está usando. VGC (Doubles) primeiro, Singles depo
 [![Licença: Apache 2.0](https://img.shields.io/github/license/caio2203/vgc-helper)](LICENSE)
 [![Versão](https://img.shields.io/github/v/release/caio2203/vgc-helper?include_prereleases)](https://github.com/caio2203/vgc-helper/releases)
 
-> **Status: início do desenvolvimento.** As Fases 2 a 5 estão prontas: o montador checa a
+> **Status: início do desenvolvimento.** As Fases 2 a 6 estão prontas: o montador checa a
 > legalidade enquanto você edita, a coluna de análise mostra a matriz de tipos, as fraquezas
 > acumuladas, o checklist de papéis, os speed tiers e as ameaças do meta com cálculo de dano,
 > com sugestões que explicam a pontuação, cada atualização dos dados vem com um diff legível,
 > uma página de Novidades e uma checagem dos times salvos, e o team preview diz quem levar e
-> quem começar contra uma Open Team List. Próximo passo: explicações com IA sob demanda — veja o
-> [roadmap](#roadmap).
+> quem começar contra uma Open Team List, e um botão Explicar e um chat opcionais usam o Gemini
+> sobre a análise. Próximo passo: Singles — veja o [roadmap](#roadmap).
 
 ## Screenshots
 
@@ -121,9 +121,14 @@ Já disponível:
   redirecionamento). A tela mostra a tabela de confrontos, quem responde a cada um deles e com
   qual golpe, as outras escolhas com a pontuação e quais campos da lista vieram dos dados de uso.
 
+- IA opcional, só quando você pede: Explicar transforma a análise numa nota curta no seu idioma
+  e nível, e você pode fazer perguntas sobre o time. Usa o Google Gemini no free tier e enxerga só
+  a análise feita pelo motor, mais ferramentas que leem uso, sets comuns e legalidade do snapshot
+  de dados. As respostas ficam guardadas; sem chave os botões ficam ocultos e nada mais muda.
+
 Planejado (veja o roadmap):
 
-- Explicações e chat sob demanda com o Google Gemini (free tier), e tudo funcionando sem ele.
+- O perfil de análise de Singles, depois Scarlet/Violet e formatos do Smogon.
 
 ## Atalhos de teclado
 
@@ -259,22 +264,25 @@ se a autenticação não estiver configurada, a API se recusa a subir.
 
 ## Variáveis de ambiente
 
-| Variável                  | Obrigatória         | Descrição                                                              |
-| ------------------------- | ------------------- | ---------------------------------------------------------------------- |
-| `APP_ORIGIN`              | sim                 | Endereço que você abre no navegador, ex.: `https://helper.example.com` |
-| `SESSION_SECRET`          | sim                 | Pelo menos 32 caracteres aleatórios                                    |
-| `AUTH_MODE`               | sim                 | `github` ou `local-password`                                           |
-| `GITHUB_CLIENT_ID`        | modo github         | Client ID do app OAuth                                                 |
-| `GITHUB_CLIENT_SECRET`    | modo github         | Client secret do app OAuth                                             |
-| `AUTH_ALLOWED_GITHUB_IDS` | modo github         | IDs numéricos do GitHub, separados por vírgula                         |
-| `ADMIN_PASSWORD_HASH`     | modo local-password | Saída do `pnpm hash-password`                                          |
-| `DATABASE_URL`            | não                 | Arquivo SQLite local, padrão `file:local.db`                           |
-| `TURSO_DATABASE_URL`      | na Vercel           | URL `libsql://…` do banco no Turso                                     |
-| `TURSO_AUTH_TOKEN`        | na Vercel           | Token do banco no Turso                                                |
-| `CRON_SECRET`             | na Vercel           | 16+ caracteres; deixa o cron diário manter o banco grátis ativo        |
-| `SESSION_TTL_DAYS`        | não                 | Duração da sessão em dias, padrão 30                                   |
-| `SERVE_WEB_DIR`           | não                 | Entregar o web compilado pela API (um processo só)                     |
-| `PORT`                    | não                 | Porta da API ao rodar localmente, padrão 3000                          |
+| Variável                  | Obrigatória         | Descrição                                                                    |
+| ------------------------- | ------------------- | ---------------------------------------------------------------------------- |
+| `APP_ORIGIN`              | sim                 | Endereço que você abre no navegador, ex.: `https://helper.example.com`       |
+| `SESSION_SECRET`          | sim                 | Pelo menos 32 caracteres aleatórios                                          |
+| `AUTH_MODE`               | sim                 | `github` ou `local-password`                                                 |
+| `GITHUB_CLIENT_ID`        | modo github         | Client ID do app OAuth                                                       |
+| `GITHUB_CLIENT_SECRET`    | modo github         | Client secret do app OAuth                                                   |
+| `AUTH_ALLOWED_GITHUB_IDS` | modo github         | IDs numéricos do GitHub, separados por vírgula                               |
+| `ADMIN_PASSWORD_HASH`     | modo local-password | Saída do `pnpm hash-password`                                                |
+| `DATABASE_URL`            | não                 | Arquivo SQLite local, padrão `file:local.db`                                 |
+| `TURSO_DATABASE_URL`      | na Vercel           | URL `libsql://…` do banco no Turso                                           |
+| `TURSO_AUTH_TOKEN`        | na Vercel           | Token do banco no Turso                                                      |
+| `CRON_SECRET`             | na Vercel           | 16+ caracteres; deixa o cron diário manter o banco grátis ativo              |
+| `SESSION_TTL_DAYS`        | não                 | Duração da sessão em dias, padrão 30                                         |
+| `SERVE_WEB_DIR`           | não                 | Entregar o web compilado pela API (um processo só)                           |
+| `GEMINI_API_KEY`          | não                 | Liga o Explicar e o chat (free tier do Gemini); sem ela ficam ocultos        |
+| `GEMINI_MODEL`            | não                 | Id do modelo do Gemini, padrão `gemini-3.8-flash`                            |
+| `AI_DAILY_LIMIT`          | não                 | Respostas da IA por usuário a cada 24 horas, padrão 50 (do cache não contam) |
+| `PORT`                    | não                 | Porta da API ao rodar localmente, padrão 3000                                |
 
 ## Fontes de dados e créditos
 
@@ -301,7 +309,7 @@ O arquivo [NOTICE](NOTICE) lista os créditos que precisam acompanhar qualquer c
 - [x] **Fase 3** — motor de análise, sugestões, níveis de experiência, feedback, calculadora de dano
 - [x] **Fase 4** — pipeline de dados com diff legível, página "Novidades", revalidação de times
 - [x] **Fase 5** — team preview: quais 4 levar contra uma Open Team List
-- [ ] **Fase 6** — explicações e chat com IA sob demanda (Gemini)
+- [x] **Fase 6** — explicações e chat com IA sob demanda (Gemini)
 - [ ] **Fase 7** — perfil de análise de Singles
 - [ ] **Fase 8** — Scarlet/Violet e formatos do Smogon
 

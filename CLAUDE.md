@@ -102,4 +102,14 @@ pnpm hash-password     # ADMIN_PASSWORD_HASH for AUTH_MODE=local-password
   by their battle forme). The web page is `/preview`; the opponent's list stays in
   `sessionStorage`. Scroll containers with `sr-only` children need `relative`, or the hidden
   text widens the page on phones.
-- Next: Phase 6 — on-demand AI explanations and chat (Gemini free tier), with fallback and cache.
+- Phase 6 is done: optional AI in `apps/api/src/ai` (`LlmProvider` interface in `llm.ts`,
+  `GeminiProvider` on `@google/genai` 2.x with function calling, prompts in `prompts.ts`). The
+  client sends only the team; the API runs `summarizeTeam` (`@vgc-helper/engine/damage`
+  `summary.ts`) and gives the model that JSON plus the snapshot tools `getUsage`,
+  `getCommonSet`, `checkLegality`. Answers are cached in `ai_responses` (key: kind, team,
+  snapshot version, locale, level, model, messages), which also counts `AI_DAILY_LIMIT`.
+  Without `GEMINI_API_KEY` the routes answer `disabled` and the web hides Explain and the chat;
+  that is a feature switch, not an auth fallback. Tests pass a fake provider to `createApp`;
+  e2e stubs `/api/ai/*` with `page.route`. Never paste or handle the key: the owner adds it with
+  `vercel env add GEMINI_API_KEY` (docs/setup.md 2.8).
+- Next: Phase 7 — the Champions Singles analysis profile.
