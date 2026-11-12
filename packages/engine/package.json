@@ -9,6 +9,10 @@
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
+    },
+    "./damage": {
+      "types": "./dist/damage/index.d.ts",
+      "default": "./dist/damage/index.js"
     }
   },
   "files": [
@@ -21,6 +25,7 @@
     "test": "vitest run"
   },
   "dependencies": {
+    "@smogon/calc": "0.12.0",
     "@vgc-helper/data": "workspace:*",
     "@vgc-helper/shared": "workspace:*"
   },
