@@ -166,8 +166,13 @@ Automation**, na mesma página.
 ## 3. Pull requests de atualização de dados (GitHub App)
 
 O workflow `Update data` refaz o snapshot de dados todo dia e abre um pull request quando algo
-mudou. Pull requests abertos com o `GITHUB_TOKEN` padrão não disparam outros workflows, então o
-CI não rodaria neles. Um GitHub App pequeno resolve isso.
+mudou. O corpo do pull request é o relatório de mudanças (o que passou a ser legal ou deixou de
+ser, mudanças de balanceamento e de uso, avisos), que também aparece no resumo da execução. Se
+uma lista de Pokémon ou golpes legais muda mais de 30%, a execução falha e mantém o snapshot
+antigo; quando a mudança é esperada (uma versão nova do jogo, por exemplo), rode de novo em
+**Actions → Update data → Run workflow** marcando **accept large changes**. Pull requests
+abertos com o `GITHUB_TOKEN` padrão não disparam outros workflows, então o CI não rodaria neles.
+Um GitHub App pequeno resolve isso.
 
 1. Entre em https://github.com/settings/apps/new e preencha:
 

@@ -166,8 +166,12 @@ Automation** in the same page.
 ## 3. Data update pull requests (GitHub App)
 
 The `Update data` workflow rebuilds the data snapshot every day and opens a pull request when it
-changed. Pull requests opened with the default `GITHUB_TOKEN` do not start other workflows, so CI
-would not run on them. A small GitHub App fixes that.
+changed. The pull request body is the change report (what became legal or not, balance and
+usage changes, warnings), also shown in the run summary. If a legal Pokémon or move list changes
+by more than 30%, the run fails and keeps the old snapshot; when the change is expected (a new
+game version, for example), run it again from **Actions → Update data → Run workflow** with
+**accept large changes** ticked. Pull requests opened with the default `GITHUB_TOKEN` do not
+start other workflows, so CI would not run on them. A small GitHub App fixes that.
 
 1. Go to https://github.com/settings/apps/new and fill in:
 
