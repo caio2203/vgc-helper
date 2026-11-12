@@ -31,6 +31,8 @@ export const mechanicsProfileSchema = z.object({
   gimmick: z.object({
     kind: z.enum(['mega', 'tera', 'dynamax', 'zmove', 'none']),
     perBattle: z.int().min(0),
+    /** Types a Pokémon can Terastallize into, for the `tera` gimmick. */
+    teraTypes: z.array(z.string().min(1)).default([]),
   }),
   pp: z.object({
     /** Base PP above this value is lowered to it before the formula runs. */
@@ -130,11 +132,15 @@ export const regulationSchema = z.object({
   formats: z.array(regulationFormatSchema).min(1),
   clauses: z.array(z.enum(['species', 'item', 'nickname'])),
   bannedTags: z.array(z.string().min(1)),
+  /** Showdown tiers left out, for Smogon formats (e.g. Uber and AG in OU). */
+  bannedTiers: z.array(z.string().min(1)).default([]),
   bannedSpecies: z.array(idSchema),
   bannedItems: z.array(idSchema),
   bannedMoves: z.array(idSchema),
   bannedAbilities: z.array(idSchema),
   restrictedLimit: z.int().min(0).nullable(),
+  /** Species tags that count toward `restrictedLimit`, e.g. Restricted Legendary. */
+  restrictedTags: z.array(z.string().min(1)).default([]),
   sources: z.array(sourceRefSchema).min(1),
   verifiedAt: z.iso.datetime(),
 });
