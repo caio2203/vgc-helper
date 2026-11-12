@@ -18,6 +18,7 @@ coverage/
 # Test output
 playwright-report/
 test-results/
+apps/web/e2e/.auth/
 
 # Editor and OS
 .DS_Store

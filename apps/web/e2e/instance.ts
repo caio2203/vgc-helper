@@ -7,6 +7,8 @@ import type { PlaywrightTestConfig } from '@playwright/test';
  */
 const PORT = 4173;
 export const E2E_ORIGIN = `http://localhost:${PORT}`;
+/** Where the setup step keeps the signed-in session for the other tests (gitignored). */
+export const AUTH_STATE = fileURLToPath(new URL('./.auth/admin.json', import.meta.url));
 /** Test-only password for that in-memory instance. */
 export const E2E_PASSWORD = 'e2e-only-password-not-a-secret';
 

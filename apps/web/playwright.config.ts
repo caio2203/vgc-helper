@@ -12,8 +12,10 @@ export default defineConfig({
     trace: 'retain-on-failure',
   },
   projects: [
-    { name: 'desktop', use: { ...devices['Desktop Chrome'] } },
-    { name: 'mobile', use: { ...devices['Pixel 7'] } },
+    // The login is rate limited, so one setup step signs in and the builder tests reuse it.
+    { name: 'setup', testMatch: /\.setup\.ts$/ },
+    { name: 'desktop', use: { ...devices['Desktop Chrome'] }, dependencies: ['setup'] },
+    { name: 'mobile', use: { ...devices['Pixel 7'] }, dependencies: ['setup'] },
   ],
   webServer: testInstance,
 });

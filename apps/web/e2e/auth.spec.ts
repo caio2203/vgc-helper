@@ -1,19 +1,5 @@
-import AxeBuilder from '@axe-core/playwright';
-import { expect, type Page, test } from '@playwright/test';
-import { E2E_PASSWORD } from './instance';
-
-async function expectNoA11yViolations(page: Page) {
-  const results = await new AxeBuilder({ page })
-    .withTags(['wcag2a', 'wcag2aa', 'wcag22aa'])
-    .analyze();
-  expect(results.violations).toEqual([]);
-}
-
-async function signIn(page: Page, password = E2E_PASSWORD) {
-  await page.goto('/');
-  await page.getByLabel('Password').fill(password);
-  await page.getByRole('button', { name: 'Sign in' }).click();
-}
+import { expect, test } from '@playwright/test';
+import { expectNoA11yViolations, signIn } from './support';
 
 test.use({ locale: 'en-US' });
 
@@ -25,28 +11,31 @@ test('a signed-out visitor only sees the login screen', async ({ page }) => {
   await expectNoA11yViolations(page);
 });
 
-test('a wrong password shows an error that says what to do', async ({ page }) => {
+test('a wrong password shows an error that says what to do', async ({ page }, info) => {
+  test.skip(info.project.name !== 'desktop', 'the login is rate limited; one project covers it');
   await signIn(page, 'not the password');
   await expect(page.getByRole('alert')).toHaveText('Wrong password. Try again.');
 });
 
-test('signing in shows the snapshot, switching language works and signing out locks again', async ({
+test('signing in opens the builder, the language follows the account and signing out locks again', async ({
   page,
-}) => {
+}, info) => {
+  test.skip(info.project.name !== 'desktop', 'the login is rate limited; one project covers it');
   await signIn(page);
-  await expect(page.getByText('Signed in as admin')).toBeVisible();
-  await expect(page.getByText(/Data snapshot \d{4}-\d{2}-\d{2}\./)).toBeVisible();
-  await expect(page.getByText('Regulation Set M-C', { exact: true })).toBeVisible();
-  await expectNoA11yViolations(page);
+  await expect(page.getByRole('heading', { name: 'Team · 0 / 6' })).toBeVisible();
+  await expect(page.getByLabel('Regulation')).toHaveValue(/M-C/);
 
+  await page.getByRole('link', { name: 'Settings' }).click();
   await page.getByLabel('Language').selectOption('pt-BR');
-  await expect(page.getByText('Conectado como admin')).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Configurações' })).toBeVisible();
   await expect(page.locator('html')).toHaveAttribute('lang', 'pt-BR');
 
   await page.reload();
-  await expect(page.getByText('Conectado como admin')).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Configurações' })).toBeVisible();
+  await page.getByLabel('Idioma').selectOption('en');
+  await expect(page.getByRole('heading', { name: 'Settings' })).toBeVisible();
 
-  await page.getByRole('button', { name: 'Sair' }).click();
+  await page.getByRole('button', { name: /Sign out/ }).click();
   await expect(page).toHaveURL(/\/login$/);
   await page.goto('/');
   await expect(page).toHaveURL(/\/login$/);
