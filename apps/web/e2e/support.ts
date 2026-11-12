@@ -71,3 +71,10 @@ Modest Nature
 - Draco Meteor
 - Flash Cannon
 - Protect`;
+
+/** Picks a species in one side (region) of the damage calculator. */
+export async function pickSpecies(page: Page, side: string | RegExp, query: string, name: string) {
+  const region = page.getByRole('region', { name: side });
+  await region.getByLabel('Pokémon', { exact: true }).fill(query);
+  await region.getByRole('option', { name: new RegExp(`^${name}`) }).click();
+}

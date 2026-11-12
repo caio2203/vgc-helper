@@ -79,8 +79,8 @@ export function AnalysisPanel({ rules, issues }: { rules: Rules; issues: Legalit
             {analysis.stacked.map((s) => (
               <Alert
                 key={s.type}
-                tone="error"
-                toneLabel={t('tone.error')}
+                tone={s.coveredBy.length > 0 ? 'warning' : 'error'}
+                toneLabel={t(s.coveredBy.length > 0 ? 'tone.warning' : 'tone.error')}
                 title={t('analysis.stacked.title', { count: s.slots.length, type: s.type })}
               >
                 <p className="m-0">
@@ -97,10 +97,15 @@ export function AnalysisPanel({ rules, issues }: { rules: Rules; issues: Legalit
                         ),
                       ),
                     })}{' '}
-                  {analysis.recommendedTypes.length > 0 &&
-                    t('analysis.stacked.recommended', {
-                      list: f.list(analysis.recommendedTypes.map((r) => r.type)),
-                    })}
+                  {s.coveredBy.length > 0
+                    ? t('analysis.stacked.covered', {
+                        count: s.coveredBy.length,
+                        list: f.list(s.coveredBy.map(nameOf)),
+                      })
+                    : analysis.recommendedTypes.length > 0 &&
+                      t('analysis.stacked.recommended', {
+                        list: f.list(analysis.recommendedTypes.map((r) => r.type)),
+                      })}
                 </p>
               </Alert>
             ))}

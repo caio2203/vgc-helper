@@ -23,7 +23,8 @@
     "teams": "My teams",
     "search": "Search",
     "settings": "Settings",
-    "signOut": "Sign out ({{login}})"
+    "signOut": "Sign out ({{login}})",
+    "calc": "Damage calc"
   },
   "login": {
     "title": "Sign in",
@@ -146,7 +147,9 @@
       "added": "Adding {{name}} made it {{count}}.",
       "users": "Used against it in the meta: {{list}}.",
       "user": "{{name}} ({{usage}}, {{move}})",
-      "recommended": "Types that resist it: {{list}}."
+      "recommended": "Types that resist it: {{list}}.",
+      "covered_one": "Covered by {{list}}, which resists it.",
+      "covered_other": "Covered by {{list}}, which resist it."
     },
     "archetype": {
       "detected": "{{name}}: {{setters}} setting it up, {{abusers}} that benefit.",
@@ -416,7 +419,15 @@
     "cutoffHint": "Empty uses the format default: {{value}}%.",
     "offMeta": "Off-meta mode: also suggest Pokémon below the cutoff",
     "saved": "Settings saved.",
-    "saveError": "The setting was not saved. Check your connection and try again."
+    "saveError": "The setting was not saved. Check your connection and try again.",
+    "feedback": {
+      "title": "Suggestion feedback",
+      "empty": "No suggestion rated yet. Use Useful or Not useful in the analysis.",
+      "total": "{{total}} ratings, {{helpful}} useful.",
+      "pokemon": "Suggested Pokémon",
+      "helpful": "Useful",
+      "notHelpful": "Not useful"
+    }
   },
   "about": {
     "title": "About",
@@ -426,11 +437,57 @@
     "showdown": "game data for the Pokémon Champions mods (MIT).",
     "pkmn": "the Showdown data packaged for JavaScript (MIT).",
     "smogon": "monthly usage statistics.",
-    "snapshot": "Data snapshot {{version}}, built {{date}}."
+    "snapshot": "Data snapshot {{version}}, built {{date}}.",
+    "calc": "damage calculations with Pokémon Champions mechanics (MIT)."
   },
   "footer": {
     "createdBy": "Created by",
     "about": "About",
     "notAffiliated": "Not affiliated with Nintendo, Game Freak, Creatures or The Pokémon Company."
+  },
+  "calc": {
+    "title": "Damage calculator",
+    "intro": "Champions damage at level 50 with Stat Points, using the stats and moves of the data snapshot.",
+    "attacker": "Attacker",
+    "defender": "Defender",
+    "field": "Field",
+    "result": "Result",
+    "fromTeam": "From your team",
+    "fromTeamNone": "Pick a slot",
+    "species": "Pokémon",
+    "ability": "Ability",
+    "item": "Item",
+    "nature": "Nature",
+    "stage": "Stat stage",
+    "stageAttack": "Atk and SpA stage",
+    "stageDefense": "Def and SpD stage",
+    "move": "Move",
+    "weather": "Weather",
+    "terrain": "Terrain",
+    "auto": "From abilities",
+    "none": "None",
+    "reflect": "Reflect",
+    "lightScreen": "Light Screen",
+    "helpingHand": "Helping Hand",
+    "critical": "Critical hit",
+    "prefilled": "Filled with the most common set from the usage data.",
+    "pickBoth": "Pick an attacker, a move and a defender.",
+    "range": "{{min}}–{{max}} damage of {{hp}} HP",
+    "hits": "Hits to knock out: {{worst}} with the lowest roll, {{best}} with the highest.",
+    "noDamage": "This move does no damage to this target.",
+    "text": "Calc text",
+    "swap": "Swap sides",
+    "weathers": {
+      "Sun": "Sun",
+      "Rain": "Rain",
+      "Sand": "Sand",
+      "Snow": "Snow"
+    },
+    "terrains": {
+      "Electric": "Electric Terrain",
+      "Grassy": "Grassy Terrain",
+      "Psychic": "Psychic Terrain",
+      "Misty": "Misty Terrain"
+    }
   }
 }

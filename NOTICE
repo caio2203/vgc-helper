@@ -27,6 +27,11 @@ Pokémon Showdown (https://github.com/smogon/pokemon-showdown)
 Smogon University usage statistics (https://www.smogon.com/stats/)
   Monthly usage, sets, spreads and teammates for the Pokémon Champions formats.
 
+@smogon/calc (https://github.com/smogon/damage-calc)
+  Damage calculations with Pokémon Champions mechanics, fed with the stats and
+  moves of the data snapshot. Bundled in the web app.
+  MIT License. Copyright (c) 2013-2025 Honko and other contributors.
+
 Rule dates and announcements are credited where they are used, in
 packages/data/manual/*.json, with the link and the date they were checked.
 
@@ -38,6 +43,8 @@ This project uses, among others, the following open source packages:
 
   NestJS, Express, cookie-parser, Passport, passport-github2 ........ MIT
   React, TanStack Router, TanStack Query, i18next, react-i18next ...... MIT
+  Radix UI, Zustand, vite-plugin-pwa, Workbox, @smogon/calc .......... MIT
+  lucide-react ....................................................... ISC
   zod, @libsql/client ................................................ MIT
   Drizzle ORM, RxJS, reflect-metadata ......................... Apache-2.0
 

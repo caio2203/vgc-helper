@@ -11,6 +11,7 @@ import { z } from 'zod';
 import { AboutPage } from './about/AboutPage';
 import { sessionQuery } from './api/queries';
 import { BuilderPage } from './builder/BuilderPage';
+import { CalcPage } from './calc/CalcPage';
 import { AppShell } from './components/AppShell';
 import { useAppearance } from './lib/theme';
 import { LoginPage } from './routes/LoginPage';
@@ -79,6 +80,12 @@ const teamRoute = createRoute({
   },
 });
 
+const calcRoute = createRoute({
+  getParentRoute: () => authedRoute,
+  path: '/calc',
+  component: CalcPage,
+});
+
 const settingsRoute = createRoute({
   getParentRoute: () => authedRoute,
   path: '/settings',
@@ -93,7 +100,14 @@ const aboutRoute = createRoute({
 
 const routeTree = rootRoute.addChildren([
   loginRoute,
-  authedRoute.addChildren([builderRoute, teamsRoute, teamRoute, settingsRoute, aboutRoute]),
+  authedRoute.addChildren([
+    builderRoute,
+    teamsRoute,
+    teamRoute,
+    calcRoute,
+    settingsRoute,
+    aboutRoute,
+  ]),
 ]);
 
 export function makeRouter(queryClient: QueryClient) {

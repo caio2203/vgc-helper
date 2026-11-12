@@ -47,6 +47,12 @@ export function AboutPage() {
             </a>{' '}
             — {t('about.smogon')}
           </li>
+          <li>
+            <a className={LINK} href="https://github.com/smogon/damage-calc">
+              @smogon/calc
+            </a>{' '}
+            — {t('about.calc')}
+          </li>
           {manifest.data && (
             <li className="text-sm text-muted">
               {t('about.snapshot', {

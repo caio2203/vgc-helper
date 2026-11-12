@@ -6,8 +6,10 @@ import { api } from '../api/client';
 import { manifestQuery, settingsQuery } from '../api/queries';
 import { Alert } from '../components/ui/Alert';
 import { Field, Panel, Select, TextInput } from '../components/ui/Controls';
+import { useRules } from '../data/rules';
 import { applyLocale, LOCALES } from '../i18n';
 import { useUi } from '../state/ui';
+import { FeedbackSummary } from './FeedbackSummary';
 
 /** Language, experience level, density, theme and data preferences. Saved on change. */
 export function SettingsPage() {
@@ -17,6 +19,7 @@ export function SettingsPage() {
   const settings = useQuery(settingsQuery);
   const manifest = useQuery(manifestQuery);
   const announce = useUi((u) => u.announce);
+  const { rules } = useRules();
 
   const save = useMutation({
     mutationFn: (patch: SettingsPatch) =>
@@ -162,6 +165,7 @@ export function SettingsPage() {
       {save.isError && (
         <Alert tone="error" title={t('settings.saveError')} toneLabel={t('tone.error')} />
       )}
+      <FeedbackSummary nameOf={(id) => rules?.index.species.get(id)?.name ?? id} />
     </div>
   );
 }

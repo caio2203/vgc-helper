@@ -23,7 +23,8 @@
     "teams": "Meus times",
     "search": "Buscar",
     "settings": "Configurações",
-    "signOut": "Sair ({{login}})"
+    "signOut": "Sair ({{login}})",
+    "calc": "Calculadora"
   },
   "login": {
     "title": "Entrar",
@@ -146,7 +147,9 @@
       "added": "Adicionar {{name}} levou a {{count}}.",
       "users": "Quem usa isso no meta: {{list}}.",
       "user": "{{name}} ({{usage}}, {{move}})",
-      "recommended": "Tipos que resistem: {{list}}."
+      "recommended": "Tipos que resistem: {{list}}.",
+      "covered_one": "Coberto por {{list}}, que resiste.",
+      "covered_other": "Coberto por {{list}}, que resistem."
     },
     "archetype": {
       "detected": "{{name}}: {{setters}} para ativar, {{abusers}} que aproveitam.",
@@ -416,7 +419,15 @@
     "cutoffHint": "Vazio usa o padrão do formato: {{value}}%.",
     "offMeta": "Modo off-meta: sugerir também Pokémon abaixo do corte",
     "saved": "Configurações salvas.",
-    "saveError": "A configuração não foi salva. Confira sua conexão e tente de novo."
+    "saveError": "A configuração não foi salva. Confira sua conexão e tente de novo.",
+    "feedback": {
+      "title": "Avaliação das sugestões",
+      "empty": "Nenhuma sugestão avaliada ainda. Use Útil ou Não útil na análise.",
+      "total": "{{total}} avaliações, {{helpful}} úteis.",
+      "pokemon": "Pokémon sugerido",
+      "helpful": "Útil",
+      "notHelpful": "Não útil"
+    }
   },
   "about": {
     "title": "Sobre",
@@ -426,11 +437,57 @@
     "showdown": "dados de jogo dos mods do Pokémon Champions (MIT).",
     "pkmn": "os dados do Showdown empacotados para JavaScript (MIT).",
     "smogon": "estatísticas mensais de uso.",
-    "snapshot": "Snapshot de dados {{version}}, gerado em {{date}}."
+    "snapshot": "Snapshot de dados {{version}}, gerado em {{date}}.",
+    "calc": "cálculo de dano com a mecânica do Pokémon Champions (MIT)."
   },
   "footer": {
     "createdBy": "Criado por",
     "about": "Sobre",
     "notAffiliated": "Não é afiliado à Nintendo, Game Freak, Creatures ou The Pokémon Company."
+  },
+  "calc": {
+    "title": "Calculadora de dano",
+    "intro": "Dano do Champions no nível 50 com Stat Points, usando os stats e golpes do snapshot de dados.",
+    "attacker": "Atacante",
+    "defender": "Defensor",
+    "field": "Campo",
+    "result": "Resultado",
+    "fromTeam": "Do seu time",
+    "fromTeamNone": "Escolha um slot",
+    "species": "Pokémon",
+    "ability": "Habilidade",
+    "item": "Item",
+    "nature": "Natureza",
+    "stage": "Estágio",
+    "stageAttack": "Estágio de Atk e SpA",
+    "stageDefense": "Estágio de Def e SpD",
+    "move": "Golpe",
+    "weather": "Clima",
+    "terrain": "Terreno",
+    "auto": "Pelas habilidades",
+    "none": "Nenhum",
+    "reflect": "Reflect",
+    "lightScreen": "Light Screen",
+    "helpingHand": "Helping Hand",
+    "critical": "Acerto crítico",
+    "prefilled": "Preenchido com o set mais comum dos dados de uso.",
+    "pickBoth": "Escolha um atacante, um golpe e um defensor.",
+    "range": "{{min}}–{{max}} de dano em {{hp}} de HP",
+    "hits": "Golpes para derrubar: {{worst}} com a menor rolagem, {{best}} com a maior.",
+    "noDamage": "Este golpe não causa dano neste alvo.",
+    "text": "Texto do cálculo",
+    "swap": "Trocar os lados",
+    "weathers": {
+      "Sun": "Sol",
+      "Rain": "Chuva",
+      "Sand": "Areia",
+      "Snow": "Neve"
+    },
+    "terrains": {
+      "Electric": "Electric Terrain",
+      "Grassy": "Grassy Terrain",
+      "Psychic": "Psychic Terrain",
+      "Misty": "Misty Terrain"
+    }
   }
 }

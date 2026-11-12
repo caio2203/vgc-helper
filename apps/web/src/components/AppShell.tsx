@@ -56,16 +56,18 @@ export function AppShell({ session, children }: { session: SessionResponse; chil
       </a>
       <header className="border-b border-line bg-surface">
         <div className="mx-auto flex h-12 max-w-[1440px] items-center gap-3 px-4 sm:gap-4">
-          <Link to="/" aria-label={t('shell.home')}>
+          <Link to="/" aria-label={t('shell.home')} className="shrink-0">
             <Logo compact />
           </Link>
           <nav
             aria-label={t('shell.nav')}
-            className="flex items-center gap-3 whitespace-nowrap sm:gap-4"
+            // On phones the links scroll inside the header instead of widening the page.
+            className="flex min-w-0 items-center gap-3 overflow-x-auto whitespace-nowrap sm:gap-4"
           >
+            {/* On phones the logo already opens the builder. */}
             <Link
               to="/"
-              className={navLink}
+              className={`${navLink} max-sm:hidden`}
               activeProps={navActive}
               activeOptions={{ exact: true }}
             >
@@ -74,8 +76,11 @@ export function AppShell({ session, children }: { session: SessionResponse; chil
             <Link to="/teams" className={navLink} activeProps={navActive}>
               {t('shell.teams')}
             </Link>
+            <Link to="/calc" className={navLink} activeProps={navActive}>
+              {t('shell.calc')}
+            </Link>
           </nav>
-          <div className="ml-auto flex items-center gap-1">
+          <div className="ml-auto flex shrink-0 items-center gap-1">
             <button
               type="button"
               onClick={() => setPalette(true)}
