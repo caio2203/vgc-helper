@@ -39,6 +39,9 @@ Gere o hash da senha que você quer usar e cole em `ADMIN_PASSWORD_HASH` (a senh
 pnpm hash-password
 ```
 
+No PowerShell do Windows, use `pnpm.cmd hash-password`: o atalho `pnpm.ps1` não repassa o que
+você digita para o script.
+
 Mantenha `AUTH_MODE=local-password` e suba:
 
 ```bash

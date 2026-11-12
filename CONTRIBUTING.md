@@ -17,7 +17,7 @@ Requirements: Node.js 24 and pnpm 12 (`npm install -g pnpm@12`).
 ```bash
 pnpm install
 cp .env.example .env        # then fill it in, see docs/setup.md
-pnpm hash-password          # paste the output into ADMIN_PASSWORD_HASH
+pnpm hash-password          # paste the output into ADMIN_PASSWORD_HASH (PowerShell: pnpm.cmd hash-password)
 pnpm dev                    # web on http://localhost:5173, API on :3000
 ```
 

@@ -39,6 +39,9 @@ Generate the hash of the password you want to use and paste it into `ADMIN_PASSW
 pnpm hash-password
 ```
 
+In Windows PowerShell, use `pnpm.cmd hash-password`: the `pnpm.ps1` shim does not pass your
+keyboard input to the script.
+
 Keep `AUTH_MODE=local-password` and start:
 
 ```bash

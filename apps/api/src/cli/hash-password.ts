@@ -35,6 +35,11 @@ async function readPassword(): Promise<string> {
 }
 
 const password = await readPassword();
+if (password.length === 0) {
+  // Windows PowerShell runs `pnpm` through pnpm.ps1, which hands scripts an empty stdin.
+  console.error('No password received. In PowerShell, run `pnpm.cmd hash-password` instead.');
+  process.exit(1);
+}
 if (password.length < MIN_LENGTH) {
   console.error(`Use at least ${MIN_LENGTH} characters.`);
   process.exit(1);
