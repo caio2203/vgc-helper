@@ -198,6 +198,23 @@ export function SlotEditor({
           </label>
         )}
 
+        {rules.ctx.profile.gimmick.kind === 'tera' && (
+          <Field label={t('builder.teraType')} htmlFor={`${ids}-tera`}>
+            <Select
+              id={`${ids}-tera`}
+              value={slot.teraType ?? ''}
+              onChange={(e) => set({ teraType: e.target.value || null })}
+            >
+              <option value="">{t('builder.teraNone')}</option>
+              {rules.ctx.profile.gimmick.teraTypes.map((type) => (
+                <option key={type} value={type}>
+                  {type}
+                </option>
+              ))}
+            </Select>
+          </Field>
+        )}
+
         <fieldset className="m-0 grid gap-2 border-0 p-0 lg:col-span-2 lg:grid-cols-2">
           <legend className="label mb-1">{t('builder.moves')}</legend>
           {Array.from({ length: MOVE_SLOTS }, (_, m) => {

@@ -430,6 +430,11 @@ export function PreviewPage() {
             labelledBy={`${ids}-pick`}
           >
             <div className="py-2">
+              {preview.bringCount >= (rules as Rules).ctx.format.teamSize.max && (
+                <p className="m-0 px-4 pb-2 text-sm text-muted">
+                  {t('preview.allIn', { format: (rules as Rules).ctx.format.name })}
+                </p>
+              )}
               <Plan preview={preview} rules={rules as Rules} roleName={roleName} />
             </div>
           </Panel>

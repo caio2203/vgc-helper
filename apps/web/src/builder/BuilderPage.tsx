@@ -48,7 +48,9 @@ export function BuilderPage({ teamId }: { teamId?: string }) {
       if (saved.data && state.teamId !== teamId) state.load(saved.data, saved.data);
     } else if (manifest.data && (state.teamId !== null || state.gameId === '')) {
       const format = manifest.data.formats[0];
-      const regulation = format ? currentRegulation(manifest.data, format.gameId) : undefined;
+      const regulation = format
+        ? currentRegulation(manifest.data, format.gameId, Date.now(), format.id)
+        : undefined;
       if (format && regulation) {
         state.load(null, {
           gameId: format.gameId,
@@ -77,7 +79,7 @@ export function BuilderPage({ teamId }: { teamId?: string }) {
       const d = useDraft.getState();
       const body = {
         name: d.name.trim(),
-        gameId: d.gameId,
+        gameId: rules.regulation.gameId,
         formatId: d.formatId,
         regulationId: d.regulationId,
         snapshotVersion: rules.manifest.version,
@@ -201,10 +203,29 @@ export function BuilderPage({ teamId }: { teamId?: string }) {
     return <BuilderSkeleton label={t('common.loading')} />;
   }
 
-  const regulations = rules.manifest.regulations.filter((r) => r.gameId === draft.gameId);
-  const formats = rules.manifest.formats.filter((f) =>
-    rules.regulation.formats.some((rf) => rf.formatId === f.id),
+  const data = rules.manifest;
+  // Regulations of this game that run the chosen format (Reg G for VGC, OU for Smogon OU).
+  const regulations = data.regulations.filter(
+    (r) =>
+      r.gameId === rules.regulation.gameId &&
+      r.formats.some((rf) => rf.formatId === draft.formatId),
   );
+  /** A format of another game or regulation also moves the team to a regulation that runs it. */
+  function pickFormat(formatId: string) {
+    const format = data.formats.find((f) => f.id === formatId);
+    if (!format) return;
+    const runs = data.regulations.filter(
+      (r) => r.gameId === format.gameId && r.formats.some((rf) => rf.formatId === format.id),
+    );
+    const inForce = currentRegulation(data, format.gameId, Date.now(), format.id);
+    const regulation =
+      runs.find((r) => r.id === draft.regulationId) ??
+      runs.find((r) => r.id === inForce?.id) ??
+      runs.at(-1);
+    if (!regulation) return;
+    useDraft.setState({ gameId: format.gameId });
+    draft.edit((x) => ({ ...x, formatId: format.id, regulationId: regulation.id }));
+  }
   const saveLabel = save.isPending
     ? t('builder.saving')
     : dirty || !draft.teamId
@@ -234,12 +255,18 @@ export function BuilderPage({ teamId }: { teamId?: string }) {
           <Select
             id={`${ids}-format`}
             value={draft.formatId}
-            onChange={(e) => draft.edit((x) => ({ ...x, formatId: e.target.value }))}
+            onChange={(e) => pickFormat(e.target.value)}
           >
-            {formats.map((f) => (
-              <option key={f.id} value={f.id}>
-                {f.name}
-              </option>
+            {data.games.map((game) => (
+              <optgroup key={game.id} label={game.name}>
+                {data.formats
+                  .filter((f) => f.gameId === game.id)
+                  .map((f) => (
+                    <option key={f.id} value={f.id}>
+                      {f.name}
+                    </option>
+                  ))}
+              </optgroup>
             ))}
           </Select>
         </div>

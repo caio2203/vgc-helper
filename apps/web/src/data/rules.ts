@@ -47,20 +47,15 @@ export function useRules(selection: RulesSelection = {}): {
       m.formats.find((f) => f.id === settings.data?.defaultFormatId) ??
       m.formats[0];
     if (!format) return null;
-    const gameId = selection.gameId ?? format.gameId;
+    // A format belongs to one game, so the format decides it (undo can change the format back).
+    const gameId = format.gameId;
     const regulation =
       m.regulations.find((r) => r.gameId === gameId && r.id === selection.regulationId) ??
-      currentRegulation(m, gameId);
+      currentRegulation(m, gameId, Date.now(), format.id);
     const game = m.games.find((g) => g.id === gameId);
     const profile = m.mechanicsProfiles.find((p) => p.id === game?.mechanicsProfileId);
     return regulation && profile ? { manifest: m, format, regulation, profile } : null;
-  }, [
-    manifest.data,
-    settings.data?.defaultFormatId,
-    selection.formatId,
-    selection.gameId,
-    selection.regulationId,
-  ]);
+  }, [manifest.data, settings.data?.defaultFormatId, selection.formatId, selection.regulationId]);
 
   const dex = useQuery({
     ...dexQuery(resolved?.regulation.gameId ?? '', resolved?.regulation.id ?? ''),

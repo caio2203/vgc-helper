@@ -99,7 +99,9 @@
       "analysis": "Analysis"
     },
     "errorCount_one": "{{count}} error",
-    "errorCount_other": "{{count}} errors"
+    "errorCount_other": "{{count}} errors",
+    "teraType": "Tera Type",
+    "teraNone": "None"
   },
   "stats": {
     "hp": "HP",
@@ -133,7 +135,7 @@
     "title": "Analysis",
     "legality": "Legality in {{regulation}}",
     "legal": "Legal in {{regulation}}",
-    "legalDetail": "Species, items, abilities, moves and Stat Points follow the rules.",
+    "legalDetail": "Species, items, abilities, moves and {{spread}} follow the rules.",
     "empty": "Add a Pokémon to see the analysis.",
     "source": "Rules for {{name}}:",
     "sections": {
@@ -287,7 +289,9 @@
       "dex": "Game data: {{name}}, retrieved {{date}}.",
       "rules": "Roles, thresholds and weights: {{name}}, {{date}}.",
       "calc": "Damage: @smogon/calc with the stats and moves of the snapshot, level {{level}}."
-    }
+    },
+    "spreadSp": "Stat Points",
+    "spreadEv": "EVs"
   },
   "legality": {
     "slot": "Slot {{n}} ({{name}})",
@@ -314,7 +318,10 @@
     "gimmickLimit_other": "{{count}} Pokémon plan to Mega Evolve; only {{perBattle}} can per battle.",
     "teamTooSmall_one": "{{count}} Pokémon on the team; this format needs at least {{min}} to play.",
     "teamTooSmall_other": "{{count}} Pokémon on the team; this format needs at least {{min}} to play.",
-    "teamTooLarge": "{{count}} Pokémon on the team; the limit is {{max}}."
+    "teamTooLarge": "{{count}} Pokémon on the team; the limit is {{max}}.",
+    "unknownTeraType": "{{slot}}: {{type}} is not a Tera Type in this game.",
+    "restrictedLimit_one": "Slots {{slots}} are Restricted Legendaries; this regulation allows {{count}}.",
+    "restrictedLimit_other": "Slots {{slots}} are Restricted Legendaries; this regulation allows {{count}}."
   },
   "paste": {
     "title": "Showdown paste",
@@ -636,7 +643,8 @@
     "endsHint_one": "{{count}} day left. Saved teams keep their regulation; pick the next one in the selector once it is in the data.",
     "endsHint_other": "{{count}} days left. Saved teams keep their regulation; pick the next one in the selector once it is in the data.",
     "endedTitle": "{{regulation}} ended on {{date}}",
-    "endedHint": "Pick the regulation in force in the selector to check the team against it."
+    "endedHint": "Pick the regulation in force in the selector to check the team against it.",
+    "endedNoNext": "No newer regulation of this game is in the data, so teams stay checked against this one."
   },
   "preview": {
     "title": "Team preview",
@@ -689,7 +697,8 @@
       "spread": "spread"
     },
     "source": "Damage from the data snapshot {{version}}. Fields missing from their list: {{name}}, retrieved {{date}}.",
-    "sourceNoMeta": "Damage from the data snapshot {{version}}. No usage data for this format, so missing spreads count as 0."
+    "sourceNoMeta": "Damage from the data snapshot {{version}}. No usage data for this format, so missing spreads count as 0.",
+    "allIn": "{{format}} brings the whole team: there is no pick to make. The matchups below still show who handles each of theirs."
   },
   "ai": {
     "title": "Explanation",

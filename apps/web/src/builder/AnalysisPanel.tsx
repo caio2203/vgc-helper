@@ -59,7 +59,12 @@ export function AnalysisPanel({ rules, issues }: { rules: Rules; issues: Legalit
               title={t('analysis.legal', { regulation: rules.regulation.name })}
               toneLabel={t('tone.success')}
             >
-              {t('analysis.legalDetail')}
+              {t('analysis.legalDetail', {
+                spread:
+                  rules.ctx.profile.statSystem.kind === 'statPoints'
+                    ? t('analysis.spreadSp')
+                    : t('analysis.spreadEv'),
+              })}
             </Alert>
           )}
           {!empty &&

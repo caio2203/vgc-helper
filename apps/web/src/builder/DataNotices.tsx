@@ -4,7 +4,7 @@ import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ChangeList } from '../changes/ChangeList';
 import { Alert } from '../components/ui/Alert';
-import type { Rules } from '../data/rules';
+import { currentRegulation, type Rules } from '../data/rules';
 import { useDateTime } from '../lib/dates';
 import { useRevalidation } from '../teams/useRevalidation';
 
@@ -38,7 +38,10 @@ export function DataNotices({ rules, saved }: { rules: Rules; saved: Team | unde
             date: date(regulation.endsAt ?? '', false),
           })}
         >
-          {t('revalidation.endedHint')}
+          {currentRegulation(rules.manifest, regulation.gameId, now, rules.ctx.format.id)?.id ===
+          regulation.id
+            ? t('revalidation.endedNoNext')
+            : t('revalidation.endedHint')}
         </Alert>
       )}
       {daysLeft !== null && daysLeft > 0 && daysLeft <= END_NOTICE_DAYS && (

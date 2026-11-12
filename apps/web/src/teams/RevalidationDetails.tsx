@@ -11,7 +11,7 @@ export function problemCount(r: Revalidation): number {
   return (
     r.issues.length +
     (r.inForce?.issues.length ?? 0) +
-    (r.regulation.status === 'missing' || r.regulation.status === 'ended' ? 1 : 0)
+    (r.regulation.status === 'missing' || (r.regulation.status === 'ended' && r.inForce) ? 1 : 0)
   );
 }
 

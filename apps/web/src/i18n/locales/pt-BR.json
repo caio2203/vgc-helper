@@ -99,7 +99,9 @@
       "analysis": "Análise"
     },
     "errorCount_one": "{{count}} erro",
-    "errorCount_other": "{{count}} erros"
+    "errorCount_other": "{{count}} erros",
+    "teraType": "Tipo Tera",
+    "teraNone": "Nenhum"
   },
   "stats": {
     "hp": "HP",
@@ -133,7 +135,7 @@
     "title": "Análise",
     "legality": "Legalidade no {{regulation}}",
     "legal": "Legal no {{regulation}}",
-    "legalDetail": "Espécies, itens, habilidades, golpes e Stat Points seguem as regras.",
+    "legalDetail": "Espécies, itens, habilidades, golpes e {{spread}} seguem as regras.",
     "empty": "Adicione um Pokémon para ver a análise.",
     "source": "Regras do {{name}}:",
     "sections": {
@@ -287,7 +289,9 @@
       "dex": "Dados do jogo: {{name}}, coletado em {{date}}.",
       "rules": "Papéis, limites e pesos: {{name}}, {{date}}.",
       "calc": "Dano: @smogon/calc com os stats e golpes do snapshot, nível {{level}}."
-    }
+    },
+    "spreadSp": "Stat Points",
+    "spreadEv": "EVs"
   },
   "legality": {
     "slot": "Slot {{n}} ({{name}})",
@@ -314,7 +318,10 @@
     "gimmickLimit_other": "{{count}} Pokémon planejam Mega Evoluir; só {{perBattle}} pode por batalha.",
     "teamTooSmall_one": "{{count}} Pokémon no time; este formato precisa de pelo menos {{min}} para jogar.",
     "teamTooSmall_other": "{{count}} Pokémon no time; este formato precisa de pelo menos {{min}} para jogar.",
-    "teamTooLarge": "{{count}} Pokémon no time; o limite é {{max}}."
+    "teamTooLarge": "{{count}} Pokémon no time; o limite é {{max}}.",
+    "unknownTeraType": "{{slot}}: {{type}} não é um Tipo Tera neste jogo.",
+    "restrictedLimit_one": "Os slots {{slots}} são Lendários Restritos; este regulamento permite {{count}}.",
+    "restrictedLimit_other": "Os slots {{slots}} são Lendários Restritos; este regulamento permite {{count}}."
   },
   "paste": {
     "title": "Paste do Showdown",
@@ -636,7 +643,8 @@
     "endsHint_one": "Falta {{count}} dia. Os times salvos mantêm o regulamento; escolha o próximo no seletor quando ele estiver nos dados.",
     "endsHint_other": "Faltam {{count}} dias. Os times salvos mantêm o regulamento; escolha o próximo no seletor quando ele estiver nos dados.",
     "endedTitle": "O {{regulation}} terminou em {{date}}",
-    "endedHint": "Escolha o regulamento em vigor no seletor para checar o time com ele."
+    "endedHint": "Escolha o regulamento em vigor no seletor para checar o time com ele.",
+    "endedNoNext": "Não há regulamento mais novo deste jogo nos dados, então os times continuam checados com este."
   },
   "preview": {
     "title": "Team preview",
@@ -689,7 +697,8 @@
       "spread": "spread"
     },
     "source": "Dano calculado com o snapshot de dados {{version}}. Campos que faltam na lista dele: {{name}}, coletado em {{date}}.",
-    "sourceNoMeta": "Dano calculado com o snapshot de dados {{version}}. Sem dados de uso para este formato, então spreads que faltam contam como 0."
+    "sourceNoMeta": "Dano calculado com o snapshot de dados {{version}}. Sem dados de uso para este formato, então spreads que faltam contam como 0.",
+    "allIn": "{{format}} leva o time inteiro: não há escolha a fazer. Os confrontos abaixo ainda mostram quem lida com cada um deles."
   },
   "ai": {
     "title": "Explicação",

@@ -28,7 +28,7 @@ export function useRevalidation(teams: (SavedTeam & { id: string })[] | undefine
     const wanted = new Set<string>();
     for (const team of teams) {
       wanted.add(`${team.gameId}/${team.regulationId}`);
-      const current = regulationInForce(m, team.gameId);
+      const current = regulationInForce(m, team.gameId, Date.now(), team.formatId);
       if (current) wanted.add(`${current.gameId}/${current.id}`);
     }
     return [...wanted]

@@ -71,6 +71,13 @@ export function describeIssue(
       return t('legality.ivsNotAllowed', { slot: slotName(issue.slot) });
     case 'teraNotAvailable':
       return t('legality.teraNotAvailable', { slot: slotName(issue.slot) });
+    case 'unknownTeraType':
+      return t('legality.unknownTeraType', { slot: slotName(issue.slot), type: issue.teraType });
+    case 'restrictedLimit':
+      return t('legality.restrictedLimit', {
+        count: issue.limit,
+        slots: issue.slots.map((s) => s + 1).join(', '),
+      });
     case 'megaWithoutStone':
       return t('legality.megaWithoutStone', { slot: slotName(issue.slot) });
     case 'stoneDoesNothing':
