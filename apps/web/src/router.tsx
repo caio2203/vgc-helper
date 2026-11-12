@@ -16,6 +16,7 @@ import { CalcPage } from './calc/CalcPage';
 import { WhatsNewPage } from './changes/WhatsNewPage';
 import { AppShell } from './components/AppShell';
 import { useAppearance } from './lib/theme';
+import { PreviewPage } from './preview/PreviewPage';
 import { LoginPage } from './routes/LoginPage';
 import { SettingsPage } from './settings/SettingsPage';
 import { TeamsPage } from './teams/TeamsPage';
@@ -88,6 +89,12 @@ const calcRoute = createRoute({
   component: CalcPage,
 });
 
+const previewRoute = createRoute({
+  getParentRoute: () => authedRoute,
+  path: '/preview',
+  component: PreviewPage,
+});
+
 const settingsRoute = createRoute({
   getParentRoute: () => authedRoute,
   path: '/settings',
@@ -119,6 +126,7 @@ const routeTree = rootRoute.addChildren([
     teamsRoute,
     teamRoute,
     calcRoute,
+    previewRoute,
     settingsRoute,
     adminRoute,
     whatsNewRoute,

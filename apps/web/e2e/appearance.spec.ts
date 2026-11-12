@@ -69,7 +69,16 @@ for (const locale of ['en-US', 'pt-BR']) {
     test.use({ locale, storageState: AUTH_STATE });
 
     test('no screen scrolls sideways', async ({ page }) => {
-      for (const path of ['/', '/teams', '/calc', '/settings', '/admin', '/whats-new', '/about']) {
+      for (const path of [
+        '/',
+        '/teams',
+        '/calc',
+        '/settings',
+        '/admin',
+        '/whats-new',
+        '/preview',
+        '/about',
+      ]) {
         await page.goto(path);
         await page.locator('main').waitFor();
         const overflow = await page.evaluate(

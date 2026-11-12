@@ -27,7 +27,8 @@
     "calc": "Calculadora",
     "whatsNew": "Novidades",
     "unread_one": "{{count}} atualização nova",
-    "unread_other": "{{count}} atualizações novas"
+    "unread_other": "{{count}} atualizações novas",
+    "preview": "Team preview"
   },
   "login": {
     "title": "Entrar",
@@ -627,5 +628,58 @@
     "endsHint_other": "Faltam {{count}} dias. Os times salvos mantêm o regulamento; escolha o próximo no seletor quando ele estiver nos dados.",
     "endedTitle": "O {{regulation}} terminou em {{date}}",
     "endedHint": "Escolha o regulamento em vigor no seletor para checar o time com ele."
+  },
+  "preview": {
+    "title": "Team preview",
+    "intro": "Cole a team list do oponente. Cada Pokémon seu é comparado com cada um dos dele: seu melhor golpe, o melhor golpe dele e quem age primeiro, com o mesmo cálculo de dano da análise. A escolha cobre cada um deles o melhor possível e mantém seus papéis; o lead soma pressão no time inteiro dele e papéis de primeiro turno.",
+    "yours": "Seu time",
+    "team": "Time",
+    "draft": "{{name}} (montador)",
+    "noTeam": "Nenhum time ainda.",
+    "rules": "{{format}}, {{regulation}}: leva {{bring}}.",
+    "theirs": "Time do oponente",
+    "list": "Team list",
+    "listHint": "Um paste do Showdown ou um Pokémon por linha. O que a lista não traz (spreads e o que mais faltar) vem do set mais comum nos dados de uso.",
+    "placeholder": "Incineroar @ Sitrus Berry\nAbility: Intimidate\n- Fake Out\n- Parting Shot\n\nGarchomp",
+    "empty": "Cole a team list do oponente para ver quem levar e quem começar.",
+    "loading": "Calculando os confrontos…",
+    "pick_one": "Levar {{count}}",
+    "pick_other": "Levar {{count}}",
+    "lead": "Lead",
+    "back": "No banco",
+    "home": "Ficam fora",
+    "homeShort": "fica fora",
+    "leadRoles": "Primeiro turno: {{roles}}",
+    "score": "Pontuação {{score}}: {{coverage}} dos confrontos mais os papéis mantidos ({{roles}}).",
+    "unanswered": "Nada do que você leva responde a {{names}}",
+    "unansweredHint": "Nenhum membro levado derruba primeiro, ou em dois golpes sobrevivendo. Planeje atacar junto ou usar Protect.",
+    "alternatives": "Outras escolhas",
+    "alternative": "Levar {{bring}}, começar com {{lead}} (pontuação {{score}})",
+    "matrix": "Confrontos",
+    "matrixCaption": "Seu melhor golpe em cada um deles, o melhor golpe deles nos seus e quem age primeiro.",
+    "mineHeader": "Seus",
+    "legend": "→ seu melhor golpe, ← o melhor golpe dele, em porcentagem do HP do alvo. Negrito: responde (derruba primeiro, ou em dois golpes sobrevivendo). A velocidade conta Choice Scarf, não Tailwind nem Trick Room.",
+    "dealt": "Seu melhor golpe:",
+    "taken": "Melhor golpe dele:",
+    "speed": {
+      "faster": "mais rápido",
+      "slower": "mais lento",
+      "tie": "empate de velocidade"
+    },
+    "answers": "responde",
+    "cellScore": "pontuação {{score}}",
+    "answersTitle": "Como a escolha lida com cada um deles",
+    "answeredBy": "Respondido por {{mine}}: {{move}} {{range}}, {{speed}}; recebe {{taken}}.",
+    "bestOption": "Melhor opção {{mine}}: {{move}} {{range}}, {{speed}}; recebe {{taken}}. Não resolve sozinho.",
+    "noHit": "Nenhum Pokémon levado causa dano nele.",
+    "assumed": "Dos dados de uso: {{fields}}.",
+    "field": {
+      "ability": "habilidade",
+      "item": "item",
+      "moves": "golpes",
+      "spread": "spread"
+    },
+    "source": "Dano calculado com o snapshot de dados {{version}}. Campos que faltam na lista dele: {{name}}, coletado em {{date}}.",
+    "sourceNoMeta": "Dano calculado com o snapshot de dados {{version}}. Sem dados de uso para este formato, então spreads que faltam contam como 0."
   }
 }

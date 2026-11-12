@@ -80,6 +80,18 @@ export function CommandPalette() {
       run: () => void navigate({ to: '/teams' }),
     },
     {
+      id: 'preview',
+      label: t('shell.preview'),
+      hint: t('palette.page'),
+      run: () => void navigate({ to: '/preview' }),
+    },
+    {
+      id: 'whatsNew',
+      label: t('shell.whatsNew'),
+      hint: t('palette.page'),
+      run: () => void navigate({ to: '/whats-new' }),
+    },
+    {
       id: 'settings',
       label: t('palette.settings'),
       hint: t('palette.page'),

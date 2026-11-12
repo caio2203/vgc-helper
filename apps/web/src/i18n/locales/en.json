@@ -27,7 +27,8 @@
     "calc": "Damage calc",
     "whatsNew": "What's new",
     "unread_one": "{{count}} new update",
-    "unread_other": "{{count}} new updates"
+    "unread_other": "{{count}} new updates",
+    "preview": "Team preview"
   },
   "login": {
     "title": "Sign in",
@@ -627,5 +628,58 @@
     "endsHint_other": "{{count}} days left. Saved teams keep their regulation; pick the next one in the selector once it is in the data.",
     "endedTitle": "{{regulation}} ended on {{date}}",
     "endedHint": "Pick the regulation in force in the selector to check the team against it."
+  },
+  "preview": {
+    "title": "Team preview",
+    "intro": "Paste the opponent's team list. Each of your Pokémon is compared with each of theirs: your best hit, their best hit and who moves first, with the same damage calc as the analysis. The pick covers each of theirs as well as it can and keeps your roles; the lead adds pressure on their whole team and turn-one roles.",
+    "yours": "Your team",
+    "team": "Team",
+    "draft": "{{name}} (builder)",
+    "noTeam": "No team yet.",
+    "rules": "{{format}}, {{regulation}}: bring {{bring}}.",
+    "theirs": "Their team",
+    "list": "Team list",
+    "listHint": "A Showdown paste or one Pokémon per line. What the list leaves out (spreads, and anything else missing) comes from the most common set in the usage data.",
+    "placeholder": "Incineroar @ Sitrus Berry\nAbility: Intimidate\n- Fake Out\n- Parting Shot\n\nGarchomp",
+    "empty": "Paste their team list to see who to bring and who to lead.",
+    "loading": "Calculating the matchups…",
+    "pick_one": "Bring {{count}}",
+    "pick_other": "Bring {{count}}",
+    "lead": "Lead",
+    "back": "In the back",
+    "home": "Stay home",
+    "homeShort": "stays home",
+    "leadRoles": "Turn one: {{roles}}",
+    "score": "Score {{score}}: {{coverage}} from the matchups plus the roles kept ({{roles}}).",
+    "unanswered": "Nothing you bring answers {{names}}",
+    "unansweredHint": "No brought member knocks them out first, or in two hits while surviving. Plan to target them together or to Protect.",
+    "alternatives": "Other picks",
+    "alternative": "Bring {{bring}}, lead {{lead}} (score {{score}})",
+    "matrix": "Matchups",
+    "matrixCaption": "Your best hit on each of theirs, their best hit on yours, and who moves first.",
+    "mineHeader": "Yours",
+    "legend": "→ your best hit, ← their best hit, as a share of the target's HP. Bold: answers it (knocks it out first, or in two hits while surviving). Speed counts Choice Scarf, not Tailwind or Trick Room.",
+    "dealt": "Your best hit:",
+    "taken": "Their best hit:",
+    "speed": {
+      "faster": "faster",
+      "slower": "slower",
+      "tie": "speed tie"
+    },
+    "answers": "answers",
+    "cellScore": "score {{score}}",
+    "answersTitle": "How the pick handles each of theirs",
+    "answeredBy": "Answered by {{mine}}: {{move}} {{range}}, {{speed}}; takes {{taken}}.",
+    "bestOption": "Best option {{mine}}: {{move}} {{range}}, {{speed}}; takes {{taken}}. Not an answer on its own.",
+    "noHit": "None of the brought Pokémon damages it.",
+    "assumed": "From the usage data: {{fields}}.",
+    "field": {
+      "ability": "ability",
+      "item": "item",
+      "moves": "moves",
+      "spread": "spread"
+    },
+    "source": "Damage from the data snapshot {{version}}. Fields missing from their list: {{name}}, retrieved {{date}}.",
+    "sourceNoMeta": "Damage from the data snapshot {{version}}. No usage data for this format, so missing spreads count as 0."
   }
 }

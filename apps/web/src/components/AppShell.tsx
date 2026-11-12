@@ -16,7 +16,7 @@ import { ShortcutsDialog } from './ShortcutsDialog';
 import { Kbd } from './ui/Controls';
 
 const navLink =
-  'inline-flex h-12 items-center border-b-2 border-transparent px-1 text-sm font-semibold text-muted hover:text-ink';
+  'relative inline-flex h-12 items-center border-b-2 border-transparent px-1 text-sm font-semibold text-muted hover:text-ink';
 const navActive = { className: 'border-ink text-ink' };
 
 export function AppShell({ session, children }: { session: SessionResponse; children: ReactNode }) {
@@ -77,6 +77,9 @@ export function AppShell({ session, children }: { session: SessionResponse; chil
             </Link>
             <Link to="/teams" className={navLink} activeProps={navActive}>
               {t('shell.teams')}
+            </Link>
+            <Link to="/preview" className={navLink} activeProps={navActive}>
+              {t('shell.preview')}
             </Link>
             <Link to="/calc" className={navLink} activeProps={navActive}>
               {t('shell.calc')}
