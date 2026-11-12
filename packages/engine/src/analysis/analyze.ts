@@ -15,6 +15,8 @@ export interface StackedAlert {
   slots: number[];
   /** The last slot in team order among the weak ones: the addition that stacked the weakness. */
   addedBy: number;
+  /** Members that resist the type or are immune to it. */
+  coveredBy: number[];
   users: { species: string; usage: number; move: string }[];
 }
 
@@ -60,6 +62,7 @@ export function analyzeTeam(
       type: r.type,
       slots: r.weak,
       addedBy: Math.max(...r.weak),
+      coveredBy: [...r.resist, ...r.immune].sort((a, b) => a - b),
       users: metaSets.flatMap((set) => {
         const move = set.moves.find((m) => isDamaging(m) && m.type === r.type);
         return move ? [{ species: set.species.id, usage: set.usage, move: move.id }] : [];

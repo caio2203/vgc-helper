@@ -215,3 +215,16 @@ describe('suggested slots', () => {
     }
   });
 });
+
+describe('covering a stacked weakness', () => {
+  it('names the member that resists it once one is added', () => {
+    const before = analyze([incineroar, kingambit, archaludon]);
+    const pick = before.suggestions.find((s) =>
+      s.parts.some((p) => p.criterion === 'coversWeakness' && p.types.includes('Ground')),
+    );
+    if (!pick) throw new Error('no suggestion covers Ground');
+    expect(before.stacked.find((s) => s.type === 'Ground')?.coveredBy).toEqual([]);
+    const after = analyze([incineroar, kingambit, archaludon, pick.slot]);
+    expect(after.stacked.find((s) => s.type === 'Ground')?.coveredBy).toEqual([3]);
+  });
+});

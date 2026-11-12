@@ -29,8 +29,9 @@ export interface CalcSet {
 export interface FieldOptions {
   weather?: 'Sun' | 'Rain' | 'Sand' | 'Snow' | null;
   terrain?: 'Electric' | 'Grassy' | 'Psychic' | 'Misty' | null;
-  /** Attacker's stat stages (Attack and Special Attack), e.g. -1 after Intimidate. */
+  /** Attacker stat stages on Attack and Special Attack, e.g. -1 after Intimidate. */
   attackerBoost?: number;
+  /** Defender stat stages on Defense and Special Defense. */
   defenderBoost?: number;
   reflect?: boolean;
   lightScreen?: boolean;
@@ -86,7 +87,7 @@ function toCalcPokemon(
   set: CalcSet,
   ctx: RulesContext,
   index: DexIndex,
-  boosts: number,
+  boosts: Partial<StatsTable>,
 ): CalcPokemon {
   const s = set.species;
   return new CalcPokemon(gen, s.name, {
@@ -95,7 +96,7 @@ function toCalcPokemon(
     item: set.item ? index.items.get(set.item)?.name : undefined,
     nature: set.nature ? index.natures.get(set.nature)?.name : undefined,
     evs: set.spread,
-    boosts: { atk: boosts, spa: boosts, def: 0, spd: 0, spe: 0, hp: 0 },
+    boosts: { hp: 0, atk: 0, def: 0, spa: 0, spd: 0, spe: 0, ...boosts },
     overrides: {
       name: s.name,
       types: s.types as never,
@@ -121,7 +122,8 @@ function toCalcMove(
   });
 }
 
-const percent = (n: number, hp: number) => Math.round((n / hp) * 1000) / 10;
+/** Truncated to one decimal, like the calc's own text, so both show the same numbers. */
+const percent = (n: number, hp: number) => Math.floor((n / hp) * 1000) / 10;
 
 export function calcDamage(
   attacker: CalcSet,
@@ -142,8 +144,14 @@ export function calcDamage(
     defenderSide: { isReflect: options.reflect, isLightScreen: options.lightScreen },
     attackerSide: { isHelpingHand: options.helpingHand },
   });
-  const a = toCalcPokemon(gen, attacker, ctx, index, options.attackerBoost ?? 0);
-  const d = toCalcPokemon(gen, defender, ctx, index, options.defenderBoost ?? 0);
+  const a = toCalcPokemon(gen, attacker, ctx, index, {
+    atk: options.attackerBoost ?? 0,
+    spa: options.attackerBoost ?? 0,
+  });
+  const d = toCalcPokemon(gen, defender, ctx, index, {
+    def: options.defenderBoost ?? 0,
+    spd: options.defenderBoost ?? 0,
+  });
   const result = calculate(gen, a, d, toCalcMove(gen, move, options.critical ?? false), field);
   const [min, max] = result.range();
   const hp = d.maxHP();
@@ -265,5 +273,5 @@ export function analyzeThreats(
 
 function calcStatsFor(set: CalcSet, ctx: RulesContext, index: DexIndex): StatsTable {
   const gen = generationFor(ctx);
-  return toCalcPokemon(gen, set, ctx, index, 0).stats;
+  return toCalcPokemon(gen, set, ctx, index, {}).stats;
 }
