@@ -47,7 +47,7 @@ export function TypeMatrix({
   const { t } = useTranslation();
   const f = useFormat();
   return (
-    <div className="overflow-x-auto">
+    <div className="relative overflow-x-auto">
       <table className="wdth-table w-full border-collapse text-sm">
         <caption className="sr-only">{t('analysis.matrix.caption')}</caption>
         <thead>
