@@ -9,20 +9,31 @@ faltando e o que o meta atual está usando. VGC (Doubles) primeiro, Singles depo
 [![Licença: Apache 2.0](https://img.shields.io/github/license/caio2203/vgc-helper)](LICENSE)
 [![Versão](https://img.shields.io/github/v/release/caio2203/vgc-helper?include_prereleases)](https://github.com/caio2203/vgc-helper/releases)
 
-> **Status: início do desenvolvimento.** A base está pronta (login, pipeline de dados e dados do
-> Regulamento M-C do Pokémon Champions). O montador de times e a análise vêm a seguir — veja o
-> [roadmap](#roadmap).
+> **Status: início do desenvolvimento.** A Fase 2 está pronta: o montador checa a legalidade
+> enquanto você edita, importa e exporta pastes do Showdown, guarda seus times com o histórico e
+> pode ser instalado como app. A análise (matriz de tipos, ameaças do meta, speed tiers,
+> sugestões) vem a seguir — veja o [roadmap](#roadmap).
 
 ## Screenshots
 
-O que existe hoje: a tela de login e a página de quem está logado, que confirma o snapshot de
-dados que o montador vai usar. O design visual chega na Fase 2; os screenshots do montador e um
-GIF curto (adicionar um Pokémon → ver o alerta → aceitar uma sugestão) chegam na Fase 3.
+O montador com um time colado. O Incineroar tem um golpe que não aprende no Pokémon Champions,
+então o slot fica marcado e a coluna de análise diz o que está errado e de onde vem a regra.
 
 <p>
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/images/home-desktop-dark-pt-BR.png">
-    <img alt="Página de quem está logado, no navegador do computador, mostrando a versão do snapshot de dados e as datas do Regulamento M-C com a fonte" src="docs/images/home-desktop-light-pt-BR.png" width="600">
+    <source media="(prefers-color-scheme: dark)" srcset="docs/images/builder-desktop-dark-pt-BR.png">
+    <img alt="Montador de times no navegador do computador: dois Pokémon na lista do time com as bordas de tipo, o editor do slot com golpes e Stat Points, e um erro de legalidade na coluna de análise" src="docs/images/builder-desktop-light-pt-BR.png" width="600">
+  </picture>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/images/builder-mobile-dark-pt-BR.png">
+    <img alt="Montador de times no celular, com as abas Time e Análise embaixo" src="docs/images/builder-mobile-light-pt-BR.png" width="200">
+  </picture>
+</p>
+
+<p>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/images/teams-desktop-dark-pt-BR.png">
+    <img alt="Meus times: uma tabela com os times salvos, seus Pokémon, o formato e a última alteração" src="docs/images/teams-desktop-light-pt-BR.png" width="600">
   </picture>
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="docs/images/login-mobile-dark-pt-BR.png">
@@ -30,8 +41,10 @@ GIF curto (adicionar um Pokémon → ver o alerta → aceitar uma sugestão) che
   </picture>
 </p>
 
-As imagens são geradas a partir de uma instância local descartável com
-`pnpm --filter @vgc-helper/web screenshots`.
+A pasta `docs/images` tem todas as telas (montador, Meus times, configurações, login) no
+computador e no celular, no tema claro e no escuro, em inglês e em português. Elas são geradas a
+partir de uma instância local descartável com `pnpm --filter @vgc-helper/web screenshots`; os
+ícones e a imagem de prévia social vêm de `pnpm --filter @vgc-helper/web brand`.
 
 ## Por que eu fiz isso
 
@@ -50,16 +63,40 @@ Já disponível:
 - Dados do Pokémon Champions no Regulamento M-C: espécies, Megas, golpes, itens, habilidades e
   learnsets legais, mais estatísticas mensais de uso do VGC e do Singles. Cada conjunto de dados
   traz a fonte e a data.
-- Interface em inglês e português do Brasil.
+- Montador de times com checagem de legalidade ao vivo contra o regulamento: espécies e formas,
+  habilidades, learnsets, Stat Points, Item e Species Clause, Mega Stones e uma Mega por batalha.
+  Cada erro diz o slot e a fonte da regra.
+- Importação de paste do Showdown (cole em qualquer lugar da página) e exportação.
+- Busca tolerante a erros de digitação de Pokémon, golpes, itens e habilidades, numa paleta de
+  comandos.
+- Atalhos de teclado, desfazer e refazer, e versões salvas de cada time.
+- Meus times: salvar, abrir, duplicar e excluir times.
+- Configurações: idioma, nível de experiência, densidade (confortável ou compacta), tema,
+  formato padrão.
+- App instalável (PWA). Só a estrutura do app fica em cache; seus dados nunca ficam offline.
+- Interface em inglês e português do Brasil, temas claro e escuro.
 
 Planejado (veja o roadmap):
 
-- Montador de times com checagem de legalidade (Stat Points, Item e Species Clause, uma Mega).
 - Análise ao vivo, sem IA: matriz de tipos, fraquezas acumuladas, ameaças do meta com cálculo
   de dano, speed tiers, checklist de papéis do VGC, detecção de arquétipo.
 - Sugestões com pontuação explicada e o set mais usado, a partir de dados de uso e de torneios.
-- Importação e exportação no formato paste do Showdown.
 - Explicações e chat sob demanda com o Google Gemini (free tier), e tudo funcionando sem ele.
+
+## Atalhos de teclado
+
+No macOS, use `Cmd` no lugar de `Ctrl`. Aperte `?` no app para ver esta lista.
+
+| Teclas         | Ação                                                 |
+| -------------- | ---------------------------------------------------- |
+| `Ctrl K`       | Buscar Pokémon, golpes, itens e comandos             |
+| `1` – `6`      | Selecionar o slot 1 a 6                              |
+| `Ctrl Z`       | Desfazer                                             |
+| `Ctrl Shift Z` | Refazer                                              |
+| `Ctrl S`       | Salvar o time                                        |
+| `Ctrl V`       | Colar um time do Showdown (fora dos campos de texto) |
+| `Esc`          | Fechar um diálogo ou lista                           |
+| `?`            | Mostrar os atalhos                                   |
 
 ## Como funciona
 
@@ -94,16 +131,16 @@ flowchart LR
 
 ## Stack
 
-| Parte      | Escolha                                                          |
-| ---------- | ---------------------------------------------------------------- |
-| Monorepo   | pnpm workspaces, Turborepo, TypeScript (estrito)                 |
-| API        | NestJS, Passport (OAuth do GitHub), Drizzle ORM, libSQL / SQLite |
-| Web        | React, Vite, TanStack Router e Query, react-i18next              |
-| Motor      | Pacote TypeScript puro, usado pelo web e pela API                |
-| Dados      | Schemas zod, `@pkmn/dex` + `@pkmn/mods`, estatísticas do Smogon  |
-| Testes     | Vitest, Supertest, Playwright, axe                               |
-| Hospedagem | Vercel (Hobby) + Turso (Free)                                    |
-| Qualidade  | Biome, commitlint, husky, CodeQL, Dependabot, release-please     |
+| Parte      | Escolha                                                                                                                      |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| Monorepo   | pnpm workspaces, Turborepo, TypeScript (estrito)                                                                             |
+| API        | NestJS, Passport (OAuth do GitHub), Drizzle ORM, libSQL / SQLite                                                             |
+| Web        | React, Vite, TanStack Router e Query, Zustand, react-i18next, Radix UI, Tailwind com os tokens do DESIGN.md, vite-plugin-pwa |
+| Motor      | Pacote TypeScript puro, usado pelo web e pela API                                                                            |
+| Dados      | Schemas zod, `@pkmn/dex` + `@pkmn/mods`, estatísticas do Smogon                                                              |
+| Testes     | Vitest, Supertest, Playwright, axe                                                                                           |
+| Hospedagem | Vercel (Hobby) + Turso (Free)                                                                                                |
+| Qualidade  | Biome, commitlint, husky, CodeQL, Dependabot, release-please                                                                 |
 
 ## Início rápido (no seu PC)
 
@@ -204,7 +241,7 @@ O arquivo [NOTICE](NOTICE) lista os créditos que precisam acompanhar qualquer c
 
 - [x] **Fase 0** — pesquisa: regras, fontes de dados, limites da hospedagem
 - [x] **Fase 1** — base: monorepo, CI, login, banco, i18n, primeiro snapshot de dados, primeiro deploy
-- [ ] **Fase 2** — design system, montador de times, legalidade, import/export de paste, busca, atalhos
+- [x] **Fase 2** — design system, montador de times, legalidade, import/export de paste, busca, atalhos
 - [ ] **Fase 3** — motor de análise, sugestões, níveis de experiência, feedback, calculadora de dano
 - [ ] **Fase 4** — pipeline de dados com diff legível, página "Novidades", revalidação de times
 - [ ] **Fase 5** — team preview: quais 4 levar contra uma Open Team List

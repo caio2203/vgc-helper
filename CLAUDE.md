@@ -69,5 +69,9 @@ pnpm hash-password     # ADMIN_PASSWORD_HASH for AUTH_MODE=local-password
   `Release Please` and `Screenshots` open pull requests that run CI.
 - Vercel's function runtime cannot `require()` ES modules: never add a CommonJS dependency that
   requires an ESM-only package (Nest 12 is ESM-only). CI checks this.
-- Next: Phase 2 — `DESIGN.md` (wait for the owner's approval), team builder, legality,
-  Showdown paste import/export, search, shortcuts.
+- Phase 2 is done: `DESIGN.md` (approved), team builder, legality, Showdown paste
+  import/export, search, shortcuts, My teams, settings, PWA (app shell only, `/api` is never
+  cached), brand images (`pnpm --filter @vgc-helper/web brand`) and README screenshots
+  (`pnpm --filter @vgc-helper/web screenshots`, after `pnpm build`).
+- Next: Phase 3 — analysis engine: type matrix, stacked weaknesses, meta threats, speed tiers,
+  suggestions.

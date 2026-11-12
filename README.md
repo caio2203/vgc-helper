@@ -9,20 +9,31 @@ missing and what the current meta is running. VGC (Doubles) first, Singles next.
 [![License: Apache 2.0](https://img.shields.io/github/license/caio2203/vgc-helper)](LICENSE)
 [![Release](https://img.shields.io/github/v/release/caio2203/vgc-helper?include_prereleases)](https://github.com/caio2203/vgc-helper/releases)
 
-> **Status: early development.** The foundation is in place (sign-in, data pipeline, Pokémon
-> Champions Reg M-C data). The team builder and the analysis come next — see the
-> [roadmap](#roadmap).
+> **Status: early development.** Phase 2 is done: the team builder checks legality as you
+> edit, imports and exports Showdown pastes, keeps your teams with their history and installs
+> as an app. The analysis (type matrix, meta threats, speed tiers, suggestions) comes next —
+> see the [roadmap](#roadmap).
 
 ## Screenshots
 
-What exists today: the sign-in screen and the signed-in page, which confirms the data snapshot
-the builder will use. The visual design arrives in Phase 2; the team builder screenshots and a
-short GIF (add a Pokémon → see the alert → accept a suggestion) arrive in Phase 3.
+The builder with a pasted team. Incineroar has a move it cannot learn in Pokémon Champions, so
+its slot is marked and the analysis column says what is wrong and where the rule comes from.
 
 <p>
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/images/home-desktop-dark.png">
-    <img alt="Signed-in page on a desktop browser, showing the data snapshot version and the dates of Regulation Set M-C with their source" src="docs/images/home-desktop-light.png" width="600">
+    <source media="(prefers-color-scheme: dark)" srcset="docs/images/builder-desktop-dark.png">
+    <img alt="Team builder on a desktop browser: two Pokémon in the team list with their type edges, the slot editor with moves and Stat Points, and a legality error in the analysis column" src="docs/images/builder-desktop-light.png" width="600">
+  </picture>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/images/builder-mobile-dark.png">
+    <img alt="Team builder on a phone, with the Team and Analysis tabs at the bottom" src="docs/images/builder-mobile-light.png" width="200">
+  </picture>
+</p>
+
+<p>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/images/teams-desktop-dark.png">
+    <img alt="My teams: a table of saved teams with their Pokémon, format and last update" src="docs/images/teams-desktop-light.png" width="600">
   </picture>
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="docs/images/login-mobile-dark.png">
@@ -30,8 +41,10 @@ short GIF (add a Pokémon → see the alert → accept a suggestion) arrive in P
   </picture>
 </p>
 
-The images are generated from a throwaway local instance with
-`pnpm --filter @vgc-helper/web screenshots`.
+`docs/images` has every screen (builder, My teams, settings, sign-in) on desktop and phone, in
+light and dark, in English and Portuguese. They are generated from a throwaway local instance
+with `pnpm --filter @vgc-helper/web screenshots`; the icons and the social preview come from
+`pnpm --filter @vgc-helper/web brand`.
 
 ## Why I built this
 
@@ -50,16 +63,38 @@ Available now:
 - Pokémon Champions data for Regulation Set M-C: legal species, Megas, moves, items, abilities
   and learnsets, plus monthly usage stats for VGC and Singles. Every dataset carries its source
   and date.
-- Interface in English and Brazilian Portuguese.
+- Team builder with live legality checks against the regulation: species and forms, abilities,
+  learnsets, Stat Points, Item and Species Clause, Mega Stones and one Mega per battle. Every
+  error names the slot and the rule's source.
+- Showdown paste import (paste anywhere on the page) and export.
+- Typo-tolerant search for Pokémon, moves, items and abilities in a command palette.
+- Keyboard shortcuts, undo and redo, and saved versions of each team.
+- My teams: save, open, duplicate and delete teams.
+- Settings: language, experience level, density (comfortable or compact), theme, default format.
+- Installable app (PWA). Only the app shell is cached; your data is never stored offline.
+- Interface in English and Brazilian Portuguese, light and dark themes.
 
 Planned (see the roadmap):
 
-- Team builder with legality checks (Stat Points, Item and Species Clause, one Mega).
 - Live analysis without AI: type matrix, stacked weaknesses, meta threats with damage calcs,
   speed tiers, VGC role checklist, archetype detection.
 - Suggestions with an explained score and a common set, based on usage and tournament data.
-- Showdown paste import and export.
 - On-demand explanations and chat with Google Gemini (free tier), with a full fallback without it.
+
+## Keyboard shortcuts
+
+On macOS, use `Cmd` instead of `Ctrl`. Press `?` in the app for this list.
+
+| Keys           | Action                                      |
+| -------------- | ------------------------------------------- |
+| `Ctrl K`       | Search Pokémon, moves, items and commands   |
+| `1` – `6`      | Select slot 1 to 6                          |
+| `Ctrl Z`       | Undo                                        |
+| `Ctrl Shift Z` | Redo                                        |
+| `Ctrl S`       | Save the team                               |
+| `Ctrl V`       | Paste a Showdown team (outside text fields) |
+| `Esc`          | Close a dialog or list                      |
+| `?`            | Show the shortcuts                          |
 
 ## How it works
 
@@ -94,16 +129,16 @@ flowchart LR
 
 ## Stack
 
-| Part     | Choice                                                        |
-| -------- | ------------------------------------------------------------- |
-| Monorepo | pnpm workspaces, Turborepo, TypeScript (strict)               |
-| API      | NestJS, Passport (GitHub OAuth), Drizzle ORM, libSQL / SQLite |
-| Web      | React, Vite, TanStack Router and Query, react-i18next         |
-| Engine   | Pure TypeScript package shared by the web app and the API     |
-| Data     | zod schemas, `@pkmn/dex` + `@pkmn/mods`, Smogon stats         |
-| Tests    | Vitest, Supertest, Playwright, axe                            |
-| Hosting  | Vercel (Hobby) + Turso (Free)                                 |
-| Quality  | Biome, commitlint, husky, CodeQL, Dependabot, release-please  |
+| Part     | Choice                                                                                                                        |
+| -------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| Monorepo | pnpm workspaces, Turborepo, TypeScript (strict)                                                                               |
+| API      | NestJS, Passport (GitHub OAuth), Drizzle ORM, libSQL / SQLite                                                                 |
+| Web      | React, Vite, TanStack Router and Query, Zustand, react-i18next, Radix UI, Tailwind with the DESIGN.md tokens, vite-plugin-pwa |
+| Engine   | Pure TypeScript package shared by the web app and the API                                                                     |
+| Data     | zod schemas, `@pkmn/dex` + `@pkmn/mods`, Smogon stats                                                                         |
+| Tests    | Vitest, Supertest, Playwright, axe                                                                                            |
+| Hosting  | Vercel (Hobby) + Turso (Free)                                                                                                 |
+| Quality  | Biome, commitlint, husky, CodeQL, Dependabot, release-please                                                                  |
 
 ## Quick start (on your PC)
 
@@ -204,7 +239,7 @@ The [NOTICE](NOTICE) file lists the credits that must travel with every copy.
 
 - [x] **Phase 0** — research: rules, data sources, hosting limits
 - [x] **Phase 1** — foundation: monorepo, CI, sign-in, database, i18n, first data snapshot, first deploy
-- [ ] **Phase 2** — design system, team builder, legality, paste import/export, search, shortcuts
+- [x] **Phase 2** — design system, team builder, legality, paste import/export, search, shortcuts
 - [ ] **Phase 3** — analysis engine, suggestions, experience levels, feedback, damage calculator
 - [ ] **Phase 4** — data pipeline with readable diffs, "What's new" page, team revalidation
 - [ ] **Phase 5** — team preview: which 4 to bring against an open team list
