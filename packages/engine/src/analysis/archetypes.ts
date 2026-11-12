@@ -20,9 +20,11 @@ export function detectArchetypes(
   team: ResolvedSlot[],
   roles: Map<string, RoleMatch[]>,
   rules: Pick<AnalysisRules, 'archetypes'>,
+  profileId: 'doubles' | 'singles' = 'doubles',
 ): ArchetypeFinding[] {
   const findings: ArchetypeFinding[] = [];
   for (const a of rules.archetypes) {
+    if (!a.profiles.includes(profileId)) continue;
     const setters = [
       ...new Set(a.setterRoles.flatMap((r) => (roles.get(r) ?? []).map((m) => m.slot))),
     ];

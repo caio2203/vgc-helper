@@ -73,7 +73,7 @@ export function analyzeTeam(
     team,
     types,
     checklist,
-    archetypes: detectArchetypes(team, roles, rules),
+    archetypes: detectArchetypes(team, roles, rules, profile.id),
     speed: speedTiers(team, ctx, index, meta, rules),
     stacked,
     recommendedTypes: typesResisting(ctx.dex, types.stacked).slice(0, 4),

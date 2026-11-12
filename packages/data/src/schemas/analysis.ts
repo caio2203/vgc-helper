@@ -37,6 +37,15 @@ export const roleRuleSchema = z.discriminatedUnion('kind', [
     min: z.int(),
     damagingOnly: z.boolean(),
   }),
+  /**
+   * The battle forme's base stats: any of the listed sums reaches `min`, e.g. Attack or Special
+   * Attack 120+ for a wallbreaker, HP + Defense or HP + Special Defense 200+ for a wall.
+   */
+  z.object({
+    kind: z.literal('baseStat'),
+    anyOf: z.array(z.array(statIdSchema).min(1)).min(1),
+    min: z.int().min(1),
+  }),
 ]);
 export type RoleRule = z.infer<typeof roleRuleSchema>;
 
@@ -72,6 +81,11 @@ export const archetypeSchema = z.object({
   minAbusers: z.int().min(0),
   /** Recognise the archetype from abusers alone (3 slow attackers suggest Trick Room). */
   detectWithoutSetter: z.boolean(),
+  /** Analysis profiles where the plan exists: Tailwind and Trick Room are Doubles plans. */
+  profiles: z
+    .array(z.enum(['doubles', 'singles']))
+    .min(1)
+    .default(['doubles', 'singles']),
 });
 export type Archetype = z.infer<typeof archetypeSchema>;
 

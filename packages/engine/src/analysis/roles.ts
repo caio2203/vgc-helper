@@ -1,10 +1,11 @@
-import type { AnalysisProfile, AnalysisRules, Move, Role } from '@vgc-helper/data';
+import type { AnalysisProfile, AnalysisRules, Move, Role, StatsTable } from '@vgc-helper/data';
 import { isDamaging, type ResolvedSlot } from './resolve.js';
 
 /** What makes a slot fill a role: the move, ability or item that matched. */
 export interface RoleMatch {
   slot: number;
-  via: { kind: 'move' | 'ability' | 'item'; id: string };
+  /** For a base-stat role, `id` names the stats that reached the minimum, e.g. `hp+def`. */
+  via: { kind: 'move' | 'ability' | 'item' | 'stat'; id: string };
 }
 
 /** A set to test against roles: a team slot, or a meta set for a suggestion. */
@@ -13,6 +14,9 @@ export interface RoleInput {
   ability: string | null;
   item: string | null;
   moves: Move[];
+  /** Base stats of the forme it battles in; team slots pass it through `battle`. */
+  baseStats?: StatsTable;
+  battle?: { baseStats: StatsTable };
 }
 
 export function matchRole(role: Role, input: RoleInput): RoleMatch | null {
@@ -26,6 +30,12 @@ export function matchRole(role: Role, input: RoleInput): RoleMatch | null {
     if (input.item && rule.items.includes(input.item))
       return { slot: input.slot, via: { kind: 'item', id: input.item } };
     return null;
+  }
+  if (rule.kind === 'baseStat') {
+    const stats = input.baseStats ?? input.battle?.baseStats;
+    const sum =
+      stats && rule.anyOf.find((ids) => ids.reduce((n, id) => n + stats[id], 0) >= rule.min);
+    return sum ? { slot: input.slot, via: { kind: 'stat', id: sum.join('+') } } : null;
   }
   const move = input.moves.find((m) =>
     !moves(m)

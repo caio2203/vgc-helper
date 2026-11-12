@@ -83,7 +83,15 @@ export function suggest(
     const covered = types.stacked.filter((t) => defend(t) < 1);
     const added = nearlyStacked.filter((t) => defend(t) > 1);
     const roles = findRoles(
-      [{ slot: -1, ability: set.ability, item: set.item, moves: set.moves }],
+      [
+        {
+          slot: -1,
+          ability: set.ability,
+          item: set.item,
+          moves: set.moves,
+          baseStats: set.species.baseStats,
+        },
+      ],
       rules,
     );
     const filled = missingGroups.filter((g) =>
