@@ -178,6 +178,7 @@ would not run on them. A small GitHub App fixes that.
 | Webhook → Active                        | unchecked                                         |
 | Repository permissions → Contents       | Read and write                                    |
 | Repository permissions → Pull requests  | Read and write                                    |
+| Repository permissions → Issues         | Read and write (labels on the pull requests)      |
 | Where can this GitHub App be installed? | Only on this account                              |
 
 2. Click **Create GitHub App** and note the **App ID**.

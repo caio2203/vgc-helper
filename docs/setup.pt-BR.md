@@ -178,6 +178,7 @@ CI não rodaria neles. Um GitHub App pequeno resolve isso.
 | Webhook → Active                        | desmarcado                                          |
 | Repository permissions → Contents       | Read and write                                      |
 | Repository permissions → Pull requests  | Read and write                                      |
+| Repository permissions → Issues         | Read and write (rótulos nos pull requests)          |
 | Where can this GitHub App be installed? | Only on this account                                |
 
 2. Clique em **Create GitHub App** e anote o **App ID**.
