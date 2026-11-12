@@ -6,7 +6,15 @@
     "useIgnoreFile": true
   },
   "files": {
-    "includes": ["**", "!**/dist", "!**/*.gen.ts", "!packages/data/snapshots", "!apps/api/drizzle"]
+    "includes": [
+      "**",
+      "!**/dist",
+      "!**/*.gen.ts",
+      "!packages/data/snapshots",
+      "!apps/api/drizzle",
+      "!CHANGELOG.md",
+      "!.release-please-manifest.json"
+    ]
   },
   "formatter": {
     "enabled": true,
