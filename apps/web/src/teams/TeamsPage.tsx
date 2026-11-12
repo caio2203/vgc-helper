@@ -104,7 +104,10 @@ export function TeamsPage() {
             </thead>
             <tbody>
               {teams.data.map((team) => (
-                <tr key={team.id} className="flex flex-col border-b border-line md:table-row">
+                <tr
+                  key={team.id}
+                  className="flex flex-col border-b border-line last:border-b-0 md:table-row"
+                >
                   <td className="px-4 pt-3 md:py-2">
                     <Link
                       to="/teams/$teamId"
