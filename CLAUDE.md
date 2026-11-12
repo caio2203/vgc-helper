@@ -29,8 +29,13 @@ pnpm hash-password     # ADMIN_PASSWORD_HASH for AUTH_MODE=local-password
 - `apps/web` — React 19 + Vite SPA, TanStack Router (code-based routes in `src/router.tsx`) and
   Query, react-i18next (`src/i18n/locales/{en,pt-BR}.json`).
 - `packages/engine` — pure analysis code. No I/O, no fetch, no Node APIs: it runs in the browser.
+  `src/analysis` holds the team analysis and suggestions; `@vgc-helper/engine/damage` wraps
+  `@smogon/calc` (Champions = generation 0) with numbers from the snapshot and is a separate
+  entry so the web app loads it on demand.
 - `packages/data` — zod schemas (`src/schemas`), Node loaders (`@vgc-helper/data/node`),
-  generated `snapshots/`, hand-curated `manual/`, and `overrides/`.
+  generated `snapshots/`, hand-curated `manual/`, and `overrides/`. `manual/analysis.json`
+  holds the analysis rules (ability matchups, roles, archetypes, thresholds, suggestion
+  weights); the builder copies it into the manifest, so run `pnpm snapshot:build` after editing.
 - `packages/shared` — zod DTOs shared by API and web.
 - `scripts` — the data pipeline (`src/snapshot/build.ts`).
 - One Vercel project: static web from `apps/web/dist`, NestJS as the function in `/api`,
@@ -73,5 +78,8 @@ pnpm hash-password     # ADMIN_PASSWORD_HASH for AUTH_MODE=local-password
   import/export, search, shortcuts, My teams, settings, PWA (app shell only, `/api` is never
   cached), brand images (`pnpm --filter @vgc-helper/web brand`) and README screenshots
   (`pnpm --filter @vgc-helper/web screenshots`, after `pnpm build`).
-- Next: Phase 3 — analysis engine: type matrix, stacked weaknesses, meta threats, speed tiers,
-  suggestions.
+- Phase 3 is done: analysis column (type matrix, stacked weaknesses, roles, archetypes, speed
+  tiers, meta threats), suggestions with an explained score, experience levels, useful/not
+  useful feedback (`/api/feedback`, summary in Settings), damage calculator (`/calc`) and the
+  README GIF (`screenshots/demo.spec.ts`).
+- Next: Phase 4 — data pipeline with readable diffs, "What's new" page, team revalidation.

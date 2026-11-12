@@ -9,20 +9,35 @@ faltando e o que o meta atual está usando. VGC (Doubles) primeiro, Singles depo
 [![Licença: Apache 2.0](https://img.shields.io/github/license/caio2203/vgc-helper)](LICENSE)
 [![Versão](https://img.shields.io/github/v/release/caio2203/vgc-helper?include_prereleases)](https://github.com/caio2203/vgc-helper/releases)
 
-> **Status: início do desenvolvimento.** A Fase 2 está pronta: o montador checa a legalidade
-> enquanto você edita, importa e exporta pastes do Showdown, guarda seus times com o histórico e
-> pode ser instalado como app. A análise (matriz de tipos, ameaças do meta, speed tiers,
-> sugestões) vem a seguir — veja o [roadmap](#roadmap).
+> **Status: início do desenvolvimento.** As Fases 2 e 3 estão prontas: o montador checa a
+> legalidade enquanto você edita, e a coluna de análise mostra a matriz de tipos, as fraquezas
+> acumuladas, o checklist de papéis, os speed tiers e as ameaças do meta com cálculo de dano,
+> com sugestões que explicam a pontuação. Próximo passo: atualização dos dados com diffs
+> legíveis — veja o [roadmap](#roadmap).
 
 ## Screenshots
 
-O montador com um time colado. O Incineroar tem um golpe que não aprende no Pokémon Champions,
-então o slot fica marcado e a coluna de análise diz o que está errado e de onde vem a regra.
+Adicionar um Pokémon, ver o alerta, aceitar uma sugestão (gravado com a interface em inglês):
+
+<img alt="Adicionar o Archaludon deixa três membros fracos a Ground; a análise avisa e sugere Pokémon que resistem a Ground; depois de adicionar a primeira sugestão o alerta diz que ela cobre a fraqueza" src="docs/images/demo.gif" width="720">
+
+O montador ao lado da coluna de análise completa, e a calculadora de dano:
 
 <p>
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="docs/images/builder-desktop-dark-pt-BR.png">
-    <img alt="Montador de times no navegador do computador: dois Pokémon na lista do time com as bordas de tipo, o editor do slot com golpes e Stat Points, e um erro de legalidade na coluna de análise" src="docs/images/builder-desktop-light-pt-BR.png" width="600">
+    <img alt="Montador de times no navegador do computador: a lista do time com as bordas de tipo, o editor do slot com golpes e Stat Points, e a coluna de análise com um erro de legalidade e sugestões" src="docs/images/builder-desktop-light-pt-BR.png" width="600">
+  </picture>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/images/analysis-desktop-dark-pt-BR.png">
+    <img alt="A coluna de análise inteira: sugestões com os motivos, a matriz de tipos, os papéis, os speed tiers contra o meta, as ameaças do meta e as fontes com datas" src="docs/images/analysis-desktop-light-pt-BR.png" width="200">
+  </picture>
+</p>
+
+<p>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/images/calc-desktop-dark-pt-BR.png">
+    <img alt="Calculadora de dano: Garchomp contra Incineroar com os sets mais comuns, a faixa de dano e os golpes para derrubar" src="docs/images/calc-desktop-light-pt-BR.png" width="600">
   </picture>
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="docs/images/builder-mobile-dark-pt-BR.png">
@@ -30,21 +45,11 @@ então o slot fica marcado e a coluna de análise diz o que está errado e de on
   </picture>
 </p>
 
-<p>
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/images/teams-desktop-dark-pt-BR.png">
-    <img alt="Meus times: uma tabela com os times salvos, seus Pokémon, o formato e a última alteração" src="docs/images/teams-desktop-light-pt-BR.png" width="600">
-  </picture>
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/images/login-mobile-dark-pt-BR.png">
-    <img alt="Tela de login no celular" src="docs/images/login-mobile-light-pt-BR.png" width="200">
-  </picture>
-</p>
-
-A pasta `docs/images` tem todas as telas (montador, Meus times, configurações, login) no
-computador e no celular, no tema claro e no escuro, em inglês e em português. Elas são geradas a
-partir de uma instância local descartável com `pnpm --filter @vgc-helper/web screenshots`; os
-ícones e a imagem de prévia social vêm de `pnpm --filter @vgc-helper/web brand`.
+A pasta `docs/images` tem todas as telas (montador, análise, calculadora de dano, Meus times,
+configurações, login) no computador e no celular, no tema claro e no escuro, em inglês e em
+português. Elas são geradas a partir de uma instância local descartável, com dados de
+demonstração, por `pnpm --filter @vgc-helper/web screenshots`, que também grava o GIF; os ícones
+e a imagem de prévia social vêm de `pnpm --filter @vgc-helper/web brand`.
 
 ## Por que eu fiz isso
 
@@ -75,12 +80,31 @@ Já disponível:
   formato padrão.
 - App instalável (PWA). Só a estrutura do app fica em cache; seus dados nunca ficam offline.
 - Interface em inglês e português do Brasil, temas claro e escuro.
+- Análise ao vivo, sem IA, refeita a cada mudança:
+  - matriz de tipos como mapa de calor com o valor em cada célula, considerando habilidades
+    (Levitate, Flash Fire, Thick Fat…), fraquezas acumuladas com o membro que as completou e os
+    Pokémon do meta que as exploram, e as lacunas da cobertura ofensiva;
+  - checklist de papéis do VGC: controle de velocidade, Fake Out, redirecionamento, Intimidate e
+    respostas a ele, Protect, golpes em área e de prioridade, pivots, Wide Guard, equilíbrio
+    físico/especial, Megas;
+  - arquétipos (Tailwind, Trick Room, climas, terrenos) e a peça que falta;
+  - speed tiers numa régua ao lado dos Pokémon mais usados, com Tailwind e Choice Scarf;
+  - ameaças do meta: os Pokémon mais usados, com o set mais comum, calculados contra o time,
+    com quem eles derrubam com um golpe e quem responde a eles.
+- Sugestões a partir dos dados de uso: Pokémon legais acima de um corte de uso configurável (ou
+  abaixo dele no modo off-meta), ordenados por uma pontuação explicada — fraquezas acumuladas
+  que resistem, papéis que faltam e que preenchem, uso, companheiros de time comuns — com o set
+  mais comum, adicionados com um clique. Cada uma pode ser marcada como útil ou não; as
+  Configurações mostram o total.
+- Os níveis de experiência mudam quanto se explica e quantos números aparecem: o iniciante ganha
+  um glossário em cada papel, o avançado ganha rolagens de dano e os pontos da pontuação.
+- Calculadora de dano com a mecânica do Champions (Stat Points, nível 50), usando o mesmo
+  cálculo e os mesmos dados da análise.
+- Todo número traz a fonte e a data.
 
 Planejado (veja o roadmap):
 
-- Análise ao vivo, sem IA: matriz de tipos, fraquezas acumuladas, ameaças do meta com cálculo
-  de dano, speed tiers, checklist de papéis do VGC, detecção de arquétipo.
-- Sugestões com pontuação explicada e o set mais usado, a partir de dados de uso e de torneios.
+- Resultados de torneio como bônus na pontuação das sugestões.
 - Explicações e chat sob demanda com o Google Gemini (free tier), e tudo funcionando sem ele.
 
 ## Atalhos de teclado
@@ -232,6 +256,8 @@ se a autenticação não estiver configurada, a API se recusa a subir.
   do Pokémon Champions, empacotados pelo [pkmn](https://github.com/pkmn/ps) (MIT).
 - [Estatísticas de uso do Smogon](https://www.smogon.com/stats/) — uso mensal, sets, spreads e
   companheiros de time.
+- [@smogon/calc](https://github.com/smogon/damage-calc) (MIT) — cálculo de dano com a mecânica
+  do Pokémon Champions, alimentado com os stats e golpes do snapshot de dados.
 - Anúncios oficiais da The Pokémon Company — datas e regras dos regulamentos, creditados junto
   dos dados em `packages/data/manual`.
 
@@ -242,7 +268,7 @@ O arquivo [NOTICE](NOTICE) lista os créditos que precisam acompanhar qualquer c
 - [x] **Fase 0** — pesquisa: regras, fontes de dados, limites da hospedagem
 - [x] **Fase 1** — base: monorepo, CI, login, banco, i18n, primeiro snapshot de dados, primeiro deploy
 - [x] **Fase 2** — design system, montador de times, legalidade, import/export de paste, busca, atalhos
-- [ ] **Fase 3** — motor de análise, sugestões, níveis de experiência, feedback, calculadora de dano
+- [x] **Fase 3** — motor de análise, sugestões, níveis de experiência, feedback, calculadora de dano
 - [ ] **Fase 4** — pipeline de dados com diff legível, página "Novidades", revalidação de times
 - [ ] **Fase 5** — team preview: quais 4 levar contra uma Open Team List
 - [ ] **Fase 6** — explicações e chat com IA sob demanda (Gemini)

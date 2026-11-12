@@ -9,20 +9,34 @@ missing and what the current meta is running. VGC (Doubles) first, Singles next.
 [![License: Apache 2.0](https://img.shields.io/github/license/caio2203/vgc-helper)](LICENSE)
 [![Release](https://img.shields.io/github/v/release/caio2203/vgc-helper?include_prereleases)](https://github.com/caio2203/vgc-helper/releases)
 
-> **Status: early development.** Phase 2 is done: the team builder checks legality as you
-> edit, imports and exports Showdown pastes, keeps your teams with their history and installs
-> as an app. The analysis (type matrix, meta threats, speed tiers, suggestions) comes next —
-> see the [roadmap](#roadmap).
+> **Status: early development.** Phases 2 and 3 are done: the team builder checks legality as
+> you edit, and the analysis column shows the type matrix, stacked weaknesses, the role
+> checklist, speed tiers and meta threats from damage calcs, with suggestions that explain
+> their score. Next: data updates with readable diffs — see the [roadmap](#roadmap).
 
 ## Screenshots
 
-The builder with a pasted team. Incineroar has a move it cannot learn in Pokémon Champions, so
-its slot is marked and the analysis column says what is wrong and where the rule comes from.
+Add a Pokémon, see the alert, accept a suggestion:
+
+<img alt="Adding Archaludon makes three members weak to Ground; the analysis warns about it and suggests Pokémon that resist Ground; after adding the first suggestion the alert says it covers the weakness" src="docs/images/demo.gif" width="720">
+
+The builder next to the full analysis column, and the damage calculator:
 
 <p>
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="docs/images/builder-desktop-dark.png">
-    <img alt="Team builder on a desktop browser: two Pokémon in the team list with their type edges, the slot editor with moves and Stat Points, and a legality error in the analysis column" src="docs/images/builder-desktop-light.png" width="600">
+    <img alt="Team builder on a desktop browser: the team list with type edges, the slot editor with moves and Stat Points, and the analysis column with a legality error and suggestions" src="docs/images/builder-desktop-light.png" width="600">
+  </picture>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/images/analysis-desktop-dark.png">
+    <img alt="The whole analysis column: suggestions with their reasons, the type matrix heat map, roles, speed tiers against the meta, meta threats and the sources with dates" src="docs/images/analysis-desktop-light.png" width="200">
+  </picture>
+</p>
+
+<p>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/images/calc-desktop-dark.png">
+    <img alt="Damage calculator: Garchomp against Incineroar with their most common sets, the damage range and the hits to knock out" src="docs/images/calc-desktop-light.png" width="600">
   </picture>
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="docs/images/builder-mobile-dark.png">
@@ -30,20 +44,10 @@ its slot is marked and the analysis column says what is wrong and where the rule
   </picture>
 </p>
 
-<p>
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/images/teams-desktop-dark.png">
-    <img alt="My teams: a table of saved teams with their Pokémon, format and last update" src="docs/images/teams-desktop-light.png" width="600">
-  </picture>
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/images/login-mobile-dark.png">
-    <img alt="Sign-in screen on a phone" src="docs/images/login-mobile-light.png" width="200">
-  </picture>
-</p>
-
-`docs/images` has every screen (builder, My teams, settings, sign-in) on desktop and phone, in
-light and dark, in English and Portuguese. They are generated from a throwaway local instance
-with `pnpm --filter @vgc-helper/web screenshots`; the icons and the social preview come from
+`docs/images` has every screen (builder, analysis, damage calculator, My teams, settings,
+sign-in) on desktop and phone, in light and dark, in English and Portuguese. They are generated
+from a throwaway local instance with demo data by `pnpm --filter @vgc-helper/web screenshots`,
+which also records the GIF; the icons and the social preview come from
 `pnpm --filter @vgc-helper/web brand`.
 
 ## Why I built this
@@ -73,12 +77,29 @@ Available now:
 - Settings: language, experience level, density (comfortable or compact), theme, default format.
 - Installable app (PWA). Only the app shell is cached; your data is never stored offline.
 - Interface in English and Brazilian Portuguese, light and dark themes.
+- Live analysis without AI, recomputed on every change:
+  - type matrix as a heat map with the value in every cell, abilities included (Levitate,
+    Flash Fire, Thick Fat…), stacked weaknesses with the member that tipped them and the meta
+    Pokémon that hit them, and offensive coverage gaps;
+  - VGC role checklist: speed control, Fake Out, redirection, Intimidate and answers to it,
+    Protect, spread and priority moves, pivots, Wide Guard, physical/special balance, Megas;
+  - archetypes (Tailwind, Trick Room, weather, terrains) and the piece that is missing;
+  - speed tiers on a ruler next to the most used Pokémon, with Tailwind and Choice Scarf;
+  - meta threats: the most used Pokémon with their most common sets, damage-calculated against
+    the team, with who they knock out in one hit and who answers them.
+- Suggestions from the usage data: legal Pokémon above a configurable usage cutoff (or below it
+  in off-meta mode), ranked by an explained score — stacked weaknesses they resist, missing
+  roles they fill, usage, common teammates — with their most common set, added in one click.
+  Each one can be rated useful or not; Settings shows the totals.
+- Experience levels change how much is explained and how many numbers are shown: beginners get
+  a glossary on every role, advanced players get damage rolls and score points.
+- Damage calculator with Champions mechanics (Stat Points, level 50), using the same calc and
+  data as the analysis.
+- Every number carries its source and date.
 
 Planned (see the roadmap):
 
-- Live analysis without AI: type matrix, stacked weaknesses, meta threats with damage calcs,
-  speed tiers, VGC role checklist, archetype detection.
-- Suggestions with an explained score and a common set, based on usage and tournament data.
+- Tournament results as a bonus in the suggestion score.
 - On-demand explanations and chat with Google Gemini (free tier), with a full fallback without it.
 
 ## Keyboard shortcuts
@@ -230,6 +251,8 @@ screen: if authentication is not configured, the API refuses to start.
   Pokémon Champions mods, packaged by [pkmn](https://github.com/pkmn/ps) (MIT).
 - [Smogon University usage statistics](https://www.smogon.com/stats/) — monthly usage, sets,
   spreads and teammates.
+- [@smogon/calc](https://github.com/smogon/damage-calc) (MIT) — damage calculations with Pokémon
+  Champions mechanics, fed with the stats and moves of the data snapshot.
 - Official announcements by The Pokémon Company — regulation dates and rules, credited next to
   the data in `packages/data/manual`.
 
@@ -240,7 +263,7 @@ The [NOTICE](NOTICE) file lists the credits that must travel with every copy.
 - [x] **Phase 0** — research: rules, data sources, hosting limits
 - [x] **Phase 1** — foundation: monorepo, CI, sign-in, database, i18n, first data snapshot, first deploy
 - [x] **Phase 2** — design system, team builder, legality, paste import/export, search, shortcuts
-- [ ] **Phase 3** — analysis engine, suggestions, experience levels, feedback, damage calculator
+- [x] **Phase 3** — analysis engine, suggestions, experience levels, feedback, damage calculator
 - [ ] **Phase 4** — data pipeline with readable diffs, "What's new" page, team revalidation
 - [ ] **Phase 5** — team preview: which 4 to bring against an open team list
 - [ ] **Phase 6** — on-demand AI explanations and chat (Gemini)
