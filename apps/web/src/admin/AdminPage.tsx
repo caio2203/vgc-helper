@@ -2,7 +2,7 @@ import { useQueries, useQuery } from '@tanstack/react-query';
 import type { Manifest, ManifestRegulation, MetaSnapshot } from '@vgc-helper/data';
 import { type ReactNode, useId } from 'react';
 import { useTranslation } from 'react-i18next';
-import { manifestQuery, metaQuery } from '../api/queries';
+import { aiStatusQuery, manifestQuery, metaQuery } from '../api/queries';
 import { useFormat } from '../builder/analysis/format';
 import { Alert } from '../components/ui/Alert';
 import { Panel } from '../components/ui/Controls';
@@ -97,6 +97,7 @@ export function AdminPage() {
   const date = useDateTime();
   const f = useFormat();
   const manifest = useQuery(manifestQuery);
+  const ai = useQuery(aiStatusQuery);
   const { rules } = useRules();
   const m = manifest.data;
   const metaKeys =
@@ -134,6 +135,9 @@ export function AdminPage() {
           )}
           <Row term={t('admin.overrides')}>
             {m.overridesApplied.length > 0 ? f.list(m.overridesApplied) : t('admin.overridesNone')}
+          </Row>
+          <Row term={t('admin.ai')}>
+            {ai.data?.enabled ? t('admin.aiOn', { model: ai.data.model }) : t('admin.aiOff')}
           </Row>
         </dl>
       </Panel>

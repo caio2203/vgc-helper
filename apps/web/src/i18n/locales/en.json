@@ -463,7 +463,10 @@
       "pokemon": "Suggested Pokémon",
       "helpful": "Useful",
       "notHelpful": "Not useful"
-    }
+    },
+    "ai": "AI explanations",
+    "aiOn": "On, model {{model}}. Answers are cached per team, data version, language and level.",
+    "aiOff": "Off: this instance has no GEMINI_API_KEY. The app works without it."
   },
   "about": {
     "title": "About",
@@ -681,5 +684,28 @@
     },
     "source": "Damage from the data snapshot {{version}}. Fields missing from their list: {{name}}, retrieved {{date}}.",
     "sourceNoMeta": "Damage from the data snapshot {{version}}. No usage data for this format, so missing spreads count as 0."
+  },
+  "ai": {
+    "title": "Explanation",
+    "explain": "Explain",
+    "writing": "Writing…",
+    "onDemand": "Runs only when you ask, on the free Gemini quota.",
+    "outdated": "The team changed since this explanation. Press Explain again.",
+    "note": "Written by {{model}} from this analysis on {{date}}. It can be wrong; the numbers above come from the data.",
+    "noteCached": "Saved answer from {{model}}, {{date}}: same team, data, language and level. It can be wrong; the numbers above come from the data.",
+    "error": {
+      "disabled": "The AI is off on this instance.",
+      "quota": "The free Gemini quota is used up for now.",
+      "dailyLimit": "This instance reached its daily limit of AI answers.",
+      "unavailable": "The AI could not answer."
+    },
+    "fallback": "The analysis above is complete without it. Try again later.",
+    "conversation": "Conversation",
+    "you": "You",
+    "model": "Gemini",
+    "askLabel": "Ask about this team",
+    "askPlaceholder": "Why not Amoonguss? What do I change against Trick Room?",
+    "ask": "Ask",
+    "clear": "Clear the conversation"
   }
 }

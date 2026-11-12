@@ -1,9 +1,12 @@
+import { useQuery } from '@tanstack/react-query';
 import { isLegal, type LegalityIssue } from '@vgc-helper/engine';
 import { useTranslation } from 'react-i18next';
+import { aiStatusQuery } from '../api/queries';
 import { Alert, type Tone } from '../components/ui/Alert';
 import { Panel } from '../components/ui/Controls';
 import type { Rules } from '../data/rules';
 import { useDraft } from '../state/draft';
+import { AiAssistant } from './analysis/AiAssistant';
 import { moveName, speciesName, useFormat } from './analysis/format';
 import { Archetypes, RoleChecklist } from './analysis/Roles';
 import { Section } from './analysis/Section';
@@ -125,6 +128,8 @@ export function AnalysisPanel({ rules, issues }: { rules: Rules; issues: Legalit
         </Section>
       )}
 
+      {!empty && <AiSection rules={rules} slots={draftSlots} level={level} />}
+
       {analysis && !empty && (
         <>
           <Section title={t('analysis.sections.types')}>
@@ -170,5 +175,17 @@ export function AnalysisPanel({ rules, issues }: { rules: Rules; issues: Legalit
         </Section>
       )}
     </Panel>
+  );
+}
+
+/** The Explain button and the chat, only when the instance has the AI enabled. */
+function AiSection(props: Parameters<typeof AiAssistant>[0]) {
+  const { t } = useTranslation();
+  const status = useQuery(aiStatusQuery);
+  if (!status.data?.enabled) return null;
+  return (
+    <Section title={t('ai.title')}>
+      <AiAssistant {...props} />
+    </Section>
   );
 }

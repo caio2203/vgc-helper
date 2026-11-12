@@ -463,7 +463,10 @@
       "pokemon": "Pokémon sugerido",
       "helpful": "Útil",
       "notHelpful": "Não útil"
-    }
+    },
+    "ai": "Explicações com IA",
+    "aiOn": "Ligadas, modelo {{model}}. As respostas ficam guardadas por time, versão dos dados, idioma e nível.",
+    "aiOff": "Desligadas: esta instância não tem GEMINI_API_KEY. O app funciona sem ela."
   },
   "about": {
     "title": "Sobre",
@@ -681,5 +684,28 @@
     },
     "source": "Dano calculado com o snapshot de dados {{version}}. Campos que faltam na lista dele: {{name}}, coletado em {{date}}.",
     "sourceNoMeta": "Dano calculado com o snapshot de dados {{version}}. Sem dados de uso para este formato, então spreads que faltam contam como 0."
+  },
+  "ai": {
+    "title": "Explicação",
+    "explain": "Explicar",
+    "writing": "Escrevendo…",
+    "onDemand": "Só roda quando você pede, com a cota grátis do Gemini.",
+    "outdated": "O time mudou desde esta explicação. Clique em Explicar de novo.",
+    "note": "Escrito por {{model}} a partir desta análise em {{date}}. Pode estar errado; os números acima vêm dos dados.",
+    "noteCached": "Resposta guardada de {{model}}, {{date}}: mesmo time, dados, idioma e nível. Pode estar errado; os números acima vêm dos dados.",
+    "error": {
+      "disabled": "A IA está desligada nesta instância.",
+      "quota": "A cota grátis do Gemini acabou por enquanto.",
+      "dailyLimit": "Esta instância chegou ao limite diário de respostas da IA.",
+      "unavailable": "A IA não conseguiu responder."
+    },
+    "fallback": "A análise acima está completa sem ela. Tente de novo mais tarde.",
+    "conversation": "Conversa",
+    "you": "Você",
+    "model": "Gemini",
+    "askLabel": "Pergunte sobre este time",
+    "askPlaceholder": "Por que não Amoonguss? O que troco contra Trick Room?",
+    "ask": "Perguntar",
+    "clear": "Limpar a conversa"
   }
 }

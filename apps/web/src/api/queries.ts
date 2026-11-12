@@ -8,6 +8,7 @@ import {
   manifestSchema,
 } from '@vgc-helper/data';
 import {
+  aiStatusSchema,
   authMethodsSchema,
   type SessionResponse,
   sessionResponseSchema,
@@ -78,6 +79,13 @@ export const metaQuery = (gameId: string, regulationId: string, formatId: string
       api(`/snapshots/${gameId}/${regulationId}/meta/${formatId}`),
     staleTime: Number.POSITIVE_INFINITY,
   });
+
+/** Whether this instance has a Gemini key; the AI buttons stay hidden without one. */
+export const aiStatusQuery = queryOptions({
+  queryKey: ['ai', 'status'],
+  queryFn: () => api('/ai/status', { schema: aiStatusSchema }),
+  staleTime: 10 * 60 * 1000,
+});
 
 export const teamsQuery = queryOptions({
   queryKey: ['teams'],
