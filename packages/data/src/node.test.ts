@@ -1,5 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { readDexSnapshot, readManifest, readMetaSnapshot, resolveSnapshotPath } from './node.js';
+import {
+  readChangelog,
+  readDexSnapshot,
+  readManifest,
+  readMetaSnapshot,
+  resolveSnapshotPath,
+} from './node.js';
 
 describe('resolveSnapshotPath', () => {
   it('keeps paths inside the snapshot folder', () => {
@@ -38,6 +44,17 @@ describe('committed snapshot', () => {
     for (const regulation of manifest.regulations) {
       expect(gameIds).toContain(regulation.gameId);
       for (const f of regulation.formats) expect(formatIds).toContain(f.formatId);
+    }
+  });
+
+  it('has a change history whose newest entry is the committed snapshot', async () => {
+    const [manifest, changelog] = await Promise.all([readManifest(), readChangelog()]);
+    expect(changelog.entries[0]?.version).toBe(manifest.version);
+    const versions = changelog.entries.map((e) => e.version);
+    expect(new Set(versions).size).toBe(versions.length);
+    for (const [i, entry] of changelog.entries.entries()) {
+      const older = changelog.entries[i + 1];
+      expect(entry.previousVersion).toBe(older ? older.version : null);
     }
   });
 });

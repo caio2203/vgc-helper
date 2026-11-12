@@ -6,13 +6,22 @@
  * - Limitless tournament standings (top-cut presence, counts only),
  * - the manual corrections in packages/data/overrides.
  *
- * Run with `pnpm snapshot:build`. Writes nothing when the content did not change.
+ * Run with `pnpm snapshot:build`. Writes nothing when the content did not change. Otherwise it also
+ * adds an entry to snapshots/changelog.json with what changed since the previous snapshot.
+ *
+ * Options:
+ *   --report <file>          write the change report (Markdown, the data PR body) to this file
+ *   --accept-large-changes   write the snapshot even when the sanity checks fail
  */
 import { createHash } from 'node:crypto';
 import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
+  type Changelog,
+  type ChangelogEntry,
+  changelogSchema,
+  type DexSnapshot,
   dexSnapshotSchema,
   type Manifest,
   type ManifestRegulation,
@@ -24,10 +33,13 @@ import {
   type Override,
   overrideFileSchema,
 } from '@vgc-helper/data';
+import { readChangelog } from '@vgc-helper/data/node';
 import { stringify } from '../lib/json.js';
 import { buildDexSnapshot } from './dex.js';
+import { diffSnapshots, metaKey, regulationKey, type SnapshotSet, sanityProblems } from './diff.js';
 import { fetchTopCut } from './limitless.js';
 import { applyOverrides } from './overrides.js';
+import { renderReport } from './report.js';
 import { chaosToMeta, fetchLatestChaos, listStatsMonths, totalUsage } from './smogon.js';
 
 const ROOT = fileURLToPath(new URL('../../../', import.meta.url));
@@ -35,6 +47,18 @@ const DATA_DIR = join(ROOT, 'packages', 'data');
 const SNAPSHOT_DIR = join(DATA_DIR, 'snapshots');
 /** Allowed gap between total usage and team size before the meta is rejected. */
 const USAGE_TOLERANCE = 0.1;
+/** A legal species or move list that changes by more than this share needs the owner's OK. */
+const MAX_LIST_CHANGE = 0.3;
+/** Usage moves in the change report: at least 2 points, or crossing the viability cutoff. */
+const DIFF_OPTIONS = { usageMinDelta: 0.02, usageMaxEntries: 15 };
+
+function parseArgs(argv: string[]) {
+  const reportAt = argv.indexOf('--report');
+  return {
+    report: reportAt >= 0 ? (argv[reportAt + 1] ?? null) : null,
+    acceptLargeChanges: argv.includes('--accept-large-changes'),
+  };
+}
 
 async function readJsonFiles(dir: string): Promise<unknown[]> {
   const files = (await readdir(dir)).filter((f) => f.endsWith('.json')).sort();
@@ -78,6 +102,37 @@ async function previousMeta(path: string): Promise<MetaSnapshot | null> {
   }
 }
 
+/** The committed snapshot, loaded before anything is overwritten, to diff against. */
+async function previousSet(manifest: Manifest | null): Promise<SnapshotSet | null> {
+  if (!manifest) return null;
+  const dex = new Map<string, DexSnapshot>();
+  const meta = new Map<string, MetaSnapshot>();
+  for (const regulation of manifest.regulations) {
+    try {
+      const raw = JSON.parse(await readFile(join(SNAPSHOT_DIR, regulation.files.dex), 'utf8'));
+      dex.set(regulationKey(regulation), dexSnapshotSchema.parse(raw));
+    } catch {
+      // A missing or invalid old dex only means its changes are not listed.
+    }
+    for (const [formatId, path] of Object.entries(regulation.files.meta)) {
+      const m = await previousMeta(path);
+      if (m) meta.set(metaKey(regulation.gameId, regulation.id, formatId), m);
+    }
+  }
+  return { ...manifest, dex, meta };
+}
+
+async function writeReport(path: string | null, body: string): Promise<void> {
+  if (!path) return;
+  await mkdir(dirname(path), { recursive: true });
+  await writeFile(path, body);
+}
+
+async function writeChangelog(changelog: Changelog): Promise<void> {
+  const body = stringify(changelogSchema.parse(changelog));
+  await writeFile(join(SNAPSHOT_DIR, 'changelog.json'), `${body}\n`);
+}
+
 async function previousManifest(): Promise<Manifest | null> {
   try {
     return manifestSchema.parse(
@@ -103,6 +158,7 @@ function contentHash(files: Map<string, unknown>): string {
 }
 
 async function main(): Promise<void> {
+  const args = parseArgs(process.argv.slice(2));
   const now = new Date().toISOString();
   const manual = await loadManual();
   const overrides = await loadOverrides();
@@ -215,9 +271,55 @@ async function main(): Promise<void> {
   for (const warning of warnings) console.warn(`warning: ${warning}`);
 
   const previous = await previousManifest();
+  const changelog = await readChangelog(SNAPSHOT_DIR);
+  // The first run with a history records the committed snapshot as its starting point.
+  const baseline: ChangelogEntry[] =
+    previous && changelog.entries.length === 0
+      ? [
+          {
+            version: previous.version,
+            previousVersion: null,
+            generatedAt: previous.generatedAt,
+            changes: [],
+            warnings: previous.warnings,
+          },
+        ]
+      : [];
+
   if (previous?.version.endsWith(`.${hash}`)) {
+    if (baseline.length > 0) await writeChangelog({ ...changelog, entries: baseline });
+    await writeReport(args.report, `Snapshot unchanged (${previous.version}).\n`);
     console.log(`Snapshot unchanged (${previous.version}).`);
     return;
+  }
+
+  const before = await previousSet(previous);
+  const newDex = new Map<string, DexSnapshot>();
+  const newMeta = new Map<string, MetaSnapshot>();
+  for (const regulation of regulations) {
+    newDex.set(regulationKey(regulation), files.get(regulation.files.dex) as DexSnapshot);
+    for (const [formatId, path] of Object.entries(regulation.files.meta)) {
+      const key = metaKey(regulation.gameId, regulation.id, formatId);
+      newMeta.set(key, files.get(path) as MetaSnapshot);
+    }
+  }
+  const after: SnapshotSet = { ...manifestBody, dex: newDex, meta: newMeta };
+
+  if (before) {
+    const problems = sanityProblems(before, after, MAX_LIST_CHANGE);
+    if (problems.length > 0 && !args.acceptLargeChanges) {
+      for (const problem of problems) console.error(`sanity check failed: ${problem}`);
+      const list = problems.map((p) => `- ${p}`).join('\n');
+      await writeReport(
+        args.report,
+        `The sanity checks failed, so the snapshot was not written:\n\n${list}\n\n` +
+          'Run the workflow again with "accept large changes" if this is expected.\n',
+      );
+      process.exitCode = 1;
+      return;
+    }
+    // Recorded in the manifest too, so the Admin page shows that a large change was accepted.
+    for (const problem of problems) manifestBody.warnings.push(`Accepted large change: ${problem}`);
   }
 
   for (const [path, value] of files) {
@@ -233,6 +335,17 @@ async function main(): Promise<void> {
     ...manifestBody,
   });
   await writeFile(join(SNAPSHOT_DIR, 'manifest.json'), `${stringify(manifest)}\n`);
+
+  const entry: ChangelogEntry = {
+    version: manifest.version,
+    previousVersion: previous?.version ?? null,
+    generatedAt: now,
+    changes: before ? diffSnapshots(before, after, DIFF_OPTIONS) : [],
+    warnings: manifest.warnings,
+  };
+  await writeChangelog({ ...changelog, entries: [entry, ...baseline, ...changelog.entries] });
+  await writeReport(args.report, renderReport(entry));
+  console.log(`${entry.changes.length} changes since ${entry.previousVersion ?? 'nothing'}.`);
 
   console.log(`Snapshot ${manifest.version} written:`);
   for (const path of files.keys()) console.log(`  ${path}`);
