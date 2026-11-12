@@ -48,6 +48,12 @@ export function AboutPage() {
             — {t('about.smogon')}
           </li>
           <li>
+            <a className={LINK} href="https://play.limitlesstcg.com">
+              Limitless
+            </a>{' '}
+            — {t('about.limitless')}
+          </li>
+          <li>
             <a className={LINK} href="https://github.com/smogon/damage-calc">
               @smogon/calc
             </a>{' '}

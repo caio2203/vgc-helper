@@ -65,8 +65,8 @@ Available now:
 - Private by design: one owner per instance, GitHub sign-in limited to your numeric GitHub id
   (or a local password when running on your own PC).
 - Pokémon Champions data for Regulation Set M-C: legal species, Megas, moves, items, abilities
-  and learnsets, plus monthly usage stats for VGC and Singles. Every dataset carries its source
-  and date.
+  and learnsets, monthly usage stats for VGC and Singles, and the top cut of recent online VGC
+  tournaments. Every dataset carries its source and date.
 - Team builder with live legality checks against the regulation: species and forms, abilities,
   learnsets, Stat Points, Item and Species Clause, Mega Stones and one Mega per battle. Every
   error names the slot and the rule's source.
@@ -89,7 +89,8 @@ Available now:
     the team, with who they knock out in one hit and who answers them.
 - Suggestions from the usage data: legal Pokémon above a configurable usage cutoff (or below it
   in off-meta mode), ranked by an explained score — stacked weaknesses they resist, missing
-  roles they fill, usage, common teammates — with their most common set, added in one click.
+  roles they fill, usage, top-cut presence in recent tournaments, common teammates — with their
+  most common set, added in one click.
   Each one can be rated useful or not; Settings shows the totals.
 - Experience levels change how much is explained and how many numbers are shown: beginners get
   a glossary on every role, advanced players get damage rolls and score points.
@@ -99,7 +100,6 @@ Available now:
 
 Planned (see the roadmap):
 
-- Tournament results as a bonus in the suggestion score.
 - On-demand explanations and chat with Google Gemini (free tier), with a full fallback without it.
 
 ## Keyboard shortcuts
@@ -251,6 +251,10 @@ screen: if authentication is not configured, the API refuses to start.
   Pokémon Champions mods, packaged by [pkmn](https://github.com/pkmn/ps) (MIT).
 - [Smogon University usage statistics](https://www.smogon.com/stats/) — monthly usage, sets,
   spreads and teammates.
+- [Limitless](https://play.limitlesstcg.com) — standings of recent online VGC tournaments
+  through its [public API](https://docs.limitlesstcg.com/developer.html). The builder keeps
+  only how often each species reaches the top cut (no player data); suggestions get a bonus
+  for it.
 - [@smogon/calc](https://github.com/smogon/damage-calc) (MIT) — damage calculations with Pokémon
   Champions mechanics, fed with the stats and moves of the data snapshot.
 - Official announcements by The Pokémon Company — regulation dates and rules, credited next to

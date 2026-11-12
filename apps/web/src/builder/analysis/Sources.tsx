@@ -44,6 +44,15 @@ export function Sources({
           <Link href={meta.source.url}>smogon.com/stats</Link>
         </li>
       )}
+      {meta?.tournaments && (
+        <li>
+          {t('analysis.sources.tournaments', {
+            name: meta.tournaments.source.name,
+            date: date(meta.tournaments.source.retrievedAt, false),
+          })}{' '}
+          <Link href={meta.tournaments.source.url}>limitlesstcg.com</Link>
+        </li>
+      )}
       <li>{t('analysis.sources.dex', { name: dex.name, date: date(dex.retrievedAt, false) })}</li>
       {ruleSource && (
         <li>

@@ -66,8 +66,8 @@ Já disponível:
 - Privado por padrão: um dono por instância, login pelo GitHub restrito ao seu ID numérico
   (ou uma senha local, para rodar no seu PC).
 - Dados do Pokémon Champions no Regulamento M-C: espécies, Megas, golpes, itens, habilidades e
-  learnsets legais, mais estatísticas mensais de uso do VGC e do Singles. Cada conjunto de dados
-  traz a fonte e a data.
+  learnsets legais, estatísticas mensais de uso do VGC e do Singles e o top cut de torneios
+  online recentes de VGC. Cada conjunto de dados traz a fonte e a data.
 - Montador de times com checagem de legalidade ao vivo contra o regulamento: espécies e formas,
   habilidades, learnsets, Stat Points, Item e Species Clause, Mega Stones e uma Mega por batalha.
   Cada erro diz o slot e a fonte da regra.
@@ -93,8 +93,8 @@ Já disponível:
     com quem eles derrubam com um golpe e quem responde a eles.
 - Sugestões a partir dos dados de uso: Pokémon legais acima de um corte de uso configurável (ou
   abaixo dele no modo off-meta), ordenados por uma pontuação explicada — fraquezas acumuladas
-  que resistem, papéis que faltam e que preenchem, uso, companheiros de time comuns — com o set
-  mais comum, adicionados com um clique. Cada uma pode ser marcada como útil ou não; as
+  que resistem, papéis que faltam e que preenchem, uso, presença no top cut de torneios
+  recentes, companheiros de time comuns — com o set mais comum, adicionados com um clique. Cada uma pode ser marcada como útil ou não; as
   Configurações mostram o total.
 - Os níveis de experiência mudam quanto se explica e quantos números aparecem: o iniciante ganha
   um glossário em cada papel, o avançado ganha rolagens de dano e os pontos da pontuação.
@@ -104,7 +104,6 @@ Já disponível:
 
 Planejado (veja o roadmap):
 
-- Resultados de torneio como bônus na pontuação das sugestões.
 - Explicações e chat sob demanda com o Google Gemini (free tier), e tudo funcionando sem ele.
 
 ## Atalhos de teclado
@@ -256,6 +255,10 @@ se a autenticação não estiver configurada, a API se recusa a subir.
   do Pokémon Champions, empacotados pelo [pkmn](https://github.com/pkmn/ps) (MIT).
 - [Estatísticas de uso do Smogon](https://www.smogon.com/stats/) — uso mensal, sets, spreads e
   companheiros de time.
+- [Limitless](https://play.limitlesstcg.com) — classificação de torneios online recentes de VGC
+  pela [API pública](https://docs.limitlesstcg.com/developer.html). O builder guarda só com que
+  frequência cada espécie chega ao top cut (nenhum dado de jogador); as sugestões ganham um
+  bônus por isso.
 - [@smogon/calc](https://github.com/smogon/damage-calc) (MIT) — cálculo de dano com a mecânica
   do Pokémon Champions, alimentado com os stats e golpes do snapshot de dados.
 - Anúncios oficiais da The Pokémon Company — datas e regras dos regulamentos, creditados junto

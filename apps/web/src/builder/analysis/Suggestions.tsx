@@ -53,6 +53,15 @@ export function Suggestions({
         });
       case 'usage':
         return t('analysis.suggestions.parts.usage', { usage: f.share(p.usage) });
+      case 'topCut': {
+        const text = t('analysis.suggestions.parts.topCut', { share: f.share(p.share) });
+        return level === 'beginner'
+          ? text
+          : `${text} ${t('analysis.suggestions.parts.topCutDetail', {
+              teams: f.number(p.teams),
+              events: f.number(p.events),
+            })}`;
+      }
       case 'teammates':
         return t('analysis.suggestions.parts.teammates', {
           list: f.list(

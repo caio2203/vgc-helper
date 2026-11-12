@@ -265,12 +265,15 @@
         "fillsRole": "Fills {{list}}",
         "usage": "On {{usage}} of teams",
         "teammates": "Often paired with {{list}}",
+        "topCut": "In {{share}} of top-cut teams in recent tournaments",
+        "topCutDetail": "({{teams}} teams, {{events}} tournaments)",
         "addsWeakness": "Adds to the weakness to {{list}}"
       }
     },
     "sources": {
       "title": "Sources",
       "meta": "Usage: {{name}}, {{battles}} battles, retrieved {{date}}.",
+      "tournaments": "Tournaments: {{name}}, retrieved {{date}}.",
       "dex": "Game data: {{name}}, retrieved {{date}}.",
       "rules": "Roles, thresholds and weights: {{name}}, {{date}}.",
       "calc": "Damage: @smogon/calc with the stats and moves of the snapshot, level {{level}}."
@@ -437,6 +440,7 @@
     "showdown": "game data for the Pokémon Champions mods (MIT).",
     "pkmn": "the Showdown data packaged for JavaScript (MIT).",
     "smogon": "monthly usage statistics.",
+    "limitless": "top-cut teams from recent online tournaments.",
     "snapshot": "Data snapshot {{version}}, built {{date}}.",
     "calc": "damage calculations with Pokémon Champions mechanics (MIT)."
   },
