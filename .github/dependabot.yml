@@ -7,6 +7,10 @@ updates:
     open-pull-requests-limit: 5
     commit-message:
       prefix: chore(deps)
+    ignore:
+      # Node types follow the runtime (24.x, see "engines"); bump both together by hand.
+      - dependency-name: "@types/node"
+        update-types: ["version-update:semver-major"]
     groups:
       production:
         dependency-type: production
