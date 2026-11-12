@@ -9,11 +9,12 @@ missing and what the current meta is running. VGC (Doubles) first, Singles next.
 [![License: Apache 2.0](https://img.shields.io/github/license/caio2203/vgc-helper)](LICENSE)
 [![Release](https://img.shields.io/github/v/release/caio2203/vgc-helper?include_prereleases)](https://github.com/caio2203/vgc-helper/releases)
 
-> **Status: early development.** Phases 2 to 4 are done: the team builder checks legality as
+> **Status: early development.** Phases 2 to 5 are done: the team builder checks legality as
 > you edit, the analysis column shows the type matrix, stacked weaknesses, the role checklist,
 > speed tiers and meta threats from damage calcs, with suggestions that explain their score,
-> and every data update comes with a readable diff, a What's new page and a check of your saved
-> teams. Next: team preview — see the [roadmap](#roadmap).
+> every data update comes with a readable diff, a What's new page and a check of your saved
+> teams, and the team preview says who to bring and lead against an open team list. Next:
+> on-demand AI explanations — see the [roadmap](#roadmap).
 
 ## Screenshots
 
@@ -108,6 +109,13 @@ Available now:
   illegal slots, a regulation that ended (and how they fare in the one in force), and the
   changes that touch their Pokémon and moves. The builder lists the same changes when you open
   such a team, and announces the end of the regulation 30 days ahead.
+- Team preview: paste the opponent's open team list (a Showdown paste or one Pokémon per line)
+  and the app picks the 4 to bring and the 2 to lead (3 and 1 in Singles). Every member of your
+  team is damage-calculated against each of theirs, both ways, with speed (Choice Scarf
+  included); the pick covers each of theirs as well as it can and keeps your roles, and the lead
+  adds pressure and turn-one roles (Fake Out, speed control, Intimidate, redirection). It shows
+  the matchup table, who answers each of theirs and with which hit, the other picks with their
+  score, and which fields of their list came from the usage data.
 
 Planned (see the roadmap):
 
@@ -288,7 +296,7 @@ The [NOTICE](NOTICE) file lists the credits that must travel with every copy.
 - [x] **Phase 2** — design system, team builder, legality, paste import/export, search, shortcuts
 - [x] **Phase 3** — analysis engine, suggestions, experience levels, feedback, damage calculator
 - [x] **Phase 4** — data pipeline with readable diffs, "What's new" page, team revalidation
-- [ ] **Phase 5** — team preview: which 4 to bring against an open team list
+- [x] **Phase 5** — team preview: which 4 to bring against an open team list
 - [ ] **Phase 6** — on-demand AI explanations and chat (Gemini)
 - [ ] **Phase 7** — Singles analysis profile
 - [ ] **Phase 8** — Scarlet/Violet and Smogon formats

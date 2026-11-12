@@ -9,11 +9,12 @@ faltando e o que o meta atual está usando. VGC (Doubles) primeiro, Singles depo
 [![Licença: Apache 2.0](https://img.shields.io/github/license/caio2203/vgc-helper)](LICENSE)
 [![Versão](https://img.shields.io/github/v/release/caio2203/vgc-helper?include_prereleases)](https://github.com/caio2203/vgc-helper/releases)
 
-> **Status: início do desenvolvimento.** As Fases 2 a 4 estão prontas: o montador checa a
+> **Status: início do desenvolvimento.** As Fases 2 a 5 estão prontas: o montador checa a
 > legalidade enquanto você edita, a coluna de análise mostra a matriz de tipos, as fraquezas
 > acumuladas, o checklist de papéis, os speed tiers e as ameaças do meta com cálculo de dano,
-> com sugestões que explicam a pontuação, e cada atualização dos dados vem com um diff legível,
-> uma página de Novidades e uma checagem dos times salvos. Próximo passo: team preview — veja o
+> com sugestões que explicam a pontuação, cada atualização dos dados vem com um diff legível,
+> uma página de Novidades e uma checagem dos times salvos, e o team preview diz quem levar e
+> quem começar contra uma Open Team List. Próximo passo: explicações com IA sob demanda — veja o
 > [roadmap](#roadmap).
 
 ## Screenshots
@@ -112,6 +113,13 @@ Já disponível:
   slots ilegais, um regulamento que terminou (e como eles ficam no que está em vigor) e as
   mudanças que afetam os Pokémon e golpes deles. O montador lista as mesmas mudanças quando você
   abre um desses times e avisa do fim do regulamento com 30 dias de antecedência.
+- Team preview: cole a Open Team List do oponente (um paste do Showdown ou um Pokémon por linha)
+  e o app escolhe os 4 para levar e os 2 de lead (3 e 1 em Singles). Cada membro do seu time
+  passa pelo cálculo de dano contra cada um dos dele, nos dois sentidos, com velocidade (Choice
+  Scarf incluído); a escolha cobre cada um deles o melhor possível e mantém seus papéis, e o
+  lead soma pressão e papéis de primeiro turno (Fake Out, controle de velocidade, Intimidate,
+  redirecionamento). A tela mostra a tabela de confrontos, quem responde a cada um deles e com
+  qual golpe, as outras escolhas com a pontuação e quais campos da lista vieram dos dados de uso.
 
 Planejado (veja o roadmap):
 
@@ -292,7 +300,7 @@ O arquivo [NOTICE](NOTICE) lista os créditos que precisam acompanhar qualquer c
 - [x] **Fase 2** — design system, montador de times, legalidade, import/export de paste, busca, atalhos
 - [x] **Fase 3** — motor de análise, sugestões, níveis de experiência, feedback, calculadora de dano
 - [x] **Fase 4** — pipeline de dados com diff legível, página "Novidades", revalidação de times
-- [ ] **Fase 5** — team preview: quais 4 levar contra uma Open Team List
+- [x] **Fase 5** — team preview: quais 4 levar contra uma Open Team List
 - [ ] **Fase 6** — explicações e chat com IA sob demanda (Gemini)
 - [ ] **Fase 7** — perfil de análise de Singles
 - [ ] **Fase 8** — Scarlet/Violet e formatos do Smogon

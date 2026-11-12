@@ -94,4 +94,12 @@ pnpm hash-password     # ADMIN_PASSWORD_HASH for AUTH_MODE=local-password
   `whatsNewSeenVersion` setting. `@vgc-helper/engine` `revalidateTeam` checks saved teams
   (legality in their regulation and in the one in force, plus the history changes that touch
   them) on My teams and in the builder. The e2e tests stub the changelog with `page.route`.
-- Next: Phase 5 — team preview: which 4 to bring and 2 to lead against an Open Team List.
+- Phase 5 is done: `teamPreview` in `@vgc-helper/engine/damage` (`src/damage/preview.ts`;
+  the calc itself moved to `damage/calc.ts`) scores every matchup (best hit both ways, speed
+  with item multipliers) with the `preview` weights of each analysis profile, then every pick of
+  `format.pickCount` members by coverage plus checklist roles, and its best lead by pressure plus
+  `leadRoles`. Fields missing from the opponent's list come from the usage data (Megas looked up
+  by their battle forme). The web page is `/preview`; the opponent's list stays in
+  `sessionStorage`. Scroll containers with `sr-only` children need `relative`, or the hidden
+  text widens the page on phones.
+- Next: Phase 6 — on-demand AI explanations and chat (Gemini free tier), with fallback and cache.
