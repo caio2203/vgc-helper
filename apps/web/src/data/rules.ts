@@ -5,25 +5,14 @@ import {
   type DexIndex,
   indexDex,
   type RulesContext,
+  regulationInForce,
   type SearchIndex,
 } from '@vgc-helper/engine';
 import { useMemo } from 'react';
 import { dexQuery, manifestQuery, settingsQuery } from '../api/queries';
 
 /** The regulation in force now, or else the latest one that started, from the snapshot dates. */
-export function currentRegulation(manifest: Manifest, gameId: string, now = Date.now()) {
-  const ofGame = manifest.regulations.filter((r) => r.gameId === gameId);
-  const active = ofGame.find(
-    (r) => Date.parse(r.startsAt) <= now && (r.endsAt === null || now < Date.parse(r.endsAt)),
-  );
-  return (
-    active ??
-    [...ofGame]
-      .filter((r) => Date.parse(r.startsAt) <= now)
-      .sort((a, b) => Date.parse(b.startsAt) - Date.parse(a.startsAt))[0] ??
-    ofGame[0]
-  );
-}
+export const currentRegulation = regulationInForce;
 
 export interface RulesSelection {
   gameId?: string;

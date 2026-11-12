@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Link, useNavigate } from '@tanstack/react-router';
 import type { TeamSummary } from '@vgc-helper/shared';
 import { Copy, FilePlus2, Trash2, Upload } from 'lucide-react';
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { api } from '../api/client';
 import { teamsQuery } from '../api/queries';
@@ -14,6 +14,8 @@ import { TypeEdge } from '../components/ui/Type';
 import { useRules } from '../data/rules';
 import { useDateTime } from '../lib/dates';
 import { useUi } from '../state/ui';
+import { problemCount, RevalidationBody, RevalidationSummary } from './RevalidationDetails';
+import { useRevalidation } from './useRevalidation';
 
 /** Saved teams: open, duplicate, delete, start a new one or import a paste. */
 export function TeamsPage() {
@@ -25,6 +27,7 @@ export function TeamsPage() {
   const { rules } = useRules();
   const { request, announce } = useUi();
   const [toDelete, setToDelete] = useState<TeamSummary | null>(null);
+  const revalidation = useRevalidation(teams.data);
 
   const refresh = () => queryClient.invalidateQueries({ queryKey: ['teams'] });
   const duplicate = useMutation({
@@ -96,6 +99,7 @@ export function TeamsPage() {
                 <th className="px-4 py-2 font-semibold">{t('teams.name')}</th>
                 <th className="px-2 py-2 font-semibold">{t('teams.pokemon')}</th>
                 <th className="px-2 py-2 font-semibold">{t('teams.format')}</th>
+                <th className="px-2 py-2 font-semibold">{t('revalidation.column')}</th>
                 <th className="px-2 py-2 text-right font-semibold">{t('teams.updated')}</th>
                 <th className="px-4 py-2 text-right font-semibold">
                   <span className="sr-only">{t('teams.actions')}</span>
@@ -103,61 +107,93 @@ export function TeamsPage() {
               </tr>
             </thead>
             <tbody>
-              {teams.data.map((team) => (
-                <tr
-                  key={team.id}
-                  className="flex flex-col border-b border-line last:border-b-0 md:table-row"
-                >
-                  <td className="px-4 pt-3 md:py-2">
-                    <Link
-                      to="/teams/$teamId"
-                      params={{ teamId: team.id }}
-                      className="font-semibold text-ink underline-offset-2 hover:underline"
+              {teams.data.map((team) => {
+                const check = revalidation.results?.get(team.id);
+                const open = check && (problemCount(check) > 0 || check.changes.length > 0);
+                return (
+                  <Fragment key={team.id}>
+                    <tr
+                      className={`flex flex-col border-line md:table-row ${open ? '' : 'border-b'}`}
                     >
-                      {team.name}
-                    </Link>
-                  </td>
-                  <td className="px-4 py-1 md:px-2 md:py-2">
-                    <ul className="m-0 flex list-none flex-wrap gap-x-3 gap-y-1 p-0">
-                      {team.species.map((s, i) => (
-                        // biome-ignore lint/suspicious/noArrayIndexKey: a team can list the same species twice while illegal
-                        <li key={`${s}-${i}`} className="flex items-stretch gap-1.5 text-sm">
-                          <TypeEdge types={speciesTypes(s)} />
-                          {speciesName(s)}
-                        </li>
-                      ))}
-                    </ul>
-                  </td>
-                  <td className="px-4 py-1 text-sm text-muted md:px-2 md:py-2">
-                    {formatName(team.formatId)} · {team.regulationId}
-                  </td>
-                  <td className="px-4 py-1 text-sm text-muted md:px-2 md:py-2 md:text-right">
-                    {formatDate(team.updatedAt)}
-                  </td>
-                  <td className="px-4 pb-3 md:py-2">
-                    <div className="flex gap-1 md:justify-end">
-                      <Button
-                        size="sm"
-                        variant="quiet"
-                        onClick={() => duplicate.mutate(team)}
-                        aria-label={t('teams.duplicate', { name: team.name })}
-                        title={t('teams.duplicate', { name: team.name })}
-                      >
-                        <Copy className="size-4" strokeWidth={1.75} aria-hidden="true" />
-                      </Button>
-                      <Button
-                        size="sm"
-                        variant="quiet"
-                        onClick={() => setToDelete(team)}
-                        aria-label={t('teams.delete', { name: team.name })}
-                        title={t('teams.delete', { name: team.name })}
-                      >
-                        <Trash2 className="size-4" strokeWidth={1.75} aria-hidden="true" />
-                      </Button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
+                      <td className="px-4 pt-3 md:py-2">
+                        <Link
+                          to="/teams/$teamId"
+                          params={{ teamId: team.id }}
+                          className="font-semibold text-ink underline-offset-2 hover:underline"
+                        >
+                          {team.name}
+                        </Link>
+                      </td>
+                      <td className="px-4 py-1 md:px-2 md:py-2">
+                        <ul className="m-0 flex list-none flex-wrap gap-x-3 gap-y-1 p-0">
+                          {team.species.map((s, i) => (
+                            // biome-ignore lint/suspicious/noArrayIndexKey: a team can list the same species twice while illegal
+                            <li key={`${s}-${i}`} className="flex items-stretch gap-1.5 text-sm">
+                              <TypeEdge types={speciesTypes(s)} />
+                              {speciesName(s)}
+                            </li>
+                          ))}
+                        </ul>
+                      </td>
+                      <td className="px-4 py-1 text-sm text-muted md:px-2 md:py-2">
+                        {formatName(team.formatId)} · {team.regulationId}
+                      </td>
+                      <td className="px-4 py-1 text-sm md:px-2 md:py-2">
+                        {check ? (
+                          <RevalidationSummary result={check} />
+                        ) : (
+                          <span className="text-muted">{t('common.loading')}</span>
+                        )}
+                      </td>
+                      <td className="px-4 py-1 text-sm text-muted md:px-2 md:py-2 md:text-right">
+                        {formatDate(team.updatedAt)}
+                      </td>
+                      <td className="px-4 pb-3 md:py-2">
+                        <div className="flex gap-1 md:justify-end">
+                          <Button
+                            size="sm"
+                            variant="quiet"
+                            onClick={() => duplicate.mutate(team)}
+                            aria-label={t('teams.duplicate', { name: team.name })}
+                            title={t('teams.duplicate', { name: team.name })}
+                          >
+                            <Copy className="size-4" strokeWidth={1.75} aria-hidden="true" />
+                          </Button>
+                          <Button
+                            size="sm"
+                            variant="quiet"
+                            onClick={() => setToDelete(team)}
+                            aria-label={t('teams.delete', { name: team.name })}
+                            title={t('teams.delete', { name: team.name })}
+                          >
+                            <Trash2 className="size-4" strokeWidth={1.75} aria-hidden="true" />
+                          </Button>
+                        </div>
+                      </td>
+                    </tr>
+                    {check && open && (
+                      <tr className="block border-b border-line md:table-row">
+                        <td colSpan={6} className="block px-4 pb-3 md:table-cell">
+                          <details>
+                            <summary className="cursor-pointer text-sm font-semibold text-ink">
+                              {t('revalidation.details', { name: team.name })}
+                            </summary>
+                            <div className="mt-2">
+                              <RevalidationBody
+                                result={check}
+                                slots={team.slots}
+                                indexOf={(regulationId) =>
+                                  revalidation.indexOf(team.gameId, regulationId)
+                                }
+                              />
+                            </div>
+                          </details>
+                        </td>
+                      </tr>
+                    )}
+                  </Fragment>
+                );
+              })}
             </tbody>
           </table>
         )}

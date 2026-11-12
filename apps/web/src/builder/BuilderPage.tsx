@@ -16,6 +16,7 @@ import { isMod, isTextTarget, isTyping } from '../lib/keys';
 import { isDirty, useDraft } from '../state/draft';
 import { useUi } from '../state/ui';
 import { AnalysisPanel } from './AnalysisPanel';
+import { DataNotices } from './DataNotices';
 import { HistoryDialog } from './HistoryDialog';
 import { PasteDialog, type PasteMode } from './PasteDialog';
 import { SlotEditor } from './SlotEditor';
@@ -315,6 +316,7 @@ export function BuilderPage({ teamId }: { teamId?: string }) {
           {t('builder.conflictHint')}
         </Alert>
       )}
+      <DataNotices rules={rules} saved={teamId ? saved.data : undefined} />
       {save.isError && !conflict && (
         <Alert tone="error" title={t('builder.saveError')} toneLabel={t('tone.error')}>
           {t('builder.saveErrorHint')}

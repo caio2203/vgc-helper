@@ -65,6 +65,8 @@ export const teamSummarySchema = z.object({
   regulationId: z.string(),
   snapshotVersion: z.string(),
   species: z.array(z.string()),
+  /** The full slots, so the list can revalidate each team against the current data. */
+  slots: z.array(teamSlotSchema),
   version: z.int().min(1),
   updatedAt: z.iso.datetime(),
 });

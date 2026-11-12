@@ -59,6 +59,7 @@ export class TeamsService {
       regulationId: row.regulationId,
       snapshotVersion: row.snapshotVersion,
       species: row.slots.map((s) => s.species),
+      slots: row.slots,
       version: row.version,
       updatedAt: row.updatedAt.toISOString(),
     }));

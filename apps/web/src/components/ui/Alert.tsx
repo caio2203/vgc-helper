@@ -43,7 +43,7 @@ export function Alert({
   return (
     <div className={cx('flex gap-2.5 rounded-md border px-3 py-2.5', box)}>
       <Icon aria-hidden="true" className={cx('mt-0.5 size-4 shrink-0', text)} strokeWidth={1.75} />
-      <div className="min-w-0">
+      <div className="min-w-0 flex-1">
         <p className={cx('m-0 font-semibold', text)}>
           {toneLabel && <span className="sr-only">{toneLabel}: </span>}
           {title}
