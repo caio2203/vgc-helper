@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "version": "2026-11-12.e5c256a6aa",
-  "generatedAt": "2026-11-12T06:09:37.269Z",
+  "version": "2026-11-12.4df1af5d90",
+  "generatedAt": "2026-11-12T09:26:15.310Z",
   "games": [
     { "id": "champions", "name": "Pokémon Champions", "mechanicsProfileId": "champions-2026" }
   ],
@@ -126,12 +126,27 @@
           "formatId": "champions-vgc",
           "showdownFormatId": "gen9championsvgc2026regmc",
           "smogonStatsId": "gen9championsvgc2026regmc",
+          "tournaments": {
+            "limitlessFormat": "M-C",
+            "minPlayers": 32,
+            "topPlacings": 8,
+            "windowDays": 28,
+            "maxEvents": 40,
+            "aliases": { "floette": "floetteeternal" },
+            "note": "Limitless lists Mega Floette teams (Floette @ Floettite) as floette; only Floette-Eternal holds Floettite, so the alias maps it. Online tournaments on Limitless with team lists. 32+ players and the top 8 keep the sample to events with a real cut; 40 events stay under the API limit of 50 requests in 5 minutes.",
+            "source": {
+              "name": "Limitless API: tournaments and standings",
+              "url": "https://docs.limitlesstcg.com/developer/tournaments.html",
+              "retrievedAt": "2026-11-12T12:00:00.000Z"
+            }
+          },
           "timer": { "playerSeconds": 420, "turnSeconds": 45, "previewSeconds": 90 }
         },
         {
           "formatId": "champions-singles",
           "showdownFormatId": "gen9championsbssregmc",
           "smogonStatsId": "gen9championsbssregmc",
+          "tournaments": null,
           "timer": { "playerSeconds": 420, "turnSeconds": 45, "previewSeconds": 90 }
         }
       ],
@@ -614,12 +629,12 @@
         {
           "id": "doubles",
           "checklist": ["speedControl", "fakeOut", "redirection", "intimidate", "intimidateAnswer", "protect", "spread", "priority", "pivot", "wideGuard"],
-          "weights": { "coversWeakness": 3, "fillsRole": 2, "usage": 3, "teammates": 2, "addsWeakness": 2 }
+          "weights": { "coversWeakness": 3, "fillsRole": 2, "usage": 3, "teammates": 2, "topCut": 2, "addsWeakness": 2 }
         },
         {
           "id": "singles",
           "checklist": ["hazards", "hazardRemoval", "pivot", "priority", "speedControl"],
-          "weights": { "coversWeakness": 3, "fillsRole": 2, "usage": 3, "teammates": 1, "addsWeakness": 2 }
+          "weights": { "coversWeakness": 3, "fillsRole": 2, "usage": 3, "teammates": 1, "topCut": 0, "addsWeakness": 2 }
         }
       ],
       "thresholds": {

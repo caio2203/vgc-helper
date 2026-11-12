@@ -27,6 +27,10 @@ Pokémon Showdown (https://github.com/smogon/pokemon-showdown)
 Smogon University usage statistics (https://www.smogon.com/stats/)
   Monthly usage, sets, spreads and teammates for the Pokémon Champions formats.
 
+Limitless (https://play.limitlesstcg.com, API: https://docs.limitlesstcg.com/developer.html)
+  Standings of recent online VGC tournaments, read through the public API. Only
+  how often each species reaches the top cut is kept; no player data is stored.
+
 @smogon/calc (https://github.com/smogon/damage-calc)
   Damage calculations with Pokémon Champions mechanics, fed with the stats and
   moves of the data snapshot. Bundled in the web app.

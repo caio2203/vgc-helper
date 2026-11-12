@@ -127,6 +127,20 @@
           "formatId": "champions-vgc",
           "showdownFormatId": "gen9championsvgc2026regmc",
           "smogonStatsId": "gen9championsvgc2026regmc",
+          "tournaments": {
+            "limitlessFormat": "M-C",
+            "minPlayers": 32,
+            "topPlacings": 8,
+            "windowDays": 28,
+            "maxEvents": 40,
+            "aliases": { "floette": "floetteeternal" },
+            "note": "Limitless lists Mega Floette teams (Floette @ Floettite) as floette; only Floette-Eternal holds Floettite, so the alias maps it. Online tournaments on Limitless with team lists. 32+ players and the top 8 keep the sample to events with a real cut; 40 events stay under the API limit of 50 requests in 5 minutes.",
+            "source": {
+              "name": "Limitless API: tournaments and standings",
+              "url": "https://docs.limitlesstcg.com/developer/tournaments.html",
+              "retrievedAt": "2026-11-12T12:00:00.000Z"
+            }
+          },
           "timer": { "playerSeconds": 420, "turnSeconds": 45, "previewSeconds": 90 }
         },
         {

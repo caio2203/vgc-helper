@@ -89,6 +89,26 @@ export const regulationFormatSchema = z.object({
   formatId: z.string().min(1),
   showdownFormatId: z.string().min(1),
   smogonStatsId: z.string().min(1).nullable(),
+  /** Which recent tournaments count as top-cut data (Limitless API). */
+  tournaments: z
+    .object({
+      /** Limitless `format` id for this regulation, e.g. M-C. */
+      limitlessFormat: z.string().min(1),
+      /** Smaller tournaments are left out. */
+      minPlayers: z.int().min(2),
+      /** Placings at or above this count as top cut. */
+      topPlacings: z.int().min(1),
+      /** Days of tournaments, ending at the start of the current week (Monday, UTC). */
+      windowDays: z.int().min(1),
+      /** The largest tournaments in the window, at most this many. */
+      maxEvents: z.int().min(1),
+      /** Limitless species id → dex id, for entries Limitless names differently. */
+      aliases: z.record(z.string().min(1), idSchema).default({}),
+      note: z.string().min(1),
+      source: sourceRefSchema,
+    })
+    .nullable()
+    .default(null),
   timer: z
     .object({
       playerSeconds: z.int().positive(),

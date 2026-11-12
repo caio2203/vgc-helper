@@ -5,11 +5,26 @@ import { fileURLToPath } from 'node:url';
 const CACHE_DIR = fileURLToPath(new URL('../../.cache/', import.meta.url));
 const USER_AGENT = 'vgc-helper-data-pipeline (+https://github.com/caio2203/vgc-helper)';
 /** The only hosts the pipeline may download from. Add a source here on purpose, not by config. */
-const ALLOWED_HOSTS = new Set(['www.smogon.com']);
+const ALLOWED_HOSTS = new Set(['www.smogon.com', 'play.limitlesstcg.com']);
 /** Pause between network requests so we never hammer a source. */
 const REQUEST_GAP_MS = 1000;
 
 let lastRequest = 0;
+/** Hosts that told us (RateLimit header) to wait until this time before the next request. */
+const blockedUntil = new Map<string, number>();
+
+/**
+ * Reads the IETF RateLimit header (`"50-in-5min"; r=3; t=120`): with one request or less left,
+ * the next request to that host waits until the window resets.
+ */
+function noteRateLimit(url: URL, response: Response): void {
+  const header = response.headers.get('ratelimit');
+  const remaining = header?.match(/\br=(\d+)/)?.[1];
+  const reset = header?.match(/\bt=(\d+)/)?.[1];
+  if (remaining !== undefined && reset !== undefined && Number(remaining) <= 1) {
+    blockedUntil.set(url.hostname, Date.now() + (Number(reset) + 1) * 1000);
+  }
+}
 
 /** Parses and checks a source URL: HTTPS and an allowed host only. */
 function checkedUrl(url: string): URL {
@@ -21,14 +36,24 @@ function checkedUrl(url: string): URL {
 }
 
 async function politeFetch(url: URL): Promise<Response> {
-  const wait = lastRequest + REQUEST_GAP_MS - Date.now();
-  if (wait > 0) await new Promise((resolve) => setTimeout(resolve, wait));
+  const wait = Math.max(
+    lastRequest + REQUEST_GAP_MS - Date.now(),
+    (blockedUntil.get(url.hostname) ?? 0) - Date.now(),
+  );
+  if (wait > 0) {
+    if (wait > 5000)
+      console.log(`Waiting ${Math.ceil(wait / 1000)} s for the ${url.hostname} rate limit`);
+    await new Promise((resolve) => setTimeout(resolve, wait));
+  }
   lastRequest = Date.now();
-  return fetch(url, { headers: { 'user-agent': USER_AGENT }, redirect: 'error' });
+  const response = await fetch(url, { headers: { 'user-agent': USER_AGENT }, redirect: 'error' });
+  noteRateLimit(url, response);
+  return response;
 }
 
 /** Cache file for a URL. Path segments are reduced to safe characters and stay inside .cache. */
 function cachePath(url: URL): string {
+  if (url.search) throw new Error(`Query strings are not cached: ${url.href}`);
   const file = url.pathname.endsWith('/') ? `${url.pathname}index.html` : url.pathname;
   const segments = [url.hostname, ...file.split('/').filter(Boolean)].map((s) =>
     s.replace(/[^A-Za-z0-9._-]/g, '_'),
@@ -49,7 +74,7 @@ function cachePath(url: URL): string {
  */
 export async function fetchText(url: string, { cache = true } = {}): Promise<string | null> {
   const source = checkedUrl(url);
-  const path = cachePath(source);
+  const path = cache ? cachePath(source) : '';
   if (cache) {
     try {
       return await readFile(path, 'utf8');

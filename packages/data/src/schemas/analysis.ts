@@ -84,6 +84,8 @@ export const suggestionWeightsSchema = z.object({
   usage: z.number().min(0),
   /** Points scaled by how often the candidate is paired with the current members. */
   teammates: z.number().min(0),
+  /** Points scaled by the candidate's top-cut share in recent tournaments, 0 without data. */
+  topCut: z.number().min(0),
   /** Points taken off per stacked weakness the candidate adds to. */
   addsWeakness: z.number().min(0),
 });

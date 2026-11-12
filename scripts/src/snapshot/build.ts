@@ -3,6 +3,7 @@
  * - the hand-curated files in packages/data/manual (rules, dates, sources),
  * - the Pokémon Showdown mods published as @pkmn/mods (species, moves, items, learnsets),
  * - Smogon usage stats (meta),
+ * - Limitless tournament standings (top-cut presence, counts only),
  * - the manual corrections in packages/data/overrides.
  *
  * Run with `pnpm snapshot:build`. Writes nothing when the content did not change.
@@ -16,6 +17,7 @@ import {
   type Manifest,
   type ManifestRegulation,
   type ManualData,
+  type MetaSnapshot,
   manifestSchema,
   manualDataSchema,
   metaSnapshotSchema,
@@ -24,6 +26,7 @@ import {
 } from '@vgc-helper/data';
 import { stringify } from '../lib/json.js';
 import { buildDexSnapshot } from './dex.js';
+import { fetchTopCut } from './limitless.js';
 import { applyOverrides } from './overrides.js';
 import { chaosToMeta, fetchLatestChaos, listStatsMonths, totalUsage } from './smogon.js';
 
@@ -62,6 +65,17 @@ async function pkmnModsVersion(): Promise<string> {
   const marker = join('node_modules', '@pkmn', 'mods');
   const pkg = join(entry.slice(0, entry.indexOf(marker) + marker.length), 'package.json');
   return (JSON.parse(await readFile(pkg, 'utf8')) as { version: string }).version;
+}
+
+/** Top-cut teams below this are flagged as a small sample. */
+const MIN_TOP_CUT_TEAMS = 64;
+
+async function previousMeta(path: string): Promise<MetaSnapshot | null> {
+  try {
+    return metaSnapshotSchema.parse(JSON.parse(await readFile(join(SNAPSHOT_DIR, path), 'utf8')));
+  } catch {
+    return null;
+  }
 }
 
 async function previousManifest(): Promise<Manifest | null> {
@@ -160,6 +174,26 @@ async function main(): Promise<void> {
       }
 
       const metaPath = `${game.id}/${regulation.id}/meta/${format.id}.json`;
+      if (entry.tournaments) {
+        const label = `${regulation.id}/${format.id}`;
+        try {
+          const topCut = await fetchTopCut(entry.tournaments, new Date(now), now);
+          if (topCut.teams < MIN_TOP_CUT_TEAMS) {
+            warnings.push(`${label}: only ${topCut.teams} top-cut teams on Limitless`);
+          }
+          const unknownTopCut = topCut.pokemon
+            .filter((p) => !speciesIds.has(p.species))
+            .map((p) => p.species);
+          if (unknownTopCut.length > 0) {
+            warnings.push(`${label}: top-cut species not in the dex: ${unknownTopCut.join(', ')}`);
+          }
+          meta.tournaments = topCut;
+        } catch (error) {
+          // Keep the last good tournament data instead of dropping the bonus.
+          meta.tournaments = (await previousMeta(metaPath))?.tournaments ?? null;
+          warnings.push(`${label}: Limitless failed, kept the previous top-cut data: ${error}`);
+        }
+      }
       files.set(metaPath, metaSnapshotSchema.parse(meta));
       metaPaths[format.id] = metaPath;
     }

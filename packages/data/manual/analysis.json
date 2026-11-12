@@ -614,6 +614,7 @@
             "fillsRole": 2,
             "usage": 3,
             "teammates": 2,
+            "topCut": 2,
             "addsWeakness": 2
           }
         },
@@ -625,6 +626,7 @@
             "fillsRole": 2,
             "usage": 3,
             "teammates": 1,
+            "topCut": 0,
             "addsWeakness": 2
           }
         }

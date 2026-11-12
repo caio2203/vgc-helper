@@ -7,7 +7,7 @@
   "source": {
     "name": "Smogon usage stats (gen9championsvgc2026regmc, 2026-10, rating 1630+)",
     "url": "https://www.smogon.com/stats/2026-10/chaos/gen9championsvgc2026regmc-1630.json",
-    "retrievedAt": "2026-11-12T06:09:37.269Z"
+    "retrievedAt": "2026-11-12T09:26:15.310Z"
   },
   "pokemon": [
     {
@@ -19396,5 +19396,367 @@
         { "id": "mamoswine", "share": 0.0776 }
       ]
     }
-  ]
+  ],
+  "tournaments": {
+    "source": {
+      "name": "Limitless (M-C, 40 tournaments with 32+ players, top 8, 2026-10-12 to 2026-11-09)",
+      "url": "https://play.limitlesstcg.com/tournaments/completed?game=VGC&format=M-C",
+      "retrievedAt": "2026-11-12T09:26:15.310Z"
+    },
+    "from": "2026-10-12",
+    "to": "2026-11-09",
+    "minPlayers": 32,
+    "topPlacings": 8,
+    "events": [
+      {
+        "id": "6acba9c9115c12b73a5a14c3",
+        "name": "Maddo's Cup #13 | 100€ for the Winner | Reg M-C",
+        "date": "2026-10-24T12:00:00.000Z",
+        "players": 230
+      },
+      {
+        "id": "6adf94b780a8f79408d1eb2f",
+        "name": "Spooky Cup - $500 PRIZE POOL",
+        "date": "2026-10-26T21:00:00.000Z",
+        "players": 230
+      },
+      {
+        "id": "6ac02d2b85920e4d2536238f",
+        "name": "🍋Sitrus-Series🍋|Champions-MC|#81",
+        "date": "2026-11-04T23:00:00.000Z",
+        "players": 170
+      },
+      {
+        "id": "6ae575670d00101b48bf316a",
+        "name": "Friday Fight Night 80! $50 Prize & Team Report",
+        "date": "2026-11-06T23:00:00.000Z",
+        "players": 139
+      },
+      {
+        "id": "6aaa8da8f1243e65f98029f7",
+        "name": "Rising Stars - Finale ₹10,000 cash prize",
+        "date": "2026-10-23T15:30:00.000Z",
+        "players": 137
+      },
+      {
+        "id": "6ad313aa115c12b73a5a5e74",
+        "name": "Friday Fight Night 78! $50 Prize & Team Report",
+        "date": "2026-10-23T22:00:00.000Z",
+        "players": 134
+      },
+      {
+        "id": "6acdb7b7115c12b73a5a2cd5",
+        "name": "Friday Fight Night 77! $50 Prize & Team Report",
+        "date": "2026-10-16T22:00:00.000Z",
+        "players": 131
+      },
+      {
+        "id": "6ac4406e85920e4d25364fd1",
+        "name": "Amyverse VGC Champions Arena #14 ❤️ Cash Prize!",
+        "date": "2026-10-12T18:00:00.000Z",
+        "players": 130
+      },
+      {
+        "id": "6ac9235f8a8383117e3e7ca4",
+        "name": "⛩️$30 VGC Champions Tournament Ep 33!⛩️",
+        "date": "2026-10-16T15:00:00.000Z",
+        "players": 123
+      },
+      {
+        "id": "6ad8e3398a8383117e3f0b5b",
+        "name": "Tuesday Throwdowns #2 ($50 for the Winner!)",
+        "date": "2026-10-27T23:30:00.000Z",
+        "players": 119
+      },
+      {
+        "id": "6ab54228f127b1b52c2811ed",
+        "name": "ValkrixVGC Pokemon Champions League #07",
+        "date": "2026-10-25T14:00:00.000Z",
+        "players": 115
+      },
+      {
+        "id": "6aab46ea38886b36383c21d6",
+        "name": "Talon's FIGHT CLUB #106 POKEMON CHAMPIONS REG M-C",
+        "date": "2026-10-15T23:00:00.000Z",
+        "players": 110
+      },
+      {
+        "id": "6abaa28a783097f8dcb72a7c",
+        "name": "Alpensee Tour (Reg M-C) #80",
+        "date": "2026-10-21T17:00:00.000Z",
+        "players": 110
+      },
+      {
+        "id": "6ad75a2d8a8383117e3eff78",
+        "name": "Amyverse VGC Champions Arena #16 ❤️ Cash Prize!",
+        "date": "2026-10-26T18:00:00.000Z",
+        "players": 109
+      },
+      {
+        "id": "6acee85f115c12b73a5a38b3",
+        "name": "⛩️$20 VGC Champions Tournament Ep 34!⛩️",
+        "date": "2026-10-17T16:00:00.000Z",
+        "players": 105
+      },
+      {
+        "id": "6abaa280783097f8dcb72a7b",
+        "name": "Alpensee Tour (Reg M-C) #79",
+        "date": "2026-10-14T17:00:00.000Z",
+        "players": 100
+      },
+      {
+        "id": "6adc561191617679e849fa45",
+        "name": "Friday Fight Night 79! $50 Prize & Team Report",
+        "date": "2026-10-30T22:00:00.000Z",
+        "players": 96
+      },
+      {
+        "id": "6ad1d260115c12b73a5a4ffa",
+        "name": "Tenki's Cart Weekly #123 - Reg M-C",
+        "date": "2026-10-22T15:00:00.000Z",
+        "players": 93
+      },
+      {
+        "id": "6ac55ac385920e4d2536589f",
+        "name": "VGC UmbreNews 13.10.2026 #35 - Champion",
+        "date": "2026-10-13T15:30:00.000Z",
+        "players": 92
+      },
+      {
+        "id": "6aab46f538886b36383c21d7",
+        "name": "Talon's FIGHT CLUB #107 POKEMON CHAMPIONS REG M-C",
+        "date": "2026-10-22T23:00:00.000Z",
+        "players": 91
+      },
+      {
+        "id": "6ac559b885920e4d25365899",
+        "name": "TARTAN'S ROAD TO NICE #42! - [CHAMPIONS REG M-C!]",
+        "date": "2026-10-13T17:00:00.000Z",
+        "players": 82
+      },
+      {
+        "id": "6adff5e180a8f79408d1f34d",
+        "name": "Amyverse VGC Champions Arena #17 ❤️ Cash Prize!",
+        "date": "2026-11-02T19:00:00.000Z",
+        "players": 82
+      },
+      {
+        "id": "6a7c50af2b308b6067b51ef4",
+        "name": "Champions League VGC October (Prize: Shiny Gengar)",
+        "date": "2026-10-17T11:30:00.000Z",
+        "players": 81
+      },
+      {
+        "id": "6abb9694783097f8dcb73471",
+        "name": "VGC Indigo League #4 (Prize: Eternal Floette)",
+        "date": "2026-10-23T12:00:00.000Z",
+        "players": 80
+      },
+      {
+        "id": "6abaa2a5880ed327106dea23",
+        "name": "Alpensee Tour (Reg M-C) #81",
+        "date": "2026-10-28T18:00:00.000Z",
+        "players": 79
+      },
+      {
+        "id": "6ac965538a8383117e3e813d",
+        "name": "🍋Sitrus-Series🍋|Champions-MC|#80",
+        "date": "2026-10-28T22:00:00.000Z",
+        "players": 78
+      },
+      {
+        "id": "6adf6f5f80a8f79408d1e986",
+        "name": "MetaVGC Arena #3 | Reg M-C | $10 Prize + Shinies",
+        "date": "2026-10-29T22:00:00.000Z",
+        "players": 78
+      },
+      {
+        "id": "6acd93fd8a8383117e3eac3f",
+        "name": "Amyverse VGC Champions Arena #15 ❤️ Cash Prize!",
+        "date": "2026-10-19T18:00:00.000Z",
+        "players": 77
+      },
+      {
+        "id": "6ad8f05b115c12b73a5a9075",
+        "name": "Alpensee Tour (Reg M-C) #82",
+        "date": "2026-11-04T18:00:00.000Z",
+        "players": 77
+      },
+      {
+        "id": "6ada09eb115c12b73a5a9904",
+        "name": "VGC UmbreNews 27.10.2026 #37 - Champion",
+        "date": "2026-10-27T16:30:00.000Z",
+        "players": 73
+      },
+      {
+        "id": "6ac908358a8383117e3e7b56",
+        "name": "Tenki's Cart Weekly #122 - Reg M-C",
+        "date": "2026-10-15T15:00:00.000Z",
+        "players": 71
+      },
+      {
+        "id": "6a9956a8ab080c8c957f8984",
+        "name": "M-C|LAST SEASON 2 TOUR👑CROWN FIGHT Bo3 TOUR #90👑",
+        "date": "2026-10-16T16:35:00.000Z",
+        "players": 71
+      },
+      {
+        "id": "6ad923ae115c12b73a5a941c",
+        "name": "GLORY OF CHAMPIONS #2 - REGULATION M-C",
+        "date": "2026-10-28T17:00:00.000Z",
+        "players": 71
+      },
+      {
+        "id": "6accb8138a8383117e3ea179",
+        "name": "Pado's Dojo Reg M-C Pratice #4 🍥",
+        "date": "2026-10-14T13:00:00.000Z",
+        "players": 70
+      },
+      {
+        "id": "6ad0f6c68a8383117e3ec545",
+        "name": "MetaVGC Arena #1 - Reg MC - Prizes: R$ 50 + Shiny",
+        "date": "2026-10-17T16:00:00.000Z",
+        "players": 70
+      },
+      {
+        "id": "6adad3b491617679e849eb19",
+        "name": "⛩️Chadweezy95 VGC Champions👻Halloween Cup!⛩️",
+        "date": "2026-10-24T15:00:00.000Z",
+        "players": 69
+      },
+      {
+        "id": "6aea24ef0c463890f304a725",
+        "name": "⚔️Torre Lotta Cup #3⚔️ 🏆50€ Amazon Gift Cards🏆",
+        "date": "2026-11-07T13:00:00.000Z",
+        "players": 68
+      },
+      {
+        "id": "6aa95de5f1243e65f98020c6",
+        "name": "London Corviknights VGC Weekly Tour 17!",
+        "date": "2026-10-15T17:30:00.000Z",
+        "players": 64
+      },
+      {
+        "id": "6ac91bfb8a8383117e3e7c3d",
+        "name": "VGC Trainer School; champions M/C #5",
+        "date": "2026-10-18T15:00:00.000Z",
+        "players": 64
+      },
+      {
+        "id": "6ac559ee85920e4d2536589b",
+        "name": "TARTAN TAKEDOWN #43! - [CHAMPIONS REG M-C!]",
+        "date": "2026-10-20T17:00:00.000Z",
+        "players": 64
+      }
+    ],
+    "teams": 320,
+    "pokemon": [
+      { "species": "sneasler", "teams": 129, "share": 0.4031 },
+      { "species": "rillaboom", "teams": 120, "share": 0.375 },
+      { "species": "garchomp", "teams": 111, "share": 0.3469 },
+      { "species": "incineroar", "teams": 111, "share": 0.3469 },
+      { "species": "kingambit", "teams": 106, "share": 0.3313 },
+      { "species": "raichu", "teams": 83, "share": 0.2594 },
+      { "species": "charizard", "teams": 79, "share": 0.2469 },
+      { "species": "basculegion", "teams": 69, "share": 0.2156 },
+      { "species": "floetteeternal", "teams": 62, "share": 0.1938 },
+      { "species": "archaludon", "teams": 55, "share": 0.1719 },
+      { "species": "gholdengo", "teams": 54, "share": 0.1688 },
+      { "species": "pelipper", "teams": 45, "share": 0.1406 },
+      { "species": "farigiraf", "teams": 42, "share": 0.1313 },
+      { "species": "whimsicott", "teams": 40, "share": 0.125 },
+      { "species": "sinistcha", "teams": 39, "share": 0.1219 },
+      { "species": "sylveon", "teams": 38, "share": 0.1188 },
+      { "species": "staraptor", "teams": 35, "share": 0.1094 },
+      { "species": "volcarona", "teams": 35, "share": 0.1094 },
+      { "species": "salamence", "teams": 32, "share": 0.1 },
+      { "species": "venusaur", "teams": 32, "share": 0.1 },
+      { "species": "indeedeef", "teams": 30, "share": 0.0938 },
+      { "species": "golisopod", "teams": 28, "share": 0.0875 },
+      { "species": "delphox", "teams": 27, "share": 0.0844 },
+      { "species": "grimmsnarl", "teams": 27, "share": 0.0844 },
+      { "species": "gengar", "teams": 25, "share": 0.0781 },
+      { "species": "arcaninehisui", "teams": 24, "share": 0.075 },
+      { "species": "dragonite", "teams": 24, "share": 0.075 },
+      { "species": "tyranitar", "teams": 24, "share": 0.075 },
+      { "species": "milotic", "teams": 23, "share": 0.0719 },
+      { "species": "basculegionf", "teams": 18, "share": 0.0563 },
+      { "species": "froslass", "teams": 18, "share": 0.0563 },
+      { "species": "kommoo", "teams": 18, "share": 0.0563 },
+      { "species": "primarina", "teams": 18, "share": 0.0563 },
+      { "species": "excadrill", "teams": 17, "share": 0.0531 },
+      { "species": "gardevoir", "teams": 17, "share": 0.0531 },
+      { "species": "glimmora", "teams": 17, "share": 0.0531 },
+      { "species": "politoed", "teams": 16, "share": 0.05 },
+      { "species": "annihilape", "teams": 14, "share": 0.0438 },
+      { "species": "armarouge", "teams": 13, "share": 0.0406 },
+      { "species": "indeedee", "teams": 13, "share": 0.0406 },
+      { "species": "torkoal", "teams": 10, "share": 0.0313 },
+      { "species": "metagross", "teams": 9, "share": 0.0281 },
+      { "species": "vivillon", "teams": 9, "share": 0.0281 },
+      { "species": "camerupt", "teams": 8, "share": 0.025 },
+      { "species": "ninetalesalola", "teams": 8, "share": 0.025 },
+      { "species": "aerodactyl", "teams": 7, "share": 0.0219 },
+      { "species": "blastoise", "teams": 7, "share": 0.0219 },
+      { "species": "dragapult", "teams": 7, "share": 0.0219 },
+      { "species": "swampert", "teams": 7, "share": 0.0219 },
+      { "species": "blaziken", "teams": 6, "share": 0.0188 },
+      { "species": "scovillain", "teams": 6, "share": 0.0188 },
+      { "species": "corviknight", "teams": 5, "share": 0.0156 },
+      { "species": "espathra", "teams": 5, "share": 0.0156 },
+      { "species": "hydreigon", "teams": 5, "share": 0.0156 },
+      { "species": "mawile", "teams": 5, "share": 0.0156 },
+      { "species": "rotomwash", "teams": 5, "share": 0.0156 },
+      { "species": "lucario", "teams": 4, "share": 0.0125 },
+      { "species": "toxapex", "teams": 4, "share": 0.0125 },
+      { "species": "aegislash", "teams": 3, "share": 0.0094 },
+      { "species": "ceruledge", "teams": 3, "share": 0.0094 },
+      { "species": "hippowdon", "teams": 3, "share": 0.0094 },
+      { "species": "houndstone", "teams": 3, "share": 0.0094 },
+      { "species": "maushold", "teams": 3, "share": 0.0094 },
+      { "species": "pawmot", "teams": 3, "share": 0.0094 },
+      { "species": "typhlosionhisui", "teams": 3, "share": 0.0094 },
+      { "species": "altaria", "teams": 2, "share": 0.0063 },
+      { "species": "araquanid", "teams": 2, "share": 0.0063 },
+      { "species": "barbaracle", "teams": 2, "share": 0.0063 },
+      { "species": "chesnaught", "teams": 2, "share": 0.0063 },
+      { "species": "hatterene", "teams": 2, "share": 0.0063 },
+      { "species": "kangaskhan", "teams": 2, "share": 0.0063 },
+      { "species": "krookodile", "teams": 2, "share": 0.0063 },
+      { "species": "lycanrocdusk", "teams": 2, "share": 0.0063 },
+      { "species": "malamar", "teams": 2, "share": 0.0063 },
+      { "species": "meganium", "teams": 2, "share": 0.0063 },
+      { "species": "pyroar", "teams": 2, "share": 0.0063 },
+      { "species": "scrafty", "teams": 2, "share": 0.0063 },
+      { "species": "snorlax", "teams": 2, "share": 0.0063 },
+      { "species": "absol", "teams": 1, "share": 0.0031 },
+      { "species": "alakazam", "teams": 1, "share": 0.0031 },
+      { "species": "ampharos", "teams": 1, "share": 0.0031 },
+      { "species": "arcanine", "teams": 1, "share": 0.0031 },
+      { "species": "azumarill", "teams": 1, "share": 0.0031 },
+      { "species": "baxcalibur", "teams": 1, "share": 0.0031 },
+      { "species": "beedrill", "teams": 1, "share": 0.0031 },
+      { "species": "chandelure", "teams": 1, "share": 0.0031 },
+      { "species": "clefable", "teams": 1, "share": 0.0031 },
+      { "species": "drampa", "teams": 1, "share": 0.0031 },
+      { "species": "eelektross", "teams": 1, "share": 0.0031 },
+      { "species": "goodrahisui", "teams": 1, "share": 0.0031 },
+      { "species": "grapploct", "teams": 1, "share": 0.0031 },
+      { "species": "hawlucha", "teams": 1, "share": 0.0031 },
+      { "species": "infernape", "teams": 1, "share": 0.0031 },
+      { "species": "meowsticf", "teams": 1, "share": 0.0031 },
+      { "species": "mimikyu", "teams": 1, "share": 0.0031 },
+      { "species": "rhyperior", "teams": 1, "share": 0.0031 },
+      { "species": "sableye", "teams": 1, "share": 0.0031 },
+      { "species": "skarmory", "teams": 1, "share": 0.0031 },
+      { "species": "slowbro", "teams": 1, "share": 0.0031 },
+      { "species": "slowkinggalar", "teams": 1, "share": 0.0031 },
+      { "species": "starmie", "teams": 1, "share": 0.0031 },
+      { "species": "talonflame", "teams": 1, "share": 0.0031 },
+      { "species": "taurospaldeaaqua", "teams": 1, "share": 0.0031 },
+      { "species": "toxicroak", "teams": 1, "share": 0.0031 },
+      { "species": "weavile", "teams": 1, "share": 0.0031 },
+      { "species": "zoroarkhisui", "teams": 1, "share": 0.0031 }
+    ]
+  }
 }

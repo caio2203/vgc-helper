@@ -122,6 +122,7 @@ export function chaosToMeta(
       retrievedAt,
     },
     pokemon,
+    tournaments: null,
   };
 }
 
