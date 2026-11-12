@@ -1,7 +1,7 @@
 import { fileURLToPath } from 'node:url';
 import { type Browser, type BrowserContextOptions, devices, expect, test } from '@playwright/test';
 import { E2E_PASSWORD } from '../e2e/instance';
-import { pasteOnPage, TEAM_WITH_ERROR } from '../e2e/support';
+import { pasteOnPage, pickSpecies, TEAM_WITH_ERROR } from '../e2e/support';
 
 /**
  * README and docs images: every screen × device × theme × language, named
@@ -129,6 +129,16 @@ async function shoot(
   await expect(panel.getByText(/Calculating damage|Calculando dano/)).toHaveCount(0);
   await panel.screenshot({ path: path('analysis') });
 
+  await page.goto('/calc');
+  await pickSpecies(page, /^(Attacker|Atacante)$/, 'garch', 'Garchomp');
+  await pickSpecies(page, /^(Defender|Defensor)$/, 'incin', 'Incineroar');
+  const result = page.getByRole('region', { name: /^(Result|Resultado)$/ });
+  await expect(result).toContainText('%');
+  await page.evaluate(() => (document.activeElement as HTMLElement | null)?.blur());
+  // Phones show the result; desktop shows the whole page.
+  if (device === 'mobile') await result.scrollIntoViewIfNeeded();
+  await page.screenshot({ path: path('calc'), fullPage: device === 'desktop' });
+
   await page.goto('/teams');
   await expect(page.getByRole('link', { name: 'Rain', exact: true })).toBeVisible();
   await page.screenshot({ path: path('teams'), fullPage: device === 'desktop' });
@@ -140,7 +150,7 @@ async function shoot(
 }
 
 test('README and docs screenshots', async ({ browser }) => {
-  test.setTimeout(300_000);
+  test.setTimeout(900_000);
   const cookies = await signIn(browser);
   await seedTeams(browser, cookies);
   for (const device of Object.keys(DEVICES) as Device[]) {

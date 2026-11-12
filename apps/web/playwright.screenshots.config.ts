@@ -6,6 +6,6 @@ export default defineConfig({
   testDir: './screenshots',
   fullyParallel: false,
   reporter: 'list',
-  use: { baseURL: E2E_ORIGIN },
+  use: { baseURL: E2E_ORIGIN, actionTimeout: 15_000 },
   webServer: testInstance,
 });
