@@ -103,7 +103,9 @@ pnpm hash-password     # ADMIN_PASSWORD_HASH for AUTH_MODE=local-password
   `sessionStorage`. Scroll containers with `sr-only` children need `relative`, or the hidden
   text widens the page on phones.
 - Phase 6 is done: optional AI in `apps/api/src/ai` (`LlmProvider` interface in `llm.ts`,
-  `GeminiProvider` on `@google/genai` 2.x with function calling, prompts in `prompts.ts`). The
+  `GeminiProvider` on `@google/genai` 2.x with function calling, prompts in `prompts.ts`).
+  Thinking is set to low (its tokens count toward `maxOutputTokens`), and on 429, 5xx or a
+  timeout the conversation moves to `GEMINI_FALLBACK_MODEL`, all within 50 s. The
   client sends only the team; the API runs `summarizeTeam` (`@vgc-helper/engine/damage`
   `summary.ts`) and gives the model that JSON plus the snapshot tools `getUsage`,
   `getCommonSet`, `checkLegality`. Answers are cached in `ai_responses` (key: kind, team,

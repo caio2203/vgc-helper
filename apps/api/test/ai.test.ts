@@ -1,7 +1,7 @@
 import type { NestExpressApplication } from '@nestjs/platform-express';
 import request from 'supertest';
 import { afterEach, describe, expect, it } from 'vitest';
-import type { LlmProvider, LlmRequest } from '../src/ai/llm.js';
+import type { LlmAnswer, LlmProvider, LlmRequest } from '../src/ai/llm.js';
 import { LlmUnavailableError } from '../src/ai/llm.js';
 import { createApp } from '../src/app.factory.js';
 import { loadConfig } from '../src/config/env.js';
@@ -35,11 +35,11 @@ class FakeLlm implements LlmProvider {
   toolResults: unknown[] = [];
   error: LlmUnavailableError | null = null;
 
-  async generate(req: LlmRequest): Promise<string> {
+  async generate(req: LlmRequest): Promise<LlmAnswer> {
     this.requests.push(req);
     if (this.error) throw this.error;
     this.toolResults.push(req.callTool('getUsage', { species: 'Incineroar' }));
-    return `Answer ${this.requests.length}`;
+    return { text: `Answer ${this.requests.length}`, model: this.model };
   }
 }
 

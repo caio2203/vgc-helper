@@ -25,7 +25,13 @@ import { APP_CONFIG } from '../core/core.module.js';
 import { DB, type Db } from '../db/client.js';
 import { aiResponses } from '../db/schema.js';
 import { SnapshotsService } from '../snapshots/snapshots.service.js';
-import { LLM_PROVIDER, type LlmProvider, type LlmTool, LlmUnavailableError } from './llm.js';
+import {
+  LLM_PROVIDER,
+  type LlmAnswer,
+  type LlmProvider,
+  type LlmTool,
+  LlmUnavailableError,
+} from './llm.js';
 import { systemPrompt } from './prompts.js';
 
 const DAY_MS = 24 * 60 * 60 * 1000;
@@ -166,9 +172,9 @@ export class AiService {
       offMeta: false,
     });
 
-    let text: string;
+    let answer: LlmAnswer;
     try {
-      text = await llm.generate({
+      answer = await llm.generate({
         system: systemPrompt(kind, input.locale, input.level, analysis),
         messages,
         tools: TOOLS,
@@ -203,12 +209,17 @@ export class AiService {
       userId,
       cacheKey,
       kind,
-      model: llm.model,
+      model: answer.model,
       snapshotVersion: version,
-      text,
+      text: answer.text,
       createdAt,
     });
-    return { text, model: llm.model, cached: false, createdAt: createdAt.toISOString() };
+    return {
+      text: answer.text,
+      model: answer.model,
+      cached: false,
+      createdAt: createdAt.toISOString(),
+    };
   }
 
   /** The rules of the team's regulation and format, from the snapshot the API serves. */

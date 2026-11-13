@@ -267,25 +267,26 @@ screen: if authentication is not configured, the API refuses to start.
 
 ## Environment variables
 
-| Variable                  | Required            | Description                                                         |
-| ------------------------- | ------------------- | ------------------------------------------------------------------- |
-| `APP_ORIGIN`              | yes                 | Address you open in the browser, e.g. `https://helper.example.com`  |
-| `SESSION_SECRET`          | yes                 | At least 32 random characters                                       |
-| `AUTH_MODE`               | yes                 | `github` or `local-password`                                        |
-| `GITHUB_CLIENT_ID`        | github mode         | OAuth app client id                                                 |
-| `GITHUB_CLIENT_SECRET`    | github mode         | OAuth app client secret                                             |
-| `AUTH_ALLOWED_GITHUB_IDS` | github mode         | Comma-separated numeric GitHub ids                                  |
-| `ADMIN_PASSWORD_HASH`     | local-password mode | Output of `pnpm hash-password`                                      |
-| `DATABASE_URL`            | no                  | Local SQLite file, default `file:local.db`                          |
-| `TURSO_DATABASE_URL`      | on Vercel           | `libsql://…` URL of the Turso database                              |
-| `TURSO_AUTH_TOKEN`        | on Vercel           | Turso database token                                                |
-| `CRON_SECRET`             | on Vercel           | 16+ characters; lets the daily cron keep the free database active   |
-| `SESSION_TTL_DAYS`        | no                  | Session length in days, default 30                                  |
-| `SERVE_WEB_DIR`           | no                  | Serve the built web app from the API (single process)               |
-| `GEMINI_API_KEY`          | no                  | Turns on Explain and the chat (Gemini free tier); hidden without it |
-| `GEMINI_MODEL`            | no                  | Gemini model id, default `gemini-3.8-flash`                         |
-| `AI_DAILY_LIMIT`          | no                  | AI answers per user per 24 hours, default 50 (cached ones are free) |
-| `PORT`                    | no                  | API port for local runs, default 3000                               |
+| Variable                  | Required            | Description                                                                                      |
+| ------------------------- | ------------------- | ------------------------------------------------------------------------------------------------ |
+| `APP_ORIGIN`              | yes                 | Address you open in the browser, e.g. `https://helper.example.com`                               |
+| `SESSION_SECRET`          | yes                 | At least 32 random characters                                                                    |
+| `AUTH_MODE`               | yes                 | `github` or `local-password`                                                                     |
+| `GITHUB_CLIENT_ID`        | github mode         | OAuth app client id                                                                              |
+| `GITHUB_CLIENT_SECRET`    | github mode         | OAuth app client secret                                                                          |
+| `AUTH_ALLOWED_GITHUB_IDS` | github mode         | Comma-separated numeric GitHub ids                                                               |
+| `ADMIN_PASSWORD_HASH`     | local-password mode | Output of `pnpm hash-password`                                                                   |
+| `DATABASE_URL`            | no                  | Local SQLite file, default `file:local.db`                                                       |
+| `TURSO_DATABASE_URL`      | on Vercel           | `libsql://…` URL of the Turso database                                                           |
+| `TURSO_AUTH_TOKEN`        | on Vercel           | Turso database token                                                                             |
+| `CRON_SECRET`             | on Vercel           | 16+ characters; lets the daily cron keep the free database active                                |
+| `SESSION_TTL_DAYS`        | no                  | Session length in days, default 30                                                               |
+| `SERVE_WEB_DIR`           | no                  | Serve the built web app from the API (single process)                                            |
+| `GEMINI_API_KEY`          | no                  | Turns on Explain and the chat (Gemini free tier); hidden without it                              |
+| `GEMINI_MODEL`            | no                  | Gemini model id, default `gemini-3.8-flash`                                                      |
+| `GEMINI_FALLBACK_MODEL`   | no                  | Model used when the main one is overloaded, default `gemini-3.5-flash-lite`, `none` turns it off |
+| `AI_DAILY_LIMIT`          | no                  | AI answers per user per 24 hours, default 50 (cached ones are free)                              |
+| `PORT`                    | no                  | API port for local runs, default 3000                                                            |
 
 ## Data sources and credits
 

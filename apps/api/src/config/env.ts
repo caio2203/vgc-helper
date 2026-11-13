@@ -3,6 +3,11 @@ import { parsePasswordHash } from '../security/password.js';
 
 /** The newest Flash model with a free tier when this was written; GEMINI_MODEL overrides it. */
 export const DEFAULT_GEMINI_MODEL = 'gemini-3.8-flash';
+/**
+ * Used when the main model is overloaded (503) or slow: a stable Flash-Lite model, also on the
+ * free tier, with its own quota. GEMINI_FALLBACK_MODEL=none turns it off.
+ */
+export const DEFAULT_GEMINI_FALLBACK_MODEL = 'gemini-3.5-flash-lite';
 
 const flag = z.enum(['true', 'false', '1', '0']).transform((v) => v === 'true' || v === '1');
 
@@ -36,6 +41,10 @@ const envSchema = z.object({
     .string()
     .regex(/^[a-z0-9.-]+$/)
     .default(DEFAULT_GEMINI_MODEL),
+  GEMINI_FALLBACK_MODEL: z
+    .string()
+    .regex(/^[a-z0-9.-]+$/)
+    .default(DEFAULT_GEMINI_FALLBACK_MODEL),
   AI_DAILY_LIMIT: z.coerce.number().int().min(1).max(1000).default(50),
 });
 
@@ -71,7 +80,7 @@ export interface AppConfig {
   migrateOnBoot: boolean;
   serveWebDir: string | null;
   /** `apiKey` null: the AI routes answer `disabled` and the web app hides the AI features. */
-  ai: { apiKey: string | null; model: string; dailyLimit: number };
+  ai: { apiKey: string | null; model: string; fallbackModel: string | null; dailyLimit: number };
 }
 
 export class ConfigError extends Error {
@@ -197,6 +206,11 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env): AppConfig {
     trustProxy: e.TRUST_PROXY ?? onVercel,
     migrateOnBoot: e.MIGRATE_ON_BOOT ?? database.url.startsWith('file:'),
     serveWebDir: e.SERVE_WEB_DIR ?? null,
-    ai: { apiKey: e.GEMINI_API_KEY ?? null, model: e.GEMINI_MODEL, dailyLimit: e.AI_DAILY_LIMIT },
+    ai: {
+      apiKey: e.GEMINI_API_KEY ?? null,
+      model: e.GEMINI_MODEL,
+      fallbackModel: e.GEMINI_FALLBACK_MODEL === 'none' ? null : e.GEMINI_FALLBACK_MODEL,
+      dailyLimit: e.AI_DAILY_LIMIT,
+    },
   };
 }

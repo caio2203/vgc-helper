@@ -188,7 +188,9 @@ vercel env add GEMINI_API_KEY preview
 4. Redeploy (**Deployments → … → Redeploy**). The Admin page then shows "AI explanations: On".
 
 Optional variables: `GEMINI_MODEL` (default `gemini-3.8-flash`, the newest Flash model with a
-free tier in November 2026) and `AI_DAILY_LIMIT` (answers per user per 24 hours, default 50).
+free tier in November 2026), `GEMINI_FALLBACK_MODEL` (default `gemini-3.5-flash-lite`, also free,
+used when Google answers that the main model is overloaded or too slow; `none` turns it off) and
+`AI_DAILY_LIMIT` (answers per user per 24 hours, default 50).
 Answers are cached in the database per team, data version, language and level, so asking again
 costs nothing. For a copy on your PC, put the key in `.env` instead.
 

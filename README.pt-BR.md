@@ -270,25 +270,26 @@ se a autenticação não estiver configurada, a API se recusa a subir.
 
 ## Variáveis de ambiente
 
-| Variável                  | Obrigatória         | Descrição                                                                    |
-| ------------------------- | ------------------- | ---------------------------------------------------------------------------- |
-| `APP_ORIGIN`              | sim                 | Endereço que você abre no navegador, ex.: `https://helper.example.com`       |
-| `SESSION_SECRET`          | sim                 | Pelo menos 32 caracteres aleatórios                                          |
-| `AUTH_MODE`               | sim                 | `github` ou `local-password`                                                 |
-| `GITHUB_CLIENT_ID`        | modo github         | Client ID do app OAuth                                                       |
-| `GITHUB_CLIENT_SECRET`    | modo github         | Client secret do app OAuth                                                   |
-| `AUTH_ALLOWED_GITHUB_IDS` | modo github         | IDs numéricos do GitHub, separados por vírgula                               |
-| `ADMIN_PASSWORD_HASH`     | modo local-password | Saída do `pnpm hash-password`                                                |
-| `DATABASE_URL`            | não                 | Arquivo SQLite local, padrão `file:local.db`                                 |
-| `TURSO_DATABASE_URL`      | na Vercel           | URL `libsql://…` do banco no Turso                                           |
-| `TURSO_AUTH_TOKEN`        | na Vercel           | Token do banco no Turso                                                      |
-| `CRON_SECRET`             | na Vercel           | 16+ caracteres; deixa o cron diário manter o banco grátis ativo              |
-| `SESSION_TTL_DAYS`        | não                 | Duração da sessão em dias, padrão 30                                         |
-| `SERVE_WEB_DIR`           | não                 | Entregar o web compilado pela API (um processo só)                           |
-| `GEMINI_API_KEY`          | não                 | Liga o Explicar e o chat (free tier do Gemini); sem ela ficam ocultos        |
-| `GEMINI_MODEL`            | não                 | Id do modelo do Gemini, padrão `gemini-3.8-flash`                            |
-| `AI_DAILY_LIMIT`          | não                 | Respostas da IA por usuário a cada 24 horas, padrão 50 (do cache não contam) |
-| `PORT`                    | não                 | Porta da API ao rodar localmente, padrão 3000                                |
+| Variável                  | Obrigatória         | Descrição                                                                                           |
+| ------------------------- | ------------------- | --------------------------------------------------------------------------------------------------- |
+| `APP_ORIGIN`              | sim                 | Endereço que você abre no navegador, ex.: `https://helper.example.com`                              |
+| `SESSION_SECRET`          | sim                 | Pelo menos 32 caracteres aleatórios                                                                 |
+| `AUTH_MODE`               | sim                 | `github` ou `local-password`                                                                        |
+| `GITHUB_CLIENT_ID`        | modo github         | Client ID do app OAuth                                                                              |
+| `GITHUB_CLIENT_SECRET`    | modo github         | Client secret do app OAuth                                                                          |
+| `AUTH_ALLOWED_GITHUB_IDS` | modo github         | IDs numéricos do GitHub, separados por vírgula                                                      |
+| `ADMIN_PASSWORD_HASH`     | modo local-password | Saída do `pnpm hash-password`                                                                       |
+| `DATABASE_URL`            | não                 | Arquivo SQLite local, padrão `file:local.db`                                                        |
+| `TURSO_DATABASE_URL`      | na Vercel           | URL `libsql://…` do banco no Turso                                                                  |
+| `TURSO_AUTH_TOKEN`        | na Vercel           | Token do banco no Turso                                                                             |
+| `CRON_SECRET`             | na Vercel           | 16+ caracteres; deixa o cron diário manter o banco grátis ativo                                     |
+| `SESSION_TTL_DAYS`        | não                 | Duração da sessão em dias, padrão 30                                                                |
+| `SERVE_WEB_DIR`           | não                 | Entregar o web compilado pela API (um processo só)                                                  |
+| `GEMINI_API_KEY`          | não                 | Liga o Explicar e o chat (free tier do Gemini); sem ela ficam ocultos                               |
+| `GEMINI_MODEL`            | não                 | Id do modelo do Gemini, padrão `gemini-3.8-flash`                                                   |
+| `GEMINI_FALLBACK_MODEL`   | não                 | Modelo usado quando o principal está sobrecarregado, padrão `gemini-3.5-flash-lite`, `none` desliga |
+| `AI_DAILY_LIMIT`          | não                 | Respostas da IA por usuário a cada 24 horas, padrão 50 (do cache não contam)                        |
+| `PORT`                    | não                 | Porta da API ao rodar localmente, padrão 3000                                                       |
 
 ## Fontes de dados e créditos
 

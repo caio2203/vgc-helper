@@ -188,8 +188,9 @@ vercel env add GEMINI_API_KEY preview
    "Explicações com IA: Ligadas".
 
 Variáveis opcionais: `GEMINI_MODEL` (padrão `gemini-3.8-flash`, o Flash mais novo com free tier
-em novembro de 2026) e `AI_DAILY_LIMIT` (respostas por usuário a cada 24 horas, padrão 50). As
-respostas ficam guardadas no banco por time, versão dos dados, idioma e nível, então perguntar de
+em novembro de 2026), `GEMINI_FALLBACK_MODEL` (padrão `gemini-3.5-flash-lite`, também grátis,
+usado quando o Google responde que o modelo principal está sobrecarregado ou lento demais; `none`
+desliga) e `AI_DAILY_LIMIT` (respostas por usuário a cada 24 horas, padrão 50). As respostas ficam guardadas no banco por time, versão dos dados, idioma e nível, então perguntar de
 novo não gasta nada. Numa cópia no seu PC, coloque a chave no `.env`.
 
 ## 3. Pull requests de atualização de dados (GitHub App)

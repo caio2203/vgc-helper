@@ -19,9 +19,15 @@ export interface LlmRequest {
   callTool: (name: string, args: Record<string, unknown>) => unknown;
 }
 
+export interface LlmAnswer {
+  text: string;
+  /** The model that wrote the answer: the main one, or the fallback when it was overloaded. */
+  model: string;
+}
+
 export interface LlmProvider {
   readonly model: string;
-  generate(request: LlmRequest): Promise<string>;
+  generate(request: LlmRequest): Promise<LlmAnswer>;
 }
 
 /** The provider could not answer: out of quota, or any other failure. The app falls back. */

@@ -26,7 +26,7 @@ export class AppModule {
       llm !== undefined
         ? llm
         : config.ai.apiKey
-          ? new GeminiProvider(config.ai.apiKey, config.ai.model)
+          ? new GeminiProvider(config.ai.apiKey, config.ai.model, config.ai.fallbackModel)
           : null;
     return {
       module: AppModule,
