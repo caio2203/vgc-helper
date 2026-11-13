@@ -79,24 +79,24 @@ describe('loadConfig with a valid environment', () => {
       ...env,
       ...vercel,
       VERCEL_ENV: 'preview',
-      VERCEL_URL: 'vgc-helper-abc123.vercel.app',
-      VERCEL_BRANCH_URL: 'vgc-helper-git-feature.vercel.app',
-      VERCEL_PROJECT_PRODUCTION_URL: 'vgc-helper.vercel.app',
+      VERCEL_URL: 'my-app-abc123.vercel.app',
+      VERCEL_BRANCH_URL: 'my-app-git-feature.vercel.app',
+      VERCEL_PROJECT_PRODUCTION_URL: 'my-app.vercel.app',
     });
-    expect(preview.appOrigin).toBe('https://vgc-helper-git-feature.vercel.app');
+    expect(preview.appOrigin).toBe('https://my-app-git-feature.vercel.app');
     expect([...preview.allowedOrigins].sort()).toEqual([
-      'https://vgc-helper-abc123.vercel.app',
-      'https://vgc-helper-git-feature.vercel.app',
-      'https://vgc-helper.vercel.app',
+      'https://my-app-abc123.vercel.app',
+      'https://my-app-git-feature.vercel.app',
+      'https://my-app.vercel.app',
     ]);
 
     const production = loadConfig({
       ...env,
       ...vercel,
       VERCEL_ENV: 'production',
-      VERCEL_PROJECT_PRODUCTION_URL: 'vgc-helper.vercel.app',
+      VERCEL_PROJECT_PRODUCTION_URL: 'my-app.vercel.app',
     });
-    expect(production.appOrigin).toBe('https://vgc-helper.vercel.app');
+    expect(production.appOrigin).toBe('https://my-app.vercel.app');
   });
 
   it('allows only APP_ORIGIN outside Vercel', () => {
