@@ -188,7 +188,7 @@ export class AiService {
       });
     } catch (error) {
       if (error instanceof LlmUnavailableError) {
-        this.logger.warn(`AI ${kind} failed (${error.reason})`);
+        this.logger.warn(`AI ${kind} failed (${error.reason}): ${error.message.slice(0, 300)}`);
         fail(
           error.reason === 'quota' ? HttpStatus.TOO_MANY_REQUESTS : HttpStatus.SERVICE_UNAVAILABLE,
           error.reason,

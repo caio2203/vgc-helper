@@ -1,10 +1,13 @@
-import { ApiError, type Content, GoogleGenAI } from '@google/genai';
+import { ApiError, type Content, GoogleGenAI, ThinkingLevel } from '@google/genai';
 import { type LlmProvider, type LlmRequest, LlmUnavailableError } from './llm.js';
 
 /** Tool rounds before the model has to answer with what it has. */
 const MAX_TOOL_ROUNDS = 4;
-/** Keeps answers short and the free quota for more questions. */
-const MAX_OUTPUT_TOKENS = 1200;
+/**
+ * Output budget per call. Thinking tokens count toward it: with a small budget the model can
+ * spend it all thinking and return no text. The prompt keeps the answer itself short.
+ */
+const MAX_OUTPUT_TOKENS = 4096;
 const TIMEOUT_MS = 25_000;
 
 /**
@@ -17,8 +20,9 @@ export class GeminiProvider implements LlmProvider {
   constructor(
     apiKey: string,
     readonly model: string,
+    client?: GoogleGenAI,
   ) {
-    this.client = new GoogleGenAI({ apiKey });
+    this.client = client ?? new GoogleGenAI({ apiKey });
   }
 
   async generate(request: LlmRequest): Promise<string> {
@@ -30,6 +34,8 @@ export class GeminiProvider implements LlmProvider {
       systemInstruction: request.system,
       temperature: 0.3,
       maxOutputTokens: MAX_OUTPUT_TOKENS,
+      // The answer explains data the API already computed: little reasoning, less quota.
+      thinkingConfig: { thinkingLevel: ThinkingLevel.LOW },
       tools: [
         {
           functionDeclarations: request.tools.map((t) => ({
@@ -53,7 +59,10 @@ export class GeminiProvider implements LlmProvider {
         const answer = response.candidates?.[0]?.content;
         if (calls.length === 0 || !answer) {
           const text = response.text?.trim();
-          if (!text) throw new LlmUnavailableError('unavailable', 'The model returned no text');
+          if (!text) {
+            const finish = response.candidates?.[0]?.finishReason ?? 'unknown';
+            throw new LlmUnavailableError('unavailable', `The model returned no text (${finish})`);
+          }
           return text;
         }
         contents.push(answer);
