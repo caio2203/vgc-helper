@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "version": "2026-11-12.9192b72ce1",
-  "generatedAt": "2026-11-12T22:57:52.051Z",
+  "version": "2026-11-20.62bebe8923",
+  "generatedAt": "2026-11-20T16:16:30.379Z",
   "games": [
     { "id": "champions", "name": "Pokémon Champions", "mechanicsProfileId": "champions-2026" },
     { "id": "sv", "name": "Pokémon Scarlet & Violet", "mechanicsProfileId": "sv" }
