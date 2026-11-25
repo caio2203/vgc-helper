@@ -36,7 +36,7 @@
     "zod": "^4.6.7"
   },
   "devDependencies": {
-    "@nestjs/testing": "^12.4.2",
+    "@nestjs/testing": "^12.6.0",
     "@swc/core": "^1.16.22",
     "@types/cookie-parser": "^1.4.10",
     "@types/express": "^5.0.6",
@@ -46,6 +46,6 @@
     "drizzle-kit": "^0.31.11",
     "supertest": "^7.3.2",
     "unplugin-swc": "^2.0.0",
-    "vitest": "^5.1.0"
+    "vitest": "^5.1.1"
   }
 }
