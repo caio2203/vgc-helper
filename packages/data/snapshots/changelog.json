@@ -2,6 +2,13 @@
   "schemaVersion": 1,
   "entries": [
     {
+      "version": "2026-11-27.d78b4ba6f3",
+      "previousVersion": "2026-11-12.9192b72ce1",
+      "generatedAt": "2026-11-27T17:33:37.655Z",
+      "changes": [],
+      "warnings": ["G/sv-vgc: only 1864 battles in 2026-10"]
+    },
+    {
       "version": "2026-11-12.9192b72ce1",
       "previousVersion": "2026-11-12.b41ea314d2",
       "generatedAt": "2026-11-12T22:57:52.051Z",
